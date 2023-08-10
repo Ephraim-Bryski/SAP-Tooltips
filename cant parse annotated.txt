@@ -1,0 +1,46 @@
+NOT METHODS
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Analysis_Results\Results\Analysis_Results_Step_Number.htm OK
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Analysis_Results\Results\Analysis_Results_Step_Type.htm OK
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Analysis_Results\Results\Base_Reaction_Centroids.htm     MIGHT be properties
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Analysis_Results\Results\Item_Type_for_Elements.htm  just info??
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Breaking_Changes_Between_v16_and_v17\Breaking_Changes.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Breaking_Changes_Between_v16_and_v17\Breaking_Changes_to_COM_Enumerations.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Breaking_Changes_Between_v16_and_v17\Breaking_Changes_to_NET_Enumerations.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Breaking_Changes_Between_v17_and_v18\Breaking_Changes_v18.htm
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Cold_Formed\AISI_2016\GetPreference_files\image001.png
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Cold_Formed\AISI_2016\GetPreference_files\image003.png
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Cold_Formed\AISI_2016\SetPreference_files\image001.png
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Cold_Formed\AISI_2016\SetPreference_files\image003.png
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\View\RefreshWindow_and_RefreshView.htm
+
+
+
+SUPPOSED TO BE METHODS
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Analysis_Results\Results\Analysis_Results_Remarks.htm               doesnt say syntax on top, not my problem
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\GetDamperBilinear.htm               
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\GetDamperLinearExponential.htm      BOLD text for syntax
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\GetDamperRingSpring.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\SetDamperBilinear.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\SetDamperFrictionSpring.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Definitions\Properties\Link\SetDamperLinearExponential.htm
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Concrete\TS_500_2000\GetOverwrite_{Concrete_TS_500-2000}.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Concrete\TS_500_2000\GetPreference_{Concrete_TS_500-2000}.htm
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Concrete\TS_500_2000\SetOverwrite_{TS_500_2000}.htm              doesnt say syntax
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Design\Concrete\TS_500_2000\SetPreference_{Concrete_TS_500_2000}.htm
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\General_Functions\Extended_Entity_Data\GetKeysWithStringsExtendedEntityData.htm         no remarks
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Object_Model\External_Analysis_Results\DeleteAllFrameForces.htm     doesnt say input arguments
+
+CSI_OAPI_Documentation\SAP2000_API_Fuctions\Object_Model\Point_Object\AddQuad.htm                               remarks has space before
+
+
+
+
+
+

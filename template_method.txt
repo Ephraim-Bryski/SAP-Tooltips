@@ -1,0 +1,7 @@
+    def SHORT_METHOD(FULL_ARGUMENTS):
+        """
+ABOUT
+ARGUMENT_INFO
+        """
+        self.api.FULL_METHOD(SHORT_ARGUMENTS)
+
