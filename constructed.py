@@ -326,8 +326,6 @@ class SapObject:
         self.api = api
         self.SapModel = SapModel(api)
         self.Sap2000 = Sap2000(api)
-        self.SapMdel = SapMdel(api)
-        self.SapMoel = SapMoel(api)
 
     def ApplicationExit(self, FileSave):
         """
@@ -56010,11 +56008,6 @@ Replace: If this item is True, all existing point spring assignments to the spec
         """
         self.api.SapObject.SapModel.PointObj.SetSpringCoupled(Name, k, ItemType, IsLocalCSys, Replace)
 
-class SapMdel:
-    def __init__(self, api):
-        self.api = api
-        self.PointObj = PointObj(api)
-
 class SolidObj:
     def __init__(self, api):
         self.api = api
@@ -57996,11 +57989,6 @@ SelectSolidSprings: If this item is True, points with a contribution from solid 
 SelectOneJointLinks: If this item is True, points with one joint link assignments in one of the specified degrees of freedom are selected or deselected.
         """
         self.api.SapObject.SapModel.SelectObj.SupportedPoints(DOF, CSys, DeSelect, SelectRestraints, SelectJointSprings, SelectLineSprings, SelectAreaSprings, SelectSolidSprings, SelectOneJointLinks)
-
-class SapMoel:
-    def __init__(self, api):
-        self.api = api
-        self.SelectObj = SelectObj(api)
 
 class View:
     def __init__(self, api):

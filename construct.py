@@ -11,12 +11,16 @@ template_method = f.read()
 
 
 
-classes = {}
+classes = {}    
+
+
 
 for method_info in docs:
 
     method_full_name = method_info["full_name"]
     method_layers = method_full_name.split(".")
+
+
     method_short_name = method_layers[-1]
 
     for i in range(len(method_layers)-1):
@@ -154,6 +158,22 @@ for class_name in classes:
     class_txt = construct_class(class_name, class_info["components"],class_info["methods"])
     
     wrapper_txt += class_txt
+
+
+def fix_typos(method_layers):
+
+    corrections = {
+        "SapMdel": "SapModel",
+        "SapMoel": "SapModel"
+    }
+        
+
+    for i in range(len(method_layers)):
+        layer = method_layers[i]
+        if layer in corrections.keys():
+            method_layers[i] = corrections[layer]
+    
+
 
 f = open("constructed.py","w",encoding="utf8")
 f.write(wrapper_txt)
