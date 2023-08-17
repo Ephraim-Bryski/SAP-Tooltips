@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetStageDefinitions_2</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetStageDefinitions_2</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.StaticNonlinearStaged.SetStageDefinitions_2</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetStageDefinitions_2(ByVal Name As String, 
+ ByVal NumberStages As Long, ByRef Duration() As Double, ByRef Output() 
+ As Boolean, ByRef OutputName() As String, ByRef Comment() As String) As 
+ Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing static nonlinear staged load 
+ case.</p>
+<p class="ParameterName">NumberStages</p>
+<p class="Comment">The number of stages defined for the specified load 
+ case.</p>
+<p class="ParameterName">Duration</p>
+<p class="Comment">This is an array that includes the duration in days 
+ for each stage.</p>
+<p class="ParameterName">Output</p>
+<p class="Comment">This is an array that includes True or False, indicating 
+ if analysis output is to be saved for each stage.</p>
+<p class="ParameterName">OutputName</p>
+<p class="Comment">This is an array that includes a user-specified output 
+ name for each stage.</p>
+<p class="ParameterName">Comment</p>
+<p class="Comment">This is an array that includes a comment for each stage. 
+ The comment may be a blank string.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function initializes the stage definition data 
+ for the specified load case. All previous stage definition data for the 
+ case is cleared when this function is called.</p>
+<p class="Comment">The function returns zero if the data is successfully 
+ initialized; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetCaseStaticNonlinearStagedStageDefinitions_2()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDuration() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutput() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutputName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyComment() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add static nonlinear staged load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetCase(&quot;ACASE1&quot;)<br>
+<br>
+&#160;&#160;&#160;'initialize stage definitions<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyDuration(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutput(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutputName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyComment(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(0) = False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(0) = &quot;Build structure&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(1) = 60<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(1) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutputName(1) = &quot;HBC2&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(1) = &quot;Wait&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageDefinitions_2(&quot;ACASE1&quot;, 
+ 2, MyDuration, MyOutput, MyOutputName, MyComment)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 19.0.0.</p>
+<p class="Comment">This function supersedes <a href="../../../Obsolete_Functions/GetStageDefinitions_1.htm">GetStageDefinitions_1</a>.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetStageDefinitions_2.htm">GetStageDefinitions_2</a></p>
+</body>
+</html>

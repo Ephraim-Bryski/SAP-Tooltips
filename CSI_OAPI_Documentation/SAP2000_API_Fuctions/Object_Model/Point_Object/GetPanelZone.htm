@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Object Functions\GetPanelZone.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetPanelZone</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetPanelZone</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.GetPanelZone</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetPanelZone(ByVal Name As String, ByRef PropType As Long, ByRef Thickness As Double, ByRef K1 As Double, ByRef K2 As Double, ByRef LinkProp As String, ByRef Connectivity As Long, ByRef LocalAxisFrom As Long, ByRef LocalAxisAngle As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object.</p>
+<p class="ParameterName">PropType</p>
+<p class="Comment">This is 0, 1, 2, or 3.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">0 = Properties are elastic from column</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">1 = Properties are elastic from column and doubler plate</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">2 = Properties are from specified spring stiffnesses</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 84px; margin-bottom: 9pt;">3 = Properties are from a specified link property</p>
+<p class="ParameterName">Thickness</p>
+<p class="Comment">The thickness of the doubler plate. This item applies only when PropType = 1. [L]</p>
+<p class="ParameterName">K1</p>
+<p class="Comment">The spring stiffness for major axis bending (about the local 3 axis of the column and panel zone). This item applies only when PropType = 2. [FL/rad]</p>
+<p class="ParameterName">K2</p>
+<p class="Comment">The spring stiffness for minor axis bending (about the local 2 axis of the column and panel zone). This item applies only when PropType = 2. [FL/rad]</p>
+<p class="ParameterName">LinkProp</p>
+<p class="Comment">The name of the link property used to define the panel zone. This item applies only when PropType = 3.</p>
+<p class="ParameterName">Connectivity</p>
+<p class="Comment">This is 0 or 1.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">0 = Panel zone connects beams to other objects</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 84px; margin-bottom: 9pt;">1 = Panel zone connects braces to other objects</p>
+<p class="ParameterName">LocalAxisFrom</p>
+<p class="Comment">This is 0 or 1.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">0 = Panel zone local axis angle is from column</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">1 = Panel zone local axis angle is user defined</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">The LocalAxisFrom item can be 1 only when the PropType item is 3.</p>
+<p class="ParameterName">LocalAxisAngle</p>
+<p class="Comment">This item applies only when PropType = 3 and LocalAxisFrom = 1. It is the angle measured counter clockwise from the positive global X-axis to the local 2-axis of the panel zone. [deg]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the panel zone assignment data for a point object.</p>
+<p class="Comment">The function returns zero if the panel zone data is successfully retrieved, otherwise it returns a nonzero value.</p>
+<p class="Comment">If no panel zone assignment is made to the point object, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetPanelZoneData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PropType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Thickness As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim K1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim K2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LinkProp As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Connectivity As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LocalAxisFrom As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LocalAxisAngle As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'assign panel zone<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetPanelZone("3", 1, 2, 0, 0, "", 0, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'get panel zone data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.GetPanelZone("3", PropType, Thickness, K1, K2, LinkProp, Connectivity, LocalAxisFrom, LocalAxisAngle)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetPanelZone.htm">SetPanelZone</a></p>
+</body>
+</html>

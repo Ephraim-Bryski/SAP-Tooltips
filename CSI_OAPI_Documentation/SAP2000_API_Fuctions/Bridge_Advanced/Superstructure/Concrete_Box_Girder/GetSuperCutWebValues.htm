@@ -1,0 +1,100 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetSuperCutWebCoordsAtY.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSuperCutWebValues</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSuperCutWebValues</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebValues</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSuperCutWebValues(ByVal Name As String, ByVal CutIndex As Long, ByVal WebIndex As Long, ByVal Item as Long, ByRef Value as Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">CutIndex</p>
+<p class="Comment">The index number of the section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by the function CountSuperCut. Section cuts will be in order of increasing Station and increasing SuperCutType.</p>
+<p class="ParameterName">WebIndex</p>
+<p class="Comment">The index number of a web in this section cut of this bridge object. This must be from 0 to CountWeb-1, where CountWeb is the number of webs returned by thenfunction GetSuperCutSectionValues using Item = 1. Webs count from left to right when looking upstation.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer from 1 to 6, inclusive, indicating the type of property value to be gotten:</p>
+<p class="Block-Text" style="margin-left: 84px;">1 = Angle from vertical (Y) axis, clockwise is positive</p>
+<p class="Comment" style="margin-left: 84px; margin-bottom: 0pt;">2 = Minimum horizontal (X) web thickness</p>
+<p class="Comment" style="margin-left: 84px; margin-bottom: 0pt;">3 = Minimum top slab thickness above cell to left of web</p>
+<p class="Comment" style="margin-left: 84px; margin-bottom: 0pt;">4 = Minimum bottom slab thickness above cell to left of web</p>
+<p class="Comment" style="margin-left: 84px; margin-bottom: 0pt;">5 = Top width of cell to left of web measured from centerline of girders on each side of cell</p>
+<p class="Comment" style="margin-left: 84px;">6 = Bottom width of cell to left of web measured from centerline of girders on each side of cell.</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the requested item:</p>
+<p class="Block-Text" style="margin-left: 84px;">1 = Angle from vertical (Y) axis, clockwise is positive</p>
+<p class="Comment" style="margin-left: 108px;">Abs(Value) &lt; 90. [deg]</p>
+<p class="Block-Text" style="margin-left: 84px;">2 = Minimum horizontal (X) web thickness</p>
+<p class="Block-Text" style="margin-left: 108px; margin-bottom: 9pt;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 84px;">3 = Minimum top slab thickness</p>
+<p class="Comment" style="margin-left: 108px;">Value &lt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 84px;">4 = Minimum bottom slab thickness</p>
+<p class="Block-Text" style="margin-left: 108px; margin-bottom: 9pt;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 84px;">5 = Top width of cell</p>
+<p class="Comment" style="margin-left: 108px;">Value &gt;= 0. [L]</p>
+<p class="Block-Text" style="margin-left: 84px;">6 = Bottom width of cell</p>
+<p class="Block-Text" style="margin-left: 108px;">Value &gt;= 0. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns an individual section property for a single web at a single superstructure section cut in a bridge object. These properties are calculated for the section before skew, grade, and superelevation are applied. Coordinate values are measured from the lower-left corner of the section bounding-box. X is positive to the right when looking upstation, and Y is positive upward</p>
+<p class="Comment">The function returns zero if the information is successfully retrieved; otherwise it returns a nonzero value. An error is returned for items 3, 4, 5 and 6 if the WebIndex is specified as 0.</p>
+<p class="Comment">If the bridge object is not currently linked to existing objects in the model, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a linked bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub GetBridgeSuperCutWebValues()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CountWeb As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get section cut count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.CountSuperCut("BOBJ1", Count)<br>
+<br>
+&#160;&#160;&#160;'get web count at section cut 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues ("BOBJ1", 1, 1, CountWeb)<br>
+<br>
+&#160;&#160;&#160;'get minimum thickness for first web (0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebValues("BOBJ1", 1, 0, 2, Value)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="../CountSuperCut.htm">CountSuperCut</a></p>
+<p class="Block-Text"><a href="GetSuperCutSectionValues.htm">GetSuperCutSectionValues</a></p>
+</body>
+</html>

@@ -1,0 +1,334 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Design\Aluminum\AA LRFD 2000\SetOverwrite.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetOverwrite {Aluminum EC9 2007}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetOverwrite</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignAluminum.Eurocode_9_2007.SetOverwrite</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetOverwrite(ByVal Name As String, ByVal Item 
+ As Long, ByVal Value As Double, Optional ByVal ItemType As eItemType = 
+ Object) As Long</p>
+<h2 class="MsoNormal">Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a frame object with a aluminum frame design 
+ procedure.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 29, inclusive, indicating 
+ the overwrite item considered.</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;"><span style="line-height: normal;">1 
+ = Demand/capacity ratio limit</span></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">2 = Live load reduction 
+ factor</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">3 = Net area to total area 
+ ratio</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">4 = Material buckling class</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">5 = Unbraced length ratio, 
+ Major</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">6 = Unbraced length ratio, 
+ Minor</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">7 = Unbraced length ratio, 
+ LTB</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">8 = Effective length factor 
+ sway, K Major</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">9 = Effective length factor 
+ sway, K Minor</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">10 = Effective length factor, 
+ K LTB</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">11 = LTB fixed end</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">12 = Bending coefficient, 
+ C<sub>1</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">13 = Bending coefficient, 
+ C<sub>2</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">14 = Bending coefficient, 
+ C<sub>3</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">15 = Torsional-flexural 
+ buckling curve</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">16 = Buckling curve for 
+ LTB</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">17 = Tensile capacity, 
+ N<sub>t,Rd</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">18 = Elastic torsional 
+ buckling force, N<sub>crT</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">19 = Elastic torsional-flexural 
+ buckling force, N<sub>crTF</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">20 = Compressive capacity, 
+ N<sub>Rk</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">21 = Major bending capacity, 
+ M<sub>yRk</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">22 = Minor bending capacity, 
+ M<sub>zRk</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">23 = Lateral-torsional 
+ buckling moment capacity, M<sub>cr</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">24 = Major shear capacity, 
+ V<sub>y.Rd</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">25 = Minor shear capacity, 
+ V<sub>z.Rd</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">26 = Torsion capacity, 
+ T<sub>Rd</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">27 = Shear stress due to 
+ warping torsion moment, <span style="mso-spacerun: yes;">&#160;</span><span 
+	 style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif; 
+	 mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; 
+	 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><i>&#964;<sub>w</sub></i></span> 
+ </p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">28 = Warping coefficient, 
+ k<sub>w</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; 
+	 margin-left: 66.0pt; line-height: normal;">29 = Coordinate of load 
+ application, z<sub>a</sub></p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 9pt;">&#160;</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered overwrite item.</p>
+<p class="Parameter_Description">1 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.&#160;&#160;</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">2 = Live load reduction factor</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use a program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">3 = Net area to total area ratio</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program default value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">4 = Material buckling class</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;0 = Program 
+ default</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;1 = Class 
+ A</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;2 = Class 
+ B</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">5 = Unbraced length ratio, Major</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">6 = Unbraced length ratio, Minor </p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">7 = Unbraced length ratio, Lateral Torsional 
+ Buckling </p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">8 = Effective length factor, K Major</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">9 = Effective length factor, K Minor</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">10 = Effective length factor, K LTB</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">11 = LTB Fixed End</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;0 
+ = Program default</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;1 
+ = Left</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;2 
+ = Right</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">12 = Bending coefficient, C1</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">13 = Bending coefficient, C2</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">14 = Bending coefficient, C3</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">15 = Torsional-flexural buckling curve</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0 
+ = Program default</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1 
+ = Curve 1</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2 
+ = Curve 2</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">16 = Buckling curve for LTB</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0 
+ = Program default</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;1 
+ = Curve 1</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;2 
+ = Curve 2</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">17 = Tensile capacity, N<sub>t,Rd</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">18 = Elastic torsional buckling force, 
+ N<sub>crT</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">19 = Elastic torsional-flexural buckling 
+ force, N<sub>crTF</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">20 = Compressive capacity, N<sub>Rk</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; 
+										 mso-fareast-font-family: 'Times New Roman';">&#160;&#160;</span></p>
+<p class="Parameter_Description">21 = Major bending capacity, M<sub>yRk</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">22 = Minor bending capacity, M<sub>zRk</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">23 = Minor bending capacity, M<sub>cr</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">24 = Major shear capacity, V<sub>y.Rd</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">25 = Minor shear capacity, V<sub>z.Rd</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">26 = Torsion capacity, T<sub>Rd</sub></p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">27 = <span style="line-height: normal;">Shear 
+ stress due to warping torsion moment, </span><span style="mso-spacerun: yes;">&#160;</span><span 
+	 style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman', serif; 
+	 mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; 
+	 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><i>&#964;<sub>w</sub></i></span><span 
+	 style="line-height: normal;"> </span>&#160;</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt;= 0; 0 means use program determined value. [F/L<sup>2</sup>]</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif; 
+										 mso-fareast-font-family: 'Times New Roman';">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="Parameter_Description">28 = Warping coefficient, k<sub>w</sub> 
+ (used in M<sub>cr</sub> calculation)</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;&#160;&#160;0.5 
+ =&lt;Value =&lt; 1; 0 means use program determined value which is defaulted 
+ to 1.0.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">29 = Coordinate of load application, z<sub>a</sub> 
+ (used in M<sub>cr</sub> calculation)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">&#160;</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType 
+ enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the 
+ frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all 
+ frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made 
+ to all selected frame objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the value of an aluminum design overwrite 
+ item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetAluminumDesignOverwriteItemEurocode_9_2007()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set aluminum design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignAluminum.SetCode(&quot;EN 
+ 1999:2007&quot;)<br>
+<br>
+&#160;&#160;&#160;'set overwrite item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignAluminum.Eurocode_9_2007.SetOverwrite(&quot;8&quot;, 
+ 1, 2)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.3.0</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetOverwrite_{Aluminum_EC9_2007}.htm">GetOverwrite</a></p>
+</body>
+</html>

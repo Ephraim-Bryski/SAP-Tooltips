@@ -1,0 +1,135 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetHingeAssigns.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetHingeAssigns</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetHingeAssigns <span style="font-size: 10pt;">(Note: &#160;Newer function 
+ available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.GetHingeAssigns</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetHingeAssigns(ByVal Name As String, ByRef 
+ NumberHinges As Long, ByRef HingeNum() As Long, ByRef Prop() As String, 
+ ByRef MyType() As Long, ByRef Behavior() As Long, ByRef Source() As String, 
+ ByRef RD() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">NumberHinges</p>
+<p class="Comment">The number of hinge assignments on the specified frame 
+ object.</p>
+<p class="ParameterName">HingeNum</p>
+<p class="Comment">An array that includes the hinge number for each hinge 
+ on the frame object.</p>
+<p class="ParameterName">Prop</p>
+<p class="Comment">An array that includes the name of the generated hinge 
+ property for each hinge on the frame object.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">An array that specifies the type of hinge for each hinge 
+ on the frame object. It is one of the following:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;1 = Axial 
+ P</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;2 = Shear 
+ V2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;3 = Shear 
+ V3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;4 = Torsion 
+ T</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;5 = Moment 
+ M2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;6 = Moment 
+ M3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;7 = Interacting 
+ P-M2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;8 = Interacting 
+ P-M3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;&#160;9 = Interacting 
+ M2-M3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">10 = Interacting P-M2-M3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 9pt;">11 = Fiber P-M2-M3</p>
+<p class="ParameterName">Behavior</p>
+<p class="Comment">An array that specifies the behavior of the hinge for 
+ each hinge on the frame object. It is one of the following:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">1 = Force controlled</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 9pt;">2 = Deformation controlled</p>
+<p class="ParameterName">Source</p>
+<p class="Comment">An array that indicates the source of the generated 
+ hinge property for each hinge on the frame object. The source is either 
+ Auto or the name of a defined (not generated) hinge property.</p>
+<p class="ParameterName">RD</p>
+<p class="Comment">An array that indicates the relative distance of each 
+ hinge along the frame object.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the hinge assignments for a specified 
+ frame object.</p>
+<p class="Comment">The function returns zero if the assignment data is 
+ successfully obtained; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyHinge.sdb exists.</p>
+<p class="Coding">Sub GetFrameHingeAssigns()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberHinges As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HingeNum() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Prop() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Behavior() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Source() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim RD() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = &quot;C:\SapAPI\MyHinge.sdb&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get hinge data for the frame object named 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.GetHingeAssigns(&quot;1&quot;, 
+ NumberHinges, HingeNum, Prop, MyType, Behavior, Source, RD)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.20.</p>
+<h2>See Also</h2>
+<p style="margin-left: 40px;"><a href="GetHingeAssigns_1.htm">GetHingeAssigns_1</a></p>
+</body>
+</html>

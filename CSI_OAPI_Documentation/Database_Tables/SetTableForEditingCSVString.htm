@@ -1,0 +1,64 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Language" content="en-us">
+<meta name="System.Keywords" content="SetTableForEditingCSVString method">
+<meta name="System.Keywords" content="cDatabaseTables.SetTableForEditingCSVString method">
+<meta name="Microsoft.Help.F1" content="ETABSv1.cDatabaseTables.SetTableForEditingCSVString">
+<meta name="Microsoft.Help.Id" content="M:ETABSv1.cDatabaseTables.SetTableForEditingCSVString(System.String,System.Int32@,System.String@,System.String)">
+<meta name="Description" content="Reads a table from a CSV-formatted string and adds it to a stored table list until either the or command is issued.">
+<meta name="Microsoft.Help.ContentType" content="Reference">
+<meta name="BrandingAware" content="true">
+<meta name="container" content="ETABSv1">
+<meta name="file" content="b80a5e9d-dc19-72af-766f-5b4f14d59577">
+<meta name="guid" content="b80a5e9d-dc19-72af-766f-5b4f14d59577">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetTableForEditingCSVString</title>
+<link rel="shortcut icon" href="../icons/favicon.ico">
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetTableForEditingCSVString</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.S</span>etTableForEditingCSVString</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetTableForEditingCSVString (<span class="parameter">TableKey</span> 
+ As String, ByRef <span class="parameter">TableVersion</span> As Integer, 
+ ByRef <span class="parameter">csvString </span>As String, Optional sepChar 
+ as string = &quot;,&quot;) As Integer </p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">TableKey</span> </p>
+<p class="Comment">Input Item: The table key of the table for which data 
+ is requested. </p>
+<p class="ParameterName"><span class="parameter">TableVersion</span> </p>
+<p class="Comment"><span class="parameter">Returned Item: The version number 
+ of the specified table. </span></p>
+<p class="ParameterName"><span class="parameter">csvString</span></p>
+<p class="Comment">Input Item: A CSV-formatted string containing all the 
+ table data. </p>
+<p class="ParameterName"><span class="parameter">sepChar (Optional)</span></p>
+<p class="Comment">Optional Input Item: The delimiter between data items, 
+ by default &quot;,&quot;. This delimiter must match what is used in the 
+ <span class="parameter">csvString</span>. </p>
+<dl>
+	<h2>Remarks:</h2>
+</dl>
+<p class="Comment">Returns 0 if the function executes correctly, otherwise 
+ returns nonzero.</p>
+<p class="Comment">Reads a table from a CSV-formatted string and adds it 
+ to a stored table list until either the <a href="ApplyEditedTables.htm">ApplyEditedTables</a> 
+ or <a href="CancelTableEditing.htm">CancelTableEditing</a> command is 
+ issued </p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetTableforDisplayCSVString.htm">GetTableForDisplayCSVString</a></p>
+<p class="Comment">&#160;</p>
+</body>
+</html>

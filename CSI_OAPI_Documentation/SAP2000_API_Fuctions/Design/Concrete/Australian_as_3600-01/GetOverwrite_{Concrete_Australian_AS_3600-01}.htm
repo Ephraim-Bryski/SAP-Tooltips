@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Originator" content="ImportDoc" />
+<meta name="OriginalFile" content="SetPreference Concrete Australian AS 2600-01.doc" />
+<meta name="generator" content="Adobe RoboHelp 2019" />
+<title>GetOverwrite {Concrete Australian AS 3600-01}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css" />
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetOverwrite</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignConcrete.AS_3600_01.GetOverwrite</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetOverwrite(ByVal Name As String, ByVal Item As Long, ByRef Value As Double, ByRef ProgDet As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a frame object with a concrete frame design procedure.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 12, inclusive, indicating the overwrite item considered.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Live load reduction factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Unbraced length ratio, Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Unbraced length ratio, Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Effective length factor, K Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Effective length factor, K Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Moment coefficient, km Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Moment coefficient, km Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Nonsway moment factor, Db Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Nonsway moment factor, Db Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Sway moment factor, Ds Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">12 = Sway moment factor, Ds Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered overwrite item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = Program Default</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = Sway special</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">2 = Sway intermediate</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">3 = Sway ordinary</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">4 = Nonsway</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Live load reduction factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Unbraced length ratio, Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Unbraced length ratio, Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Effective length factor, K Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Effective length factor, K Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Moment coefficient, km Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Moment coefficient, km Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Nonsway moment factor, Db Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Nonsway moment factor, Db Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Sway moment factor, Ds Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">12 = Sway moment factor, Ds Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .75in;">&#160;</p>
+<p class="ParameterName">ProgDet</p>
+<p class="Comment">If this item is True, the specified value is program determined.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the value of a concrete design overwrite item.</p>
+<p class="Comment">The function returns zero if the item is successfully retrieved; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetConcreteDesignOverwriteItemAS_3600_01()<br />
+&#160;&#160;&#160;'dimension variables<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ProgDet As Boolean<br />
+<br />
+&#160;&#160;&#160;'create Sap2000 object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br />
+<br />
+&#160;&#160;&#160;'start Sap2000 application<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br />
+<br />
+&#160;&#160;&#160;'create SapModel object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br />
+<br />
+&#160;&#160;&#160;'initialize model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br />
+<br />
+&#160;&#160;&#160;'create new concrete frame section property<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetRectangle("R1", "4000Psi", 20, 12)<br />
+<br />
+&#160;&#160;&#160;'create model from template<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288, True, "R1", "R1")<br />
+<br />
+&#160;&#160;&#160;'set concrete design code<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.SetCode("AS 3600-01")<br />
+<br />
+&#160;&#160;&#160;'run analysis<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br />
+<br />
+&#160;&#160;&#160;'start concrete design<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.StartDesign<br />
+<br />
+&#160;&#160;&#160;'get overwrite item<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.AS_3600_01.GetOverwrite("8", 1, Value, ProgDet)<br />
+<br />
+&#160;&#160;&#160;'close Sap2000<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br />
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetOverwrite_{Concrete_Australian_AS_3600-01}.htm">SetOverwrite</a></p>
+</body>
+</html>

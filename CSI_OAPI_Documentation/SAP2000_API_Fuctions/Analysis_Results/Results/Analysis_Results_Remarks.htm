@@ -1,0 +1,34 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\Additional Remarks Hyperlink.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Analysis Results Remarks</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>Analysis Results Remarks</h1>
+<p class="Comment">The analysis results are returned in a collection of one-dimensional result arrays. Each result array is created as a dynamic array by the API user. As an example, in VBA a dynamic string array is defined by:</p>
+<p class="Coding">&#160;&#160;&#160;Dim MyArray() as String</p>
+<p class="Comment" style="margin-top: 9pt;">The array is dimensioned to (NumberResults– 1) inside the Sap2000 program, filled with the result values, and returned to the API user.</p>
+<p class="Comment">The arrays are zero-based. Thus the first result is at array index 0, and the last result is at array index (NumberResults- 1). For example, the StepType() array is filled as:</p>
+<p class="Coding">&#160;&#160;&#160;StepType(0) = Step type for first result returned<br>
+&#160;&#160;&#160;StepType(1) = Step type for second result<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;.<br>
+&#160;&#160;&#160;StepType(NumberResults- 1) = Step type for last result</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">Immediately before requesting results data, it is a good idea to clear the SelectedForOutput flag for all load cases and response combinations and then to set the flag True for those cases and combos for which output is to be generated. This avoids confusion as to which cases and combos are currently selected for output.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+</body>
+</html>

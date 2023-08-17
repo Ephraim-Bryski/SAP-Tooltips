@@ -1,0 +1,75 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetByGroup</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetByGroup</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SectCut.SetByGroup</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetByGroup(ByVal Name As String, ByVal GroupName As String, ByVal MyType As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The section cut name. If a section cut with this name already exists then the section cut is reinitialized with the new data.<span style="mso-spacerun: yes;">&#160;</span>&#160;All previous data assigned to the section cut is lost. If a section cut with this name does not exist then a new section cut is added.</p>
+<p class="ParameterName">GroupName</p>
+<p class="Comment">The name of the group on which the section cut is based.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is either 1, 2, 3 or 4 indicating the result type of the section cut.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 1.0in; margin-bottom: .0001pt;">1 = Analysis</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 1.0in; margin-bottom: .0001pt;">2 = Design Wall</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 1.0in; margin-bottom: .0001pt;">3 = Design Spandrel</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 1.0in; margin-bottom: .0001pt;">4 = Design Slab</p>
+<h2>Remarks</h2>
+<p class="Comment">This function adds a new section cut defined by a group to the model or reinitializes an existing section cut to be defined by a group.</p>
+<p class="Comment">The function returns zero if the section cut is successfully added or initialized, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">Sub SetSectionCutByGroup()</p>
+<p class="CommentFirstOne" style="font-family: 'Courier New', monospace; margin-left: 72px;">'dimension variables</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapModel As cSapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim ret As Long</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create Sap2000 object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = New Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'start Sap2000 application</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationStart</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create SapModel object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = SapObject.SapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'initialize model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.InitializeNewModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create model from template</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define new group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.GroupDef.SetGroup("Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'add objects to group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.PointObj.SetGroupAssign("1", "Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.FrameObj.SetGroupAssign("1", "Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define section cut</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.SetByGroup("SCut1", "Group1", 1)</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'close Sap2000</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationExit False</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetByQuad.htm">SetByQuad</a></p>
+</body>
+</html>

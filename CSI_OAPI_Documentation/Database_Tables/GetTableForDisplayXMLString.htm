@@ -1,0 +1,72 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Language" content="en-us">
+<meta name="System.Keywords" content="GetTableForDisplayXMLString method">
+<meta name="System.Keywords" content="cDatabaseTables.GetTableForDisplayXMLString method">
+<meta name="Microsoft.Help.F1" content="ETABSv1.cDatabaseTables.GetTableForDisplayXMLString">
+<meta name="Microsoft.Help.Id" content="M:ETABSv1.cDatabaseTables.GetTableForDisplayXMLString(System.String,System.String[]@,System.String,System.Boolean,System.Int32@,System.String@)">
+<meta name="Description" content="Returns data for a single table as XML in a single string. If there is nothing to be shown in the table then no data is returned.">
+<meta name="Microsoft.Help.ContentType" content="Reference">
+<meta name="BrandingAware" content="true">
+<meta name="container" content="ETABSv1">
+<meta name="file" content="db234812-79f0-ad61-998b-1719a2ce6481">
+<meta name="guid" content="db234812-79f0-ad61-998b-1719a2ce6481">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTableForDisplayXMLString</title>
+<link rel="shortcut icon" href="../icons/favicon.ico" type="">
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetTableForDisplayXMLString</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.</span>GetTableForDisplayXMLString</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTableForDisplayXMLString (<span class="parameter">TableKey</span> 
+ As String,&#160;ByRef <span class="parameter">FieldKeyList</span> As String(), 
+ <span class="parameter">GroupName </span>As String(), IncludeSchema As 
+ Boolean, ByRef <span class="parameter">TableVersion</span> As Integer, 
+ ByRef XMLTableData<span class="parameter"> </span>As String) As Integer 
+ </p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">TableKey</span> </p>
+<p class="Comment">Input Item: The table key of the table for which data 
+ is requested. </p>
+<p class="ParameterName"><span class="parameter">FieldKeyList</span> </p>
+<p class="Comment">Input Item: A zero-based array listing the field keys 
+ associated with the specified table for which data is requested. &#160;</p>
+<p class="ParameterName">GroupName</p>
+<p class="Comment">Input Item: The name of the group for which data will 
+ be returned.</p>
+<p class="ParameterName">IncludeSchema</p>
+<p class="Comment">Input Item: Flag indicating if the schema should be 
+ included with the table data.</p>
+<p class="ParameterName"><span class="parameter">TableVersion</span> </p>
+<p class="Comment"><span class="parameter">Returned Item: The version number 
+ of the specified table. &#160;</span></p>
+<p class="ParameterName"><span class="parameter">XMLTableData</span></p>
+<p class="Comment">Returned Item: A string containing the XML data for 
+ the table. </p>
+<dl>
+	<h2>Remarks:</h2>
+</dl>
+<p class="Comment">Returns 0 if the function executes correctly, otherwise 
+ returns nonzero. &#160;</p>
+<p class="Comment">Returns data for a single table as XML in a single string. 
+ If there is nothing to be shown in the table then no data is returned 
+ </p>
+<p class="Comment">If the <span class="parameter">FieldKeyList</span> array 
+ contains a single blank string the data will be provided for all fields. 
+ If the <span class="parameter">GroupName</span> is All, or a blank string, 
+ then data will be returned for all applicable objects in the model. </p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+</body>
+</html>

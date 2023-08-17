@@ -1,0 +1,108 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Load Case Functions\Auto Wind Load Functions\GetUserLoad.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetUserLoad {Wind Load}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetUserLoad</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.GetUserLoad</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetUserLoad(ByVal Name As String, ByRef Num As Long, ByRef Diaph() As String, ByRef Fx() As Double, ByRef Fx() As Double, ByRef Mz() As Double, ByRef x() As Double, ByRef y() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern that has a User-type auto wind load assigned.</p>
+<p class="ParameterName">Num</p>
+<p class="Comment">The number of diaphragms at which user wind loads are reported.</p>
+<p class="ParameterName">Diaph</p>
+<p class="Comment">This is an array that includes the names of the diaphragms that have user wind loads.</p>
+<p class="ParameterName">Fx</p>
+<p class="Comment">This is an array that includes the global X direction force assigned to the specified diaphragm. [F]</p>
+<p class="ParameterName">Fy</p>
+<p class="Comment">This is an array that includes the global Y direction force assigned to the specified diaphragm. [F]</p>
+<p class="ParameterName">Mz</p>
+<p class="Comment">This is an array that includes the moment about the global Z axis assigned to the specified diaphragm. [FL]</p>
+<p class="ParameterName">x</p>
+<p class="Comment">This is an array that includes the global X-coordinate of the point where the wind force load is applied to the diaphragm. [L]</p>
+<p class="ParameterName">y</p>
+<p class="Comment">This is an array that includes the global Y-coordinate of the point where the wind force load is applied to the diaphragm. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto wind loading parameters for User-type wind loading.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindUser()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Num As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Diaph() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fx() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fy() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Mz() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim x() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign user wind load parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetUserLoad("WIND", "Diaph1", 100, 20, 5000, 0, 0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetUserLoad("WIND", "Diaph2", 50, 10, 2500, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'get user wind load parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.GetUserLoad("WIND", Num, Diaph, Fx, Fy, Mz, x, y)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.01.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetUserLoad_{Wind_Load}.htm">SetUserLoad</a></p>
+<p class="Block-Text"><a href="../../Constraints/GetSpecialRigidDiaphragmList.htm">GetSpecialRigidDiaphragmList</a></p>
+</body>
+</html>

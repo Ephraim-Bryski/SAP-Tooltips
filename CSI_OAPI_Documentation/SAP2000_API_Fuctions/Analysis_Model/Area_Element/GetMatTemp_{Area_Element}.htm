@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Originator" content="ImportDoc" />
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Area Element Functions\GetMatTemp.doc" />
+<meta name="topic-status" content="In Progress" />
+<meta name="topic-priority" content="0" />
+<meta name="topic-time-estimate" content="0" />
+<meta name="topic-id" content="" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>GetMatTemp {Area Element}</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css" />
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetMatTemp</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.AreaElm.GetMatTemp</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetMatTemp(ByVal Name As String, ByRef Temp As Double, ByRef PatternName As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing area element.</p>
+<p class="ParameterName">Temp</p>
+<p class="Comment">This is the material temperature value assigned to the area element. [T]</p>
+<p class="ParameterName">PatternName</p>
+<p class="Comment">This is blank or the name of a defined joint pattern. If it is blank, the material temperature for the area element is uniform over the element at the value specified by Temp.</p>
+<p class="Comment">If PatternName is the name of a defined joint pattern, the material temperature for the area element may vary. The material temperature at each corner point around the area element perimeter is equal to the specified temperature multiplied by the pattern value at the associated point element. The material temperature at other points in the area element is calculated by interpolation from the corner points.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the material temperature assignments to area elements.</p>
+<p class="Comment">The function returns zero if the material temperature assignments are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAreaElementMatTemp()<br />
+&#160;&#160;&#160;'dimension variables<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Temp As Double<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PatternName As String<br />
+<br />
+&#160;&#160;&#160;'create Sap2000 object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br />
+<br />
+&#160;&#160;&#160;'start Sap2000 application<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br />
+<br />
+&#160;&#160;&#160;'create SapModel object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br />
+<br />
+&#160;&#160;&#160;'initialize model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br />
+<br />
+&#160;&#160;&#160;'create model from template<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(2, 48, 2, 48)<br />
+<br />
+&#160;&#160;&#160;'assign material temperature<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.AreaObj.SetMatTemp("ALL", 50, , Group)<br />
+<br />
+&#160;&#160;&#160;'create analysis model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.CreateAnalysisModel<br />
+<br />
+&#160;&#160;&#160;'get material temperature for area element<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.AreaElm.GetMatTemp("3", Temp, PatternName)<br />
+<br />
+&#160;&#160;&#160;'close Sap2000<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br />
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

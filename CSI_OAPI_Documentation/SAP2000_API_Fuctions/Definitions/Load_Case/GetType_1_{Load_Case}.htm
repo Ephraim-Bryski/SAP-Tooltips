@@ -1,0 +1,165 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Case Functions\GetType_1.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTypeOAPI_1 {Load Case}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetTypeOAPI_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.GetTypeOAPI_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTypeOAPI_1(ByVal Name As String, ByRef CaseType As eLoadCaseType, ByRef SubType As Long, ByRef DesignType As eLoadPatternType, ByRef DesignTypeOption As Long, ByRef Auto As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing load case.</p>
+<p class="ParameterName">CaseType</p>
+<p class="Comment">This is one of the following items in the eLoadCaseType enumeration.</p>
+<p class="Block-Text" style="margin-left: 85px;">LinearStatic = 1</p>
+<p class="Block-Text" style="margin-left: 85px;">NonlinearStatic = 2</p>
+<p class="Block-Text" style="margin-left: 85px;">Modal = 3</p>
+<p class="Block-Text" style="margin-left: 85px;">ResponseSpectrum = 4</p>
+<p class="Block-Text" style="margin-left: 85px;">LinearHistory = 5 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">NonlinearHistory = 6 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">LinearDynamic = 7 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">NonlinearDynamic = 8 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">MovingLoad = 9</p>
+<p class="Block-Text" style="margin-left: 85px;">Buckling = 10</p>
+<p class="Block-Text" style="margin-left: 85px;">SteadyState = 11</p>
+<p class="Block-Text" style="margin-left: 85px;">PowerSpectralDensity = 12</p>
+<p class="Block-Text" style="margin-left: 85px;">LinearStaticMultistep = 13</p>
+<p class="Block-Text" style="margin-left: 85px;">Hyperstatic = 14</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">ExternalResults = 15</p>
+<p class="ParameterName">SubType</p>
+<p class="Comment">This is an integer representing the load case sub type. This item applies only for certain case types.</p>
+<p class="Comment">For CASE_NONLINEAR_STATIC:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Nonlinear</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: .0001pt;">2 = Nonlinear staged construction</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Nonlinear static multi-step</p>
+<p class="Comment">For CASE_MODAL:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Eigen</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Ritz</p>
+<p class="Comment">For CASE_LINEAR_HISTORY:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Transient</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Periodic</p>
+<p class="ParameterName">DesignType</p>
+<p class="Comment">This is one of the following items in the eLoadPatternType enumeration.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Dead = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">SuperDead = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Live = 3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">ReduceLive = 4</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Quake = 5</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Wind = 6</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Snow = 7</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Other = 8</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Move = 9</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Temperature = 10</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RoofLive = 11</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Notional = 12</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">PatternLive = 13</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Wave= 14</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Braking = 15</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Centrifugal = 16</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Friction = 17</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ice = 18</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">WindOnLiveLoad = 19</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">HorizontalEarthPressure = 20</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">VerticalEarthPressure = 21</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">EarthSurcharge = 22</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DownDrag = 23</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">VehicleCollision = 24</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">VesselCollision = 25</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">TemperatureGradient = 26</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Settlement = 27</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Shrinkage = 28</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Creep = 29</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">WaterLoadPressure = 30</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">LiveLoadSurcharge = 31</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">LockedInForces = 32</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">PedestrianLL = 33</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Prestress = 34</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">Hyperstatic = 35</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">Bouyancy = 36</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">StreamFlow = 37</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">Impact = 38</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">Construction = 39</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">DeadWearing = 40</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">DeadWater = 41</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">DeadManufacture = 42</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EarthHydrostatic = 43</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">PassiveEarthPressure = 44</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">ActiveEarthPressure = 45</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">PedestrianLLReduced = 46</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">SnowHighAltitude = 47</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EuroLm1Char = 48</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EuroLm1Freq = 49</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EuroLm2 = 50</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EuroLm3 = 51</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">EuroLm4 = 52</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterName">DesignTypeOption</p>
+<p class="Comment">This is one of the following options for the DesignType item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Program determined</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">1 = User specified</p>
+<p class="ParameterName">Auto</p>
+<p class="Comment">This is one of the following values indicating if the load case has been automatically created.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Not automatically created</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Automatically created by the bridge construction scheduler</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the case type, design type, and auto flag for the specified load case.</p>
+<p class="Comment">The function returns zero if the type is successfully retrieved; otherwise it returns nonzero.</p>
+<p class="Comment">This function supersedes .GetType (LoadCases).</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetLoadCaseType_1()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CaseType As eLoadCaseType<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SubType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DesignType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DesignTypeOption As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Auto As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get load case type<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.GetTypeOAPI_1("DEAD", CaseType, SubType, DesignType, DesignTypeOption, Auto)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<p class="Comment">This function supersedes <a href="../../Obsolete_Functions/GetType_{Load_Case}.htm">GetTypeOAPI {Load Case}</a>.</p>
+<p class="Comment">Changed function name to GetTypeOAPI in v17.0.0.</p>
+<p class="Comment">This function is obsolete and has been superseded by GetTypeOAPI_2 as of v21.0.0. This function is maintained for backwards compatibility where staged construction and nonlinear multi-step cases are a subtype of load case type nonlinear static</p>
+<h2>See Also</h2>
+</body>
+</html>

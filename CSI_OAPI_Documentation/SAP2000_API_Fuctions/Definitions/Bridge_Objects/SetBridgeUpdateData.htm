@@ -1,0 +1,82 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetBridgeUpdateData.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetBridgeUpdateData</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetBridgeUpdateData</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeObj.SetBridgeUpdateData</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetBridgeUpdateData(ByVal Name As String, ByVal Action As Long, ByVal ModelType As Long, ByVal MaxDeckSegLength As Double, ByVal MaxCapSegLength As Double, ByVal MaxColSegLength As Double, ByVal SubMeshSize As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">Action</p>
+<p class="Comment">This is 1, 2 or 3, indicating the action to be taken.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Update linked model.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Clear all from linked model.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Convert to unlinked model.</p>
+<p class="ParameterName">ModelType</p>
+<p class="Comment">This is 1, 2 or 3, indicating the linked bridge model type. This item applies only when the Action item is 1 (update linked model).</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Spine model (frame).</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Area model.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Solid model.</p>
+<p class="ParameterName">MaxDeckSegLength</p>
+<p class="Comment">The maximum length for the deck objects in the linked bridge model. This item applies only when the Action item is 1 (update linked model). [L]</p>
+<p class="ParameterName">MaxCapSegLength</p>
+<p class="Comment">The maximum length for the cap beam objects in the linked bridge model. This item applies only when the Action item is 1 (update linked model). [L]</p>
+<p class="ParameterName">MaxColSegLength</p>
+<p class="Comment">The maximum length for the column objects in the linked bridge model. This item applies only when the Action item is 1 (update linked model). [L]</p>
+<p class="ParameterName">SubMeshSize</p>
+<p class="Comment">The maximum submesh size for area and solid objects in the linked bridge model. This item applies only when the Action item is 1 (update linked model) and the ModelType item is 2 or 3 (area or solid model). [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function updates a linked bridge model, clears all objects from a linked bridge model, or converts a linked bridge model to an unlinked model.</p>
+<p class="Comment">The function returns zero if it is successful.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub SetBridgeObjectUpdateData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'update linked bridge model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeObj.SetBridgeUpdateData("BOBJ1", 1, 2, 150, 150, 150, 50)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.20.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetBridgeUpdateData.htm">GetBridgeUpdateData</a></p>
+</body>
+</html>

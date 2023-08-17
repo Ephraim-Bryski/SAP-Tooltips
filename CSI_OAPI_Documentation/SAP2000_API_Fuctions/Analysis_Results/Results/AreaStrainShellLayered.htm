@@ -1,0 +1,80 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>AreaStrainShellLayered</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>AreaStrainShellLayered</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.Sap2000.Results.AreaStrainShellLayered</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function AreaStrainShellLayered(ByVal name As String, ByVal ItemTypeElm As eItemTypeElm, ByRef NumberResults As Long, ByRef Obj() As String, ByRef Elm() As String, ByRef Layer() As String, ByRef IntPtNum() As Long, ByRef IntPtLoc() As Double, ByRef PointElm() As String, ByRef LoadCase() As String, ByRef StepType() As String, ByRef StepNum() As Double, ByRef E11() As Double, ByRef E22() As Double, ByRef G12() As Double, ByRef EMax() As Double, ByRef EMin() As Double, ByRef EAngle() As Double, ByRef EVM() As Double, ByRef G13Avg() As Double, ByRef G23Avg() As Double, ByRef GMaxAvg() As Double, ByRef GAngleAvg() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing area object, area element or group of objects, depending on the value of the ItemTypeElm item.</p>
+<p class="ParameterName">ItemTypeElm</p>
+<p class="Comment">This is one of the following items in the eItemTypeElm enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">ObjectElm = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Element = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">GroupElm = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectionElm = 3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is ObjectElm, the result request is for the area elements corresponding to the area object specified by the Name item.</p>
+<p class="Comment">If this item is Element, the result request is for the area element specified by the Name item.</p>
+<p class="Comment">If this item is GroupElm, the result request is for the area elements corresponding to all area objects included in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectionElm, the result request is for area elements corresponding to all selected area objects and the Name item is ignored.</p>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">Obj</p>
+<p class="Comment">This is an array that includes the area object name associated with each result, if any.</p>
+<p class="ParameterName">Elm</p>
+<p class="Comment">This is an array that includes the area element name associated with each result.</p>
+<p class="ParameterName">Layer</p>
+<p class="Comment">This is an array that includes the layer name associated with each result.</p>
+<p class="ParameterName">IntPtNum</p>
+<p class="Comment">This is an array that includes the integration point number within the specified layer of the area element.</p>
+<p class="ParameterName">IntPtLoc</p>
+<p class="Comment">This is an array that includes the integration point relative location within the specified layer of the area element. The location is between -1 (bottom of layer) and +1 (top of layer), inclusive. The midheight of the layer is at a value of 0.</p>
+<p class="ParameterName">PointElm</p>
+<p class="Comment">This is an array that includes the name of the point element where the results are reported.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the analysis case or load combination associated with each result.</p>
+<p class="ParameterName">StepType</p>
+<p class="Comment">This is an array that includes the step type, if any, for each result.</p>
+<p class="ParameterName">StepNum</p>
+<p class="Comment">This is an array that includes the step number, if any, for each result.</p>
+<p class="ParameterName">E11, E22, G12</p>
+<p class="Comment">The area element internal E11, E22 and G12 strains, at the specified point element location, for the specified layer and layer integration point, reported in the area element local coordinate system.</p>
+<p class="ParameterName">EMax, EMin</p>
+<p class="Comment">The area element maximum and minimum principal strains, at the specified point element location, for the specified layer and layer integration point.</p>
+<p class="ParameterName">EAngle</p>
+<p class="Comment">The angle measured counter clockwise (when the local 3 axis is pointing toward you) from the area local 1 axis to the direction of the maximum principal strain. [deg]</p>
+<p class="ParameterName">EVM</p>
+<p class="Comment">The area element internal Von Mises strain at the specified point element location, for the specified layer and layer integration point.</p>
+<p class="ParameterName">G13Avg, G23Avg</p>
+<p class="Comment">The area element average G13 or G23 out-of-plane shear strain at the specified point element location, for the specified layer and layer integration point.</p>
+<p class="ParameterName">GMaxAvg</p>
+<p class="Comment">The area element maximum average out-of-plane shear strain for the specified layer and layer integration point. It is equal to the square root of the sum of the squares of G13Avg and G23Avg.</p>
+<p class="ParameterName">GAngleAvg</p>
+<p class="Comment">The angle measured counter clockwise (when the local 3 axis is pointing toward you) from the area local 1 axis to the direction of GMaxAvg. [deg]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the area strains for the specified area elements that are assigned layered shell section properties.</p>
+<p class="Comment">The function returns zero if the strains are successfully recovered, otherwise it returns a nonzero value.</p>
+<p class="Comment">See <a href="Analysis_Results_Remarks.htm">Analysis Results Remarks</a> for more information.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Similar to AreaStrainShell<br>
+<br>
+&#160;&#160;&#160;'get area strains for area object "1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.AreaStrainShellLayered("1", Object, NumberResults, Obj, Elm, Layer, IntPtNum, IntPtLoc, PointElm, LoadCase, StepType, StepNum, E11, E22, G12, EMax, EMin, EAngle, EVM, G13Avg, G23Avg, GMaxAvg, GAngleAvg )</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 20.1.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="AreaStrainShell.htm">AreaStrainShell</a></p>
+</body>
+</html>

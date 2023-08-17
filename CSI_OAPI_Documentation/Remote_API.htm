@@ -1,0 +1,224 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Remote API</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Remote API</h1>
+<p class="MsoNormal">The SAP2000 API can be used to start and/or connect 
+ to a running instance of SAP2000 on a remote computer that is running 
+ the API Service. This can be particularly useful if you need to run a 
+ large number of load cases (e.g., earthquakes for performance-based design, 
+ moving load cases for bridge design, etc.), and there are multiple machines 
+ available for running analyses simultaneously.</p>
+<p class="MsoNormal">Simultaneous runs can be started on multiple Remote 
+ Computers using an API script or plug-in, and results can be merged to 
+ the Main Computer programmatically, without user intervention, as they 
+ become available. Other applications could include using distributed processing 
+ to run a large parameter study or Monte Carlo simulation.</p>
+<p class="IntroTextHeading">Terminology</p>
+<p class="Bullets" style="margin-left: 0.406in;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Main 
+ Computer</b>: Your primary computer.</p>
+<p class="Bullets" style="margin-left: 0.406in;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Remote 
+ Computer</b>: Any other computer that you have access to (physically or 
+ over the network) and that is available for running analyses and/or API 
+ scripts.</p>
+<p class="Bullets" style="margin-left: 0.406in;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>API 
+ Service</b>: “CSiAPIService.exe” command line utility running on a remote 
+ computer that enables Remote API.</p>
+<p class="Bullets" style="margin-left: 0.406in;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>TCP 
+ Port</b>: A TCP (Transmission Control Protocol) port is an integer between&#160;0 
+ to 65535 used to identify which service is to receive a packet/message 
+ sent to a Remote Computer.</p>
+<p class="IntroTextHeading">Requirements &amp; Limitations</p>
+<p class="Bullets" style="text-indent: -0.2in; 
+											 margin-left: 39px; margin-bottom: 4pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span 
+	 style="mso-list: l0 level1 lfo1;">Depending on the type of firewall 
+ installed on a Remote Computer, you may have to create a firewall exception 
+ on that Remote Computer to allow the API Service to communicate on your 
+ network. This is done automatically for Windows Firewall during the installation 
+ of SAP2000, but it may have to be manually done for other firewalls and 
+ will require administrative privileges. This is typically a one-time operation.</span></p>
+<p class="Bullets" style="text-indent: -0in; 
+											 margin-left: 20px; margin-bottom: 4pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>The 
+ API Service has two modes:</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 0pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Product-Specific:</p>
+<ul>
+	<ul>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 4pt;">Listens to 
+		 connections made from SAP2000v1.dll at default TCP port 11650. (For CSiBridge1.dll , the port is 11649 )</p></li>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 4pt; text-indent: -0.2in; 
+										 margin-left: 0.2in;">This is the 
+		 default mode and can be started using the following command:<br>
+		“CSiAPIService.exe” or “CSiAPIService.exe --api A”</p></li>
+	</ul>
+</ul>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 4pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Cross-Product:</p>
+<ul>
+	<ul>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 4pt;">Listens to 
+		 connections made from CSiAPIv1.dll at default TCP port 11646.</p></li>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 4pt; text-indent: -0.2in; 
+										 margin-left: 0.2in;">This 
+		 can be started using the following command:<br>
+		“CSiAPIService.exe --api C”</p></li>
+	</ul>
+</ul>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-list: l0 level1 lfo1; 
+											 margin-left: 20px; margin-bottom: 4pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Multiple 
+ API Service instances can be run simultaneously on a Remote Computer as 
+ long as they do not use the same TCP port. In case of TCP port conflicts 
+ with other programs, it is possible to assign a specific TCP port to each 
+ API Service instance using the following command:</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 4pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>“CSiAPIService.exe 
+ --port [portNumber]”</p>
+<p class="MsoListParagraphCxSpLast" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 4pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>where 
+ [portNumber] is between 1024 and 49151.</p>
+<p class="MsoNormal" style="margin-left: 8px; margin-bottom: 4pt;">It is 
+ also possible to override the default TCP port for Product-Specific and 
+ Cross-Product API modes using the following Windows environment variables:</p>
+<p class="MsoListParagraphCxSpFirst" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 4pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Product-Specific: 
+ “SAP2000v1_cOAPI_DEFAULT_PORT” (For CSiBridge, use “CSiBridge1_cOAPI_DEFAULT_PORT”)</p>
+<p class="MsoListParagraphCxSpLast" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 4pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Cross-Product: 
+ “CSiAPIv1_cOAPI_DEFAULT_PORT”</p>
+<p class="IntroTextHeading">Procedure</p>
+<p class="MsoListParagraphCxSpFirst" 
+											 style="mso-list: l0 level1 lfo1; 
+											 margin-left: 20px; margin-bottom: 3.5pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Install 
+ the SAP2000 on the Main and Remote Computers.</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-list: l0 level1 lfo1; 
+											 margin-left: 20px; margin-bottom: 3.5pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>On 
+ each Remote Computer, open a command prompt and run “CSiAPIService.exe”, 
+ located in the SAP2000 installation folder, to start the API Service.</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Tip</b>: 
+ Type “CSiAPIService.exe --help” to view a detailed list of options where 
+ you can set</p>
+<ul>
+	<ul>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 3.5pt;">The TCP 
+		 port to use.</p></li>
+		<li style="list-style: disc;"><p class="MsoListParagraphCxSpMiddle" 
+										 style="mso-add-space: auto; mso-list: l0 level3 lfo1; 
+										 margin-bottom: 3.5pt;">API mode: 
+		 Product-specific or Cross-product.</p></li>
+	</ul>
+</ul>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Tip</b>: 
+ You can set the API Service to run automatically when your computer starts 
+ (see <a href="https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps">Change 
+ which apps run automatically at startup in Windows 10</a> for details).</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-list: l0 level1 lfo1; 
+											 margin-left: 20px; margin-bottom: 3.5pt;"><span class="rls-2-Bullets"><span style="font-family:Wingdings">&#167;</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>On 
+ your Main Computer, run a script, program, or SAP2000 Plug-in that uses 
+ one of the following API calls to start (CreateObject…) or connect to 
+ (GetObject…) an instance of SAP2000 on a Remote Computer:</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.CreateObjectHost(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal fullPath As String)</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.CreateObjectHostPort(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal portNumber As Integer,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal fullPath As String)</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.CreateObjectProgIDHost(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal progID As String)</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.CreateObjectProgIDHostPort(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal portNumber As Integer,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal progID As String)</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.GetObjectHost(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal progID As String)</p>
+<p class="MsoListParagraphCxSpMiddle" 
+											 style="mso-add-space: auto; 
+											 mso-list: l0 level2 lfo1; 
+											 margin-left: 40px; margin-bottom: 3.5pt;"><span class="rls-3-Bullets"><span style="font-family:'Courier New'">o</span></span><span style='word-spacing:normal; font:6.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>cHelper.GetObjectHostPort(</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal hostName As String,</p>
+<p class="MsoListParagraphCxSpMiddle" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal portNumber As Integer,</p>
+<p class="MsoListParagraphCxSpLast" style="mso-add-space: auto; margin-left: 80px; 
+	 margin-bottom: 3.5pt;">ByVal progID As String)</p>
+<p class="MsoNormal">The above API calls receive the name of the Remote 
+ Computer (e.g. hostName = “myserver”), and optionally a TCP port number, 
+ in addition to the arguments of the regular cHelper.CreateObject() or 
+ GetObject() API calls. Upon successful instantiation at a Remote Computer, 
+ subsequent calls to the returned cOAPI object will execute on the Remote 
+ Computer. API calls can be used to open models, modify them, run analysis 
+ and design, extract results, and/or merge results back to identical models 
+ on the Main Computer.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 22.1.0</p>
+</body>
+</html>

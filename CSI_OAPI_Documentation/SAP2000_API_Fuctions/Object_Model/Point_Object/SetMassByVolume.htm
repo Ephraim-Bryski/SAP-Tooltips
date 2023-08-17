@@ -1,0 +1,91 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetMassByWeight.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetMassByVolume</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetMassByVolume</h1>
+<h2>Syntax</h2>
+<p class="Comment">Sap2000.PointObj.SetMassByVolume</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetMassByVolume(ByVal Name As String, ByVal MatProp As String, ByRef m() As Double, Optional ByVal ItemType As eItemType = Object, Optional ByVal IsLocalCSys As Boolean = True, Optional ByVal Replace As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object or group, depending on the value of the ItemType item.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of an existing material property.</p>
+<p class="ParameterName">m</p>
+<p class="Comment">This is an array of six mass assignment values.</p>
+<p class="Block-Text" style="margin-left: 72px;">Value(0) = U1 [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="Block-Text" style="margin-left: 72px;">Value(1) = U2 [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="Block-Text" style="margin-left: 72px;">Value(2) = U3 [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="Block-Text" style="margin-left: 72px;">Value(3) = R1 [L<sup style="font-size: 8pt;">5</sup>]</p>
+<p class="Block-Text" style="margin-left: 72px;">Value(4) = R2 [L<sup style="font-size: 8pt;">5</sup>]</p>
+<p class="Comment" style="margin-left: 72px;">Value(5) = R3 [L<sup style="font-size: 8pt;">5</sup>]</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="Block-Text" style="margin-left: 72px;">Object = 0</p>
+<p class="Block-Text" style="margin-left: 72px;">Group = 1</p>
+<p class="Comment" style="margin-left: 72px;">SelectedObjects = 2</p>
+<p class="Comment">If this item is Object, the mass assignment is made to the point object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the mass assignment is made to all point objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, the mass assignment is made to all selected point objects and the Name item is ignored.</p>
+<p class="ParameterName">IsLocalCSys</p>
+<p class="Comment">If this item is True, the specified mass assignments are in the point object local coordinate system. If it is False, the assignments are in the Global coordinate system.</p>
+<p class="ParameterName">Replace</p>
+<p class="Comment">If this item is True, all existing point mass assignments to the specified point object(s) are deleted prior to making the assignment. If it is False, &#160;the mass assignments are added to any previously existing assignments.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns point mass to a point object. The program calculates the mass by multiplying the specified values by the mass per unit volume of the specified material property.</p>
+<p class="Comment">The function returns zero if the mass is successfully assigned; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignPointMassByVolume()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim i as long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim m() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'assign point mass<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Redim m(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;For i = 0 to 5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;m(i) = 20000 * (i+1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Next i<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetMassByVolume("3", "4000psi", m)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel= Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetMass.htm">SetMass</a></p>
+<p class="Block-Text"><a href="SetMassByWeight.htm">SetMassByWeight</a></p>
+<p class="Block-Text"><a href="GetMass_{Point_Object}.htm">GetMass</a></p>
+<p class="Block-Text"><a href="DeleteMass.htm">DeleteMass</a></p>
+</body>
+</html>

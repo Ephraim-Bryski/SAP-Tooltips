@@ -1,0 +1,117 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="NEW - Analyze.SetSolverOption_2.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Analyze.GetSolverOption_3</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body>
+<script type="text/javascript" src="../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1><b>GetSolverOption_3</b></h1>
+<h2><b>Syntax</b></h2>
+<p class="Comment">SapObject.SapModel.Analyze.GetSolverOption_3</p>
+<h2><b>VB6 Procedure</b></h2>
+<p class="Comment">Function GetSolverOption_3(ByRef SolverType As Long, 
+ ByRef SolverProcessType As Long, ByRef NumberParallelRuns As Long, ByRef 
+ ResponseFileSizeMaxMB As Long, ByRef NumberAnalysisThreads As Long, ByRef 
+ StiffCase As String) As Long</p>
+<h2><b>Parameters</b></h2>
+<p class="ParameterName"><b>SolverType</b></p>
+<p class="Comment">This is 0, 1 or 2, indicating the solver type.</p>
+<p style="line-height: normal; margin-left: 88px;">0 = Standard solver<br>
+1 = Advanced solver<br>
+2 = Multi-threaded solver</p>
+<p class="ParameterName"><b>SolverProcessType</b></p>
+<p class="Comment">This is 0, 1 or 2, indicating the process the analysis 
+ is run.</p>
+<p style="line-height: normal; margin-left: 88px;">0 = Auto (program determined)<br>
+1 = GUI process<br>
+2 = Separate process</p>
+<p class="ParameterName"><b>NumberParallelRuns</b></p>
+<p class="Comment">This is an integer between -8 and 8, inclusive, not 
+ including -1 or 0.</p>
+<p style="margin-left: 88px; line-height: normal;">-8 to -2 = The negative 
+ of the program determined value when the assigned value is <span style="line-height: normal;">0 
+ = Auto parallel (use up to all physical cores - max 8).<br>
+1 = Serial.<br>
+2 to 8 = User defined parallel (use up to this fixed number of cores - 
+ max 8</span></p>
+<p class="ParameterName">ResponseFileSizeMaxMB</p>
+<p class="Comment">The maximum size of a response file in MB before a new 
+ response file is created. Positive if user specified, negative if program 
+ determined.</p>
+<p class="ParameterName">NumberAnalysisThreads</p>
+<p class="Comment">Number of threads that the analysis can use. Positive 
+ if user specified, negative if program determined.</p>
+<p class="ParameterName"><b>StiffCase</b></p>
+<p class="Comment">The name of the load case used when outputting the mass 
+ and stiffness matrices to text files. If this item is blank, no matrices 
+ are output.</p>
+<h2><b>Remarks</b></h2>
+<p class="Comment">This function retrieves the model solver options.</p>
+<p class="Comment">The function returns zero if the options are successfully 
+ retrieved; otherwise it returns a nonzero value.</p>
+<h2><b>VBA Example</b></h2>
+<p class="Coding">Sub GetModelSolverOption()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SolverType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SolverProcessType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StiffCase As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set model solver options<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.GetSolverOption_3(SolverType, 
+ SolverProcessType, NumberParallelRuns, ResponseFileSizeMaxMB, NumberAnalysisThreads, 
+ StiffCase)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2><b>Release Notes</b></h2>
+<p class="Comment">Initial release in v21.1.0.</p>
+<p class="Comment">Modified the allowed values for NumberParallelRuns in 
+ v 22.1.0. </p>
+<p class="Comment">Added ResponseFileSizeMaxMB and NumberAnalysisThreads 
+ parameters in v23.2.0</p>
+<p class="Comment">This function supersedes <a href="../Obsolete_Functions/NEW_-_Analyze.GetSolverOption_2.htm">GetSolverOption_2</a>, 
+ adding the NumberParallelRuns parameter and removing the previous Force32BitSolver 
+ parameter</p>
+<h2><b>See Also</b></h2>
+<p class="Comment"><a href="Analyze.SetSolverOption_3.htm">SetSolverOption_3</a></p>
+<p style="line-height: normal;">&#160;</p>
+<p>&#160;</p>
+</body>
+</html>

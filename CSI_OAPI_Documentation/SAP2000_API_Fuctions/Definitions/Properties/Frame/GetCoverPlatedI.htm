@@ -1,0 +1,119 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame\GetCoverPlatedI.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetCoverPlatedI</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetCoverPlatedI</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.GetCoverPlatedI</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetCoverPlatedI(ByVal Name As String, ByRef SectName As String, ByRef FyTopFlange As Double, ByRef FyWeb As Double, ByRef FyBotFlange As Double, ByRef tc As Double, ByRef bc As Double, ByRef MatPropTop As String, ByRef tcb As Double, ByRef bcb As Double, ByRef MatPropBot As String, ByRef Color As Long, ByRef Notes As String, ByRef GUID As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property.</p>
+<p class="ParameterName">SectName</p>
+<p class="Comment">The name of an existing I-type frame section property that is used for the I-section portion of the coverplated I section.</p>
+<p class="ParameterName">FyTopFlange</p>
+<p class="Comment">The yield strength of the top flange of the I-section. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="Comment">If this item is 0, the yield strength of the I-section specified by the SectName item is used.</p>
+<p class="ParameterName">FyWeb</p>
+<p class="Comment">The yield strength of the web of the I-section. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="Comment">If this item is 0, the yield strength of the I-section specified by the SectName item is used.</p>
+<p class="ParameterName">FyBotFlange</p>
+<p class="Comment">The yield strength of the bottom flange of the I-section. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="Comment">If this item is 0, the yield strength of the I-section specified by the SectName item is used.</p>
+<p class="ParameterName">tc</p>
+<p class="Comment">The thickness of the top cover plate. [L]</p>
+<p class="Comment">If the tc or the bc item is less than or equal to 0, no top cover plate exists.</p>
+<p class="ParameterName">bc</p>
+<p class="Comment">The width of the top cover plate. [L]</p>
+<p class="Comment">If the tc or the bc item is less than or equal to 0, no top cover plate exists.</p>
+<p class="ParameterName">MatPropTop</p>
+<p class="Comment">The name of the material property for the top cover plate.</p>
+<p class="Comment">This item applies only if both the tc and the bc items are greater than 0.</p>
+<p class="ParameterName">tcb</p>
+<p class="Comment">The thickness of the bottom cover plate. [L]</p>
+<p class="Comment">If the tcb or the bcb item is less than or equal to 0, no bottom cover plate exists.</p>
+<p class="ParameterName">bcb</p>
+<p class="Comment">The width of the bottom cover plate. [L]</p>
+<p class="Comment">If the tcb or the bcb item is less than or equal to 0, no bottom cover plate exists.</p>
+<p class="ParameterName">MatPropBot</p>
+<p class="Comment">The name of the material property for the bottom cover plate.</p>
+<p class="Comment">This item applies only if both the tcb and the bcb items are greater than 0.</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the section.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the section.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the section.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves frame section property data for a tube-type frame section.</p>
+<p class="Comment">The function returns zero if the section property data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFramePropCoverPlatedI()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SectName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FyTopFlange As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FyWeb As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FyBotFlange As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim tc As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim bc As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatPropTop As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim tcb As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim bcb As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatPropBot As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Color As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Notes As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GUID As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set new I-type frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetISection("ISEC", "A992Fy50", 24, 8, 0.5, 0.3, 8, 0.5)<br>
+<br>
+&#160;&#160;&#160;'set new cover plated I-type frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetCoverPlatedI("CPI1", "ISEC", 0, 36, 0, 0.75, 14, "A992Fy50", 0.5, 6, "A992Fy50")<br>
+<br>
+&#160;&#160;&#160;'get frame section property data for cover plated I<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.GetCoverPlatedI("CPI1", SectName, FyTopFlange, FyWeb, FyBotFlange, tc, bc, MatPropTop, tcb, bcb, MatPropBot, Color, Notes, GUID)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetCoverPlatedI.htm">SetCoverPlatedI</a></p>
+</body>
+</html>

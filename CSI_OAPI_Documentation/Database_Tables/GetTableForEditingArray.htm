@@ -1,0 +1,116 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Language" content="en-us">
+<meta name="System.Keywords" content="GetTableForEditingArray method">
+<meta name="System.Keywords" content="cDatabaseTables.GetTableForEditingArray method">
+<meta name="Microsoft.Help.F1" content="ETABSv1.cDatabaseTables.GetTableForEditingArray">
+<meta name="Microsoft.Help.Id" content="M:ETABSv1.cDatabaseTables.GetTableForEditingArray(System.String,System.String,System.Int32@,System.String[]@,System.Int32@,System.String[]@)">
+<meta name="Description" content="Returns a single table in a string array for interactive editing.">
+<meta name="Microsoft.Help.ContentType" content="Reference">
+<meta name="BrandingAware" content="true">
+<meta name="container" content="ETABSv1">
+<meta name="file" content="c1f8b914-5d10-7ff2-f7c1-ed1660352f9e">
+<meta name="guid" content="c1f8b914-5d10-7ff2-f7c1-ed1660352f9e">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTableForEditingArray</title>
+<link rel="shortcut icon" href="../icons/favicon.ico">
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetTableForEditingArray</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.</span>GetTableForEditingArray</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTableForEditingArray (<span class="parameter">TableKey</span> 
+ As String(),&#160;<span class="parameter">GroupName </span>As String(), 
+ ByRef <span class="parameter">TableVersion</span> As Integer, ByRef <span 
+	 class="parameter">FieldKeysIncluded</span> As String(), ByRef <span 
+	 class="parameter">NumberRecords</span> As Integer, ByRef <span class="parameter">TableData</span> 
+ As String()) As Integer &#160;</p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">TableKey</span> </p>
+<p class="Comment">Input Item: The table key of the table for which data 
+ is requested. </p>
+<p class="ParameterName">GroupName</p>
+<p class="Comment">Input Item: The name of the group for which data will 
+ be returned.</p>
+<p class="ParameterName"><span class="parameter">TableVersion</span> </p>
+<p class="Comment"><span class="parameter">Returned Item: The version number 
+ of the specified table. &#160;</span></p>
+<p class="ParameterName"><span class="parameter"><span class="parameter">F</span>ieldKeysIncluded</span> 
+ </p>
+<p class="Comment">Returned Item: A zero-based array listing the field 
+ keys associated with the specified table for which data is reported in 
+ the order it is reported in the <span class="parameter">TableData</span> 
+ array. These are essentially the column headers of the data returned in 
+ <span class="parameter">TableData</span>. </p>
+<p class="ParameterName"><span class="parameter">NumberRecords</span> </p>
+<p class="Comment">Returned Item: The number of records of data returned 
+ for each field. This is essentially the number of rows of data . &#160;</p>
+<dl>
+	<p class="ParameterName"><span class="parameter">TableData</span> </p>
+</dl>
+<p class="Comment">Returned Item: A zero-based, one-dimensional array of 
+ the table data, excluding headers, returned row by row. The format of 
+ the data is explained below. </p>
+<p class="Comment">As an example, suppose there are three fields in the 
+ <span class="parameter">FieldsKeysIncluded</span> array and the <span 
+	 class="parameter">NumberRecords</span> is five.</p>
+<table style="margin-left: 80px; left: 0px; top: 545px;" width="368">
+	<tr>
+		<th>EXAMPLE Material Name</th>
+		<th>Type</th>
+		<th>Density</th>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;">A992Fy50</p></td>
+		<td><p style="text-align: center;">Steel</p></td>
+		<td><p style="text-align: center;">490</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;">4000Psi</p></td>
+		<td><p style="text-align: center;">Concrete</p></td>
+		<td><p style="text-align: center;">150</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;">A615Gr60</p></td>
+		<td><p style="text-align: center;">Rebar</p></td>
+		<td><p style="text-align: center;">480</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;">A416Gr270</p></td>
+		<td><p style="text-align: center;">Tendon</p></td>
+		<td><p style="text-align: center;">470</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;">6061T6</p></td>
+		<td><p style="text-align: center;">Aluminum</p></td>
+		<td><p style="text-align: center;">170</p></td>
+	</tr>
+</table>
+<p class="Comment">The data is returned row by row, and items 0 thru 2 
+ in this array would be the first row, items 3 thru 5 the second row, etc, 
+ and items 12 thru 14 the fifth row. Using the example of the table above, 
+ the returned array would look like this: (A992Fy50, Steel, 490, 4000Psi, 
+ Concrete, 150, A615Gr60, Rebar, 480, A416Gr270, Tendon, 470, 6061T6, Aluminum, 
+ 170) &#160;</p>
+<dl>
+	<h2>Remarks:</h2>
+</dl>
+<p class="Comment">Returns 0 if the function executes correctly, otherwise 
+ returns nonzero. &#160;</p>
+<p class="Comment">Returns a single table in a string array for interactive 
+ editing.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetTableforEditingArray.htm">SetTableForEditingArray</a></p>
+</body>
+</html>

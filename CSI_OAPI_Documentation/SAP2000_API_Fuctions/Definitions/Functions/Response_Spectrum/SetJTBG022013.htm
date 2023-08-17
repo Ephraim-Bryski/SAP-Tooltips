@@ -1,0 +1,74 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetJTBG022013 {RS}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetJTBG022013</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.SetJTGB022013</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetJTGB022013(ByVal Name As String, ByVal Direction As Long, ByVal PeakAccel As Double, ByVal Tg As Double, ByVal Ci As Double, ByVal Cs As Double, ByVal DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new function. If this is an existing function, that function is modified; otherwise, a new function is added.</p>
+<p class="ParameterName">Direction</p>
+<p class="Comment">This is 1, 2 or 3, indicating the response spectrum direction.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Horizontal</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Vertical-Rock</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Vertical-Soil</p>
+<p class="ParameterName">PeakAccel</p>
+<p class="Comment">The peak acceleration, A.</p>
+<p class="ParameterName">Tg</p>
+<p class="Comment">The characteristic ground period, Tg &gt; 0.1. [s]</p>
+<p class="ParameterName">Ci</p>
+<p class="Comment">The importance coefficient.</p>
+<p class="ParameterName">Cs</p>
+<p class="Comment">The site soil coefficient.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function defines a JTG B02-2013 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function is successfully defined; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetRSFuncJTGB022013()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add JTG B02-2013 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetJTGB022013("RS-1", 1, 0.18, 0.36, 0.4, 1, 0.04)<br>
+&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in v18.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetJTGB022013.htm">GetJTBG022013</a></p>
+</body>
+</html>

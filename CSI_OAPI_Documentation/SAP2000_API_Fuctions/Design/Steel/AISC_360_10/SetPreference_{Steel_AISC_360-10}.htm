@@ -1,0 +1,458 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetPreference {Steel AISC 360-10}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetPreference</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignSteel.AISC360_10.SetPreference</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetPreference(ByVal Item As Long, ByVal Value 
+ As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 35, inclusive, indicating 
+ the preference item considered.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">2 = Seismic design category</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">3 = Design provision</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">4 = Analysis method (Obsolete, 
+ replaced by 27, 28, and 29)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">5 = Notional load coefficient</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">6 = Phi or Omega for bending</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">7 = Phi or Omega for compression</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">8 = Phi or Omega for tension 
+ yielding</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">9 = Phi or Omega for tension 
+ fracture</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">10 = Phi or Omega for 
+ shear</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">11 = Phi or Omega for 
+ shear short webbed rolled I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">12 = Phi or Omega for 
+ torsion</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">13 = Ignore seismic code</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">14 = Ignore special seismic 
+ load</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">15 = Doubler plate is 
+ plug welded</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">16 = HSS welding type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">17 = Reduce HSS thickness</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">18 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">19 = DL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">20 = SDL + LL deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">21 = LL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">22 = Total load deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">23 = Total camber limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">24 = Pattern live load 
+ factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">25 = Demand/capacity ratio 
+ limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">26 = Multi-response case design<br>
+27 = Analysis Method<br>
+28 = Second Order Method<br>
+29 = Stiffness Reduction Method</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">30 = Importance Factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">31 = Design Systems Rho</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">32 = Design Systems Sds</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">33 = Design Systems R</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">34 = Design Systems Omega0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 9pt;">35 = Design Systems Cd</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered preference item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 = SMF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 = IMF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">3 = OMF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">4 = SCBF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">5 = OCBF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">6 = OCBFI</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">7 = EBF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">2 = Seismic design category</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">5 = E</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">6 = F</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">3 = Design provision</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 = LRFD</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 = ASD</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">4 = Analysis method (Obsolete, 
+ replaced by 27, 28, and 29)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 = Gen 2nd Order Elastic</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 = 2nd Order By Amp 
+ 1st Order</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">3 = Limited 1st Order 
+ Elastic</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">4 = DAM Gen 2nd Order 
+ Taub Variable</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">5 = DAM Gen 2nd Order 
+ Taub Fixed</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">6 = DAM Amp 1st Order 
+ Taub Variable</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">7 = DAM Amp 1st Order 
+ Taub Fixed</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">5 = Notional load coefficient</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">6 = Phi or Omega for bending</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">7 = Phi or Omega for compression</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">8 = Phi or Omega for tension 
+ yielding</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">9 = Phi or Omega for tension 
+ fracture</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">10 = Phi or Omega for 
+ shear</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">11 = Phi or Omega for 
+ shear short webbed rolled I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">12 = Phi or Omega for 
+ torsion</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">13 = Ignore seismic code</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">14 = Ignore special seismic 
+ load</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">15 = Doubler plate is 
+ plug welded</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">16 = HSS welding type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">1 = ERW</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">2 = SAW</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">17 = Reduce HSS thickness</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">18 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">19 = DL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">20 = SDL + LL deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">21 = LL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">22 = Total load deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">23 = Total camber limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">24 = Pattern live load 
+ factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt;= 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">25 = Demand/capacity ratio 
+ limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">26 = Multi-response case 
+ design</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;1 = Envelopes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;2 = Step-by-step</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;3 = Last 
+ step</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;4 = Envelopes 
+ -- All</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;5 = Step-by-step 
+ -- All</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">27 = &#160;Analysis Method</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">1 = Direct Analysis</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">2 = Effective Length</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">3 = Limited 1st Order</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">28 = &#160;Second Order 
+ Method</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">1 = General 2nd Order</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">2 = Amplified 1st Order</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">29 = &#160;Stiffness Reduction 
+ Method</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">1 = Tau-b variable</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">2 = Tau-b Fixed</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">3 = No Modification</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 120px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">30 = Importance Factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">31 = Design System Rho</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">32 = Design System Sds</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt;= 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">33 = Design System R</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">34 = Design System Omega0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 84px;">35 = Design System Cd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 124px;">Value &gt; 0</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the value of a steel design preference 
+ item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetSteelDesignPreferenceItemAISC360_10()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set steel design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.SetCode(&quot;AISC360-10&quot;)<br>
+<br>
+&#160;&#160;&#160;'set preference item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.AISC360_10.SetPreference(1, 
+ 7)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<p class="Comment">Added items 30 through 35 in v17.3.0.</p>
+<p class="Comment" style="mso-fareast-font-family: 'Times New Roman'; font-family: Arial, sans-serif;">v23.2.0 
+ - modified items 6 through 12 to allow phi or omega, depending on the 
+ design provision value (item 3).</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetPreference_{Steel_AISC_360-10}.htm">GetPreference</a></p>
+</body>
+</html>

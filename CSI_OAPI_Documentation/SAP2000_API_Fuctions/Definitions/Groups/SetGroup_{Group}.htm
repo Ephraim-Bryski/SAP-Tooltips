@@ -1,0 +1,88 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Group Definition Functions\SetGroup.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetGroup {Group}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetGroup</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GroupDef.SetGroup</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetGroup(ByVal Name As String, Optional ByVal color As Long = -1, Optional ByVal SpecifiedForSelection As Boolean = True, Optional ByVal SpecifiedForSectionCutDefinition As Boolean = True, Optional ByVal SpecifiedForSteelDesign As Boolean = True, Optional ByVal SpecifiedForConcreteDesign As Boolean = True, Optional ByVal SpecifiedForAluminumDesign As Boolean = True, Optional ByVal SpecifiedForColdFormedDesign As Boolean = True, Optional ByVal SpecifiedForStaticNLActiveStage As Boolean = True, Optional ByVal SpecifiedForBridgeResponseOutput As Boolean = True, Optional ByVal SpecifiedForAutoSeismicOutput As Boolean = False, Optional ByVal SpecifiedForAutoWindOutput As Boolean = False, Optional ByVal SpecifiedForMassAndWeight As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">This is the name of a group.&#160;&#160;If this is the name of an existing group, &#160;that group is modified, otherwise a new group is added.</p>
+<p class="ParameterName">color</p>
+<p class="Comment">The display color for the group specified as a Long. If this value is input as –1, the program automatically selects a display color for the group.</p>
+<p class="ParameterName">SpecifiedForSelection</p>
+<p class="Comment">This item is True if the group is specified to be used for selection; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForSectionCutDefinition</p>
+<p class="Comment">This item is True if the group is specified to be used for defining section cuts; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForSteelDesign</p>
+<p class="Comment">This item is True if the group is specified to be used for defining steel frame design groups; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForConcreteDesign</p>
+<p class="Comment">This item is True if the group is specified to be used for defining concrete frame design groups; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForAluminumDesign</p>
+<p class="Comment">This item is True if the group is specified to be used for defining aluminum frame design groups; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForColdFormedDesign</p>
+<p class="Comment">This item is True if the group is specified to be used for defining cold formed frame design groups; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForStaticNLActiveStage</p>
+<p class="Comment">This item is True if the group is specified to be used for defining stages for nonlinear static analysis; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForBridgeResponseOutput</p>
+<p class="Comment">This item is True if the group is specified to be used for reporting bridge response output; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForAutoSeismicOutput</p>
+<p class="Comment">This item is True if the group is specified to be used for reporting auto seismic loads; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForAutoWindOutput</p>
+<p class="Comment">This item is True if the group is specified to be used for reporting auto wind loads; otherwise it is False.</p>
+<p class="ParameterName">SpecifiedForMassAndWeight</p>
+<p class="Comment">This item is True if the group is specified to be used for reporting group masses and weight; otherwise it is False.</p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns zero if the group data is successfully set, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetGroupData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'define new group<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GroupDef.SetGroup("Group1")<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetGroup_{Group}.htm">GetGroup</a></p>
+</body>
+</html>

@@ -1,0 +1,85 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNameList {Load Case}_1</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetNameList_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.GetNameList_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNameList_1(ByRef NumberNames As Long, ByRef MyName() As String, Optional ByVal CaseType As eLoadCaseType) As Long</p>
+<h2>Parameters</h2>
+<p class="CommentFirstOne" style="font-weight: bold;">NumberNames</p>
+<p class="Comment">The number of load case names retrieved by the program.</p>
+<p class="CommentFirstOne" style="font-weight: bold;">MyName</p>
+<p class="Comment">This is a one-dimensional array of load case names. The MyName array is created as a dynamic, zero-based, array by the API user:</p>
+<p class="Coding" style="margin-left: 88px; margin-bottom: 9pt;">Dim MyName() as String</p>
+<p class="Comment">The array is dimensioned to (NumberNames - 1) inside the Sap2000 program, filled with the names, and returned to the API user.</p>
+<p class="CommentFirstOne" style="font-weight: bold;">CaseType</p>
+<p class="Comment">This optional value is one of the following items in the eLoadCaseType enumeration.</p>
+<p class="Block-Text" style="margin-left: 85px;">Linear Static = 1</p>
+<p class="Block-Text" style="margin-left: 85px;">Nonlinear_Static = 2</p>
+<p class="Block-Text" style="margin-left: 85px;">Modal = 3</p>
+<p class="Block-Text" style="margin-left: 85px;">Response_Spectrum = 4</p>
+<p class="Block-Text" style="margin-left: 85px;">Linear_History = 5 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">Nonlinear_History = 6 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">Linear_Dynamic = 7 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">Nonlinear_Dynamic = 8 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">Moving_Load = 9</p>
+<p class="Block-Text" style="margin-left: 85px;">Buckling = 10</p>
+<p class="Block-Text" style="margin-left: 85px;">Steady_State = 11</p>
+<p class="Block-Text" style="margin-left: 85px;">Power_Spectral_Density = 12</p>
+<p class="Block-Text" style="margin-left: 85px;">Linear_Static_Multistep = 13</p>
+<p class="Block-Text" style="margin-left: 85px;">Hyperstatic = 14</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 0pt;">External_Results = 15</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 0pt;">StagedConstruction = 16</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">NonlinearStaticMultiStep = 17</p>
+<p class="Comment">If no value is input for CaseType, names are returned for all load cases in the model regardless of type.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the names of all defined load cases of the specified type.</p>
+<p class="Comment">The function returns zero if the names are successfully retrieved, otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetLoadCaseNames()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberNames As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyName() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get load case names<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.GetNameList_1(NumberNames, MyName)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in v21.0.0.</p>
+<p class="Comment">This function supersedes <a href="../../Obsolete_Functions/GetNameList_{Load_Case}.htm">GetNameList {Load Case}</a>.</p>
+<h2>See Also</h2>
+</body>
+</html>

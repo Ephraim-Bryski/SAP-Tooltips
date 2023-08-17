@@ -1,0 +1,86 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="GetObsoleteTableKeyList.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetObsoleteTableKeyList</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body style="word-wrap: break-word;">
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetObsoleteTableKeyList</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.DatabaseTables.GetObsoleteTableKeyList</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetObsoleteTableKeyList(ByRef NumberTableKeys 
+ As Long, ByRef TableKeyList() As String, ByRef NotesList() As String) 
+ As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">NumberTableKeys</p>
+<p class="Parameter_Description" style="margin-left: 48px;">The number 
+ of obsolete table keys for the program.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="ParameterName">TableKeyList</p>
+<p class="Parameter_Description" style="margin-left: 48px;">A zero-based 
+ array of the obsolete table keys in the program.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="ParameterName">NotesList</p>
+<p class="Parameter_Description" style="margin-left: 48px;">A zero-based 
+ array of notes associated with each obsolete table key.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves a list of obsolete table keys 
+ for the program.</p>
+<p class="Comment">The function returns zero if the list is successfully 
+ retrieved; otherwise it returns nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetObsoleteTableKeys()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberTableKeys As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TableKeyList() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NotesList() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create a template model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get obsolete table key data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DatabaseTables. GetObsoleteTableKeyList(NumberTableKeys, 
+ TableKeyList, NotesList)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.20.</p>
+<p style="line-height: normal;">&#160;</p>
+</body>
+</html>

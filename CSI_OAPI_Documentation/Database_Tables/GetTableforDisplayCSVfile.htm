@@ -1,0 +1,73 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Language" content="en-us">
+<meta name="System.Keywords" content="GetTableForDisplayCSVFile method">
+<meta name="System.Keywords" content="cDatabaseTables.GetTableForDisplayCSVFile method">
+<meta name="Microsoft.Help.F1" content="ETABSv1.cDatabaseTables.GetTableForDisplayCSVFile">
+<meta name="Microsoft.Help.Id" content="M:ETABSv1.cDatabaseTables.GetTableForDisplayCSVFile(System.String,System.String[]@,System.String,System.Int32@,System.String,System.String)">
+<meta name="Description" content="Returns data for a single table in a CSV file. If there is nothing to be shown in the table then no data is returned.">
+<meta name="Microsoft.Help.ContentType" content="Reference">
+<meta name="BrandingAware" content="true">
+<meta name="container" content="ETABSv1">
+<meta name="file" content="3ffd7174-be56-d9cc-7802-781240f0581b">
+<meta name="guid" content="3ffd7174-be56-d9cc-7802-781240f0581b">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTableForDisplayCSVFile</title>
+<link rel="shortcut icon" href="../icons/favicon.ico">
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetTableForDisplayCSVFile</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.</span>GetTableForDisplayCSVFile</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTableForDisplayCSVFile (<span class="parameter">TableKey</span> 
+ As String(),&#160;ByRef <span class="parameter">FieldKeyList</span> As 
+ String(), <span class="parameter">GroupName </span>As String(), ByRef 
+ <span class="parameter">TableVersion</span> As Integer, <span class="parameter">csvFilePath 
+ </span>As String(), Optional sepChar as string = &quot;,&quot;) As Integer 
+ </p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">TableKey</span> </p>
+<p class="Comment">Input Item: The table key of the table for which data 
+ is requested. </p>
+<p class="ParameterName"><span class="parameter">FieldKeyList</span> </p>
+<p class="Comment">Input Item: A zero-based array listing the field keys 
+ associated with the specified table for which data is requested. &#160;</p>
+<p class="ParameterName">GroupName</p>
+<p class="Comment">Input Item: The name of the group for which data will 
+ be returned.</p>
+<p class="ParameterName"><span class="parameter">TableVersion</span> </p>
+<p class="Comment"><span class="parameter">Returned Item: The version number 
+ of the specified table. &#160;</span></p>
+<p class="ParameterName"><span class="parameter">csvFilePath</span></p>
+<p class="Comment">Input Item: The fully-qualified path for the CSV file 
+ containing the table data. </p>
+<p class="ParameterName"><span class="parameter">sepChar (Optional) </span></p>
+<p class="Comment">Optional Input Item: The delimiter between data items, 
+ by default &quot;,&quot; </p>
+<dl>
+	<h2>Remarks:</h2>
+</dl>
+<p class="Comment">Returns 0 if the function executes correctly, otherwise 
+ returns nonzero. &#160;</p>
+<p class="Comment">Returns data for a single table in a CSV file. If there 
+ is nothing to be shown in the table then no data is returned </p>
+<p class="Comment">If the <span class="parameter">FieldKeyList</span> array 
+ contains a single blank string the data will be provided for all fields. 
+ If the <span class="parameter">GroupName</span> is All, or a blank string, 
+ then data will be returned for all applicable objects in the model. </p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetTableforEditingCSVFile.htm">GetTableForEditingCSVFile</a> 
+ </p>
+</body>
+</html>

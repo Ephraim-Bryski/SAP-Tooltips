@@ -1,0 +1,82 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetModalComb_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetModalComb_1</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetModalComb_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.ResponseSpectrum.SetModalComb_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetModalComb_1(ByVal Name As String, ByVal MyType As Long, Optional ByVal F1 As Double = 1, Optional ByVal F2 As Double = 0, Optional ByVal PeriodicRigidCombType As Long = 1, Optional ByVal td As Double = 60) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing response spectrum load case.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the modal combination option.</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = CQC</p>
+<p class="Block-Text" style="margin-left: 85px;">2 = SRSS</p>
+<p class="Block-Text" style="margin-left: 85px;">3 = Absolute</p>
+<p class="Block-Text" style="margin-left: 85px;">4 = GMC</p>
+<p class="Block-Text" style="margin-left: 85px;">5 = NRC 10 percent</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">6 = Double sum</p>
+<p class="ParameterName">F1</p>
+<p class="Comment">The GMC f1 factor. This item does not apply when MyType = 3. [cyc/s]</p>
+<p class="ParameterName">F2</p>
+<p class="Comment">The GMC f2 factor. This item does not apply when MyType = 3. [cyc/s]</p>
+<p class="ParameterName">PeriodicRigidCombType</p>
+<p class="Comment">This is 1 or 2, indicating the periodic plus rigid modal combination option.</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = SRSS</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">2 = Absolute</p>
+<p class="ParameterName">t<span class="ParameterName">d</span></p>
+<p class="Comment">Th<span class="Comment">is item applies only when MyType = 6. It is the factor td. [s]</span></p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the modal combination option for the specified load case.</p>
+<p class="Comment">The function returns zero if the option is successfully set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetCaseResponseSpec<span class="Code2">t</span>rumModalComb_1()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 applic<span class="Code2">a</span>tion<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add response spectrum load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set modal combination option<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.SetModalComb_1("LCASE1", 4, 0.5, 1.2, 1)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+&#160;&#160;&#160;End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.00.</p>
+<p class="Comment">This function supersedes <a href="../../../Obsolete_Functions/SetModalComb.htm">SetModalComb</a>.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetModalComb_1.htm">GetModalComb_1</a></p>
+</body>
+</html>

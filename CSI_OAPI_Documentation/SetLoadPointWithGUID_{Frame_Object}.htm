@@ -1,0 +1,64 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoadPointWithGUID {Frame Object}</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetLoadPointWithGUID {Frame Object}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.SetLoadPointWithGUID</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoadPointWithGUID(ByVal Name As String, ByVal LoadPat As String, ByVal MyType As Integer, ByVal dir As Integer, ByVal dist As Double, ByVal val As Double, ByRef GUID As String, Optional ByVal csys As String = "Global", Optional ByVal RelDist As Boolean = True, Optional ByVal Replace As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">The name of a defined load pattern.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1 or 2, indicating the type of point load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Moment</p>
+<p class="ParameterName">Dir</p>
+<p class="Comment">This is an integer between 1 and 11, indicating the direction of the load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Local 1 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Local 2 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Local 3 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Projected X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Projected Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Projected Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Projected Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">The positive gravity direction (see Dir = 10 and 11) is in the negative Global Z direction.</p>
+<p class="ParameterName">Dist</p>
+<p class="Comment">This is the distance from the I-End of the frame object to the load location. This may be a relative distance (0 &lt;= Dist &lt;= 1) or an actual distance, depending on the value of the RelDist item. [L] when RelDist is False</p>
+<p class="ParameterName">Val</p>
+<p class="Comment">This is the value of the point load. [F] when MyType is 1 and [FL] when MyType is 2</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">This is the global unique ID of a point load assigned to the frame object or if it is not the global unique id of a point load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</p>
+<p class="ParameterName">RelDist</p>
+<p class="Comment">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</p>
+<p class="ParameterName" style="margin-left: 88px;">Replace</p>
+<p class="Comment">If this item is True and the input GUID is not the GUID of any point load assigned to the frame object, all previous point loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. If the input GUID is the GUID of a point load already assigned to the frame object, the parameters of the point load are updated with the values provided and this item is ignored.</p>
+<p class="Comment">The function returns zero if the loads are successfully assigned, otherwise it returns a nonzero value.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns point loads to frame objects.</p>
+<p class="Comment">The function returns zero if the loads are successfully assigned, otherwise it returns a nonzero value.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SAP2000_API_Fuctions/Object_Model/Frame_Object/GetLoadPoint_{Frame_Object}.htm">GetLoadPointWithGUID</a></p>
+<p class="Block-Text"><a href="SAP2000_API_Fuctions/Object_Model/Frame_Object/DeleteLoadPointWithGUID_{Frame_Object}.htm">DeleteLoadPointWithGUID</a></p>
+</body>
+</html>

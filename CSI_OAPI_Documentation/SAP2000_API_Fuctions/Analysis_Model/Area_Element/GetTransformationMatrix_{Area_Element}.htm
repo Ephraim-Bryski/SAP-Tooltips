@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Originator" content="ImportDoc" />
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Area Element Functions\GetTransformationMatrix.doc" />
+<meta name="topic-status" content="In Progress" />
+<meta name="topic-priority" content="0" />
+<meta name="topic-time-estimate" content="0" />
+<meta name="topic-id" content="" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>GetTransformationMatrix {Area Element}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css" />
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetTransformationMatrix</h1>
+<h2>Syntax</h2>
+<p class="Comment">Sap2000.AreaElm.GetTransformationMatrix</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTransformationMatrix(ByVal Name As String, ByRef Value() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing area element.</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">Value is an array of nine direction cosines that define the transformation matrix.</p>
+<p class="Comment">The following matrix equation shows how the transformation matrix is used to convert items from the area element local coordinate system to the global coordinate system.</p>
+<p class="ParameterDescription" style="margin-left: 80px;"><img src="../../../Images/Transformation%20Matrix.JPG" alt="" style="border: none;" width="380" height="131" border="0" /></p>
+<p class="Comment">In the equation c0 through c8 are the nine values from the transformation array, (Local1, Local2, Local3) are an item (such as a load) in the element local coordinate system, and (GlobalX, GlobalY, GlobalZ) are the same item in the global coordinate system.</p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns zero if the transformation matrix is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAreaElementMatrix()<br />
+&#160;&#160;&#160;'dimension variables<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value() As Double<br />
+<br />
+&#160;&#160;&#160;'create Sap2000 object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br />
+<br />
+&#160;&#160;&#160;'start Sap2000 application<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br />
+<br />
+&#160;&#160;&#160;'create SapModel object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br />
+<br />
+&#160;&#160;&#160;'initialize model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br />
+<br />
+&#160;&#160;&#160;'create model from template<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(2, 48, 2, 48)<br />
+<br />
+&#160;&#160;&#160;'assign area object local axis angle<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.AreaObj.SetLocalAxes("3", 30)<br />
+<br />
+&#160;&#160;&#160;'create analysis model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.CreateAnalysisModel<br />
+<br />
+&#160;&#160;&#160;'get area element transformation matrix<br />
+&#160;&#160;&#160;&#160;&#160;&#160;redim Value(8)<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.AreaElm.GetTransformationMatrix("3", Value)<br />
+<br />
+&#160;&#160;&#160;'close Sap2000<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br />
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

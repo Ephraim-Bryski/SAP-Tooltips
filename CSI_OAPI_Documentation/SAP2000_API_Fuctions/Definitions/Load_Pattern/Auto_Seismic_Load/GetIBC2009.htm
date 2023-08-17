@@ -1,0 +1,143 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetIBC2009 {Auto Seismic}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetIBC2009</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoSeismic.GetIBC2009</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetIBC2009(ByVal Name As String, ByRef DirFlag As Long, ByRef Eccen As Double, ByRef PeriodFlag As Long, ByRef CtType As Long, ByRef UserT As Double, ByRef UserZ As Boolean, ByRef TopZ As Double, ByRef BottomZ As Double, ByRef R As Double, ByRef Omega As Double, ByRef Cd As Double, ByRef I As Double, ByRef IBC2009Option As Long, ByRef Latitude As Double, ByRef Longitude As Double, ByRef ZipCode As String, ByRef SS As Double, ByRef S1 As Double, ByRef TL As Double, ByRef SiteClass As Long, ByRef Fa As Double, ByRef Fv As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Quake-type load pattern with a IBC2009 auto seismic load assignment.</p>
+<p class="ParameterName">DirFlag</p>
+<p class="Comment">This is either 1 or 2, indicating the seismic load direction.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Global X</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Global Y</p>
+<p class="ParameterName">Eccen</p>
+<p class="Comment">The eccentricity ratio that applies to all diaphragms.</p>
+<p class="ParameterName">PeriodFlag</p>
+<p class="Comment">This is 1, 2 or 3, indicating the time period option.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Approximate</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Program calculated</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = User defined</p>
+<p class="ParameterName">CtType</p>
+<p class="Comment">This is 0, 1, 2 or 3, indicating the values of Ct and x. This item is meaningful when the PeriodFlag item is 1 or 2.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Ct = 0.028 (ft),&#160;&#160;&#160;&#160;&#160;x = 0.8</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Ct = 0.016 (ft),&#160;&#160;&#160;&#160;&#160;x = 0.9</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Ct = 0.03 (ft),&#160;&#160;&#160;&#160;&#160;&#160;x = 0.75</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Ct = 0.02 (ft),&#160;&#160;&#160;&#160;&#160;&#160;x = 0.75</p>
+<p class="ParameterName">UserT</p>
+<p class="Comment">The user specified time period. This item is meaningful when the PeriodFlag item is 3. [s]</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the seismic load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto seismic loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the lowest level where auto seismic loads are applied. [L]</p>
+<p class="ParameterName">R</p>
+<p class="Comment">The response modification factor.</p>
+<p class="ParameterName">Omega</p>
+<p class="Comment">The system overstrength factor.</p>
+<p class="ParameterName">Cd</p>
+<p class="Comment">The deflection amplification factor.</p>
+<p class="ParameterName">I</p>
+<p class="Comment">The occupancy importance factor.</p>
+<p class="ParameterName">IBC2009Option</p>
+<p class="Comment">This is 0, 1 or 2, indicating the seismic coefficient option.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Ss and S1 from USGS by latitude and longitude</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Ss and S1 from USGS by zip code</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Ss and S1 are user defined</p>
+<p class="ParameterName">Latitude, Longitude</p>
+<p class="Comment">The latitude and longitude for which the seismic coefficients are obtained. These items are meaningful only when IBC2009Option = 0 or 1.</p>
+<p class="ParameterName">ZipCode</p>
+<p class="Comment">The zip code for which the seismic coefficients are obtained. This item is meaningful only when IBC2009Option = 1.</p>
+<p class="ParameterName">SS, S1</p>
+<p class="Comment">The seismic coefficients Ss and S1.</p>
+<p class="ParameterName">TL</p>
+<p class="Comment">The long-period transition period. [s]</p>
+<p class="ParameterName">SiteClass</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the site class.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = E</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">6 = F</p>
+<p class="ParameterName">Fa, Fv</p>
+<p class="Comment">The site coefficients Fa and Fv.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto seismic loading parameters for the 2009 IBC code.</p>
+<p class="Comment">The function returns zero if the parameters are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetSeismicParametersIBC2009()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirFlag As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Eccen As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PeriodFlag As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CtType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserT As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserZ As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TopZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BottomZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim R As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Omega As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cd As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim I As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim IBC2009Option As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Latitude As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Longitude As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ZipCode As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SS As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim S1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TL As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SiteClass As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fa As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fv As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("EQX", LTYPE_QUAKE)<br>
+<br>
+&#160;&#160;&#160;'assign IBC2009 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeismic.SetIBC2009("EQX", 1, 0.05, 1, 1, 0, False, 0, 0, 8, 3, 5.5, 1, 1, 0, 0, "94704", 0, 0, 8, 3, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'get IBC2009 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeismic.GetIBC2009("EQX", DirFlag, Eccen, PeriodFlag, CtType, UserT, UserZ, TopZ, BottomZ, R, Omega, Cd, I, IBC2009Option, Latitude, Longitude, ZipCode, SS, S1, TL, SiteClass, Fa, Fv)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetIBC2009.htm">SetIBC2009</a></p>
+</body>
+</html>

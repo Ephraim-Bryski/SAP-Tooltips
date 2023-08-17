@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Element Functions\CountConstraint.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>CountConstraint {Point Element}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>CountConstraint</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointElm.CountConstraint</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function CountConstraint(ByRef Count As Long, Optional ByVal Name As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Count</p>
+<p class="Comment">The number of counted constraints.</p>
+<p class="ParameterName">Name</p>
+<p class="Comment">This optional item is the name of an existing point element.</p>
+<h2>Remarks</h2>
+<p class="Comment">If the Name item is provided, the Count item returns the total number of constraint assignments made to the specified point element. If the Name item is not specified or is specified as an empty string, the Count item returns the total number of constraint assignments to all point elements in the model. If the Name item is specified but it is not recognized by the program as a valid point element, an error is returned.</p>
+<p class="Comment">This function returns zero if the count is successfully completed, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub CountConstraintElmAssignments()<br>
+&#160;&#160;&#160;'dimension variables<span style="color: #ff0000;"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;</span>Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'add constraint definition<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1")<br>
+<br>
+&#160;&#160;&#160;'make constraint assignment<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("3", "Diaph1")<br>
+<br>
+&#160;&#160;&#160;'create analysis model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.CreateAnalysisModel<br>
+<br>
+&#160;&#160;&#160;'get number of constraint assignments to point elements<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointElm.CountConstraint(Count)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetConstraint_{Point_Element}.htm">GetConstraint</a></p>
+</body>
+</html>

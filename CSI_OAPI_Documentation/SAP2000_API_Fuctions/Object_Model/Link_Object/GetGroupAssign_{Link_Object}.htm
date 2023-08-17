@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetGroupAssign {Link Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetGroupAssign</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LinkObj.GetGroupAssign</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetGroupAssign(ByVal Name As String, ByRef NumberGroups As Long, ByRef Groups() As String) &#160;As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing link object.</p>
+<p class="ParameterName">NumberGroups</p>
+<p class="Comment">The number of group names retrieved.</p>
+<p class="ParameterName">Groups</p>
+<p class="Comment">The names of the groups to which the link object is assigned.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the names of the groups to which a specified link object is assigned.</p>
+<p class="Comment">The function returns zero if the group assignments are successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetLinkObjectGroups()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberGroups As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Groups() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'add link object by points<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.AddByPoint("1", "5", Name)<br>
+<br>
+&#160;&#160;&#160;'define new groups<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GroupDef.SetGroup("Group1")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GroupDef.SetGroup("Group2")<br>
+<br>
+&#160;&#160;&#160;'add link object to groups<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.SetGroupAssign(Name, "Group1")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.SetGroupAssign(Name, "Group2")<br>
+<br>
+&#160;&#160;&#160;'get link object groups<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.GetGroupAssign(Name, NumberGroups, Groups)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 20.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetGroupAssign_{Link_Object}.htm">SetGroupAssign</a></p>
+</body>
+</html>

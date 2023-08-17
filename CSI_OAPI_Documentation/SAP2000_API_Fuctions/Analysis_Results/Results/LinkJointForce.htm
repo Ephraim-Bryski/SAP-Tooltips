@@ -1,0 +1,73 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\LinkJointForce.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>LinkJointForce</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>LinkJointForce</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.LinkJointForce</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function LinkJointForce(ByVal Name As String, ByVal ItemTypeElm As eItemTypeElm, ByRef NumberResults As Long, ByRef Obj() As String, ByRef Elm() As String, ByRef PointElm() As String, ByRef LoadCase() As String, ByRef StepType() As String, ByRef StepNum() As Double, ByRef F1() As Double, ByRef F2() As Double, ByRef F3() As Double, ByRef M1() As Double, ByRef M2() As Double, ByRef M3() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing link object, link element or group of objects depending on the value of the ItemTypeElm item.</p>
+<p class="ParameterName">ItemTypeElm</p>
+<p class="Comment">This is one of the following items in the eItemTypeElm enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">ObjectElm = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Element = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">GroupElm = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectionElm = 3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is ObjectElm, the result request is for the link element corresponding to the link object specified by the Name item.</p>
+<p class="Comment">If this item is Element, the result request is for the link element specified by the Name item.</p>
+<p class="Comment">If this item is GroupElm, the result request is for all link elements directly or indirectly specified in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectionElm, the result request is for link elements directly or indirectly selected and the Name item is ignored.</p>
+<p class="Comment">For GroupElm and SelectionElm a link element may be indirectly specified through point objects that have panel zone assignments and through line, area and solid objects that have spring assignments.</p>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">Obj</p>
+<p class="Comment">This is an array that includes the link object name associated with each result, if any.</p>
+<p class="ParameterName">Elm</p>
+<p class="Comment">This is an array that includes the link element name associated with each result.</p>
+<p class="ParameterName">PointElm</p>
+<p class="Comment">This is an array that includes the point element name associated with each result.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the analysis case or load combination associated with each result.</p>
+<p class="ParameterName">StepType</p>
+<p class="Comment">This is an array that includes the step type, if any, for each result.</p>
+<p class="ParameterName">StepNum</p>
+<p class="Comment">This is an array that includes the step number, if any, for each result.</p>
+<p class="ParameterName">F1, F2, F3</p>
+<p class="Comment">These are one dimensional arrays that include the joint force components in the point element local axes directions. [F]</p>
+<p class="ParameterName">M1, M2, M3</p>
+<p class="Comment">These are one dimensional arrays that include the joint moment components about the point element local axes. [FL]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the joint forces for the point elements at the ends of the specified link elements.</p>
+<p class="Comment">The function returns zero if the forces are successfully recovered, otherwise it returns a nonzero value.</p>
+<p class="Comment">See <a href="Analysis_Results_Remarks.htm">Analysis Results Remarks</a> for more information.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Similar to AreaJointForceShell<br>
+<br>
+&#160;&#160;&#160;'get link joint forces for link object "1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.LinkJointForce("1", ObjectElm, NumberResults, Obj, Elm, PointElm, LoadCase, StepType, StepNum, F1, F2, F3, M1, M2, M3)</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="LinkForce.htm">LinkForce</a></p>
+<p class="Block-Text"><a href="LinkDeformation.htm">LinkDeformation</a></p>
+</body>
+</html>

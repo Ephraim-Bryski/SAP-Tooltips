@@ -1,0 +1,68 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\File Functions\NewBlank.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>NewBlank</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>NewBlank</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.File.NewBlank</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function NewBlank() As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName" style="font-weight: normal;">None</p>
+<h2>Remarks</h2>
+<p class="Comment">Do not use this function to add to an existing model. This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.</p>
+<p class="Comment">The function returns zero if the new blank model is successfully created, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub NewBlankModel()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create a blank model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewBlank<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="NewBeam.htm">NewBeam</a></p>
+<p class="Block-Text"><a href="New2DFrame.htm">New2DFrame</a></p>
+<p class="Block-Text"><a href="New3DFrame.htm">New3DFrame</a></p>
+<p class="Block-Text"><a href="NewSolidBlock.htm">NewSolidBlock</a></p>
+<p class="Block-Text"><a href="NewWall.htm">NewWall</a></p>
+<p class="Block-Text"><a href="../General_Functions/ApplicationStart.htm">ApplicationStart</a></p>
+<p class="Block-Text"><a href="../General_Functions/InitializeNewModel.htm">InitializeNewModel</a></p>
+<p class="block-text">&#160;</p>
+</body>
+</html>

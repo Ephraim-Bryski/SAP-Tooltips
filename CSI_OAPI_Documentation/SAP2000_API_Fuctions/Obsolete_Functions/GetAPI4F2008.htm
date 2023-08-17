@@ -1,0 +1,92 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetAPI4F2008.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetAPI4F2008</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetAPI4F2008 <span style="font-size: 10pt;">(Note: &#160;Newer function available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.GetAPI4F2008</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetAPI4F2008(ByVal Name As String, ByRef ExposureFrom As Long, ByRef DirAngle As Double, ByRef UserZ As Boolean, ByRef TopZ As Double, ByRef BottomZ As Double, ByRef WindSpeed As Double, ByRef SSLFactor As Double, ) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load case with an API 4F 2008 auto wind assignment.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 2, 3 or 4, indicating the source of the wind exposure.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = From area objects</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = From frame objects (open structure)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = From area objects and frame objects (open structure)</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">WindSpeed</p>
+<p class="Comment">The design reference wind velocity, Vref, in knots.</p>
+<p class="ParameterName">SSLFactor</p>
+<p class="Comment">The structural safety level multiplier.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto wind loading parameters for API 4F 2008.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindAPI4F2008()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject As Sap2000v15.SapObject<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ExposureFrom As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirAngle As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserZ As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TopZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BottomZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim WindSpeed As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SSLFactor As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = New Sap2000v15.SapObject<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'add new load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign API 4F 2008 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetAPI4F2008("WIND", 3, 0, False, 0, 0, 93, 1.1)<br>
+<br>
+&#160;&#160;&#160;'get API 4F 2008 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.GetAPI4F2008("WIND", ExposureFrom, DirAngle, UserZ, TopZ, BottomZ, WindSpeed, SSLFactor)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00</p>
+<p class="Comment">The function is obsolete and has been superseded by <a href="../Definitions/Load_Pattern/Auto_Wind_Load/GetAPI4F2008_1.htm">GetAPI4F2008_1</a> as of version 14.1.0. This function is maintained for backward compatibility. New function added.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetAPI4F2008.htm">SetAPI4F2008</a></p>
+</body>
+</html>

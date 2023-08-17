@@ -1,0 +1,89 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame\GetPipe.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetPipe {Frame}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetPipe</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.GetPipe</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetPipe(ByVal Name As String, ByRef FileName As String, ByRef MatProp As String, ByRef t3 As Double, ByRef tw As Double, ByRef Color As Long, ByRef Notes As String, ByRef GUID As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property.</p>
+<p class="ParameterName">FileName</p>
+<p class="Comment">If the section property was imported from a property file, this is the name of that file. If the section property was not imported, this item is blank.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the section.</p>
+<p class="ParameterName">t3</p>
+<p class="Comment">The outside diameter. [L]</p>
+<p class="ParameterName">tw</p>
+<p class="Comment">The wall thickness. [L]</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the section.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the section.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the section.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves frame section property data for a pipe-type frame section.</p>
+<p class="Comment">The function returns zero if the section property data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFramePropPipe()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatProp As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim t3 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim tw As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Color As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Notes As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GUID As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set new frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetPipe("PIPE1", "A992Fy50", 8, 0.375)<br>
+<br>
+&#160;&#160;&#160;'get frame section property data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.GetPipe("PIPE1", FileName, MatProp, t3, tw, Color, Notes, GUID)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetPipe.htm">SetPipe</a></p>
+</body>
+</html>

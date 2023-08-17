@@ -1,0 +1,94 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetSP14133302014 {RS}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetSP14133302014</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.SetSP14133302014</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetSP14133302014(ByVal Name As String, ByVal Direction As Long, ByVal Seismicity As Long, ByVal SoilCat As Long, ByVal K0Factor As Double, ByVal K1Factor As Double, ByVal KPsiFactor As Double, ByVal NonlinSoil As Boolean, ByVal ASoil As Double, ByVal DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new function. If this is an existing function, that function is modified; otherwise, a new function is added.</p>
+<p class="ParameterName">Direction</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the direction and structure type for which the response spectrum is generated.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Building Horizontal</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Building Vertical</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Bridge Horizontal</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Bridge Vertical</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="ParameterName">Seismicity</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the region seismicity of the construction site.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = 6</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = 7</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = 8</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = 9</p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">SoilCat</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the soil category.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = II</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = III</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = IV</p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">K0Factor</p>
+<p class="Comment">The K0Factor, 0 &lt; K0 &lt;= 2.0. This is only applicable when the Direction parameter is 1 or 3 for horizontal spectra.</p>
+<p class="ParameterName">K1Factor</p>
+<p class="Comment">The K1Factor, 0 &lt; K1 &lt;= 1.0.</p>
+<p class="ParameterName">KPsiFactor</p>
+<p class="Comment">The KPsiFactor, 0.5 &lt; KPsi &lt;= 1.5. This is only applicable when the Direction parameter is 1 or 3 for horizontal spectra.</p>
+<p class="ParameterName">NonlinSoil</p>
+<p class="Comment">This item is True if nonlinear soil deformation should be accounted for. This is only applicable when the Direction parameter is 1 or 2 for buildings and the SoilCat parameter is 3 or 4.</p>
+<p class="ParameterName">ASoil</p>
+<p class="Comment">The nonlinear soil deformation factor, 0 &gt; a_soil &lt;= 1.0. This is only applicable when the NonlinSoil parameter is True, the Direction parameter is 1 or 2 buildings, and the SoilCat parameter is 3 or 4. &#160;</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a SP 14.13330.2014 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function is successfully defined; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetRSFuncSP14133302014()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add SP 14.13330.2014 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetSP14133302014("RS-1", 1, 2, 2, 1.0, 0.25, 1.0, False, 0.7, 0.04)<br></p>
+<p class="Coding">&#160;&#160;&#160;'get SP 14.13330.2014 RS function</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetSP14133302014("RS-1", Direction, Seismicity, SoilCat, K0Factor, K1Factor, KPsiFactor, NonlinSoil, ASoil, DampRatio)</p>
+<p class="Coding"><br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 18.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetSP14133302014.htm">GetSP14133302014</a></p>
+</body>
+</html>

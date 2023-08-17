@@ -1,0 +1,133 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNTC2008 {RS}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetNTC2008</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.GetNTC2008</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNTC2008(ByVal Name As String, ByRef ParamsOption As Long, ByRef Latitude As Double, ByRef Longitude As Double, ByRef Island As Long, ByRef LimitState As Long, ByRef UsageClass As Long, ByRef NomLife As Double, ByRef PeakAccel As Double, ByRef F0 As Double, ByRef Tcs As Double, ByRef SpecType As Long, ByRef SoilType As Long, ByRef Topography As Long, ByRef hRatio As Double, ByRef Damping As Double, ByRef q As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a NTC2008 response spectrum function.</p>
+<p class="ParameterName">ParamsOption</p>
+<p class="Comment">This is 1, 2, or 3, indicating the option for defining the parameters.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = by latitude and longitude</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = by island</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = user specified</p>
+<p class="ParameterName">Latitude, Longitude</p>
+<p class="Comment">The latitude and longitude for which the seismic coefficients are obtained. These items are meaningful only when ParamsOption = 1.</p>
+<p class="ParameterName">Island</p>
+<p class="Comment">This is one of the following values. This item is used only when ParamsOption = 2.</p>
+<p class="Comment" style="margin-left: 84px;"><span lang="IT" xml:lang="IT" style="line-height: 107%; font-family: 'Times New Roman', serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">1 = Alicudi<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">2 = Arcipelago Toscano<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">3 = Filcudi<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">4 = Isole Egadi<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">5 = Lampedusa<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">6 = Linosa<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">7 = Lipari<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">8 = Palmarola<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">9 = Panarea<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span style="mso-tab-count: 1; line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">1</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">0 = Pantelleria<br></span><span style="mso-tab-count: 1; font-size: 10pt;">&#160;</span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">11 = Ponza<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">12 = Salina<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">13 = Santo Stefano<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">14 = Sardegna<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">15 = Stromboli<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">16 = Tremiti<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">17 = Ustica<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">18 = Ventotene<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">19 = Vulcano<br></span><span lang="IT" xml:lang="IT" style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; font-size: 10pt;">20 = Zannone</span></p>
+<p class="ParameterName">LimitState</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the limit state.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = SLO</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = SLD</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = SLV</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = SLC</p>
+<p class="ParameterName">UsageClass</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the usage class.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = II</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = III</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = IV</p>
+<p class="ParameterName">NomLife</p>
+<p class="Comment">The nominal life to be considered.</p>
+<p class="ParameterName">PeakAccel</p>
+<p class="Comment">The peak ground acceleration, ag/g.</p>
+<p class="ParameterName">F0</p>
+<p class="Comment">The magnitude factor, F0.</p>
+<p class="ParameterName">Tcs</p>
+<p class="Comment">The reference period, Tc* [s].</p>
+<p class="ParameterName">SpecType</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the type of spectrum to consider.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Elastic horizontal</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Elastic vertical</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Design horizontal</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = Design vertical</p>
+<p class="ParameterName">SoilType</p>
+<p class="Comment">This is 1, 2, 3, 4, or 5, indicating the subsoil type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = E</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="ParameterName">Topography</p>
+<p class="Comment">This is 1, 2, 3, or 4, indicating the topography type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = T1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = T2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = T3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = T4</p>
+<p class="ParameterName">hRatio</p>
+<p class="Comment">The ratio for the site altitude at the base of the hill to the height of the hill.</p>
+<p class="ParameterName">Damping</p>
+<p class="Comment">The damping, in percent. This is only applicable for SpecType 1 and 2.</p>
+<p class="ParameterName">q</p>
+<p class="Comment">The behavior correction factor. This is only applicable for SpecType 3 and 4.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a NTC2008 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function is successfully defined; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetRSFuncNTC2008()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim ParamsOption As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Latitude As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Longitude As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Island As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim LimitState As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim UsageClass As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim NomLife As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim PeakAccel As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F0 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Tcs As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim SpecType As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim SoilType As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Topography As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim hRatio As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Damping As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim q As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add NTC2008 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetNTC2008("RS-1", 1, 45.9, 12.6, 1, 3, 2, 50, 0.2, 2.4, 0.3, 3, 2, 1, 1, 5, 1)<br></p>
+<p class="Coding">&#160;&#160;&#160;'get NTC2008 RS function</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetNTC2008("RS-1", ParamsOption, Latitude, Longitude, Island, LimitState, UsageClass, NomLife, PeakAccel, F0, Tcs, SpecType, SoilType, Topography, hRatio, Damping, q)</p>
+<p class="Coding"><br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 18.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetNTC2008_{RS}.htm">SetNTC2008</a></p>
+</body>
+</html>

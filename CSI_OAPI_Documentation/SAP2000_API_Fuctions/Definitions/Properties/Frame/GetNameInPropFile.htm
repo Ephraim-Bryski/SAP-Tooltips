@@ -1,0 +1,105 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame Properties\GetNameInPropFile.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNameInPropFile</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetNameInPropFile</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.GetNameInPropFile</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNameInPropFile(ByVal Name As String, ByRef NameInFile As String, ByRef FileName As String, ByRef MatProp As String, ByRef PropType As eFramePropType) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property.</p>
+<p class="ParameterName">NameInFile</p>
+<p class="Comment">The name of the specified frame section property in the frame section property file.</p>
+<p class="ParameterName">FileName</p>
+<p class="Comment">The name of the frame section property file from which the specified frame section property was obtained.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the section.</p>
+<p class="ParameterName">PropType</p>
+<p class="Comment">This is one of the following items in the eFramePropType enumeration.</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_I = 1</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_CHANNEL = 2</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_T = 3</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_ANGLE = 4</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_DBLANGLE = 5</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_BOX = 6</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_PIPE = 7</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_RECTANGULAR = 8</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_CIRCLE = 9</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_GENERAL = 10</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_DBCHANNEL = 11</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_AUTO = 12</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_SD = 13</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_VARIABLE = 14</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_JOIST = 15</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_BRIDGE = 16</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_C = 17</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_2C = 18</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_Z = 19</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_L = 20</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_2L = 21</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_COLD_HAT = 22</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_BUILTUP_I_COVERPLATE = 23</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_PCC_GIRDER_I = 24</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">SECTION_PCC_GIRDER_U = 25</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the names of the section property file from which an imported frame section originated, and it also retrieves the section name used in the property file.</p>
+<p class="Comment">The function returns zero if the names are successfully retrieved; otherwise it returns nonzero.</p>
+<p class="Comment">If the specified frame section property was not imported, blank strings are returned for NameInFile and FileName.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFramePropNameInFile()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NameInFile As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatProp As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PropType As eFramePropType<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'import new frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.ImportProp("MyFrame", "A992Fy50", "Sections8.pro", "W18X35")<br>
+<br>
+&#160;&#160;&#160;'get frame property name in file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.GetNameInPropFile("MyFrame", NameInFile, FileName, MatProp, PropType)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.03.</p>
+<h2>See Also</h2>
+</body>
+</html>

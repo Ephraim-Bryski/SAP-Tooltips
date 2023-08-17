@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Originator" content="ImportDoc" />
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Design\Steel\Indian IS 800-1998\GetPreference.doc" />
+<meta name="topic-status" content="In Progress" />
+<meta name="topic-priority" content="0" />
+<meta name="topic-time-estimate" content="0" />
+<meta name="topic-id" content="" />
+<meta name="generator" content="Adobe RoboHelp 2019" />
+<title>GetPreference {Steel Indian IS 800-1998}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css" />
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetPreference</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignSteel.Indian_IS:800_1998.GetPreference</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetPreference(ByVal Item As Long, ByRef Value As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 11, inclusive, indicating the preference item considered.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Lateral factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = DL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = SDL + LL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = LL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Total deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Total camber limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Pattern live load factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Demand/capacity ratio limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">11 = Multi-response case design</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered preference item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = Sway Frame</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">2 = Nonsway Frame</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Lateral factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = No</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Any other value = Yes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = DL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = SDL + LL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = LL deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Total deflection limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Total camber limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Pattern live load factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Demand/capacity ratio limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 120px;">Value &gt; 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Multi-response case design</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;1 = Envelopes</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;2 = Step-by-step</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;3 = Last step</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;4 = Envelopes -- All</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;5 = Step-by-step -- All</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the value of a steel design preference item.</p>
+<p class="Comment">The function returns zero if the item is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetSteelDesignPreferenceItemIndian_IS_800_1998()<br />
+&#160;&#160;&#160;'dimension variables<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br />
+<br />
+&#160;&#160;&#160;'create Sap2000 object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br />
+<br />
+&#160;&#160;&#160;'start Sap2000 application<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br />
+<br />
+&#160;&#160;&#160;'create SapModel object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br />
+<br />
+&#160;&#160;&#160;'initialize model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br />
+<br />
+&#160;&#160;&#160;'create model from template<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br />
+<br />
+&#160;&#160;&#160;'set steel design code<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.SetCode("Indian IS:800-1998")<br />
+<br />
+&#160;&#160;&#160;'get preference item<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.Indian_IS_800_1998.GetPreference(1, Value)<br />
+<br />
+&#160;&#160;&#160;'close Sap2000<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br />
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.03.</p>
+<p class="Comment">Changed Time history design item to Multi-response case design and added additional values in version 15.0.1.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetPreference_{Steel_Indian_IS_800-1998}.htm">SetPreference</a></p>
+</body>
+</html>

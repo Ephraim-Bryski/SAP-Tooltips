@@ -1,0 +1,91 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetNone</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetNone</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoSeastate.SetNone</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetNone(ByVal Name As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing seastate-type load pattern.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the auto seastate loading type for the specified load pattern to None.</p>
+<p class="Comment">The function returns zero if the loading type is successfully assigned; otherwise it returns a nonzero vale.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignSeastateNone()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCenter(2) As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyParams(8) As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'define diaphragm constraints</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SaModel.SelectObj.ClearSelection</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearsSelection</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObject.SetConstraint("", Diaph2", SelectedObjects)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection</p>
+<p class="Coding">&#160;&#160;&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("SEASTATE", LTYPE_SEASTATE)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'assign seastate parameters</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(0) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(1) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(2) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(0) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(1) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(2) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(3) = 0.5</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(4) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(5) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(6) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(7) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(8) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeastate.SetAuto("SEASTATE", 3, "Global", True, MyCenter, MyParms)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'set auto seastate loading type to None</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSWind.SetNone("SEASTATE")<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

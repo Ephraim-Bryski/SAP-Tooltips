@@ -1,0 +1,101 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetShell_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetShell_1</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetShell_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropArea.GetShell</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetShell_1(ByVal Name As String, ByRef ShellType As Long, ByRef IncludeDrillingDOF As Boolean, ByRef MatProp As String, ByRef MatAng As Double, ByRef Thickness As Double, ByRef Bending As Double, ByRef Color As Long, ByRef Notes As String, ByRef GUID As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing shell-type area property.</p>
+<p class="ParameterName">ShellType</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the shell type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Shell - thin</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Shell - thick</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Plate - thin</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Plate - thick</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Membrane</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9pt; margin-left: 88px;">6 = Shell layered/nonlinear</p>
+<p class="ParameterName">IncludeDrillingDOF</p>
+<p class="Comment">This item is True if drilling degrees of freedom are included in the element formulation in the analysis model. This item does not apply when ShellType = 3, 4 or 6.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the area property. This item does not apply when ShellType = 6.</p>
+<p class="ParameterName">MatAng</p>
+<p class="Comment">The material angle. [deg]</p>
+<p class="Comment">This item does not apply when ShellType = 6.</p>
+<p class="ParameterName">Thickness</p>
+<p class="Comment">The membrane thickness. [L]</p>
+<p class="Comment">This item does not apply when ShellType = 6.</p>
+<p class="ParameterName">Bending</p>
+<p class="Comment">The bending thickness. [L]</p>
+<p class="Comment">This item does not apply when ShellType = 6.</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the property.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the property.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the property.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves area property data for a shell-type area section.</p>
+<p class="Comment">The function returns zero if the property data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAreaPropShell_1()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ShellType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim IncludeDrillingDOF As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatProp As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatAng As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Thickness As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Bending As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Color As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Notes As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GUID As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(2, 48, 2, 48)<br>
+<br>
+&#160;&#160;&#160;'set new area property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropArea.SetShell("A1", 1, "4000Psi", 0, 16, 16)<br>
+<br>
+&#160;&#160;&#160;'get area property data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropArea.GetShell_1("A1", ShellType, IncludeDrillingDOF, MatProp, MatAng, Thickness, Bending, Color, Notes, GUID)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.00.</p>
+<p class="Comment">This function supersedes <a href="../../../Obsolete_Functions/GetShell.htm">GetShell</a>.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetShell_1.htm">SetShell_1</a></p>
+</body>
+</html>

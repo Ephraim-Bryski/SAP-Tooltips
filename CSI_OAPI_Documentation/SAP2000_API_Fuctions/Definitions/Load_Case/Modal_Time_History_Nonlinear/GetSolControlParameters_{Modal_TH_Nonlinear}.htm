@@ -1,0 +1,93 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Modal Time History Nonlinear\GetSolControlParameters.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSolControlParameters {Modal TH Nonlinear}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSolControlParameters</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.ModHistNonlinear.GetSolControlParameters</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSolControlParameters(ByVal Name As String, ByRef tstat As Double, ByRef dtmax As Double, ByRef dtmin As Double, ByRef ftol As Double, ByRef etol As Double, ByRef itmax As Long, ByRef itmin As Long, ByRef Cf As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing nonlinear modal time history analysis case.</p>
+<p class="ParameterName">tstat</p>
+<p class="Comment">The static period.</p>
+<p class="ParameterName">dtmax</p>
+<p class="Comment">The maximum substep size.</p>
+<p class="ParameterName">dtmin</p>
+<p class="Comment">The minimum substep size.</p>
+<p class="ParameterName">ftol</p>
+<p class="Comment">The relative force convergence tolerance.</p>
+<p class="ParameterName">etol</p>
+<p class="Comment">The relative energy convergence tolerance.</p>
+<p class="ParameterName">itmax</p>
+<p class="Comment">The maximum iteration limit.</p>
+<p class="ParameterName">itmin</p>
+<p class="Comment">The minimum iteration limit.</p>
+<p class="ParameterName">Cf</p>
+<p class="Comment">The convergence factor.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the solution control parameters for the specified load case.</p>
+<p class="Comment">The function returns zero if the parameters are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseModHistNonlinearSolutionControlParameters()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim tstat As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim dtmax As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim dtmin As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ftol As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim etol As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim itmax As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim itmin As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cf As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add nonlinear modal time history load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ModHistNonlinear.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'get solution control parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ModHistNonlinear.GetSolControlParameters("LCASE1", tstat, dtmax, dtmin, ftol, etol, itmax, itmin, Cf)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetSolControlParameters_{Modal_TH_Nonlinear}.htm">SetSolControlParameters</a></p>
+</body>
+</html>

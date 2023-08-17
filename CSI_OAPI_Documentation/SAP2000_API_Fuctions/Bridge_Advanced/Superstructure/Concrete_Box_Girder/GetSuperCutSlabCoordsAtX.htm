@@ -1,0 +1,86 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetSuperCutSlabCoordsAtX.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSuperCutSlabCoordsAtX</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSuperCutSlabCoordsAtX</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSlabCoordsAtX</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSuperCutSlabCoordsAtX(ByVal Name As String, ByVal CutIndex As Long, ByVal X As Double, ByRef Status As Long, ByRef y1 As Double, ByRef y2 As Double, ByRef y3 As Double, ByRef y4 As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">CutIndex</p>
+<p class="Comment">The index number of the section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by function CountSuperCut. Section cuts will be in order of increasing Station and increasing SuperCutType.</p>
+<p class="ParameterName">X</p>
+<p class="Comment">The X coordinate in the section local coordinate system at which a vertical line is passed through the section and the slab coordinates are returned.</p>
+<p class="ParameterName">Status</p>
+<p class="Comment">This is 0, 1, or 2.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = No portion of the section is cut.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Only the section is cut; no interior cell is cut.</p>
+<p class="Comment" style="margin-left: 88px;">2 = The section and an interior cell are cut.</p>
+<p class="ParameterName">y1</p>
+<p class="Comment">The topmost Y coordinate where the vertical line cuts the section.&#160;&#160;This item is returned as zero when Status &lt; 1.</p>
+<p class="ParameterName">y2</p>
+<p class="Comment">The bottommost Y coordinate where the vertical line cuts the section.&#160;&#160;This item is returned as zero when Status &lt; 1.</p>
+<p class="ParameterName">y3</p>
+<p class="Comment">The topmost Y coordinate where the vertical line cuts an interior cell.&#160;&#160;This item is returned as zero when Status &lt; 2.</p>
+<p class="ParameterName">y4</p>
+<p class="Comment">The bottommost Y coordinate where the vertical line cuts an interior cell.&#160;&#160;This item is returned as zero when Status &lt; 2.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns information about the box girder slab thicknesses at a given horizontal location across the box girder section.</p>
+<p class="Comment">The function returns zero if the information is successfully retrieved; otherwise it returns a nonzero value.</p>
+<p class="Comment">If the bridge object is not currently linked to existing objects in the model, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a linked bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub GetBridgeSuperCutSlabCoordsAtX()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Status As Long<span lang="FR" xml:lang="FR"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y3 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y4 As Double</span><br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get slab thickness information at X = 60<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSlabCoordsAtX("BOBJ1", 1, 60, Status, y1, y2, y3, y4)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="ParameterName">&#160;</p>
+</body>
+</html>

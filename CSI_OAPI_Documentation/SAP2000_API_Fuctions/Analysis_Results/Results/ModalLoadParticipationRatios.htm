@@ -1,0 +1,94 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="ModalParticipationFactors.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ModalLoadParticipationRatios</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>ModalLoadParticipationRatios</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.ModalLoadParticipationRatios</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ModalLoadParticipationRatios(ByRef NumberResults As Long, ByRef LoadCase() As String, ByRef ItemType() As String, ByRef Item() As String, ByRef Stat() As Double, ByRef Dyn() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the modal load case associated with each result.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is an array that includes Load Pattern, Acceleration, Link or Panel Zone. It specifies the type of item for which the modal load participation is reported.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an array whose values depend on the ItemType. If the ItemType is Load Pattern, this is the name of the load pattern.</p>
+<p class="Comment">If the ItemType is Acceleration, this is UX, UY, UZ, RX, RY, or RZ, indicating the acceleration direction.</p>
+<p class="Comment">If the ItemType is Link, this is the name of the link followed by U1, U2, U3, R1, R2, or R3 (in parenthesis), indicating the link degree of freedom for which the output is reported.</p>
+<p class="Comment">If the ItemType is Panel Zone, this is the name of the joint to which the panel zone is assigned, followed by U1, U2, U3, R1, R2, or R3 (in parenthesis), indicating the degree of freedom for which the output is reported.</p>
+<p class="ParameterName">Stat</p>
+<p class="Comment">This is an array that includes the percent static load participation ratio.</p>
+<p class="ParameterName">Dyn</p>
+<p class="Comment">This is an array that includes the percent dynamic load participation ratio.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the modal load participation ratios for each selected modal analysis case.</p>
+<p class="Comment">The function returns zero if the data is successfully recovered; otherwise it returns a nonzero value.</p>
+<p class="Comment">See <u><a href="Analysis_Results_Remarks.htm">Analysis Results Remarks</a></u> for more information.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetModalLoadParticipationRatios()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberResults As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LoadCase() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ItemType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Item() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Stat() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dyn() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'clear all case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput<br>
+<br>
+&#160;&#160;&#160;'set case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.SetCaseSelectedForOutput("MODAL")<br>
+<br>
+&#160;&#160;&#160;'get modal load participation ratios<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.ModalLoadParticipationRatios(NumberResults, LoadCase, ItemType, Item, Stat, Dyn)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+&#160;&#160;&#160;End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="ModeShape.htm">ModeShape</a></p>
+<p class="Block-Text"><a href="ModalPeriod.htm">ModalPeriod</a></p>
+<p class="Block-Text"><a href="ModalParticipatingMassRatios.htm">ModalParticipatingMassRatios</a></p>
+<p class="Block-Text"><a href="ModalParticipationFactors.htm">ModalParticipationFactors</a></p>
+</body>
+</html>

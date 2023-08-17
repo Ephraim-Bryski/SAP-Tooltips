@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Response Spectrum\GetDampProportional.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDampProportional {Response Spectrum}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetDampProportional</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.ResponseSpectrum.GetDampProportional</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetDampProportional(ByVal Name As String, ByRef DampType As Long, ByRef Dampa As Double, ByRef Dampb As Double, ByRef Dampf1 As Double, ByRef Dampf2 As Double, ByRef Dampd1 As Double, ByRef Dampd2 As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing response spectrum load case that has proportional damping.</p>
+<p class="ParameterName">DampType</p>
+<p class="Comment">This is 1, 2 or 3, indicating the proportional modal damping type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Mass and stiffness proportional damping by direct specification</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Mass and stiffness proportional damping by period</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Mass and stiffness proportional damping by frequency</p>
+<p class="ParameterName">Dampa</p>
+<p class="Comment">The mass proportional damping coefficient.</p>
+<p class="ParameterName">Dampb</p>
+<p class="Comment">The stiffness proportional damping coefficient.</p>
+<p class="ParameterName">Dampf1</p>
+<p class="Comment">This is the period or the frequency (depending on the value of the DampType item) for point 1. [s] for DampType = 2 and [cyc/s] for DampType = 3</p>
+<p class="Comment">This item applies only when DampType = 2 or 3.</p>
+<p class="ParameterName">Dampf2</p>
+<p class="Comment">This is the period or the frequency (depending on the value of the DampType item) for point 2. [s] for DampType = 2 and [cyc/s] for DampType = 3</p>
+<p class="Comment">This item applies only when DampType = 2 or 3.</p>
+<p class="ParameterName">Dampd1</p>
+<p class="Comment">This is the damping at point 1 (0 &lt;= Dampd1 &lt; 1).</p>
+<p class="Comment">This item applies only when DampType = 2 or 3.</p>
+<p class="ParameterName">Dampd2</p>
+<p class="Comment">This is the damping at point 2 (0 &lt;= Dampd2 &lt; 1).</p>
+<p class="Comment">This item applies only when DampType = 2 or 3.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the proportional modal damping data assigned to the specified load case.</p>
+<p class="Comment">The function returns zero if the option is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseResponseSpectrumDampProportional()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampa As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampb As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampf1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampf2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampd1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dampd2 As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add response spectrum load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set proportional damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.SetDampProportional("LCASE1", 2, 0, 0, 0.1, 1, 0.05, 0.06)<br>
+<br>
+&#160;&#160;&#160;'get proportional damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.GetDampType("LCASE1", DampType)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;If DampType &gt;= 1 or DampType &lt;= 3 Then<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ResponseSpectrum.GetDampProportional("LCASE1", DampType, Dampa, Dampb, Dampf1, Dampf2, Dampd1, Dampd2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;End If<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetDampProportional_{Response_Spectrum}.htm">SetDampProportional</a></p>
+</body>
+</html>

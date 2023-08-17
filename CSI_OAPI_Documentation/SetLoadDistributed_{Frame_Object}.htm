@@ -1,0 +1,67 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoadDistributed {Frame Object}</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetLoadDistributedWithGUID {Frame Object}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.SetLoadDistributedWithGUID</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoadDistributedWithGUID(ByVal Name As String, ByVal LoadPat As String, ByVal MyType As Long, ByVal Dir As Long, ByVal Dist1 As Double, ByVal Dist2 As Double, ByVal Val1 As Double, ByVal Val2 As Double, ByRef GUID As String, Optional ByVal CSys As String = "Global", Optional ByVal RelDist As Boolean = True, Optional ByVal Replace As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">The name of a defined load pattern.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1 or 2, indicating the type of distributed load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Force per unit length</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Moment per unit length</p>
+<p class="ParameterName">Dir</p>
+<p class="Comment">This is an integer between 1 and 11, indicating the direction of the load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Local 1 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Local 2 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Local 3 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Projected X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Projected Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Projected Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Projected Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">The positive gravity direction (see Dir = 10 and 11) is in the negative Global Z direction.</p>
+<p class="ParameterName">Dist1</p>
+<p class="Comment">This is the distance from the I-End of the frame object to the start of the distributed load. This may be a relative distance (0 &lt;= Dist1 &lt;= 1) or an actual distance, depending on the value of the RelDist item. [L] when RelDist is False</p>
+<p class="ParameterName">Dist2</p>
+<p class="Comment">This is the distance from the I-End of the frame object to the end of the distributed load. This may be a relative distance (0 &lt;= Dist2 &lt;= 1) or an actual distance, depending on the value of the RelDist item. [L] when RelDist is False</p>
+<p class="ParameterName">Val1</p>
+<p class="Comment">This is the load value at the start of the distributed load. [F/L] when MyType is 1 and [FL/L] when MyType is 2</p>
+<p class="ParameterName">Val2</p>
+<p class="Comment">This is the load value at the end of the distributed load. [F/L] when MyType is 1 and [FL/L] when MyType is 2</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">This is the global unique ID of a distributed load assigned to the frame object or if it is not the global unique id of a distributed load assigned to the frame object and it is not blank, the global unique ID which is assigned to the newly assigned load. If left blank, a new load is assigned to the frame object and the value of this parameter is set to the global unique ID of the newly assigned load.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</p>
+<p class="ParameterName">RelDist</p>
+<p class="Comment">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</p>
+<p class="ParameterName">Replace</p>
+<p class="Comment">If this item is True and the input GUID is not the GUID of any distributed load assigned to the frame object, all previous distributed loads, if any, assigned to the specified frame object, in the specified load pattern, are deleted before making the new assignment. If the input GUID is the GUID of a distributed load already assigned to the frame object, the parameters of the distributed load are updated with the values provided and this item is ignored</p>
+<h2>Remarks</h2>
+<p class="Comment">If the frame object is already assigned a distributed load with a global unique ID matching the specified global unique ID, this function modifies that distributed load. Otherwise, this function assigns a new distributed load to the frame object and sets its global unique ID to the specified global unique ID.</p>
+<p class="Comment">The function returns zero if the loads are successfully assigned, otherwise it returns a nonzero value.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SAP2000_API_Fuctions/Object_Model/Frame_Object/GetLoadDistributed_{Frame_Object}.htm">GetLoadDistributedWithGUID</a></p>
+<p class="Block-Text"><a href="SAP2000_API_Fuctions/Object_Model/Frame_Object/DeleteLoadDistributed_{Frame_Object}.htm">DeleteLoadDistributedWithGUID</a></p>
+</body>
+</html>

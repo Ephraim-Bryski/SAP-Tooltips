@@ -1,0 +1,20 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Migrating From SAP2000v20 to SAP2000v1</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Migrating From SAP2000v20 to SAP2000v1</h1>
+<p class="Comment">Starting with Version 21 of SAP2000, the API DLLs will no longer have the program version as part of their name. So, while the name of the API library for SAP2000 version 20 was SAP2000v20.DLL, the name of the API library for SAP2000 version 21 is SAP2000v1.DLL.</p>
+<p class="Comment">The name of the API library will remain SAP2000v1.DLL , even as new major versions of SAP2000 are released. Since improvements will continue to be added to the API, a new function, cHelper. GetOAPIVersionNumber, has been added. This API version number will increment as new API functions are added. However, the API library name will remain SAP2000v1.DLL.</p>
+<p class="Comment">Once users reference the new SAP2000v1.DLL in their client applications, they will no longer need to update with every major release. The SAP2000v1.DLL reference in their client application will automatically use the latest edition of SAP2000v1 that is registered with each product installation.</p>
+<h1 class="Comment">Migrating from CSiBridge20 to CSiBridge1</h1>
+<p class="Comment">The same considerations and examples apply to CSiBridge but the name of the API library is changing from CSiBridge20.DLL to CSiBridge1.DLL.</p>
+</body>
+</html>

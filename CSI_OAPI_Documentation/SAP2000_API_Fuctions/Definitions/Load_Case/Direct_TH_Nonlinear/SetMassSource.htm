@@ -1,0 +1,69 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetMassSource</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetMassSource</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.DirHistNonlinear.SetMassSource</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetMassSource(ByVal Name As String, ByVal Source As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing nonlinear direct integration time history load case.</p>
+<p class="ParameterName">Source</p>
+<p class="Comment">This is the name of an existing mass source or a blank string. Blank indicates to use the mass source from the previous load case or the default mass source if the load case starts from zero initial conditions.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the mass source to be used for the specified load case.</p>
+<p class="Comment">The function returns zero if the mass source is data is successfully set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetCase DirHistNonlinear MassSource()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add static nonlinear load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.DirHistNonlinear.SetCase("LCASE1")</p>
+<p class="Coding">&#160;&#160;&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'add a new mass source and make it the default mass source</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;LoadPat(0) = "DEAD"</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;SF(0) = 1.25</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SourceMass.SetMassSource("MyMassSource", True, True, True, True, 1, LoadPat, SF)<br>
+<br>
+&#160;&#160;&#160;'assign a mass source to the static nonlinear load case</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.DirHistNonlinear.SetMassSource("LCASE1", "MyMassSource")<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.20.</p>
+<h2>See Also</h2>
+<p class="Block-Text">Ge<a href="GetMassSource.htm">GetMassSource</a>tMassSource</p>
+</body>
+</html>

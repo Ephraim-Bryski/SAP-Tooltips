@@ -1,0 +1,82 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\PSD\GetDampConstant.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDampConstant {PSD}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetDampConstant</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.PSD.GetDampConstant</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetDampConstant(ByVal Name As String, ByRef HysConMassCoeff As Double, ByRef HysConStiffCoeff As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing power spectral density analysis case that has constant damping.</p>
+<p class="ParameterName">HysConMassCoeff</p>
+<p class="Comment">The mass proportional damping coefficient.</p>
+<p class="ParameterName">HysConStiffCoeff</p>
+<p class="Comment">The stiffness proportional damping coefficient.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the constant hysteretic damping for all frequencies assigned to the specified load case.</p>
+<p class="Comment">The function returns zero if the damping is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCasePSDDampConstant()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysConMassCoeff As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysConStiffCoeff As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add power spectral density load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.PSD.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set constant damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.PSD.SetDampConstant("LCASE1", 0.8, 0.04)<br>
+<br>
+&#160;&#160;&#160;'get constant damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.PSD.GetDampType("LCASE1", DampType)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;If DampType = 1 Then<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.PSD.GetDampConstant("LCASE1", HysConMassCoeff, HysConStiffCoeff)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;End If<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetDampConstant_{PSD}.htm">SetDampConstant</a></p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetKeysWithStringsExtendedEntityData</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetKeysWithStringsExtendedEntityData</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GetKeysWithStringsExtendedEntityData</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetKeysWithStringsExtendedEntityData (ByVal AppName As String, ByRef NumberKeys As Long, ByRef Keys() As String) As Long&#160;</p>
+<h2 class="Comment">Parameters</h2>
+<p class="ParameterName">AppName</p>
+<p class="Comment">This is an application name of your choice under which your application previously stored some data. It is recommended you choose a unique name to guarantee no other third-party application resets the data that was set by your application. Application names are stored in their original capitalization and character set, but are compared in a case insensitive and culturally invariant manner for retrieval purposes.</p>
+<p class="ParameterName">NumberKeys</p>
+<p class="Comment">The number of different entries for which data was previously stored under the application name AppName.</p>
+<p class="ParameterName">Key</p>
+<p class="Comment">This is a one-dimensional array of entry names. The Keys array is created as a dynamic, zero-based, array by the API user:</p>
+<p class="ParameterName">Dim Keys() as String</p>
+<p class="Comment">The array is dimensioned to (NumberKeys – 1) inside the Sap2000 program, filled with the entry names for which data was previously stored under the application name AppName, and returned to the API user.</p>
+<h2 class="Comment">Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment">GetKeyStringsExtendedEntityData</p>
+<p class="Comment">SetKeyStringsExtendedEntityData</p>
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\File Functions\New3DFrame.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>New3DFrame</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>New3DFrame</h1>
+<h2>Syntax</h2>
+<p class="Block-Text">SapObject.SapModel.File.New3DFrame</p>
+<h2>VB6 Procedure</h2>
+<p class="Block-Text">Function New3DFrame(ByVal TempType As e3DFrameType, ByVal NumberStorys As Long, ByVal StoryHeight As Double, ByVal NumberBaysX As Long, ByVal BayWidthX As Double, ByVal NumberBaysY As Long, ByVal BayWidthY As Double, Optional ByVal Restraint As Boolean = True, Optional ByVal Beam As String = "Default", Optional ByVal Column As String = "Default", Optional ByVal Area As String = "Default", Optional ByVal NumberXDivisions As Long = 4, Optional ByVal NumberYDivisions As Long = 4) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">TempType</p>
+<p class="CommentFirstOne">One of the following 3D frame template types in the e3DFrameType enumeration.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">OpenFrame = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">PerimeterFrame = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">BeamSlab = 2</p>
+<p class="Comment" style="margin-left: 84px;">FlatPlate = 3</p>
+<p class="ParameterName">NumberStorys</p>
+<p class="Comment">The number of stories in the frame.</p>
+<p class="ParameterName">StoryHeight</p>
+<p class="Comment">The height of each story. [L]</p>
+<p class="ParameterName">NumberBaysX</p>
+<p class="Comment">The number of bays in the global X direction of the frame.</p>
+<p class="ParameterName">BayWidthX</p>
+<p class="Comment">The width of each bay in the global X direction of the frame. [L]</p>
+<p class="ParameterName">NumberBaysY</p>
+<p class="Comment">The number of bays in the global Y direction of the frame.</p>
+<p class="ParameterName">BayWidthY</p>
+<p class="Comment">The width of each bay in the global Y direction of the frame. [L]</p>
+<p class="ParameterName">Restraint</p>
+<p class="Comment">Joint restraints are provided at the base of the frame when this item is True.</p>
+<p class="ParameterName">Beam</p>
+<p class="Comment">The frame section property used for all beams in the frame. This must either be Default or the name of a defined frame section property.</p>
+<p class="ParameterName">Column</p>
+<p class="Comment">The frame section property used for all columns in the frame. This must either be Default or the name of a defined frame section property.</p>
+<p class="ParameterName">Area</p>
+<p class="Comment">The shell section property used for all floor slabs in the frame. This must either be Default or the name of a defined shell section property. This item does not apply to the open and perimeter frames.</p>
+<p class="ParameterName">NumberXDivisions</p>
+<p class="Comment">The number of divisions for each floor area object in the global X direction. This item does not apply to the open and perimeter frames.</p>
+<p class="ParameterName">NumberYDivisions</p>
+<p class="Comment">The number of divisions for each floor area object in the global Y direction. This item does not apply to the open and perimeter frames.</p>
+<h2>Remarks</h2>
+<p class="Comment">Do not use this function to add to an existing model. This function should be used only for creating a new model and typically would be preceded by calls to ApplicationStart or InitializeNewModel.</p>
+<p class="Comment">The function returns zero if the new 3D frame model is successfully created, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub New3DFrameModel()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel(kip_ft_F)<br>
+<br>
+&#160;&#160;&#160;'create a 3D frame model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 3, 12, 3, 28, 2, 36)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="NewBeam.htm">NewBeam</a></p>
+<p class="Block-Text"><a href="NewBlank.htm">NewBlank</a></p>
+<p class="Block-Text"><a href="New2DFrame.htm">New2DFrame</a></p>
+<p class="Block-Text"><a href="NewSolidBlock.htm">NewSolidBlock</a></p>
+<p class="Block-Text"><a href="NewWall.htm">NewWall</a></p>
+<p class="Block-Text"><a href="../General_Functions/ApplicationStart.htm">ApplicationStart</a></p>
+<p class="Block-Text"><a href="../General_Functions/InitializeNewModel.htm">InitializeNewModel</a></p>
+<p class="block-text">&#160;</p>
+</body>
+</html>

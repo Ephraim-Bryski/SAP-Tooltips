@@ -1,0 +1,79 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Get Mass Source</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Get Mass Source</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SourceMass.GetMassSource</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetMassSource (ByVal Name As String, ByRef MassFromElements As Boolean, ByRef MassFromMasses As Boolean, ByRef MassFromLoads As Boolean, ByRef IsDefault As Boolean, ByRef NumberLoads As Long, ByRef LoadPat() As String, ByRef SF() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The mass source name.</p>
+<p class="ParameterName">MassFromElements</p>
+<p class="Comment">If this item is True then element self mass is included in the mass.</p>
+<p class="ParameterName">MassFromMasses</p>
+<p class="Comment">If this item is True then assigned masses are included in the mass.</p>
+<p class="ParameterName">MassFromLoads</p>
+<p class="Comment">If this item is True then specified load patterns are included in the mass.</p>
+<p class="ParameterName">IsDefault</p>
+<p class="Comment">If this item is True then the mass source is the default mass source.</p>
+<p class="ParameterName">NumberLoads</p>
+<p class="Comment">The number of load patterns specified for the mass source.<span style="mso-spacerun: yes;">&#160;</span>&#160;This item is only applicable when the MassFromLoads item is True.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">This is an array of load pattern names specified for the mass source.</p>
+<p class="ParameterName">SF</p>
+<p class="Comment">This is an array of load pattern multipliers specified for the mass source.</p>
+<h2><b style="mso-bidi-font-weight: normal;">Remarks</b></h2>
+<p class="Comment">This function gets the mass source data for an existing mass source.</p>
+<p class="Comment">The function returns zero if the mass source data is successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetMassSource()</p>
+<p class="Coding" style="margin-left: 72px;">'dimension variables</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapObject as cOAPI</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapModel As cSapModel</p>
+<p class="Coding" style="margin-left: 96px;">Dim ret As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim MassFromElements As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim MassFromMasses As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim MassFromLoads As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim IsDefault As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim NumberLoads As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim LoadPat() As String</p>
+<p class="Coding" style="margin-left: 96px;">Dim SF() As Double</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'start Sap2000 application</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationStart</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create SapModel object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = SapObject.SapModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'initialize model</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.InitializeNewModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create model from template</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'get data for mass source MSSSRC1</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.SourceMass.GetMassSource("MSSSRC1", MassFromElements, MassFromMasses, MassFromLoads, IsDefault, NumberLoads, LoadPat, SF)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

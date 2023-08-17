@@ -1,0 +1,83 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetFireproofing_1</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetFireproofing_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.SetFireProofing_1</p>
+<h2 class="Comment">VB6 Procedure</h2>
+<p class="Comment">Function SetFireProofing_1(ByVal Name As String, ByVal MyType As Long, ByVal Thickness As Double, ByVal Perimeter As Double, ByVal Density As Double, ByVal tf As Boolean, ByVal IncludeInSelfWeightAs Boolean, ByVal IncludeInGravityLoads As Boolean, Optional ByVal IncludeInThisLoadPattern As String = "None", Optional ByVal ItemType As eItemType = Object) As Long</p>
+<h2 class="Comment">Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1, 2 or 3, indicating the type of fireproofing assigned.</p>
+<p class="Comment" style="font-size: 12pt;">1 = Sprayed on - program calculate section perimeter</p>
+<p class="Comment" style="font-size: 12pt;">2 = Sprayed on - user provides section perimeter</p>
+<p class="Comment" style="font-size: 12pt;">3 = Concrete encased</p>
+<p class="ParameterName">Thickness</p>
+<p class="Comment">When MyType = 1 or MyType = 2 this is the thickness of the sprayed on fireproofing. When MyType = 3 this is the concrete cover dimension. [L]</p>
+<p class="ParameterName">Perimeter</p>
+<p class="Comment">This item applies only when MyType = 2. It is the length of fireproofing applied measured around the perimeter of the frame object cross-section. [L]</p>
+<p class="ParameterName">Density</p>
+<p class="Comment">This is the weight per unit volume of the fireproofing material. [F/L3]</p>
+<p class="ParameterName">tf</p>
+<p class="Comment">This item &#160;applies only when MyType = 1 or MyType = 3. If this item is True, the fireproofing is assumed to be applied to the top flange of the section. If it is False, the program assumes no fireproofing is applied to the section top flange. This flag applies for I, channel and double channel sections.</p>
+<p class="ParameterName">IncludeInSelfWeight</p>
+<p class="Comment">If this item is True the fireproofing is included in the structure self weight.</p>
+<p class="ParameterName">IncludeInGravityLoads</p>
+<p class="Comment">If this item is True the fireproofing is included gravity loads applied in the X, Y and Z directions.</p>
+<p class="ParameterName">IncludeInThisLoadPattern</p>
+<p class="Comment">This item is either None or the name of an existing load pattern. If it is the name of a load pattern then the weight of the fireproofing is applied as a distributed load in the global Z direction in the load pattern.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="Comment" style="margin-bottom: 0pt;">Object = 0</p>
+<p class="Comment" style="margin-bottom: 0pt;">Group = 1</p>
+<p class="Comment">SelectedObjects = 2</p>
+<p class="Comment">If this item is Object, the assignment is made to the frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made to all selected frame objects, and the Name item is ignored.</p>
+<h2><b style="mso-bidi-font-weight: normal;"><span style="mso-spacerun: yes;">&#160;</span>Remarks</b></h2>
+<p class="Comment">This function sets the fireproofing assignments to existing frame objects.</p>
+<p class="Comment">The function returns zero if the fireproofing assignments are successfully set, otherwise it returns a nonzero value.</p>
+<h2 class="Comment">VBA Example</h2>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 60px; margin-bottom: 0pt;">Sub SetFireproofing()</p>
+<p class="CommentFirstOne" style="font-family: 'Courier New', monospace; margin-left: 96px;">'dimension variables</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px;">Dim SapModel As cSapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px; margin-bottom: 9pt;">Dim ret As Long</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'create Sap2000 object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 9pt; margin-left: 120px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'start Sap2000 application</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 9pt; margin-left: 120px;">SapObject.ApplicationStart</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'create SapModel object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px; margin-bottom: 9pt;">Set SapModel = SapObject.SapModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'initialize model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px; margin-bottom: 9pt;">ret = SapModel.InitializeNewModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'create model from template</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 9pt; margin-left: 120px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'add new load pattern</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 9pt; margin-left: 120px;">ret = SapModel.LoadPatterns.Add("Fireproofing", LTYPE_SUPERDEAD)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'assign fireproofing, use in self weight and in load pattern</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 9pt; margin-left: 120px;">ret = SapModel.FrameObj.SetFireproofing_1("ALL", 1, 2, 0, 8.68E-06, False, True, False, "Fireproofing", Group)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; font-size: 10pt; margin-left: 96px; margin-bottom: 0pt;">'close Sap2000</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px;">SapObject.ApplicationExit False</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px;">Set SapModel = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 120px;">Set SapObject = Nothing</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 60px;">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.<span style="mso-spacerun: yes;">&#160;</span>&#160;This function supersedes obsolete function SetFireProofing</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetFireproofing_1.htm">GetFireProofing_1</a></p>
+<p class="Comment"><a href="DeleteFireproofing.htm">DeleteFireProofing</a></p>
+</body>
+</html>

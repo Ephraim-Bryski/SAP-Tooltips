@@ -1,0 +1,85 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="SetPlotFunctionTracesNamedSetsSelectedForDisplay.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetPushoverNamedSetsSelectedForDisplay</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetPushoverNamedSetsSelectedForDisplay</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DatabaseTables.GetPushoverNamedSetsSelectedForDisplay</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetPushoverNamedSetsSelectedForDisplay (ByRef 
+ NumberSelectedPushoverNamedSets As Integer, ByRef PushoverNamedSetList() 
+ As String) As Integer</p>
+<h2>Parameters</h2>
+<p class="ParameterName">NumberSelectedPushoverNamedSets</p>
+<p class="Comment">The number of pushover named sets selected for display 
+ in the analysis result tables.</p>
+<p class="ParameterName">PushoverNamedSetList</p>
+<p class="Comment">A zero-based list of the names of the pushover named 
+ sets selected for display in the analysis result tables.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns the pushover named sets selected 
+ for display in the analysis result tables.</p>
+<p class="Comment">The function returns zero if the information is successfully 
+ retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyModel.sdb exists.</p>
+<p class="Coding">Sub GetPushoverNamedSetSelectionData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberItems As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ItemList() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = &quot;C:\SapAPI\MyModel.sdb&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get pushover named sets selected for display in the 
+ analysis result tables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel. DatabaseTables.GetPushoverNamedSetsSelectedForDisplay 
+ (NumberItems, ItemList)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetPushoverNamedSetsSelectedForDisplay.htm">SetPushoverNamedSetsSelectedForDisplay</a></p>
+<p>&#160;</p>
+</body>
+</html>

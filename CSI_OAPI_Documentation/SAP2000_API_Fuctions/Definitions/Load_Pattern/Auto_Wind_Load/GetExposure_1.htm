@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetExposure_1</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetExposure_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.GetExposure_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetExposure_1(ByVal Name As String, ByRef Num As Long, ByRef Diaph() As String, ByRef x() As Double, ByRef y() As Double, ByRef MyWidth() As Double, ByRef MyDepth() As Double, ByRef Height() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern that has an auto wind load assigned.</p>
+<p class="ParameterName">Num</p>
+<p class="Comment">The number of diaphragms at which exposure data is reported.</p>
+<p class="ParameterName">Diaph</p>
+<p class="Comment">This is an array that includes the names of the diaphragms that have eccentricity overrides.</p>
+<p class="ParameterName">x</p>
+<p class="Comment">This is an array that includes the global X-coordinate of the point where the wind force load is applied to the diaphragm. [L]</p>
+<p class="ParameterName">y</p>
+<p class="Comment">This is an array that includes the global Y-coordinate of the point where the wind force load is applied to the diaphragm. [L]</p>
+<p class="ParameterName">MyWidth</p>
+<p class="Comment">This is an array that includes the exposure width for the wind load applied to the specified diaphragm. [L]</p>
+<p class="ParameterName">MyDepth</p>
+<p class="Comment">This is an array that includes the exposure depth for the wind load applied to the specified diaphragm. [L]</p>
+<p class="ParameterName">Height</p>
+<p class="Comment">This is an array that includes the exposure height for the wind load applied to the specified diaphragm. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves exposure parameters for auto wind loads determined from extents of rigid diaphragms. This function does not apply for User-type auto wind loads.</p>
+<p class="Comment">The function returns zero if the parameters are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindExposure_1()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Num As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Diaph() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim x() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyWidth() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDepth() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Height() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign ASCE788 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetASCE788("WIND", 1, 0, 0.8, 0.5, False, 0, 0, 80, 3, 1, 0.85, True)<br>
+<br>
+&#160;&#160;&#160;'assign user exposure data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetExposure_1("WIND", "Diaph2", 0, 0, 900, 90, 125)<br>
+<br>
+&#160;&#160;&#160;'get exposure data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.GetExposure_1("WIND", Num, Diaph, x, y, MyWidth, MyDepth, Height)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.3.0.</p>
+<p class="Comment">This function supersedes GetExposure.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetExposure_1.htm">SetExposure_1</a></p>
+</body>
+</html>

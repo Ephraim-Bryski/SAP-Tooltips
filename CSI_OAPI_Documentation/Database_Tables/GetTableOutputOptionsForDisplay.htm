@@ -1,0 +1,158 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="SetJointResponseSpectraNamedSetsSelectedForDisplay.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTableOutputOptionsForDisplay</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetTableOutputOptionsForDisplay</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DatabaseTables.GetTableOutputOptionsForDisplay</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTableOutputOptionsForDisplay (ByRef BaseReactionGX 
+ As Double, ByRef BaseReactionGY As Double, ByRef BaseReactionGZ As Double, 
+ ByRef IsAllModes As Boolean, ByRef StartMode As Integer, ByRef EndMode 
+ As Integer, ByRef IsAllBucklingModes As Boolean, ByRef StartBucklingMode 
+ As Integer, ByRef EndBucklingMode As Integer, ByRef ModalHistory As Integer, 
+ ByRef DirectHistory As Integer, ByRef NonlinearStatic As Integer, ByRef 
+ MultistepStatic As Integer, ByRef SteadyState As Integer, ByRef SteadyStateOption 
+ As Integer, ByRef PowerSpectralDensity As Integer, ByRef Combo As Integer, 
+ ByRef BridgeDesign As Integer) As Integer</p>
+<h2>Parameters</h2>
+<p class="ParameterName">BaseReactionGX</p>
+<p class="Comment">The global X coordinate of the base reaction location.</p>
+<p class="ParameterName">BaseReactionGY</p>
+<p class="Comment">The global Y coordinate of the base reaction location.</p>
+<p class="ParameterName">BaseReactionGZ</p>
+<p class="Comment">The global Z coordinate of the base reaction location.</p>
+<p class="ParameterName">IsAllModes</p>
+<p class="Comment">This item is true if results are displayed for all modes 
+ of modal load cases.</p>
+<p class="ParameterName">StartMode</p>
+<p class="Comment">The first mode for which results are shown for modal 
+ load cases. This item only applies when the IsAllModes item is False.</p>
+<p class="ParameterName">EndMode</p>
+<p class="Comment">The last mode for which results are shown for modal 
+ load cases. This item only applies when the IsAllModes item is False.</p>
+<p class="ParameterName">IsAllBucklingModes</p>
+<p class="Comment">This item is true if results are displayed for all modes 
+ of buckling load cases.</p>
+<p class="ParameterName">StartBucklingMode</p>
+<p class="Comment">The first mode for which results are shown for buckling 
+ load cases. This item only applies when the IsAllBucklingModes item is 
+ False.</p>
+<p class="ParameterName">EndBucklingMode</p>
+<p class="Comment">The last mode for which results are shown for buckling 
+ load cases. This item only applies when the IsAllBucklingModes item is 
+ False.</p>
+<p class="ParameterName">ModalHistory</p>
+<p class="Comment">Indicates how multistep modal time history load case 
+ results are displayed: 1=Envelopes, 2=Step-by-step, 3=Last Step.</p>
+<p class="ParameterName">DirectHistory</p>
+<p class="Comment">Indicates how direct integration time history load case 
+ results are displayed: 1=Envelopes, 2=Step-by-step, 3=Last Step.</p>
+<p class="ParameterName">NonlinearStatic</p>
+<p class="Comment">Indicates how nonlinear static load case results are 
+ displayed: 1=Envelopes, 2=Step-by-step, 3=Last Step.</p>
+<p class="ParameterName">MultistepStaticStatic</p>
+<p class="Comment">Indicates how multistep static load case results are 
+ displayed: 1=Envelopes, 2=Step-by-step, 3=Last Step.</p>
+<p class="ParameterName">SteadyState</p>
+<p class="Comment">Indicates how steady state load case results are displayed: 
+ 1=Envelopes, 2=At Frequencies.</p>
+<p class="ParameterName">SteadyStateOption</p>
+<p class="Comment">Indicates how type of steady state load case results 
+ displayed: 1=In and Out of Phase, 2=Magnitude, 3=All.</p>
+<p class="ParameterName">PowerSpectralDensity</p>
+<p class="Comment">Indicates how power spectral density load case results 
+ are displayed: 1=RMS, 2=sqrt(PSD).</p>
+<p class="ParameterName">Combo</p>
+<p class="Comment">Indicates how load combination results are displayed: 
+ 1=Envelopes, 2=Multiple Values If Possible, 3=Correspondence.</p>
+<p class="ParameterName">BridgeDesign</p>
+<p class="Comment">Indicates which bridge design results are displayed: 
+ 1=Controlling Combo, 2=All Combos.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns the output option data used for 
+ display of analysis result tables.</p>
+<p class="Comment">The function returns zero if the information is successfully 
+ retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyModel.sdb exists.</p>
+<p class="Coding">Sub GetTableOutputOptions()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BaseReactionGX As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BaseReactionGY As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BaseReactionGZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim IsAllModes As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StartMode As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EndMode As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim IsAllBucklingModes As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StartBucklingMode As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EndBucklingMode As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ModalHistory As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirectHistory As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NonlinearStatic As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MultistepStatic As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SteadyState As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SteadyStateOption As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PowerSpectralDensity As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Combo As Integer<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BridgeDesign As Integer<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = &quot;C:\SapAPI\MyModel.sdb&quot;<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get table output options used for display in the analysis 
+ result tables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel. DatabaseTables.GetTableOutputOptionsForDisplay 
+ (BaseReactionGX, BaseReactionGY, BaseReactionGZ, IsAllModes, StartMode, 
+ EndMode, IsAllBucklingModes,</p>
+<p class="Coding">StartBucklingMode, EndBucklingMode, ModalHistory, DirectHistory, 
+ NonlinearStatic, MultistepStatic, SteadyState, SteadyStateOption, PowerSpectralDensity, 
+ Combo, BridgeDesign)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetTableOutputOptionsForDisplay.htm">SetTableOutputOptionsForDisplay</a></p>
+<p>&#160;</p>
+</body>
+</html>

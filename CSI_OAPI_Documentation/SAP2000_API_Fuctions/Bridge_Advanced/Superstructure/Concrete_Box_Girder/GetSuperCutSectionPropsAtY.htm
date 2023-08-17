@@ -1,0 +1,95 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetSuperCutWebStressPoint.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSuperCutSectionPropsAtY</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">
+/*<![CDATA[*/
+A:visited {
+        color: #800080;
+}
+A:link {
+        color: #0000ff;
+}
+/*]]>*/
+</style>
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSuperCutSectionPropsAtY</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionPropsAtY</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSuperCutSectionPropsAtY (ByVal Name As String, ByVal CutIndex As Long, ByVal Y as Double, ByVal AboveY as Boolean, ByRef Ycg as Double, ByRef Area as Double, ByRef Inertia as Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">CutIndex</p>
+<p class="Comment">The index number of the section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by the function CountSuperCut. Section cuts will be in order of increasing Station and increasing SuperCutType.</p>
+<p class="ParameterName">Y</p>
+<p class="Comment">The Y coordinate in the section local coordinate system above or below which the section properties are calculated.</p>
+<p class="ParameterName">AboveY</p>
+<p class="Comment">Boolean indicating whether properties are to be computed for the region above (if true) or below (if false) the specified coordinate Y.</p>
+<p class="ParameterName">Ycg</p>
+<p class="Comment">Y coordinate of the centroid of the region above/below specified coordinate Y. [L]</p>
+<p class="ParameterName">Area</p>
+<p class="Comment">Area of the region above/below specified coordinate Y. [L<span class="hcp1" style="font-size: 8.0pt; vertical-align: Super;">2</span>]</p>
+<p class="ParameterName">Inertia</p>
+<p class="Comment">Moment of inertia of the region above/below specified coordinate Y, taken about a horizontal axis at Ycg. [L<span class="hcp1" style="font-size: 8.0pt; vertical-align: Super;">4</span>]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns section properties for the region above or below a given Y coordinate value at a single superstructure section cut in a bridge object. These properties are calculated for the section before skew, grade, and superelevation are applied. Coordinate values are measured from the lower-left corner of the section bounding-box. X is positive to the right when looking upstation, and Y is positive upward.</p>
+<p class="Comment">The function returns zero if the information is successfully retrieved; otherwise it returns a nonzero value.</p>
+<p class="Comment">If the bridge object is not currently linked to existing objects in the model, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a linked bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub GetBridgeSuperCutSectionValues()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Y As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ycg As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Area As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Inertia As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get section cut count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.CountSuperCut("BOBJ1", Count)<br>
+<br>
+&#160;&#160;&#160;'get section properties for region above Y = 10 at first cut (0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox. GetSuperCutSectionPropsAtY ("BOBJ1", 0, Y, True, Ycg, Area, Inertia)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="../CountSuperCut.htm">CountSuperCut</a></p>
+<p>&#160;</p>
+</body>
+</html>

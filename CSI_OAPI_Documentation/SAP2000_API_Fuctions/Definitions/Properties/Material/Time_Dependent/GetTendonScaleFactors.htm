@@ -1,0 +1,73 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTendonScaleFactors</title>
+<link rel="StyleSheet" href="../../../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=2"></a><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetTendonScaleFactors</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropMaterial.TimeDep.GetTendonScaleFactors</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTendonScaleFactors(ByVal Name As String, ByRef ScaleFactorRelaxation As Double, Optional ByVal Temp As Double = 0) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing tendon material property.</p>
+<p class="ParameterName">ScaleFactorRelaxation</p>
+<p class="Comment">This value multiplies the relaxation coefficient, and hence the relaxation strain, computed for the material during a time-dependent analysis. It has no effect for load cases that do not consider time-dependent effects, or for materials that do not consider relaxation effects. The default value is unity, and the specified value must be positive.</p>
+<p class="ParameterName">Temp</p>
+<p class="Comment">This item applies only if the specified material has properties that are temperature dependent. That is, it applies only if properties are specified for the material at more than one temperature.</p>
+<p class="Comment">This item is the temperature at which the specified data is to be retrieved. The temperature must have been previously defined for the material.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the scale factors for the time-dependent material property data for tendon materials.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise it returns a nonzero value. The function returns an error if the specified material is not tendon.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetMatPropTendonTimeDepScaleFactors()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim ScaleFactorRelaxation As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'initialize new material property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.SetMaterial("Tendon", eMatType,Tendon)<br>
+<br>
+&#160;&#160;&#160;'assign CEB FIP-90 time dependent data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.TimeDep.SetTendonCEBFIP90("Tendon", True, 2, 1, 12)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'assign time dependent scale factors<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.TimeDep.SetTendonScaleFactors("Tendon", 1.15)<br></p>
+<p class="Coding">&#160;&#160;&#160;'get time dependent scale factors<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.TimeDep.GetTendonScaleFactors("Tendon", ScaleFactorRelaxation)<br>
+&#160;&#160;&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetTendonScaleFactors.htm">SetTendonScaleFactors</a></p>
+</body>
+</html>

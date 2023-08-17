@@ -1,0 +1,85 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetLocalAxesAnalysys</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetLocalAxesAnalysys</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SectCut.GetLocalAxesAnalysis</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetLocalAxesAnalysis(ByVal Name As String, ByRef Z As Double, ByRef Y As Double, ByRef X As Double, ByRef IsAdvanced As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing section cut.</p>
+<p class="ParameterName">Z</p>
+<p class="Comment">The Rotation about the Z axis.</p>
+<p class="ParameterName">Y</p>
+<p class="Comment">The rotation about the Y' axis where Y' is the orientation of the Y axis after rotation about the Z axis.</p>
+<p class="ParameterName">X</p>
+<p class="Comment">The rotation about the X'' axis where X'' is the orientation of the X axis after rotation about the Z axis and about the Y' axis.</p>
+<p class="ParameterName">IsAdvanced</p>
+<p class="Comment">Indicates if advanced local axes are specified.</p>
+<h2><b style="mso-bidi-font-weight: normal;">Remarks</b></h2>
+<p class="Comment">This function gets the local axes angles for an existing section cut whose result type is Analysis.</p>
+<p class="Comment">The function returns zero if the angles are successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">Sub GetSectionCutLocalAxesAnalysis()</p>
+<p class="CommentFirstOne" style="font-family: 'Courier New', monospace; margin-left: 72px;">'dimension variables</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapModel As cSapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim ret As Long</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim Z As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim Y As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim X As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim IsAdvanced As Boolean</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create Sap2000 object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = New Sap2000v16.SapObject</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'start Sap2000 application</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationStart</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create SapModel object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = SapObject.SapModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'initialize model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.InitializeNewModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create model from template</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define new group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.GroupDef.SetGroup("Group1")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'add objects to group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.PointObj.SetGroupAssign("1", "Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.FrameObj.SetGroupAssign("1", "Group1")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define section cut</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.SetByGroup("SCut1", "Group1", 1)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'set section cut local axes angles</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.SetLocalAxesAnalysis ("SCut1", 10, 20, 30)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'get section cut local axes data</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.GetLocalAxesAnalysis ("SCut1",Z, Y, X, IsAdvanced)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'close Sap2000</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationExit False</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = Nothing</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">End Sub</p>
+<h2 class="CodeName">Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetLocalAxisAdvancedAnalysis.htm">GetLocalAxesAdvancedAnalysis</a></p>
+</body>
+</html>

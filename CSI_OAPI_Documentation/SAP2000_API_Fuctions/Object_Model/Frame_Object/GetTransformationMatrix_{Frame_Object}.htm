@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame Object Functions\GetTransformationMatrix.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTransformationMatrix {Frame Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetTransformationMatrix</h1>
+<h2>Syntax</h2>
+<p class="Comment">Sap2000.FrameObj.GetTransformationMatrix</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTransformationMatrix(ByVal Name As String, ByRef Value() As Double,Optional ByVal IsGlobal As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">Value is an array of nine direction cosines that define the transformation matrix.</p>
+<p class="Comment">The following matrix equation shows how the transformation matrix is used to convert items from the frame object local coordinate system to the global coordinate system.</p>
+<p class="ParameterDescription" style="margin-left: 80px;"><img src="../../../Images/Transformation%20Matrix.JPG" alt="" style="border: none;" width="380" height="131" border="0"></p>
+<p class="Comment">In the equation, c0 through c8 are the nine values from the transformation array, (Local1, Local2, Local3) are an item (such as a load) in the object local coordinate system, and (GlobalX, GlobalY, GlobalZ) are the same item in the global coordinate system.</p>
+<p class="Comment">The transformation from the local coordinate system to the present coordinate system is the same as that shown above for the global system if you substitute the present system for the global system.</p>
+<p class="ParameterName">IsGlobal</p>
+<p class="Comment">If this item is True, the transformation matrix is between the Global coordinate system and the frame object local coordinate system.</p>
+<p class="Comment">If this item is False, the transformation maxtrix is between the present coordinate system and the frame object local coordinate system.</p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns zero if the frame object transformation matrix is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFrameObjectMatrix()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'assign frame object local axis angle<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.SetLocalAxes("3", 30)<br>
+<br>
+&#160;&#160;&#160;'get frame object transformation matrix<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Value(8)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.GetTransformationMatrix("3", Value)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

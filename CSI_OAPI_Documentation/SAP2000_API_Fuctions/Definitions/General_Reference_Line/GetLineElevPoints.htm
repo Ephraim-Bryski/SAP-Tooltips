@@ -1,0 +1,143 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetLine.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetLineElevPoints</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetLineElevPoints</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GenRefLine.GetLineElevPoints</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetLineElevPoints(ByVal Name As String, ByRef NumberPoints As Long, ByRef CurveType() As Long, ByRef Value1() As Double, ByRef Value2() As Double, ByRef Value3() As Double, ByRef s() As Double, ByRef z() As Double, Optional ByVal CSys As String = "Global") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing general reference line.</p>
+<p class="ParameterName">NumberPoints</p>
+<p class="Comment">The number of points used to define the general reference line elevation layout.</p>
+<p class="ParameterName">CurveType</p>
+<p class="Comment">This is an array of values indicating the general reference line elevation layout curve type for each point.</p>
+<p class="Comment" style="margin-left: 88px;">0 = None<br>
+1 = Circular Curve<br>
+2 = Highway Curve<br>
+3 = Parabolic Curve<br>
+4 = Bezier Curve<br>
+5 = BSpline Curve<br>
+6 = Bezier Curve Child Point<br>
+7 = BSpline Curve Child Point</p>
+<p class="ParameterName">Value1</p>
+<p class="Comment"><span style="font-weight: normal;">This is the value of a parameter used to define the general reference line layout. The item that Value1 represents depends on the CurveType item.</span></p>
+<p class="Comment" style="margin-left: 88px;"><span style="font-weight: normal;">CurveType = 0: Not Used<br>
+CurveType = 1: Curve Radius [L]<br>
+CurveType = 2: Curve Radius [L]<br>
+CurveType = 3: Angle measured from the horizontal, up station axis, to the axis of symmetry of the parabolic curve. [deg]<br>
+CurveType = 4: Number of control points. This is currently hard-wired internally to 4.<br>
+CurveType = 5: Number of control points.<br>
+CurveType = 6: Not Used<br>
+CurveType = 7: Not Used</span></p>
+<p class="Comment">Value2<span style="font-weight: normal;"><br>
+This is the value of a parameter used to define the general reference line layout. The item that Value2 represents depends on the CurveType item.</span></p>
+<p class="Comment" style="margin-left: 88px;"><span style="font-weight: normal;">CurveType = 0: Not Used<br>
+CurveType = 1: Not Used<br>
+CurveType = 2: Curve length, including length of spirals on either end. [L]<br>
+CurveType = 3: Rate at which the slope of a parabolic curve is changing in percent. [1/L]<br>
+CurveType = 4: Number of discretization points.<br>
+CurveType = 5: Number of discretization points.<br>
+CurveType = 6: Not Used<br>
+CurveType = 7: Not Used</span></p>
+<p class="ParameterName">Value3</p>
+<p class="Comment"><span style="font-weight: normal;">This is the value of a parameter used to define the general reference line layout. The item that Value3 represents depends on the CurveType item.</span></p>
+<p class="Comment" style="margin-left: 88px;"><span style="font-weight: normal;">CurveType = 0: Not Used<br>
+CurveType = 1: Not Used<br>
+CurveType = 2: Not Used<br>
+CurveType = 3: Not Used<br>
+CurveType = 4: Not Used<br>
+CurveType = 5: Curve order.<br>
+CurveType = 6: Not Used<br>
+CurveType = 7: Not Used</span></p>
+<p class="ParameterName">s</p>
+<p class="Comment">This is an array of the station coordinate of each point in the coordinate system specified for the general reference line. [L]</p>
+<p class="ParameterName">z</p>
+<p class="Comment">This is an array of the Z coordinate of each point in the coordinate system specified for the general reference line. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the general reference line elevation points and the associated parameters.</p>
+<p class="Comment">The function returns zero if the general reference line parameters are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetElevPoints()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberPoints As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CurveType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value1() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value2() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value3() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim s() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim z() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add new general reference line<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Name = "GRef1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GenRefLine.SetLine(Name, 120, 5)<br>
+<br>
+&#160;&#160;&#160;'set general reference line elev points data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;NumberPoints = 3<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim CurveType(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim x(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Redim y(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;CurveType(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;CurveType(1) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;CurveType(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;s(0) = 0: z(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;s(1) = 100: z(1) = 100<br>
+&#160;&#160;&#160;&#160;&#160;&#160;s(2) = 200: z(2) = 100<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Value1(0) = 0: Value1(1) = 100: Value1(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Value2(0) = 0: Value2(1) = 0: Value2(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Value3(0) = 0: Value3(1) = 0: Value3(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GenRefLine.SetLineElevPoints(Name, NumberPoints, CurveType, Value1, Value2, Value3, s, z)<br>
+<br>
+&#160;&#160;&#160;'get general reference line plan points data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim CurveType(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Value1(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Value2(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Value3(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim s(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim z(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Ret = SapModel.GenRefLine.GetLinePlanPoints(Name, NumberPoints, Value1, Value2, Value3, s, z)&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetLineElevPoints.htm">SetLineElevPoints</a><a href="GetLine_{Gen_Ref_Line}.htm"><br>
+GetLine</a><a href="GetLinePlanPoints.htm"><br>
+GetLinePlanPoints</a></p>
+</body>
+</html>

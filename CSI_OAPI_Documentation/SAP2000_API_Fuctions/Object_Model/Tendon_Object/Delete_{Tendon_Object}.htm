@@ -1,0 +1,87 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Tendon Object Functions\Delete.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Delete {Tendon Object}</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>Delete</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.TendonObj.Delete</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function Delete(ByVal Name As String, Optional ByVal ItemType As eItemType = Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing tendon object or group depending on the value of the ItemType item.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the tendon object specified by the Name item is deleted.</p>
+<p class="Comment">If this item is Group, all of the tendon objects in the group specified by the Name item are deleted.</p>
+<p class="Comment">If this item is SelectedObjects, all selected tendon objects are deleted, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">The function deletes tendon objects.</p>
+<p class="Comment">The function returns zero if the tendon objects are successfully deleted, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub DeleteTendonObj()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name1 As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name2 As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add tendon objects by points<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.AddByPoint("3", "9", Name1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.AddByPoint("2", "8", Name2)<br>
+<br>
+&#160;&#160;&#160;'update view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, False)<br>
+<br>
+&#160;&#160;&#160;'delete tendon object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.Delete(Name1)<br>
+<br>
+&#160;&#160;&#160;'update view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, True)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="AddByCoord_{Tendon_Object}.htm">AddByCoord</a></p>
+<p class="Block-Text"><a href="AddByPoint_{Tendon_Object}.htm">AddByPoint</a></p>
+</body>
+</html>

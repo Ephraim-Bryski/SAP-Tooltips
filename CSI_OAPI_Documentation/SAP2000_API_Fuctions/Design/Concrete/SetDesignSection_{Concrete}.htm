@@ -1,0 +1,90 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Design\Concrete\SetDesignSection.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetDesignSection {Concrete}</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetDesignSection</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignConcrete.SetDesignSection</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetDesignSection(ByVal Name As String, ByVal PropName As String, ByVal LastAnalysis As Boolean, Optional ByVal ItemType As eItemType = Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object or group, depending on the value of the ItemType item.</p>
+<p class="ParameterName">PropName</p>
+<p class="Comment">The name of an existing frame section property to be used as the design section for the specified frame objects. This item applies only when LastAnalysis = False.</p>
+<p class="ParameterName">LastAnalysis</p>
+<p class="Comment">If this item is True, the design section for the specified frame objects is reset to the last analysis section for the frame object. If it is False, the design section is set to that specified by PropName.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0pt; margin-right: 0pt; margin-bottom: .0001pt; margin-left: 36.0pt;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, the assignment is made to all selected frame objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function modifies the design section for all specified frame objects that have a concrete frame design procedure.</p>
+<p class="Comment">The function returns zero if the design section is successfully modified; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetConcreteDesignSection()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyName() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create new concrete frame section properties<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetRectangle("R1", "4000Psi", 20, 12)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetRectangle("R2", "4000Psi", 20, 16)<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288, True, "R1", "R1")<br>
+<br>
+&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'start concrete design<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.StartDesign<br>
+<br>
+&#160;&#160;&#160;'set design section<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.SetDesignSection("8", "R2", False)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.03.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetDesignSection_{Concrete}.htm">GetDesignSection</a></p>
+</body>
+</html>

@@ -1,0 +1,82 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Case Functions\Count Analysis Case Functions.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Count {Load Case}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>Count</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.Count</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function Count(Optional ByVal CaseType As eLoadCaseType) As Long</p>
+<h2>Parameters</h2>
+<p class="Block-Text" style="font-weight: bold; margin-left: 48px;">CaseType</p>
+<p class="Comment">This optional value is one of the following items in the eLoadCaseType enumeration.</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_LINEAR_STATIC = 1</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_NONLINEAR_STATIC = 2</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_MODAL = 3</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_RESPONSE_SPECTRUM = 4</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_LINEAR_HISTORY = 5 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_NONLINEAR_HISTORY = 6 &#160;(Modal Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_LINEAR_DYNAMIC = 7 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_NONLINEAR_DYNAMIC = 8 &#160;(Direct Integration Time History)</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_MOVING_LOAD = 9</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_BUCKLING = 10</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_STEADY_STATE = 11</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_POWER_SPECTRAL_DENSITY = 12</p>
+<p class="Block-Text" style="margin-left: 85px;">CASE_LINEAR_STATIC_MULTISTEP = 13</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">CASE_HYPERSTATIC = 14</p>
+<p class="Comment">If no value is input for CaseType, a count is returned for all load cases in the model regardless of type.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns the total number of defined load cases in the model. If desired, counts can be returned for all load cases of a specified type in the model.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub CountLoadCases()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'return number of load cases of all types<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Count = SapModel.LoadCases.Count<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Added optional CaseType parameter in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<p class="Comment">Added one item to the eLoadCaseType enumeration in version 12.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

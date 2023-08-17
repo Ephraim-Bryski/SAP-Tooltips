@@ -1,0 +1,63 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\ApplicationExit.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ApplicationExit</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1 style="text-decoration: none;"><u><span style="text-decoration: none;">ApplicationExit</span></u></h1>
+<h2>Syntax</h2>
+<p class="Block-Text">SapObject.ApplicationExit</p>
+<h2>VB6 Procedure</h2>
+<p class="Block-Text">Function ApplicationExit(ByVal FileSave As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">FileSave</p>
+<p style="margin-left: 48px; margin-bottom: 0pt;">If this item is True the existing model file is saved prior to closing Sap2000.</p>
+<h2>Remarks</h2>
+<p class="Block-Text">If the model file is saved then it is saved with its current name. You should set the Sap2000 object variable to nothing after calling this function.</p>
+<p class="Block-Text">&#160;</p>
+<p class="Block-Text">This function returns zero if the function succeeds and nonzero if it fails.</p>
+<h2>VBA Example</h2>
+<p class="Coding" style="margin-left: 48px;">Sub ExitExample()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<span style="color: #ff0000;"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;</span>Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel(kip_ft_F)<br>
+<br>
+&#160;&#160;&#160;'create a 3D frame model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 3, 12, 3, 28, 2, 36)&#160;&#160;&#160;<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Block-Text">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="ApplicationStart.htm">ApplicationStart</a></p>
+</body>
+</html>

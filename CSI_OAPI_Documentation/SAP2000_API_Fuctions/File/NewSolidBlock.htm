@@ -1,0 +1,80 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\NewSolidBlock.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>NewSolidBlock</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>NewSolidBlock</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.File.NewSolidBlock</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function NewSolidBlock(ByVal XWidth As Double, ByVal YWidth As Double, ByVal Height As Double, Optional ByVal Restraint As Boolean = True, Optional ByVal Solid As String = "Default", Optional ByVal NumberXDivisions As Long = 5, Optional ByVal NumberYDivisions As Long = 8, Optional ByVal NumberZDivisions As Long = 10) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">XWidth</p>
+<p class="Comment">The total width of the solid block measured in the global X direction. [L]</p>
+<p class="ParameterName">YWidth</p>
+<p class="Comment">The total width of the solid block measured in the global Y direction. [L]</p>
+<p class="ParameterName">Height</p>
+<p class="Comment">The total height of the solid block measured in the global Z direction. [L]</p>
+<p class="ParameterName">Restraint</p>
+<p class="Comment">Joint restraints are provided at the base of the solid block when this item is True.</p>
+<p class="ParameterName">Solid</p>
+<p class="Comment">The solid property used for the solid block. This must either be Default or the name of a defined solid property.</p>
+<p class="ParameterName">NumberXDivisions</p>
+<p class="Comment">The number of solid objects in the global X direction of the block.</p>
+<p class="ParameterName">NumberYDivisions</p>
+<p class="Comment">The number of solid objects in the global Y direction of the block.</p>
+<p class="ParameterName">NumberZDivisions</p>
+<p class="Comment">The number of solid objects in the global Z direction of the block.</p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns zero if the new solid block model is successfully created, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub NewSolidBlock()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel(kip_ft_F)<br>
+<br>
+&#160;&#160;&#160;'create a solid model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewSolidBlock(20, 50, 20)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="NewBlank.htm">NewBlank</a></p>
+<p class="Block-Text"><a href="NewBeam.htm">NewBeam</a></p>
+<p class="Block-Text"><a href="New2DFrame.htm">New2DFrame</a></p>
+<p class="Block-Text"><a href="New3DFrame.htm">New3DFrame</a></p>
+<p class="Block-Text"><a href="NewWall.htm">NewWall</a></p>
+<p class="Normal">&#160;</p>
+</body>
+</html>

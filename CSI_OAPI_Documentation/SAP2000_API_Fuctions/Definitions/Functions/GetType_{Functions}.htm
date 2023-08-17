@@ -1,0 +1,147 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Functions\GetType.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTypeOAPI {Functions}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetTypeOAPI</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.GetTypeOAPI</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTypeOAPI(ByVal Name As String, ByRef FuncType As Long, ByRef AddType As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing function.</p>
+<p class="ParameterName">FuncType</p>
+<p class="Comment">This is one of the following numbers, indicating the type of function.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Response spectrum</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Time history</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Power spectral density</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = Steady state</p>
+<p class="ParameterName">AddType</p>
+<p class="Comment">The is one of the following items, indicating the function subtype.</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">Response Spectrum Functions</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = From file</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = User</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">2 = UBC 94</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">3 = UBC 97</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">4 = BOCA 96</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">5 = NBCC 95</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">6 = IBC 2003</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">7 = NEHRP 97</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">8 = Eurocode 8-1998</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">9 = NZS4203 1992</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">10 = Chinese 2010</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">11 = Italian Ordinanza 3274</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">12 = IS1893:2002</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">13 = AASHTO LRFD 2006</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">14 = NCHRP Project 20-07</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 112px; margin-bottom: 0pt;">15 = IBC 2006</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 112px; margin-bottom: 9pt;">16 = NBCC 2005<br>
+17 = Eurocode 8-2004<br>
+18 = AS 1170.4-2007<br>
+19 = NZS 1170.5-2004<br>
+20 = AASHTO 2007<br>
+21 = Chinese JTG/T B02-2013<br>
+22 = Chinese GB 50111-2006<br>
+23 = IBC 2009<br>
+24 = NBCC 2010<br>
+25 = NTC 2008<br>
+26 = AASHTO 2012<br>
+27 = IBC 2012<br>
+28 = TSC 2007<br>
+29 = SI 413(1995)<br>
+30 = Argentina INPRES-CIRSOC 103<br>
+31 = Chile Norma NCh433+DS61<br>
+32 = Chile Norma NCh2369-2003<br>
+33 = Colombia NSR-10<br>
+34 = Ecuador NEC-11 Capitulo 2<br>
+35 = Guatemala AGIES NSE 2-10<br>
+36 = Mexico NTC 2004<br>
+37 = Peru Norma E.030<br>
+38 = Dominican Republic R-001<br>
+39 = Venezuela COVENIN 1756-2:2001<br>
+40 = KBC 2009<br>
+41 = Mexico CFE-93<br>
+42 = Peru NTE E.030 2014<br>
+43 = Mexico CFE-2008<br>
+44 = Ecuado Norma NEC-SE-DS 2015<br>
+45 = Costa Rica Seismic Code 2010<br>
+46 = SP 14.13330.2014<br>
+47 = Chinese CJJ 166-2011<br>
+48 = NBCC 2015<br>
+49 = IS 1893:2016<br>
+50 = ASCE 7-16<br>
+51 = KBC 2016<br>
+52 = NTC 2018<br>
+53 = TSC 2018<br></p>
+<p class="CommentFirstOne" style="margin-left: 88px;">Time History Functions</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = From file</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = User</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">2 = Sine</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">3 = Cosine</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">4 = Ramp</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">5 = Sawtooth</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">6 = Triangular</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 112px; margin-bottom: 9pt;">7 = User periodic</p>
+<p class="CommentFirstOne" style="margin-left: 88px;">Power Spectral Density Functions</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = From file</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = User</p>
+<p class="CommentFirstOne" style="margin-left: 88px; margin-bottom: 9pt;">&#160;</p>
+<p class="CommentFirstOne" style="margin-left: 88px; margin-bottom: 9pt;">Steady State Functions</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">0 = From file</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 112px;">1 = User</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the function type for the specified function.</p>
+<p class="Comment">The function returns zero if the type is successfully retrieved; otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFunctionType()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FuncType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AddType As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get function type<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.GetTypeOAPI("UNIFRS", FuncType, AddType)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.01.</p>
+<p class="Comment">Changed function name to GetTypeOAPI in v17.0.0.</p>
+<p class="Comment">Updated list of AddType values for response spectrum functions in v18.2.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

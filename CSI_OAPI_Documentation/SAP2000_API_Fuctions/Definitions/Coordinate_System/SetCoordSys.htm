@@ -1,0 +1,74 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Coordinate System Definition Functions\SetCoordSys.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetCoordSys</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetCoordSys</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.CoordSys.SetCoordSys</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetCoordSys(ByVal Name As String, ByVal x As Double, ByVal y As Double, ByVal z As Double, ByVal RZ As Double, ByVal RY As Double, ByVal RX As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">This is the name of a coordinate system. If this is the name of an existing coordinate system, that coordinate system is modified, otherwise a new coordinate system is added.</p>
+<p class="ParameterName">x</p>
+<p class="Comment">The global X coordinate of the origin of the coordinate system. [L]</p>
+<p class="ParameterName">y</p>
+<p class="Comment">The global Y coordinate of the origin of the coordinate system. [L]</p>
+<p class="ParameterName">z</p>
+<p class="Comment">The global Z coordinate of the origin of the coordinate system. [L]</p>
+<p class="ParameterName">RZ, RY, RX</p>
+<p class="Comment">The rotation of an axis of the new coordinate system relative to the global coordinate system is defined as follows: (1) Rotate the coordinate system about the positive global Z-axis as defined by the RZ item. (2) Rotate the coordinate system about the positive global Y-axis as defined by the RY item. (3) Rotate the coordinate system about the positive global X-axis as defined by the RX item.&#160;&#160;Note that the order in which these rotations are performed is important.&#160;&#160;RX, RY and RZ are angles in degrees [deg].</p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns zero if the coordinate system is successfully added or modified, otherwise it returns a nonzero value.</p>
+<p class="Comment">Modifying the Global coordinate system will fail and return an error.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AddCoordSystem()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'define new coordinate system<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.CoordSys.SetCoordSys("CSys1", 1000, 1000, 0, 0, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetCoordSys.htm">GetCoordSys</a></p>
+<p class="Block-Text"><a href="Delete_{Coordinate_System}.htm">Delete</a></p>
+</body>
+</html>

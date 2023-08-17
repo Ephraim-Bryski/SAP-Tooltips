@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Line Object Functions\GetEndLengthOffset.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetEndLengthOffset {Frame Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetEndLengthOffset</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.GetEndLengthOffset</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetEndLengthOffset(ByVal Name As String, ByRef AutoOffset As Boolean, ByRef Length1 As Double, ByRef Length2 As Double, ByRef rz As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">AutoOffset</p>
+<p class="Comment">If this item is True, the end length offsets are automatically determined by the program from object connectivity.</p>
+<p class="ParameterName">Length1</p>
+<p class="Comment">The offset length along the 1-axis of the frame object at the I-End of the frame object. [L]</p>
+<p class="ParameterName">Length2</p>
+<p class="Comment">The offset along the 1-axis of the frame object at the J-End of the frame object. [L]</p>
+<p class="ParameterName">rz</p>
+<p class="Comment">The rigid zone factor.&#160;&#160;This is the fraction of the end offset length assumed to be rigid for bending and shear deformations.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the frame object end offsets along the 1-axis of the object.</p>
+<p class="Comment">The function returns zero if the offsets are successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFrameEndOffsets()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AutoOffset As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Length1 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Length2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim rz As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'get offsets<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.GetEndLengthOffset("15", AutoOffset, Length1, Length2, rz)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetEndLengthOffset.htm">SetEndLengthOffset</a></p>
+</body>
+</html>

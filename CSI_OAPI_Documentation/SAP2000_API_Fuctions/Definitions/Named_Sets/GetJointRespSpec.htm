@@ -1,0 +1,139 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetJointRespSpec</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetJointRespSpec</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.NamedSets.GetJointRespSpec</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetJointRespSpec(ByVal Name As String, ByRef LoadCase As String, ByRef NumberJoints As Long, ByRef JointNames() As String, ByRef CoordSys As String, ByRef Direction As Long, ByRef Abscissa As Long, ByRef Ordinate As Long, ByRef DefaultFreq As Boolean, ByRef StructuralFreq As Boolean, ByRef NumberUserFreq As Long, ByRef UserFreqValues() As Double, ByRef NumberDampValues As Long, ByRef DampingValues() As Double, ByRef AbscissaPlotType As Long, ByRef SpectrumWidening As Double, ByRef OrdinatePlotType As Long, ByRef OrdinateScaleFactor As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing joint response spectrum named set..</p>
+<p class="ParameterName">Load Case</p>
+<p class="Comment">The name of a time history load case for which results will be extracted.</p>
+<p class="ParameterName">NumberJoints</p>
+<p class="Comment">The number of joints for which to generate response spectra. &#160;</p>
+<p class="ParameterName">JointNames</p>
+<p class="Comment">This is an array of joint names for which to generate response spectra.</p>
+<p class="ParameterName">CoordSys</p>
+<p class="Comment">The name of a coordinate system in which the direction for results is defined. This can be Global, Local, or any other user-defined coordinate system.</p>
+<p class="ParameterName">Direction</p>
+<p class="Comment">This specifies the direction, in the specified coordinate system, in which the results are to be retrieved. Valid values for the direction are:</p>
+<p class="Comment" style="margin-left: 88px;">1 = Local 1, Global X, or user-defined coordinate system X<br>
+2 = Local 2, Global Y, or user-defined coordinate system Y<br>
+3 = Local 3, Global Z, or user-defined coordinate system Z</p>
+<p class="ParameterName">Abscissa</p>
+<p class="Comment">This is one of the following, specifying the abscissa data type.</p>
+<p class="Comment" style="margin-left: 88px;">1 = Frequency<br>
+2 = Period</p>
+<p class="ParameterName">Ordinate</p>
+<p class="Comment">This is one of the following, specifying the ordinate data type.</p>
+<p class="Comment" style="margin-left: 88px;">1 = Spectral displacement<br>
+2 = Spectral velocity<br>
+3 = Pseudo-spectral velocity<br>
+4 = Spectral acceleration<br>
+5 = Pseudo-spectral acceleration</p>
+<p class="ParameterName">DefaultFreq</p>
+<p class="Comment">If this item is True, the default frequencies are used for output.</p>
+<p class="ParameterName">StructuralFreq</p>
+<p class="Comment">If this item is True, the structural frequencies are used for output.</p>
+<p class="ParameterName">NumberUserFreq</p>
+<p class="Comment">The number of user-defined frequencies, which may be 0.</p>
+<p class="ParameterName">UserFreqValues</p>
+<p class="Comment">This is an array that includes the user-defined frequencies. Values are returned<span style="mso-spacerun: yes;">&#160;</span><span style="line-height: 107%; font-family: 'Times New Roman', serif; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;">&#160;using indices 0 to NumberUserFreq-1 if NumberUserFreq &gt; 0. [1/s]</span></p>
+<p class="ParameterName">NumberDampValues</p>
+<p class="Comment">The number of critical damping ratio values.</p>
+<p class="ParameterName">Damping Values</p>
+<p class="Comment">This is an array that includes the critical damping ratios to be used for extracting results. Values are supplied using indices 0 to NumberDampValues-1.</p>
+<p class="ParameterName">Abscissa Plot Type</p>
+<p class="Comment">This is one of the following, specifying the abscissa axis scale type.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">1 = Arithmetic</p>
+<p class="Comment" style="margin-left: 88px;">2 = Log</p>
+<p class="ParameterName">Spectrum Widening</p>
+<p class="Comment">This specifies the percentage by which to widen the peaks of the spectrum.</p>
+<p class="ParameterName">OrdinatePlotType</p>
+<p class="Comment">This is one of the following, specifying the ordinate axis scale type.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">1 = Arithmetic</p>
+<p class="Comment" style="margin-left: 88px;">2 = Log</p>
+<p class="ParameterName">OrdinateScaleFactor</p>
+<p class="Comment">This is the scale factor used to linearly scale the response spectrum ordinate values.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function gets a joint response spectrum named set definition. &#160;</p>
+<p class="Comment">The function returns zero if the named set is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetJointRSNamedSet()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim InJoints() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim InUserFreq() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim InDampValues() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LoadCase As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim NumJoints As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Joints() As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim CoordSys As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Direction As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Abscissa As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ordinate As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DefaultFreq As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StructuralFreq As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumUserFreq As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserFreqValues() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumDampValues As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampingValues() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AbscissaPlotType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SpectrumWidening As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim OrdinatePlotType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim OrdinateScaleFactor As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br></p>
+<p class="Coding">&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'add linear modal history load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ModHistLinear.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'define named set<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim InJoints(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;InJoints(0) = "3"<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;InJoints(1) = "6"<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim InDampValues(1)<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;InDampValues(0) = 0<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;InDampValues(1) = 0.05<br>
+<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>ret = SapModel.NamedSets.SetJointRespSpec("Sample", "LCASE1", 2, InJoints, "Global", 1, 1, 4, True, True, 0, InUserFreq, 2, InDampValues)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'get named set<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.NamedSets.GetJointRespSpec("Sample", LoadCase, NumJoints, Joints, CoordSys, Direction, Abscissa, Ordinate, DefaultFreq, StructuralFreq, NumUserFreq, UserFreqValues, NumDampValues, DampingValues, AbscissaPlotType, SpectrumWidening, OrdinatePlotType, OrdinateScaleFactor)<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.3.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetJointRespSpec.htm">SetJointRespSpec</a></p>
+</body>
+</html>

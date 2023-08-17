@@ -1,0 +1,86 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Object Functions\SetConstraint.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetConstraint</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetConstraint</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.SetConstraint</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetConstraint(ByVal Name As String, ConstraintName As String, Optional ByVal ItemType As eItemType = Object, Optional ByVal Replace As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object or group depending on the value of the ItemType item.</p>
+<p class="ParameterName">ConstraintName</p>
+<p class="Comment">The name of an existing joint constraint.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the constraint assignment is made to the point object specified by the Name item.</p>
+<p class="Comment">If this item is Group, &#160;the constraint assignment is made to all point objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, the constraint assignment is made to all selected point objects and the Name item is ignored.</p>
+<p class="ParameterName">Replace</p>
+<p class="Comment">If this item is True, all previous joint constraints, if any, assigned to the specified point object(s) are deleted before making the new assignment.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function makes joint constraint assignments to point objects.</p>
+<p class="Comment">The function returns 0 if the assignment is successfully made, otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetConstraintAssignment()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim i As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'define a new constraint<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1")<br>
+<br>
+&#160;&#160;&#160;'define new constraint assignments<br>
+&#160;&#160;&#160;&#160;&#160;&#160;For i = 4 To 16 Step 4<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint(Format(i), "Diaph1")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Next i<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Modified optional argument Replace to be ByVal in version 12.0.1.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetConstraint_{Point_Object}.htm">GetConstraint</a></p>
+<p class="Block-Text"><a href="DeleteConstraint.htm">DeleteConstraint</a></p>
+</body>
+</html>

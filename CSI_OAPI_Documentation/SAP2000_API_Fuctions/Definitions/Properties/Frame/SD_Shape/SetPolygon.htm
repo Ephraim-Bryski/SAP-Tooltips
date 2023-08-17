@@ -1,0 +1,113 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetPolygon</title>
+<link rel="StyleSheet" href="../../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetPolygon</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.SDShape.SetPolygon</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetPolygon(ByVal Name As String, ByRef ShapeName As String, ByVal MatProp As String, ByVal SSOverwrite As String, ByVal NumberPoints As Long, ByRef X() As Double, ByRef Y() As Double, ByRef Radius() As Double, Optional ByVal Color As Long = -1, Optional ByVal Reinf As Boolean = False, Optional ByVal MatRebar As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property that is a section designer section.</p>
+<p class="ParameterName">ShapeName</p>
+<p class="Comment">The name of an existing or new shape in a section designer property. If this is an existing shape, that shape is modified; otherwise, a new shape is added.</p>
+<p class="Comment">This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the ShapeName variable.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the shape.</p>
+<p class="ParameterName">SSOverwrite</p>
+<p class="Comment">This is a blank string, Default, or the name of a defined stress-strain curve.</p>
+<p class="Comment">If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</p>
+<p class="ParameterName">NumberPoints</p>
+<p class="Comment"><span style="font-weight: normal;">The number of point coordinates used to define the polygon.</span></p>
+<p class="ParameterName">X</p>
+<p class="Comment">This is an array that contains the X-coordinates of the polygon points. [L]</p>
+<p class="ParameterName">Y</p>
+<p class="Comment">This is an array that contains the Y-coordinates of the polygon points. [L]</p>
+<p class="ParameterName">Radius</p>
+<p class="Comment">This is an array that contains the radius to be applied at each of the polygon points. [L]</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The fill color assigned to the shape. If Color is specified as -1, the program will automatically assign the default fill color.</p>
+<p class="ParameterName">Reinf</p>
+<p class="Comment">This item is True when there is edge and corner reinforcing steel associated with the shape.</p>
+<p class="Comment">If the MatProp item is not a concrete material, this item is always assumed to be False.</p>
+<p class="ParameterName">MatRebar</p>
+<p class="Comment">The material property for the edge and corner reinforcing steel associated with the shape. This item applies only when the MatProp item is a concrete material and the Reinf item is True.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function adds a new polygon shape or modifies an existing shape to be a polygon shape in a section designer property.</p>
+<p class="Comment">The polygon points must be defined in order around the polygon, otherwise the shape will be created incorrectly or the creation of the shape will fail.</p>
+<p class="Comment">The function returns zero if the shape is successfully added or modified; otherwise it returns a nonzero val .</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetFrameSDPropPolygon()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberPoints As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim X() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Y() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Radius() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add ASTM A706 rebar material<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.AddQuick(Name, eMatType.eMatType_Rebar, , , , , eMatTypeRebar.eMatTypeRebar_ASTM_A706)<br>
+<br>
+&#160;&#160;&#160;'add new section designer frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetSDSection("SD1", "A992Fy50")<br>
+<br>
+&#160;&#160;&#160;'add polygon shape to new property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;NumberPoints = 5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim X(4)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Y(4)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Radius(4)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;X(0) = -26<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Y(0) = -26<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Radius(0) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;X(1) = -20<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Y(1) = -20<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Radius(1) = 5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;X(2) = -25<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Y(2) = 15<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Radius(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;X(3) = 20<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Y(3) = 12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Radius(3) = 3<br>
+&#160;&#160;&#160;&#160;&#160;&#160;X(4) = 25<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Y(4) = -15<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Radius(4) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SDShape.SetPolygon("SD1", "SH1", "4000Psi", "Default", NumberPoints, X, Y, Radius, -1, True, Name) &#160;</p>
+<p class="Coding">&#160;<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 19.1.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetPolygon.htm">GetPolygon</a></p>
+</body>
+</html>

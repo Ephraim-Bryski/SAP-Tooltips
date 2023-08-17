@@ -1,0 +1,55 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoadForceWithGUID {Point Object}</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetLoadForceWithGUID {Point Object}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.SetLoadForceWithGUID</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoadForceWithGUID(ByVal Name As String, ByVal LoadPat As String, ByRef Value() As Double, ByRef GUID As String, Optional ByVal Replace As Boolean = False, Optional ByVal CSys As String = "Global") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">The name of the load pattern for the point load.</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">This is an array of six point load values.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Value(0) = F1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Value(1) = F2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Value(2) = F3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Value(3) = M1 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Value(4) = M2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 84px; margin-bottom: 9pt;">Value(5) = M3 [FL]</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">This is the global unique ID of a load force assigned to the point object or if it is not the global unique id of a load force assigned to the point object and it is not blank, the global unique ID which is assigned to the newly assigned load. If left blank, a new load is assigned to the point object and the value of this parameter is set to the global unique ID of the newly assigned load.</p>
+<p class="ParameterName">Replace</p>
+<p class="Comment">If this item is True and the input GUID is not the GUID of any load force assigned to the point object, all previous loads force, if any, assigned to the specified point object, in the specified load pattern, are deleted before making the new assignment. If the input GUID is the GUID of a load force already assigned to the point object, the parameters of the distributed load are updated with the values provided and this item is ignored.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The name of the coordinate system for the considered point load. This is Local or the name of a defined coordinate system.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the load assignment is made to the point object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the load assignment is made to all point objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, the load assignment is made to all selected point objects and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function makes point load assignments to point objects.</p>
+<p class="Comment">The function returns zero if the load assignments are successfully made, otherwise it returns a nonzero value.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetLoadForceWithGUID_{Point_Object}.htm">GetLoadForceWithGUID</a></p>
+<p class="Block-Text"><a href="DeleteLoadForceWithGUID_{Point_Object}.htm">DeleteLoadForceWithGUID</a></p>
+</body>
+</html>

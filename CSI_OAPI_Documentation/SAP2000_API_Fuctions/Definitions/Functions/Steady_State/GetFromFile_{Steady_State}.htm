@@ -1,0 +1,104 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Steady State Functions\GetFromFile.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetFromFile {Steady State}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetFromFile</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncSS.GetFromFile</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetFromFile(ByVal Name As String, ByRef FileName As String, ByRef HeadLines As Long, ByRef PreChars As Long, ByRef PointsPerLine As Long, ByRef ValueType As Long, ByRef FreeFormat As Boolean, ByRef NumberFixed As Long, ByRef FreqTypeInFile As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a defined steady state function specified to be from a text file.</p>
+<p class="ParameterName">FileName</p>
+<p class="Comment">The full path of the text file containing the function data.</p>
+<p class="ParameterName">HeadLines</p>
+<p class="Comment">The number of header lines in the text file to be skipped before starting to read function data.</p>
+<p class="ParameterName">PreChars</p>
+<p class="Comment">The number of prefix characters to be skipped on each line in the text file.</p>
+<p class="ParameterName">PointsPerLine</p>
+<p class="Comment">The number of function points included on each text file line.</p>
+<p class="ParameterName">ValueType</p>
+<p class="Comment">This is either 1 or 2, indicating value type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Values at equal time intervals</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Time and function values</p>
+<p class="ParameterName">FreeFormat</p>
+<p class="Comment">This item is True if the data is provided in a free format. It is False if it is in a fixed format.</p>
+<p class="ParameterName">NumberFixed</p>
+<p class="Comment">This item only applies when the FreeFormat item is False. It is the number of characters per item.</p>
+<p class="ParameterName">FreqTypeInFile</p>
+<p class="Comment">This is either 1 or 2, indicating frequency type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Hz</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = RPM</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a steady state function from file.</p>
+<p class="Comment">The function returns zero if the function definition is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetSSFuncFromFile()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HeadLines As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PreChars As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PointsPerLine As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ValueType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreeFormat As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberFixed As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqTypeInFile As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add SS function from file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncSS.SetFromFile("SS-1", "C:\SapAPI\FuncSS.txt", 2, 0, 1, 2, True)<br>
+<br>
+&#160;&#160;&#160;'get SS function from file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncSS.GetFromFile("SS-1", FileName, HeadLines, PreChars, PointsPerLine, ValueType, FreeFormat, NumberFixed, FreqTypeInFile)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Text File</h2>
+<p class="Comment">Following is the contents of the text file name FuncSS.txt used in the VBA Example.</p>
+<p class="Coding">Steady State Function</p>
+<p class="Coding">One pair of Frequency (Hz) and Value items per line</p>
+<p class="Coding">0&#160;&#160;1</p>
+<p class="Coding">1&#160;&#160;1</p>
+<p class="Coding">2&#160;&#160;2</p>
+<p class="Coding">3&#160;&#160;2</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetFromFile_{Steady_State}.htm">SetFromFile</a></p>
+</body>
+</html>

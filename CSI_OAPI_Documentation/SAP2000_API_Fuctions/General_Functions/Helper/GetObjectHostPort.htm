@@ -1,0 +1,66 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetObjectHostPort</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetObjectHostPort</h1>
+<h2>Syntax</h2>
+<p class="Comment">Helper.GetObjectHostPort</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetObjectHostPort(ByVal hostName As String, 
+ ByVal portNumber As Integer, ByVal progID As String) As cOAPI</p>
+<h2>Parameters</h2>
+<p class="ParameterName">hostName</p>
+<p class="Comment">The host computer name.</p>
+<p class="ParameterName">portNumber</p>
+<p class="Comment">The TCP port to connect to the host computer.</p>
+<p class="ParameterName">progID</p>
+<p class="Comment">The program ID of the API object. Use “CSI.SAP2000.API.SapObject” 
+ for SAP2000 and “CSI.CSiBridge.API.SapObject” for CSiBridge.</p>
+<h2>Remarks</h2>
+<p class="Comment">Attaches to the active running instance of SAP2000 on 
+ a given computer using the given TCP port. Returns an instance of SapObject 
+ if successful, nothing otherwise.</p>
+<p class="Comment">CSiAPIService.exe must be running on the host computer 
+ and listening to the given TCP port for the call to succeed.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Public Sub Example()</p>
+<p class="Coding">Dim myHelper As cHelper</p>
+<p class="Coding">Dim SapModel As cSapModel</p>
+<p class="Coding">Dim SapObject As cOAPI</p>
+<p class="Coding">Dim ret As Integer</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">‘create SapObject</p>
+<p class="Coding">Set myHelper = New Helper</p>
+<p class="Coding">Set SapObject = myHelper.GetObjectHostPort(&quot;RemoteServer&quot;, 
+ 8500, &quot;CSI.SAP2000.API.SapObject&quot;)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'create SapModel object</p>
+<p class="Coding">Set SapModel = SapObject.SapModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'initialize model</p>
+<p class="Coding">ret = SapModel.InitializeNewModel()</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'close SAP2000</p>
+<p class="Coding">ret = SapObject.ApplicationExit(False)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'clean up variables</p>
+<p class="Coding">Set SapModel = Nothing</p>
+<p class="Coding">Set SapObject = Nothing</p>
+<p class="Coding">Set myHelper = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2 class="Coding">Release Notes</h2>
+<p class="Comment">Initial release in version 22.10</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="../ApplicationExit.htm">SapObject.AplicationExit</a></p>
+<p class="Comment"><a href="../../../Remote_API.htm">RemoteAPI</a></p>
+</body>
+</html>

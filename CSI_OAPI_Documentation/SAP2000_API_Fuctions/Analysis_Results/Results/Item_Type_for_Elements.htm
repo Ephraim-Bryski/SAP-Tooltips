@@ -1,0 +1,30 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\ItemTypeElm Hyperlink.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Item Type for Elements</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>Item Type For Elements</h1>
+<p class="Comment">The ItemTypeElm is one of the following items in the eItemTypeElmenumeration:</p>
+<p class="Block-Text" style="margin-left: 84px;">ObjectElm = 0</p>
+<p class="Block-Text" style="margin-left: 84px;">Element = 1</p>
+<p class="Block-Text" style="margin-left: 84px;">GroupElm = 2</p>
+<p class="Block-Text" style="margin-left: 84px;">SelectionElm = 3</p>
+<p class="Comment" style="margin-top: 9pt;">If this item is ObjectElm, the item request is for the point element corresponding to the point object specified by the Name item.</p>
+<p class="Comment" style="margin-top: 9pt;">If the ItemTypeElm is Element, the item request is for the point element specified by the Name item.</p>
+<p class="Comment">If the ItemTypeElm is GroupElm, the item request is for all point elements directly or indirectly specified in the group specified by the Name item. If a point object is in the specified group, data is requested for its corresponding point element. If line, area, solid or link objects are in the specified group, data is requested for all point elements associated with those objects, including those point elements created as a result of automatic internal meshing of the object by the program.</p>
+<p class="Comment">If the ItemTypeElm is SelectionElm, the item request is for all point elements directly or indirectly selected and the Name item is ignored. If a point object is selected, data is requested for its corresponding point element. If line, area, solid or link objects are selected, data is requested for all point elements associated with those objects, including those point elements created as a result of automatic internal meshing of the object by the program.</p>
+</body>
+</html>

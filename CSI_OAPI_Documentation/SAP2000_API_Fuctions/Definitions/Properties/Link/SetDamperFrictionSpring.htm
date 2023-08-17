@@ -1,0 +1,198 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetDamperFrictionSpring</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetDamperFrictionSpring</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropLink.SetDamperFrictionSpring</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetDamperFrictionSpring(ByVal Name As String, ByRef DOF() As Boolean, ByRef Fixed() As Boolean, ByRef NonLinear() As Boolean, ByRef Ke() As Double, ByRef Ce() As Double, ByRef k() As Double, ByRef k1() As Double, ByRef k2() As Double, ByRef u0() As Double, ByRef us() As Double, ByRef dir() As Long, ByVal dj2 As Double, ByVal dj3 As Double, Optional ByVal Notes As String = "", Optional ByVal GUID As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new link property. If this is an existing property, that property is modified; otherwise, a new property is added.</p>
+<p class="ParameterName">DOF</p>
+<p class="Comment">This is a boolean array, dimensioned to 5, indicating if properties exist for a specified degree of freedom.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">DOF(0) = U1</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">DOF(1) = U2</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">DOF(2) = U3</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">DOF(3) = R1</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">DOF(4) = R2</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">DOF(5) = R3</p>
+<p class="ParameterName">Fixed</p>
+<p class="Comment">This is a boolean array, dimensioned to 5, indicating if the specified degree of freedom is fixed (restrained.)</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Fixed(0) = U1 fixity</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Fixed(1) = U2 fixity</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Fixed(2) = U3 fixity</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Fixed(3) = R1 fixity</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Fixed(4) = R2 fixity</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">Fixed(5) = R3 fixity</p>
+<p class="Comment">The term Fixed(n) applies only when DOF(n) = True.</p>
+<p class="ParameterName">NonLinear</p>
+<p class="Comment">This is a boolean array, dimensioned to 5, indicating if nonlinear properties exist for a specified degree of freedom.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">NonLinear(0) = U1 has nonlinear properties</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">NonLinear(1) = U2 has nonlinear properties</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">NonLinear(2) = U3 has nonlinear properties</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">NonLinear(3) = R1 has nonlinear properties</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">NonLinear(4) = R2 has nonlinear properties</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">NonLinear(5) = R3 has nonlinear properties</p>
+<p class="Comment">The term NonLinear(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="ParameterName">Ke</p>
+<p class="Comment">This is an array of effective stiffness terms for the link property. The effective stiffness applies for linear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ke(0) = U1 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ke(1) = U2 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Ke(2) = U3 [F/L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Ke(3) = R1 [FL]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">Ke(4) = R2 [FL]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">Ke(5) = R3 [FL]</p>
+<p class="Comment">The term Ke(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="ParameterName">Ce</p>
+<p class="Comment">This is an array of effective damping terms for the link property. The effective damping applies for linear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ce(0) = U1 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ce(1) = U2 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ce(2) = U3 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ce(3) = R1 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">Ce(4) = R2 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">Ce(5) = R3 [FL]</p>
+<p class="Comment">The term Ce(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="ParameterName">k</p>
+<p class="Comment">This is an array of initial (nonslipping) stiffness terms for the link property. The initial stiffness applies for nonlinear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k(0) = U1 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k(1) = U2 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k(2) = U3 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k(3) = R1 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k(4) = R2 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">k(5) = R3 [FL]</p>
+<p class="Comment">The term k(n) only applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="ParameterName">k1</p>
+<p class="Comment">This is an array of slipping stiffness when loading terms for the link property. The slipping stiffness when loading applies for nonlinear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">k1(0) = U1 [F/L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k1(1) = U2 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k1(2) = U3 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k1(3) = R1 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">k1<span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">(4) = R2 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">k1(5) = R3 [FL]</p>
+<p class="Comment">The term k1(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="ParameterName">k2</p>
+<p class="Comment">This is an array of slipping stiffness when unloading terms for the link property. The slipping stiffness when unloading applies for nonlinear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">k2(0) = U1 [F/L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k2(1) = U2 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k2(2) = U3 [F/L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">k2(3) = R1 [FL]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">k2(4) = R2 [FL]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">k2(5) = R3 [FL]</p>
+<p class="Comment">The term k2(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="ParameterName">u0</p>
+<p class="Comment">This is an array of precompression displacement terms for the link property. The nonlinear precompression displacement applies for nonlinear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">u0(0) = U1 [L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">u0(1) = U2 [L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">u0(2) = U3 [L]</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">u0(3) = R1</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">u0(4) = R2</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">u0(5) = R3</p>
+<p class="Comment">The term u0(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="ParameterName">us</p>
+<p class="Comment">This is an array of stop displacement terms for the link property. The nonlinear stop displacement applies for nonlinear analyses.</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">us(0) = U1 [L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">us(1) = U2 [L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">us(2) = U3 [L]</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt;">us(3) = R1</p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt; font-size: 10.0pt; mso-ansi-language: NO-BOK;"><span lang="NO-BOK" xml:lang="NO-BOK">us(4) = R2</span></p>
+<p class="parameterdescription0" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; font-size: 10.0pt;">us(5) = R3</p>
+<p class="Comment">The term us(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="ParameterName">dj2</p>
+<p class="Comment">The distance from the J-End of the link to the U2 shear spring. This item applies only when DOF(1) = True. [L]</p>
+<p class="ParameterName">dj3</p>
+<p class="Comment">The distance from the J-End of the link to the U3 shear spring. This item applies only when DOF(2) = True. [L]</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the property.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the property. If this item is input as Default, the program assigns a GUID to the property.</p>
+<h2><b style="mso-bidi-font-weight: normal;"><span style="mso-spacerun: yes;">&#160;</span>Remarks</b></h2>
+<p class="Comment">This function initializes a friction spring damper-type link property. If this function is called for an existing link property, all items for the property are reset to their default values.</p>
+<p class="Comment">The function returns zero if the property is successfully initialized; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetLinkPropDamperFrictionSpring()</p>
+<p class="Coding" style="margin-left: 72px;">'dimension variables</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapObject as cOAPI</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapModel As cSapModel</p>
+<p class="Coding" style="margin-left: 96px;">Dim ret As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyDOF() As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyFixed() As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyNonLinear() As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyKe() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyCe() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyK() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyK1() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyK2() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyU0() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyUs() As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyDir() As Long</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'start Sap2000 application</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationStart</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create SapModel object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = SapObject.SapModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'initialize model</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.InitializeNewModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create model from template</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'add link property</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyDOF(5)</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyFixed(5)</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyNonLinear(5)</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyKe(5)</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyCe(5)</p>
+<p class="Coding" style="margin-left: 96px;">ReDim MyK(5)</p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">ReDim MyK1(5)</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">ReDim MyK2(5)</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">ReDim MyU0(5)</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">ReDim MyUs(5)</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">ReDim MyDir(5)</span></p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 96px;">MyDOF(0) = True</p>
+<p class="Coding" style="margin-left: 96px;">MyKe(0) = 12</p>
+<p class="Coding" style="margin-left: 96px;">MyCe(0) = 0.01</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 96px;">MyDOF(1) = True</p>
+<p class="Coding" style="margin-left: 96px;">MyNonLinear(1) = True</p>
+<p class="Coding" style="margin-left: 96px;">MyKe(1) = 12</p>
+<p class="Coding" style="margin-left: 96px;">MyCe(1) = 0.01</p>
+<p class="Coding" style="margin-left: 96px;">MyK(1) = 20</p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">MyK1(1)=2</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">MyK2(1) = 1</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">MyU0(1) = -.2</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">MyUs(1) = 1</span></p>
+<p class="Coding" style="margin-left: 96px;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">MyDir(1) = 2</span></p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 96px;">MyDOF(2) = True</p>
+<p class="Coding" style="margin-left: 96px;">MyFixed(2) = True</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.PropLink.SetDamperFrictionSpring("D1", MyDOF, MyFixed, MyNonLinear, MyKe, MyCe, MyK, MyK1, MyK2, MyU0, MyUs, MyDir, 1, 0)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.2.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetDamperRingSpring.htm">GetDamperFrictionSpring</a></p>
+</body>
+</html>

@@ -1,0 +1,101 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\SDShape\SetSolidCircle.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetSolidCircle</title>
+<link rel="stylesheet" href="../../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../../ehlpdhtm.js"></script>
+
+<h1>SetSolidCircle</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.SDShape.SetSolidCircle</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetSolidCircle(ByVal Name As String, ByRefShapeNameAs String, ByValMatProp As String, ByValSSOverwrite As String, ByValXCenter As Double, ByValYCenter As Double, Optional ByVal diameter As Double = 24, Optional ByVal color As Long = -1, Optional ByValReinf As Boolean = False, Optional ByValNumberBars As Long = 8, Option ByVal Rotation As Double = 22.5, Optional ByVal Cover As Double = 2, Optional ByValRebarSize As String = "", Optional ByValMatRebar As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property that is a section designer section.</p>
+<p class="ParameterName">ShapeName</p>
+<p class="Comment">The name of an existing or new shape in a section designer property. If this is an existing shape, that shape is modified; otherwise, a new shape is added.</p>
+<p class="Comment">This item may be input as a blank string, in which case the program will assign a shape name to the shape and return that name in the ShapeName variable.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the shape.</p>
+<p class="ParameterName">SSOverwrite</p>
+<p class="Comment">This is a blank string, Default, or the name of a defined stress-strain curve.</p>
+<p class="Comment">If this item is a blank string or Default, the shape stress-strain curve is based on the assigned material property.</p>
+<p class="ParameterName">XCenter</p>
+<p class="Comment">The X-coordinate of the center of the shape in the section designer coordinate system. [L]</p>
+<p class="ParameterName">YCenter</p>
+<p class="Comment">The Y-coordinate of the center of the shape in the section designer coordinate system. [L]</p>
+<p class="ParameterName">Diameter</p>
+<p class="Comment">The diameter of the circle.[L]</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The fill color assigned to the shape. If Color is specified as -1, the program will automatically assign the default fill color.</p>
+<p class="ParameterName">Reinf</p>
+<p class="Comment">This item is True when there is edge and corner reinforcing steel associated with the shape.</p>
+<p class="Comment">If the MatProp item is not a concrete material, this item is always assumed to be False.</p>
+<p class="ParameterName"># Bars</p>
+<p class="Comment">This item is visible only if the Reinforcing item is set to True.&#160;&#160;It is the number of equally spaced bars for the circular reinforcing.</p>
+<p class="ParameterName">Rotation</p>
+<p class="Comment">The counter clockwise rotation of the shape from its default orientation. [deg]</p>
+<p class="ParameterName">Bar Cover</p>
+<p class="Comment">This item is visible only if the Reinforcing item is set to True.&#160;&#160;It is the clear cover for the specified rebar. [L]</p>
+<p class="ParameterName">Barsize</p>
+<p class="Comment">This item is visible only if the Reinforcing item is set to True.&#160;&#160;It is the size of the reinforcing bar.</p>
+<p class="ParameterName">MatRebar</p>
+<p class="Comment">The material property for the edge and corner reinforcing steel associated with the shape. This item applies only when the MatProp item is a concrete material and the Reinf item is True.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function adds a new solid circle shape or modifies an existing shape to be a solid circle shape in a section designer property.</p>
+<p class="Comment">The function returns zero if the shape is successfully added or modified; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetFrameSDPropSolidCircle()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'createSapModelobject<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'addASTMA706 rebar material<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.AddQuick(Name, MATERIAL_REBAR, , , , , MATERIAL_REBAR_SUBTYPE_ASTM_A706)<br>
+<br>
+&#160;&#160;&#160;'add new section designer frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetSDSection("SD1", "4000Psi")<br>
+<br>
+&#160;&#160;&#160;'add solid circle shape to new property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SDShape.SetSolidCircle("SD1", "SH1", "4000psi", "Default", 0, 0, 12, -1, True, 16, 0, 16, "#4", Name)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetSolidCircle.htm">GetSolidCircle</a></p>
+</body>
+</html>

@@ -1,0 +1,109 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetNTC2008 {Wind Load}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetNTC2008</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.SetNTC2008</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetNTC2008(ByVal Name As String, ByRef ExposureFrom As Long, ByRef DirAngle As Double, ByRef Cpw As Double, ByRef Cpl As Double, ByRef UserZ As Boolean, ByRef TopZ As Double, ByRef BottomZ As Double, ByRef Vb As Double, ByRef ExposureCategory As Long, ByRef ct As Double, ByRef cd As Double, ByRef cp As Double, ByRef UserExposure As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 1 or 2, indicating the source of the wind exposure.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = From extents of rigid diaphragms</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9pt; margin-left: 88px;">2 = From area objects</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpw</p>
+<p class="Comment">The windward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpl</p>
+<p class="Comment">The leeward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">Vb</p>
+<p class="Comment">The wind velocity in m/s.</p>
+<p class="ParameterName">ExposureCategory</p>
+<p class="Comment">This is 1, 2, 3, 4, or 5, indicating the exposure category.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">2 = II</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">3 = III</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">4 = IV</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">5 = V</p>
+<p class="ParameterName">ct</p>
+<p class="Comment">The topography factor, ct.</p>
+<p class="ParameterName">cd</p>
+<p class="Comment">The dynamic coefficient, cd.</p>
+<p class="ParameterName">cp</p>
+<p class="Comment">The shape factor, cp.</p>
+<p class="ParameterName">UserExposure</p>
+<p class="Comment">If this item is True, the wind exposure widths are provided by the user. If it is False, the wind exposure widths are calculated by the program from the extents of the diaphragms.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto wind loading parameters for NTC 2008.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindNTC2008()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", eLoadPatternType_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign NTC2008 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetNTC2008("WIND", 1, 0, 0.8, 0.5, False, 0, 0, 35, 3, 1, 1, 1, False)<br>
+&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 18.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetNTC2008_{Wind_Load}.htm">GetNTC2008</a></p>
+<p class="Comment">&#160;</p>
+</body>
+</html>

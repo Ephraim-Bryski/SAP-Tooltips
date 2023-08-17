@@ -1,0 +1,89 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetCSAS614 {Bridge Wind Load}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetCSAS614 {Bridge Wind Load}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWindBridge.SetCSAS614</p>
+<h2 class="Comment">VB6 Procedure</h2>
+<p class="Comment">Function SetCSAS614(ByVal Name As String, ByVal Superstructure As Boolean, ByVal Substructure As Boolean, ByVal Vertical As Boolean, ByVal GroundElevation As Double, ByVal SuperZProgCalc As Boolean, ByVal SuperstructureZ As Double, ByVal q As Double, ByVal Cg As Double, ByVal CeProgCalc As Boolean, ByVal Ce As Double, ByVal ChStructure As Double, ByVal ChLiveLoad As Double, ByVal Cv As Double) As Long</p>
+<h2 class="Comment">Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern.</p>
+<p class="ParameterName">Superstructure</p>
+<p class="Comment">This item is True if wind on the superstructure should be considered, otherwise it is false.</p>
+<p class="ParameterName">Substructure</p>
+<p class="Comment">This item is True if wind on the substructure should be considered, otherwise it is false.</p>
+<p class="ParameterName">Vertical</p>
+<p class="Comment">This item is True if vertical wind should be considered, otherwise it is false</p>
+<p class="ParameterName">GroundElevation</p>
+<p class="Comment">The ground elevation used for determining heights used for wind pressure values. [L]</p>
+<p class="ParameterName">SuperZProgCalc</p>
+<p class="Comment">This item is True if the superstructure height, Z, should be program calculated, otherwise it is false.</p>
+<p class="ParameterName">SuperstructureZ</p>
+<p class="Comment">The superstructure height Z. This item applies only when SuperProgCalc = False. [L]</p>
+<p class="ParameterName">q</p>
+<p class="Comment">The reference wind pressure, q. [F/L<span style="vertical-align: Super;">2</span>]</p>
+<p class="ParameterName">Cg</p>
+<p class="Comment">The gust effect factor.</p>
+<p class="ParameterName">CeProgCalc</p>
+<p class="Comment">This item is True if the wind exposure factor, Ce, should be program calculated, otherwise it is false.</p>
+<p class="ParameterName">Ce</p>
+<p class="Comment">The wind exposure factor. This item applies only when CeProgCalc = False.</p>
+<p class="ParameterName">ChStructure</p>
+<p class="Comment">The Ch factor for wind acting on the structure.</p>
+<p class="ParameterName">ChLiveLoad</p>
+<p class="Comment">The Ch factor for wind acting on the live load.</p>
+<p class="ParameterName">Cv</p>
+<p class="Comment">The Cv factor for vertical wind.</p>
+<h2 class="Comment">Remarks</h2>
+<p class="Comment">This function sets bridge auto wind loading parameters for CSA S6-14.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2 class="Comment">VBA Example</h2>
+<p class="Coding">Sub SetBridgeWindCSAS614()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open existing model containing a bridge object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(“C:\Temp\BridgeModel.bdb” )<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign CSA S6-14 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWindBridge.SetCSAS614("WIND", True, True, True, -100, True, 10, 1, 2, True, 1, 2, 1.2, 1)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<p class="Coding">&#160;</p>
+<h2 class="Coding">Release Notes</h2>
+<p class="Comment">Initial release in v21.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetCSAS614_{Bridge_Wind_Load}.htm">GetCSAS614</a></p>
+</body>
+</html>

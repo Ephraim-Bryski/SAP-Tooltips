@@ -1,0 +1,167 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>JointRespSpec</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>JointRespSpec</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.JointRespSpec</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function JointRespSpec(ByVal Name As String, ByVal ItemTypeElm As eItemTypeElm, ByVal edSet As String, ByRef NumberResults As Long, ByRef Obj() As String, ByRef Elm() As String, ByRef LoadCase() As String, ByRef CoordSys() As String, ByRef Dir() As Long, ByRef Damping() As Double, ByRef SpecWidening() As Double, ByRef AbscissaValue() As Double, ByRef OrdinateValue() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object, point element, or group of objects depending on the value of the ItemTypeElm item.</p>
+<p class="ParameterName">ItemTypeElem</p>
+<p class="Comment">This is one of the following items in the ItemTypeElm enumeration:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">ObjectElm = 0</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Element = 1</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">GroupElm = 2</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">SelectionElm = 3</p>
+<p class="Comment" style="margin-left: 88px;">Default = 4</p>
+<p class="Comment">If this item is ObjectElm, the result request is for the point element corresponding to the point object specified by the Name item.</p>
+<p class="Comment">If this item is Element, the result request is for the point element specified by the Name item.</p>
+<p class="Comment">If this item is GroupElm, the result request is for all point elements directly or indirectly specified in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectionElm, the result request is for all point elements directly or indirectly selected and the Name item is ignored.</p>
+<p class="Comment">If this item is Default, the result request is for the point object specified in the named set.</p>
+<p class="Comment">See <a href="Item_Type_for_Elements.htm">Item Type for Elements</a> for more information.</p>
+<p class="ParameterName">NamedSet</p>
+<p class="Comment">The name of an existing joint response spectrum named set. See SapModel.NamedSet.SetJointRespSpec. &#160;&#160;</p>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">Obj</p>
+<p class="Comment">This is an array that includes the point object name associated with each result, if any. Some results will have no point object associated with them. For those cases, this item will be blank.</p>
+<p class="ParameterName">Elm</p>
+<p class="Comment">This is an array that includes the point element name associated with each result.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the load case associated with each result.</p>
+<p class="ParameterName">CoordSys</p>
+<p class="Comment">This is an array that includes the coordinate system in which the results are reported.</p>
+<p class="ParameterName">Dir</p>
+<p class="Comment">This is an array that includes the direction for which the results are reported. Valid values for the direction are:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">1 = Local 1, Global X, or user-defined coordinate system X</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">2 = Local 2, Global Y, or user-defined coordinate system Y</p>
+<p class="Comment" style="margin-left: 88px;">3 = Local 3, Global Z, or user-defined coordinate system Z</p>
+<p class="ParameterName">Damping</p>
+<p class="Comment">This is an array that includes the critical damping ratio, for each result.</p>
+<p class="ParameterName">SpecWidening</p>
+<p class="Comment">This is an array that includes the percent spectrum widening, for each result.</p>
+<p class="ParameterName">AbscissaValue</p>
+<p class="Comment">This is an array that includes the period or frequency, as defined in each named set, for each result. [s or 1/s]</p>
+<p class="ParameterName">OrdinateValue</p>
+<p class="Comment">This is an array of the response quantity, as defined in each named set, for each result. The possible response quantities are spectral displacement [L], spectral velocity [L/s], pseudo spectral velocity [L/s], spectral acceleration [L/s<sup>2</sup>], or pseudo spectral acceleration [L/s<sup>2</sup>].</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the joint response spectra values, due to a time history analysis, for the specified point elements.</p>
+<p class="Comment">The function returns zero if the response spectra data is successfully recovered, otherwise it returns a nonzero value.</p>
+<p class="Comment">See <a href="Analysis_Results_Remarks.htm">Analysis Results Remarks</a> for more information</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetJointResponseSpectra()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyLoadType() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyLoadName() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyFunc() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MySF() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyTF() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAT() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCSys() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAng() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Joints() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim UserFreq() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim DampValues() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberResults As Long&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Obj() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Elm() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim LoadCase() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim CoordSys() As String&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Dir() As Long&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Damping() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim SpecWidening() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim AbscissaValue() As Double&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim OrdinateValue() As Double<br>
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br></p>
+<p class="Coding">&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'add sine TH function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncTH.SetSine("TH-1, 1, 16, 4, 1.25)<br>
+<br>
+&#160;&#160;&#160;'add linear modal history load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyLoadType(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyLoadName(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyFunc(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MySF(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyTF(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAT(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyCSys(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAng(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadType(0) = "Accel"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadName(0) = "U1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFunc(0) = "TH-1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MySF(0) = 2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyTF(0) = 1.5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAT(0) = 10<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCSys(0) = "Global"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAng(0) = 10</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ModHistLinear.SetCase("LCASE1")</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.ModHistLinear.SetLoads("LCASE1", 1, MyLoadType, MyLoadName, MyFunc, MySF, MyTF, MyAT, MyCSys, MyAng)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'define named set<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Joints(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Joints(0) = "3"<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Joints(1) = "6"<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;</span>ReDim DampValues(1)<br>
+<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;DampValues(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;</span>&#160;DampValues(1) = 0.05<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.NamedSets.SetJointRespSpec("Sample", "LCASE1", 2, Joints, "Global", 1, 1, 4, True, True, 0, UserFreq, 2, DampValues)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'run analysis</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'clear all case and combo output selections and select time history case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput<br>
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'set case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.SetCaseSelectedForOutput("LCASE1")<br style="mso-special-character: line-break;"></p>
+<p class="Coding">&#160;&#160;&#160;'get point response spectra</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.JointRespSpec("3", 4, "Sample", NumberResults, Obj, Elm, LoadCase, CoordSys, Dir, Damping, SpecWidening, AbscissaValue, OrdinateValue)<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.3.0.</p>
+<h2>See Also</h2>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="../../Definitions/Named_Sets/SetJointRespSpec.htm">SetJointRespSpec</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="JointDisplAbs.htm">JointDisplAbs</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="JointVel.htm">JointVel</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="JointVelAbs.htm">JointVelAbs</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="JointAcc.htm">JointAcc</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="JointAccAbs.htm">JointAccAbs</a></p>
+<p class="Comment" style="margin-bottom: 0pt;"><a href="GeneralizedDispl.htm">GeneralizedDispl</a></p>
+</body>
+</html>

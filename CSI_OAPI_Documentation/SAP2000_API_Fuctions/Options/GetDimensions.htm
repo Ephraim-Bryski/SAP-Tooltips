@@ -1,0 +1,99 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Options\GetDimensions.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDimensions</title>
+<link rel="stylesheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetDimensions</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Options.GetDimensions</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetDimensions(ByRef CuttingPlaneTol As Double, ByRef WorldSpacing As Double, ByRef NudgeValue As Double, ByRef PixelClickSize As Long, ByRef PixelSnapSize As Long, ByRef ScrLinThk As Long, ByRef PrtLinThk As Long, ByRef MaxFont As Long, ByRef MinFont As Long, ByRef ZoomStep As Long, ByRef ShrinkFact As Long, ByRef TextFileMaxChar As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">CuttingPlaneTol</p>
+<p class="Comment">The tolerance for 2D view cutting planes. [L]</p>
+<p class="ParameterName">WorldSpacing</p>
+<p class="Comment">The plan fine grid spacing. [L]</p>
+<p class="ParameterName">NudgeValue</p>
+<p class="Comment">The plan nudge value. [L]</p>
+<p class="ParameterName">PixelClickSize</p>
+<p class="Comment">The screen selection tolerance in pixels.</p>
+<p class="ParameterName">PixelSnapSize</p>
+<p class="Comment">The screen snap tolerance in pixels.</p>
+<p class="ParameterName">ScrLinThk</p>
+<p class="Comment">The screen line thickness in pixels.</p>
+<p class="ParameterName">PrtLinThk</p>
+<p class="Comment">The printer line thickness in pixels.</p>
+<p class="ParameterName">MaxFont</p>
+<p class="Comment">The maximum graphic font size in points.</p>
+<p class="ParameterName">MinFont</p>
+<p class="Comment">The minimum graphic font size in points.</p>
+<p class="ParameterName">ZoomStep</p>
+<p class="Comment">The auto zoom step size in percent (0 &lt; ZoomStep &lt; = 100).</p>
+<p class="ParameterName">ShrinkFact</p>
+<p class="Comment">The shrink factor in percent (0 &lt; ShrinkFact &lt; = 100).</p>
+<p class="ParameterName">TextFileMaxChar</p>
+<p class="Comment">The maximum line length in the text file (ShrinkFact &gt; = 80).</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the program dimension and tolerance items.</p>
+<p class="Comment">The function returns zero if the items are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetDimensionItems()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CuttingPlaneTol As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim WorldSpacing As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NudgeValue As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PixelClickSize As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PixelSnapSize As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ScrLinThk As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PrtLinThk As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MaxFont As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MinFont As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ZoomStep As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ShrinkFact As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TextFileMaxChar As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get dimensions and tolerances<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Options.GetDimensions(CuttingPlaneTol, WorldSpacing, NudgeValue, PixelClickSize, PixelSnapSize, ScrLinThk, PrtLinThk, MaxFont, MinFont, ZoomStep, ShrinkFact, TextFileMaxChar)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.03.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetDimensions.htm">SetDimensions</a></p>
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetEurocode12005.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetEurocode12005 {Wind Load}</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>SetEurocode12005 <span style="font-size: 10pt;">(Note: &#160;Newer function available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.SetEurocode12005</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetEurocode12005(ByVal Name As String, ByVal ExposureFrom As Long, ByVal DirAngle As Double, ByVal Cpw As Double, ByVal Cpl As Double, ByVal UserZ As Boolean, ByVal TopZ As Double, ByVal BottomZ As Double, ByVal WindSpeed As Double, ByVal Terrain As Long, ByVal Orography As Double, ByVal k1 As Double, ByVal CsCd As Double, Optional ByVal UserExposure As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 1 or 2, indicating the source of the wind exposure.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = From extents of rigid diaphragms</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = From area objects</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpw</p>
+<p class="Comment">The windward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpl</p>
+<p class="Comment">The leeward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">WindSpeed</p>
+<p class="Comment">The basic wind speed, vb, in meters per second.</p>
+<p class="ParameterName">Terrain</p>
+<p class="Comment">This is 0, 1, 2, 3 or 4, indicating the terrain category.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = I</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = II</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = III</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">4 = IV</p>
+<p class="ParameterName">Orography</p>
+<p class="Comment">The orography factor, Co.</p>
+<p class="ParameterName">k1</p>
+<p class="Comment">The turbulence factor, k1.</p>
+<p class="ParameterName">CsCd</p>
+<p class="Comment">The structural factor, CsCd.</p>
+<p class="ParameterName">UserExposure</p>
+<p class="Comment">If this item is True, the wind exposure widths are provided by the user. If it is False, the wind exposure widths are calculated by the program from the extents of the diaphragms.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns auto wind loading parameters for Eurocode 1 2005.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignWindEurocode12005()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject As Sap2000v15.SapObject<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = New Sap2000v15.SapObject<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign Eurocode 1 2005 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetEurocode12005("WIND", 1, 0, 0.8, 0.5, False, 0, 0, 35, 2, 1, 1, 1)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.00.</p>
+<p class="Comment">The function is obsolete and has been superseded by <a href="../Definitions/Load_Pattern/Auto_Wind_Load/SetEurocode12005_1{Wind_Load}.htm">SetEurocode12005_1</a> as of version 14.1.0. This function is maintained for backward compatibility. New function added.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetEurocode12005_{Wind_Load}.htm">GetEurocode12005</a></p>
+</body>
+</html>

@@ -1,0 +1,71 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetLinePlanPoints.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNameList {Gen Ref Line}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetNameList</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GenRefLine.GetNameList</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNameList(ByRef NumberNames As Long, ByRef MyName() As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">NumberNames</p>
+<p class="Comment">The number of general reference line names retrieved by the program.</p>
+<p class="ParameterName">MyName</p>
+<p class="Comment"><span style="font-weight: normal;">This is a one-dimensional array of general reference line names. The MyName array is created as a dynamic, zero-based array by the API user:</span></p>
+<p class="Coding" style="margin-left: 88px;">Dim MyName() As String<br>
+&#160;</p>
+<p class="Comment"><span style="font-weight: normal;">The array is dimensioned to (NumberNames – 1) inside the SAP2000 program, filled with the names, and returned to the API user.</span></p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the names of all defined general reference lines.</p>
+<p class="Comment">The function returns the names; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetGenRefLineNames()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberNames As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyName() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'define new general reference line<span lang="FR" xml:lang="FR"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GenRefLine.SetLine("GRef1", 120, 5)</span><br>
+<br>
+&#160;&#160;&#160;'get general reference line names<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GenRefLine.GetNameList(NumberNames, MyName)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetLine_{Gen_Ref_Line}.htm">SetLine</a></p>
+</body>
+</html>

@@ -1,0 +1,609 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Examples\Example1.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Example 8 (Python NET)</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h1>Example 8 (Python NET)</h1>
+<h2>Remarks</h2>
+<p class="comment">This example was created using Python 3.4.3. It is based 
+ on the Sap2000 verification problem Example 1-001.</p>
+<p class="Comment">This example creates the example verification problem 
+ from scratch, runs the analysis, extracts results, and compares the results 
+ with hand calculated values.</p>
+<h2>Example</h2>
+<p class="Comment">
+    1. Download and install a Python version between 3.4.3
+    and 3.8.6 for Windows. At the time of this writing (Jan 2021), a required
+    library for this example will not work with Python 3.9. Python is freely available at
+    python.org.
+</p>
+<p class="Comment">2. Install the Python package &quot;pythonnet&quot;. 
+ If you are using Python 3.4 or higher, the easiest way to do this is by 
+ opening a command prompt with administrative privileges and entering the 
+ command:</p>
+<p class="Coding">C:\&gt;python -m pip install pythonnet</p>
+<p class="Coding">&#160;</p>
+<p class="Comment">Please note that your computer will need to be connected 
+ to the internet for the above command to work.</p>
+<p class="Comment">3. Create a Python .py file using IDLE or any text editor 
+ and paste in the following code. Please pay attention to the comments 
+ in this code block; they contain important information about running the 
+ script. This example includes an option for executing on a remote computer. 
+ </p>
+<p class="Coding">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">import os</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">import sys</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px; 
+	 font-size: 10.0pt; font-family: 'Courier New'; mso-highlight: white; 
+	 background-color: #ffffff;"><span style="background: #ffffff;">import 
+ clr</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">clr.AddReference(&quot;System.Runtime.InteropServices&quot;)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">from System.Runtime.InteropServices import 
+ Marshal</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#set the following path to the installed 
+ SAP2000 program directory</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">clr.AddReference(R'C:\Program Files\Computers 
+ and Structures\SAP2000 22\SAP2000v1.dll')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">from SAP2000v1 import *</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#set the following flag to True to execute 
+ on a remote computer</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Remote = False</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#if the above flag is True, set the following 
+ variable to the hostname of the remote computer</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#remember that the remote computer must 
+ have SAP2000 installed and be running the CSiAPIService.exe</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">RemoteComputer = &quot;SpareComputer-DT&quot;</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#set the following flag to True to attach 
+ to an existing instance of the program</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#otherwise a new instance of the program 
+ will be started</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">AttachToInstance = True</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#set the following flag to True to manually 
+ specify the path to SAP2000.exe</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#this allows for a connection to a version 
+ of SAP2000 other than the latest installation</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#otherwise the latest installed version 
+ of SAP2000 will be launched</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">SpecifyPath = False</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#if the above flag is set to True, specify 
+ the path to SAP2000 below</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ProgramPath = R&quot;C:\Program Files\Computers 
+ and Structures\SAP2000 22\SAP2000.exe&quot;</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#full path to the model</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#set it to the desired path of your model</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#if executing remotely, ensure that this 
+ folder already exists on the remote computer</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#the below command will only create the 
+ folder locally</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">APIPath = R'C:\CSi_SAP2000_API_Example'</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">if not os.path.exists(APIPath):</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;try:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;os.makedirs(APIPath)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;except OSError:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;</span><span class="Coding_Characters" 
+														 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;</span><span 
+	 class="Coding_Characters">pass</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ModelPath = APIPath + os.sep + 'API_1-001.sdb'</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#create API helper object</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">helper = cHelper(Helper())</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">if AttachToInstance:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;#attach to a running 
+ instance of SAP2000</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;try:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;#get 
+ the active SAP2000 object&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if 
+ Remote:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;</span><span class="Coding_Characters" 
+														 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span><span 
+	 class="Coding_Characters">mySAPObject = cOAPI(helper.GetObjectHost(RemoteComputer, 
+ &quot;CSI.SAP2000.API.SAPObject&quot;))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mySAPObject 
+ = cOAPI(helper.GetObject(&quot;CSI.SAP2000.API.SAPObject&quot;))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;except:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print(&quot;No 
+ running instance of the program found or failed to attach.&quot;)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;if SpecifyPath:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;#'create 
+ an instance of the SAP2000 object from the specified path</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if 
+ Remote:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mySAPObject 
+ = cOAPI(helper.CreateObjectHost(RemoteComputer, ProgramPath))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mySAPObject 
+ = cOAPI(helper.CreateObject(ProgramPath))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;except 
+ :</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print(&quot;Cannot 
+ start a new instance of the program from &quot; + ProgramPath)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;#create 
+ an instance of the SAP2000 object from the latest installed SAP2000</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if 
+ Remote:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mySAPObject 
+ = cOAPI(helper.CreateObjectProgIDHost(RemoteComputer, &quot;CSI.SAP2000.API.SAPObject&quot;))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span><span 
+	 class="Coding_Characters" style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span><span 
+	 class="Coding_Characters">else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;mySAPObject 
+ = cOAPI(helper.CreateObjectProgID(&quot;CSI.SAP2000.API.SAPObject&quot;))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;except:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print(&quot;Cannot 
+ start a new instance of the program.&quot;)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;#start SAP2000 application</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;mySAPObject.ApplicationStart()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#create SapModel object</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">SapModel = cSapModel(mySAPObject.SapModel)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#initialize model</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">SapModel.InitializeNewModel()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#create new blank model</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">File = cFile(SapModel.File)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = File.NewBlank()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#define material property</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">MATERIAL_CONCRETE = 2</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PropMaterial = cPropMaterial(SapModel.PropMaterial)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PropMaterial.SetMaterial('CONC', MATERIAL_CONCRETE)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign isotropic mechanical properties 
+ to material</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PropMaterial.SetMPIsotropic('CONC', 
+ 3600, 0.2, 0.0000055)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#define rectangular frame section property</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PropFrame = cPropFrame(SapModel.PropFrame)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PropFrame.SetRectangle('R1', 'CONC', 
+ 12, 12)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#define frame section property modifiers</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ModValue = [1000, 0, 0, 1, 1, 1, 1, 1]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PropFrame.SetModifiers('R1', ModValue)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#switch to k-ft units</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">kip_ft_F = 4</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = SapModel.SetPresentUnits(kip_ft_F)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#add frame object by coordinates</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">FrameObj = cFrameObj(SapModel.FrameObj)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">FrameName1 = ' '</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">FrameName2 = ' '</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">FrameName3 = ' '</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, FrameName1] = FrameObj.AddByCoord(0, 
+ 0, 0, 0, 0, 10, FrameName1, 'R1', '1', 'Global')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, FrameName2] = FrameObj.AddByCoord(0, 
+ 0, 10, 8, 0, 16, FrameName2, 'R1', '2', 'Global')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, FrameName3] = FrameObj.AddByCoord(-4, 
+ 0, 10, 0, 0, 10, FrameName3, 'R1', '3', 'Global')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign point object restraint at base</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PointObj = cPointObj(SapModel.PointObj)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PointName1 = ' '</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PointName2 = ' '</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Restraint = [True, True, True, True, False, 
+ False]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, PointName1, PointName2] = FrameObj.GetPoints(FrameName1, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PointObj.SetRestraint(PointName1, 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign point object restraint at top</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Restraint = [True, True, False, False, False, 
+ False]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, PointName1, PointName2] = FrameObj.GetPoints(FrameName2, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PointObj.SetRestraint(PointName2, 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#refresh view, update (initialize) zoom</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">View = cView(SapModel.View)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = View.RefreshView(0, False)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#add load patterns</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">LTYPE_OTHER = 8</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">LoadPatterns = cLoadPatterns(SapModel.LoadPatterns)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('1', LTYPE_OTHER, 
+ 1, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('2', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('3', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('4', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('5', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('6', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = LoadPatterns.Add('7', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 2</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, PointName1, PointName2] = FrameObj.GetPoints(FrameName3, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PointLoadValue = [0,0,-10,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PointObj.SetLoadForce(PointName1, 
+ '2', PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName3, 
+ '2', 1, 10, 0, 1, 1.8, 1.8)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 3</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, PointName1, PointName2] = FrameObj.GetPoints(FrameName3, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PointLoadValue = [0,0,-17.2,0,-54.4,0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = PointObj.SetLoadForce(PointName2, 
+ '3', PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 4</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName2, 
+ '4', 1, 11, 0, 1, 2, 2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 5</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName1, 
+ '5', 1, 2, 0, 1, 2, 2, 'Local')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName2, 
+ '5', 1, 2, 0, 1, -2, -2, 'Local')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 6</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName1, 
+ '6', 1, 2, 0, 1, 0.9984, 0.3744, 'Local')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadDistributed(FrameName2, 
+ '6', 1, 2, 0, 1, -0.3744, 0, 'Local')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#assign loading for load pattern 7</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = FrameObj.SetLoadPoint(FrameName2, 
+ '7', 1, 2, 0.5, -15, 'Local')</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#switch to k-in units</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">kip_in_F = 3</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = SapModel.SetPresentUnits(kip_in_F)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#save model</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">File = cFile(SapModel.File)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = File.Save(ModelPath)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#run model (this will create the analysis 
+ model)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Analyze = cAnalyze(SapModel.Analyze)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = Analyze.RunAnalysis()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#initialize for results</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ProgramResult = [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">[ret, PointName1, PointName2] = FrameObj.GetPoints(FrameName2, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#get results for load cases 1 through 7</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Results = cAnalysisResults(SapModel.Results)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">Setup = cAnalysisResultsSetup(Results.Setup)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;NumberResults 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;Obj 
+ = []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;Elm 
+ = []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;ACase 
+ = []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;StepType 
+ = []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;StepNum 
+ = []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;U1 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;U2 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;U3 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;R1 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;R2 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;R3 = 
+ []</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;ObjectElm 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;ret 
+ = Setup.DeselectAllCasesAndCombosForOutput()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;ret 
+ = Setup.SetCaseSelectedForOutput(str(i + 1))</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;if i 
+ &lt;= 3:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[ret, 
+ NumberResults, Obj, Elm, ACase, StepType, StepNum, U1, U2, U3, R1, R2, 
+ R3] = Results.JointDispl(PointName2, ObjectElm, NumberResults, Obj, Elm, 
+ ACase, StepType, StepNum, U1, U2, U3, R1, R2, R3)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ProgramResult[i] 
+ = U3[0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;else:</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[ret, 
+ NumberResults, Obj, Elm, ACase, StepType, StepNum, U1, U2, U3, R1, R2, 
+ R3] = Results.JointDispl(PointName1, ObjectElm, NumberResults, Obj, Elm, 
+ ACase, StepType, StepNum, U1, U2, U3, R1, R2, R3)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ProgramResult[i] 
+ = U1[0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#close the program</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">ret = mySAPObject.ApplicationExit(False)</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">SapModel = None</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">mySAPObject = None</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#fill independent results</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult = [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[0] = -0.02639</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[1] = 0.06296</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[2] = 0.06296</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[3] = -0.2963</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[4] = 0.3125</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[5] = 0.11556</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">IndResult[6] = 0.00651</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#fill percent difference</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">PercentDiff = [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;PercentDiff[i] 
+ = (ProgramResult[i] / IndResult[i]) - 1</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">#display results</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;print()</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;print(ProgramResult[i])</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;print(IndResult[i])</span></p>
+<p class="MsoNormal" style="margin-left: 48px; margin-bottom: 0pt;"><span 
+	 class="Coding_Characters">&#160;&#160;&#160;&#160;&#160;&#160;print(PercentDiff[i])</span><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span><span style="line-height: normal; 
+														 mso-layout-grid-align: none; 
+														 text-autospace: none;"><br>
+&#160;</span></p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.1</p>
+<p class="Comment">Updated for version 23.1.0.</p>
+</body>
+</html>

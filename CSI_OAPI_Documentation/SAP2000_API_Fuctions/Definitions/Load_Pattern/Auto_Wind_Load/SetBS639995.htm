@@ -1,0 +1,106 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Load Case Functions\Auto Wind Load Functions\SetBS639995.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetBS639995</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetBS639995</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.SetBS639995</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetBS639995(ByVal Name As String, ByVal ExposureFrom As Long, ByVal DirAngle As Double, ByVal Cpw As Double, ByVal Cpl As Double, ByVal UserZ As Boolean, ByVal TopZ As Double, ByVal BottomZ As Double, ByVal Ve As Double, ByVal Ca As Double, ByVal Cr As Double, Optional ByVal UserExposure As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is either 1 or 2, indicating the source of the wind exposure.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = From extents of rigid diaphragms</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = From area objects</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpw</p>
+<p class="Comment">The front coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpl</p>
+<p class="Comment">The rear coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">Ve</p>
+<p class="Comment">The effective wind speed in meters per second.</p>
+<p class="ParameterName">Ca</p>
+<p class="Comment">The size effect factor.</p>
+<p class="ParameterName">Cr</p>
+<p class="Comment">The dynamic augmentation factor.</p>
+<p class="ParameterName">UserExposure</p>
+<p class="Comment">If this item is True, the wind exposure widths are provided by the user. If it is False, the wind exposure widths are calculated by the program from the extents of the diaphragms.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns auto wind loading parameters for BS6399-95.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignWindBS639995()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign BS639995 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetBS639995("WIND", 1, 0, 0.8, 0.5, False, 0, 0, 32, 1.1, 0.28)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.01.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetBS639995.htm">GetBS639995</a></p>
+</body>
+</html>

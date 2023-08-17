@@ -1,0 +1,100 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame\GetSectProps.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSectProps</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSectProps</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.GetSectProps</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSectProps(ByVal Name As String, ByRef Area As Double, ByRef As2 As Double, ByRef As3 As Double, ByRef Torsion As Double, ByRef I22 As Double, ByRef I33 As Double, ByRef S22 As Double, ByRef S33 As Double, ByRef Z22 As Double, ByRef Z33 As Double, ByRef R22 As Double, ByRef R33 As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property.</p>
+<p class="ParameterName">Area</p>
+<p class="Comment">The cross-sectional area. [L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">As2</p>
+<p class="Comment">The shear area for forces in the section local 2-axis direction. [L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">As3</p>
+<p class="Comment">The shear area for forces in the section local 3-axis direction. [L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">Torsion</p>
+<p class="Comment">The torsional constant. [L<sup style="font-size: 8pt;">4</sup>]</p>
+<p class="ParameterName">I22</p>
+<p class="Comment">The moment of inertia for bending about the local 2 axis. [L<sup style="font-size: 8pt;">4</sup>]</p>
+<p class="ParameterName">I33</p>
+<p class="Comment">The moment of inertia for bending about the local 3 axis. [L<sup style="font-size: 8pt;">4</sup>]</p>
+<p class="ParameterName">S22</p>
+<p class="Comment">The section modulus for bending about the local 2 axis. [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">S33</p>
+<p class="Comment">The section modulus for bending about the local 3 axis. [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">Z22</p>
+<p class="Comment">The plastic modulus for bending about the local 2 axis. [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">Z33</p>
+<p class="Comment">The plastic modulus for bending about the local 3 axis. [L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">R22</p>
+<p class="Comment">The radius of gyration about the local 2 axis. [L]</p>
+<p class="ParameterName">R33</p>
+<p class="Comment">The radius of gyration about the local 3 axis. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves properties for frame section.</p>
+<p class="Comment">The function returns zero if the property data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFramePropProperties()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Area As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim as2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim as3 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Torsion As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim I22 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim I33 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim S22 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim S33 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Z22 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Z33 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim R22 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim R33 As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'get frame section properties<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.GetSectProps("FSEC1", Area, As2, As3, Torsion, I22, I33, S22, S33, Z22, Z33, R22, R33)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+</body>
+</html>

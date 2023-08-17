@@ -1,0 +1,83 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetNumberSteps</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetNumberSteps</h1>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Syntax</span></h2>
+<p class="parameterdescription" style="margin-left: .5in;">SapObject.SapModel.LoadCases.ExternalResults.SetNumberSteps</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">VB6 Procedure</span></h2>
+<p class="parameterdescription" style="margin-left: .5in;">Function SetNumberSteps (ByVal Name As String, ByVal FirstStep As Long, ByVal LastStep As Long) As Long</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Parameters</span></h2>
+<p class="parametername" style="margin-left: .5in;">Name</p>
+<p class="parameterdescription" style="margin-left: .5in;">The name of an existing external results load case.</p>
+<p class="parametername" style="margin-left: .5in;"><span style="mso-spacerun: yes;">F</span>irstStep</p>
+<p class="parameterdescription" style="margin-left: .5in;">The number of the first step for which external results are to be subsequently provided for frame objects in conjunction with this load case. The value may be 0 or 1. A value of zero is typically used for cases that include the initial conditions, such as time-history cases.</p>
+<p class="parametername" style="margin-left: .5in;">LastStep</p>
+<p class="parameterdescription" style="margin-left: .5in;">The number of the last step for which external results are to be subsequently provided for frame objects in conjunction with this load case. The value must be greater than or equal to FirstStep.</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Remarks</span></h2>
+<p class="parameterdescription" style="margin-left: .5in;">In the absence of a call to this function, the default values are FirstStep = 1 and LastStep = 1.</p>
+<p class="parameterdescription" style="margin-left: .5in;">The number of steps available for this load case will be LastStep – FirstStep + 1.</p>
+<p class="parameterdescription" style="margin-left: .5in;">The function returns zero if the number of steps is successfully initialized; otherwise it returns a nonzero value.</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">VBA Example</span></h2>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-left: 48px; font-family: 'Courier New', monospace;">Sub SetFrameExternalResultStations()</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;'dimension variables</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim SapObject As Sap2000v16.SapObject</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim SapModel As cSapModel</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim ret As Long</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim ObjSta() As Double = New Double() {0.0, 124.0}</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim LoadCase() As String = New String() {"EXTERNAL"}<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span></p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim P() As Double = New Double() {5.0, 5.0}</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim V2() As Double = New Double() {-5.0, 5.0}</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim V3() As Double = Nothing</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim T() As Double = Nothing</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim M2() As Double = Nothing</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim M3() As Double = New Double() {100.0, 100.0}</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create Sap2000 object</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-left: 36px; font-family: 'Courier New', monospace;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject = New Sap2000v16.SapObject</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 36px;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'start Sap2000 application</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject.ApplicationStart()</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create SapModel object</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapModel = SapObject.SapModel</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'initialize model</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.InitializeNewModel</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create model from template</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.File.New2DFrame(e2DFrameType.PortalFrame, 3, 124, 3, 200)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create load case for external results</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.LoadCases.ExternalResults.SetCase("EXTERNAL")</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.LoadCases.ExternalResults.SetNumberSteps("EXTERNAL", 1, 1)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'set cases and stations for frame external results</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.ExternalAnalysisResults.PresetFrameCases("1", 1, LoadCase)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.ExternalAnalysisResults.SetFrameStations("1", ObjSta)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'set frame external result forces at case first step</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret = SapModel.ExternalAnalysisResults.SetFrameForce("1", "EXTERNAL", 0, P, V2, V3, T, M2, M3)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 12px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'close Sap2000</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject.ApplicationExit(False)</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapModel = Nothing</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; margin-bottom: 0pt; font-family: 'Courier New', monospace; margin-left: 36px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject = Nothing</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace;">&#160;</p>
+<p class="MsoNormal" style="mso-layout-grid-align: none; text-autospace: none; font-family: 'Courier New', monospace; margin-left: 24px;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;End Sub</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Release Notes</span></h2>
+<p class="parameterdescription">Initial release in version 16.0</p>
+<p class="parameterdescription">&#160;</p>
+<p class="MsoNormal">&#160;</p>
+</body>
+</html>

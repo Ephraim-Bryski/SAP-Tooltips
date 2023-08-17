@@ -1,0 +1,123 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="StepLabel.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>StepLabel</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>StepLabel</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.StepLabel</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function StepLabel(ByVal LoadCase As String, ByVal StepNum As Double, ByRef Label As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">The name of an existing linear multi-step, nonlinear multi-step, or staged-construction load case.</p>
+<p class="ParameterName">StepNum</p>
+<p class="Comment">This is an overall step number from the specified load case. The range of values of StepNum for a given load case can be obtained from most analysis results calls, such as SapObject.SapModel.Results.JointDispl</p>
+<p class="ParameterName">Label</p>
+<p class="Comment">The is the step label, including the name or number of the stage, the step number within the stage, and the age of the structure for time-dependent load cases</p>
+<h2>Remarks</h2>
+<p class="Comment">This function generates the step label for analyzed linear multi-step, nonlinear multi-step, or staged-construction load cases. For other load case types, the label will be blank.</p>
+<p class="Comment">The function returns zero if the step label is successfully generated; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetStepLabel()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As Sap2000v16.cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDuration() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutput() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutputName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyComment() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOperation() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyObjectType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyObjectName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAge() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyMyType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyMyName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MySF() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Label() as String<br>
+&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(Sap2000v16.PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add static nonlinear staged load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetCase("ACASE1")<br>
+<br>
+&#160;&#160;&#160;'initialize stage definitions<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyDuration(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutput(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutputName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyComment(1)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Redim Label(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(0) = False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(0) = "Build structure"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(1) = 60<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(1) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutputName(1) = "HBC2"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(1) = "Wait"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageDefinitions_1("ACASE1", 2, MyDuration, MyOutput, MyOutputName, MyComment)<br>
+<br>
+&#160;&#160;&#160;'set stage data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOperation(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyObjectType(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyObjectName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAge(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyMyType(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyMyName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MySF(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOperation(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectType(0) = "Group"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectName(0) = "ALL"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAge(0) = 3<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOperation(1) = 4<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectType(1) = "Frame"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectName(1) = "8"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyMyType(1) = "Load"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyMyName(1) = "DEAD"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MySF(1) = 0.85<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageData_1("ACASE1", 1, 2, MyOperation, MyObjectType, MyObjectName, MyAge, MyMyType, MyMyName, MySF)<br>
+<br>
+&#160;&#160;&#160;'set results saved parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetResultsSaved("ACASE1", 3, 4, 10)<br>
+<br>
+&#160;&#160;&#160;'save model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+<br>
+&#160;&#160;&#160;'run model (this will create the analysis model)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'Get step label<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.StepLabel("ACASE1", 3, Label(0))<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.StepLabel("ACASE1", 8, Label(1))<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.00.</p>
+</body>
+</html>

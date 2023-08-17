@@ -1,0 +1,70 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetNotionalSize</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetNotionalSize</h1>
+<h2 class="MsoNormal">Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropArea.SetNotionalSize</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetNotionalSize(ByVal Name As String, ByVal stype As String, ByVal Value As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing shell-type area section property.</p>
+<p class="ParameterName">stype</p>
+<p class="Comment">The type to define the notional size of a section. It can be:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">"Auto" = Program will determine the notional size based on the average thickness of an area element.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">"User" = The notional size is based on the user-defined value.</p>
+<p class="Comment" style="margin-left: 88px;">"None" = Notional size will not be considered. In other words, the time-dependent effect of this section will not be considered.</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">For <span style="font-weight: bold;">stype</span> is "Auto", the Value represents for the scale factor to the program<span style="font-family: 'Times New Roman', serif; mso-fareast-font-family: 'Times New Roman';">-</span><span style="mso-fareast-font-family: 'Times New Roman';">determined notional size; for <b style="mso-bidi-font-weight: normal;">stype</b> is “User”, the <b style="mso-bidi-font-weight: normal;">Value</b> represents for the user-defined notional size [L]; for <b style="mso-bidi-font-weight: normal;">stype</b> is “None”, the <b style="mso-bidi-font-weight: normal;">Value</b> will not be used and can be set to 1.</span></p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns the <span style="line-height: 107%; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA;">method to determine the notional size of an area section for the creep and shrinkage calculations. This function is currently worked for shell type area section.</span></p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignArea<span style="line-height: 107%; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: PMingLiU; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA;">PropNotionalSize()</span><span style="font-size: 11.0pt; line-height: 107%; font-family: Calibri, sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: PMingLiU; mso-fareast-theme-font: minor-fareast; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA;"><br style="mso-special-character: line-break;"></span>&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim i As Long</p>
+<p class="Coding" style="margin-left: 88px;">&#160;Dim stype As String</p>
+<p class="Coding" style="margin-left: 88px;">&#160;Dim Value As Double</p>
+<p class="Coding" style="margin-left: 88px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object<br>
+&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+'start Sap2000 application<br>
+&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+'create SapModel object<br>
+&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+'initialize model<br>
+&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+'create model from template<br>
+&#160;&#160;&#160;ret = SapModel.File.NewWall(2, 48, 2, 48)<br>
+<br>
+'assign parameters<br>
+&#160;&#160;&#160;stype = “Auto”<br>
+&#160;&#160;&#160;Value = 1.1<br>
+&#160;&#160;&#160;ret = SapModel.PropArea.SetNotionalSize("ASEC1", stype, Value)<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+'close Sap2000<br>
+&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;Set SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.1.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetNotionalSize.htm">GetNotionalSize</a></p>
+</body>
+</html>

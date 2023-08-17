@@ -1,0 +1,112 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetQuad</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetQuad</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SectCut.GetQuad</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function AddQuad(ByVal Name As String, ByVal Num As Long, ByRef X() As Double, ByRef Y() As Double, ByRef Z() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing section cut defined using quadrilateral cutting planes.</p>
+<p class="ParameterName">Num</p>
+<p class="Comment">The number of a quadirilateral cutting plane in the section cut.</p>
+<p class="ParameterName">GroupName</p>
+<p class="ParameterName">X</p>
+<p class="Comment">This is an array of four X coordinates, one for each of the four points defining the quadrilateral.</p>
+<p class="ParameterName">Y</p>
+<p class="Comment">This is an array of four Y coordinates, one for each of the four points defining the quadrilateral.</p>
+<p class="ParameterName">Z</p>
+<p class="Comment">This is an array of four Z coordinates, one for each of the four points defining the quadrilateral.</p>
+<h2><b style="mso-bidi-font-weight: normal;">Remarks</b></h2>
+<p class="Comment">This function returns the coordinates of a quadrilateral cutting plane in a section cut defined by quadrilaterals.</p>
+<p class="Comment">The function returns zero if the coordinates are successfully returned, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">Sub GetSectionCutQuad()</p>
+<p class="CommentFirstOne" style="font-family: 'Courier New', monospace; margin-left: 72px;">'dimension variables</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim SapModel As cSapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim ret As Long</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim X() As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim Y() As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Dim Z() As Double</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create Sap2000 object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = New Sap2000v16.SapObject</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'start Sap2000 application</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationStart</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create SapModel object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = SapObject.SapModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'initialize model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px; margin-bottom: 9pt;">ret = SapModel.InitializeNewModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'create model from template</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define new group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.GroupDef.SetGroup("Group1")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'add objects to group</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.FrameObj.SetGroupAssign("1", "Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.FrameObj.SetGroupAssign("2", "Group1")</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.FrameObj.SetGroupAssign("3", "Group1")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'define section cut</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Redim X(3)</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Redim Y(3)</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Redim Z(3)</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(0) = -300</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(1) = -270</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(2) = -270</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(3) = -300</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(0) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(1) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(2) = -10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(3) = -10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(0) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(1) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(2) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(3) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.SetByQuad("SCut1", "Group1", 1, X, Y, Z)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'add a second quadrilateral</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(0) = 270</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(1) = 300</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(2) = 300</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">X(3) = 270</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(0) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(1) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(2) = -10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Y(3) = -10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(0) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(1) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(2) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Z(3) = 10</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.AddQuad("SCut1", X, Y, Z)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'get coordinates of quadrilateral 2</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">ret = SapModel.SectCut.GetQuad("SCut1", 2, X, Y, Z)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-left: 72px; margin-bottom: 0pt;">'close Sap2000</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">SapObject.ApplicationExit False</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapModel = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">Set SapObject = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-left: 108px;">&#160;</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-left: 48px;">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

@@ -1,0 +1,133 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SolidStrain</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SolidStrain</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.SolidStrain</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SolidStrain(ByVal name As String, ByVal ItemTypeElm As eItemTypeElm, ByRef NumberResults As Long, ByRef Obj() As String, ByRef Elm() As String, ByRef PointElm() As String, ByRef LoadCase() As String, ByRef StepType() As String, ByRef StepNum() As Double, ByRef E11() As Double, ByRef E22() As Double, ByRef E33() As Double, ByRef G12() As Double, ByRef G13() As Double, ByRef G23() As Double, ByRef EMax() As Double, ByRef EMid() As Double, ByRef EMin() As Double, ByRef EVM() As Double, ByRef DirCosMax1() As Double, ByRef DirCosMax2() As Double, ByRef DirCosMax3() As Double, ByRef DirCosMid1() As Double, ByRef DirCosMid2() As Double, ByRef DirCosMid3() As Double, ByRef DirCosMin1() As Double, ByRef DirCosMin2() As Double, ByRef DirCosMin3() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing solid object, solid element, or group of objects, depending on the value of the ItemTypeElm item.</p>
+<p class="ParameterName">ItemTypeElm</p>
+<p class="Comment">This is one of the following items in the eItemTypeElm enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">ObjectElm = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Element = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">GroupElm = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectionElm = 3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is ObjectElm, the result request is for the solid elements corresponding to the solid object specified by the Name item.</p>
+<p class="Comment">If this item is Element, the result request is for the solid element specified by the Name item.</p>
+<p class="Comment">If this item is GroupElm, the result request is for the solid elements corresponding to all solid objects included in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectionElm, the result request is for solid elements corresponding to all selected solid objects and the Name item is ignored.</p>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">Obj</p>
+<p class="Comment">This is an array that includes the solid object name associated with each result, if any.</p>
+<p class="ParameterName">Elm</p>
+<p class="Comment">This is an array that includes the solid element name associated with each result.</p>
+<p class="ParameterName">PointElm</p>
+<p class="Comment">This is an array that includes the name of the point element where the results are reported.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the analysis case or load combination associated with each result.</p>
+<p class="ParameterName">StepType</p>
+<p class="Comment">This is an array that includes the step type, if any, for each result.</p>
+<p class="ParameterName">StepNum</p>
+<p class="Comment">This is an array that includes the step number, if any, for each result.</p>
+<p class="ParameterName">E11, E22, E33, G12, G13, G23</p>
+<p class="Comment">The solid element internal E11, E22, E33, G12, G13 and G23 strains at the specified point element location, reported in the solid element local coordinate system.</p>
+<p class="ParameterName">EMax, EMid, EMin</p>
+<p class="Comment">The solid element maximum, middle and minimum principal strains at the specified point element location.</p>
+<p class="ParameterName">EVM</p>
+<p class="Comment">The solid element internal Von Mises strain at the specified point element location.</p>
+<p class="ParameterName">DirCosMax1, DirCosMax2, DirCosMax3</p>
+<p class="Comment">These are three direction cosines defining the orientation of the maximum principal strain with respect to the solid element local axes.</p>
+<p class="ParameterName">DirCosMid1, DirCosMid2, DirCosMid3</p>
+<p class="Comment">These are three direction cosines defining the orientation of the middle principal strain with respect to the solid element local axes.</p>
+<p class="ParameterName">DirCosMin1, DirCosMin2, DirCosMin3</p>
+<p class="Comment">These are three direction cosines defining the orientation of the minimum principal strain with respect to the solid element local axes.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the strains for the specified solid elements. Strains are reported at each point element associated with the solid element.</p>
+<p class="Comment">The function returns zero if the strains are successfully recovered, otherwise it returns a nonzero value.</p>
+<p class="Comment">See Analysis Results Remarks for more information.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetSolidStrains()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberResults As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Obj() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Elm() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PointElm() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LoadCase() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StepType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StepNum() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim E11() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim E22() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim E33() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim G12() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim G13() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim G23() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EMax() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EMid() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EMin() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EVM() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMax1() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMax2() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMax3() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMid1() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMid2() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMid3() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMin1() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMin2() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirCosMin3() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create a solid model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewSolidBlock(20, 50, 20)<br>
+<br>
+&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'clear all case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput<br>
+<br>
+&#160;&#160;&#160;'set case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.SetCaseSelectedForOutput("DEAD")<br>
+<br>
+&#160;&#160;&#160;'get solid strains for solid object "1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.SolidStrain("1", ObjectElm, NumberResults, Obj, Elm, PointElm, LoadCase, StepType, StepNum, E11, E22, E33, G12, G13, G23, EMax, EMid, EMin, EVM, DirCosMax1, DirCosMax2, DirCosMax3, DirCosMid1, DirCosMid2, DirCosMid3, DirCosMin1, DirCosMin2, DirCosMin3)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 20.1.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SolidStress.htm">SolidStress</a></p>
+</body>
+</html>

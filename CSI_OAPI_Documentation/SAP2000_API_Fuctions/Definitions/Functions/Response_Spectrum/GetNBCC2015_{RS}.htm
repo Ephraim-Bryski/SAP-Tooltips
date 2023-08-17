@@ -1,0 +1,115 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNBCC2015 {RS}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetNBCC2015</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.GetNBCC2015</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNBCC2015(ByVal Name As String, ByRef PGA As Double, ByRef S02 As Double, ByRef S05 As Double, ByRef S1 As Double, ByRef S2 As Double, ByRef S5 As Double, ByRef S10 As Double, ByRef SiteClass As Long, ByRef F02 As Double, ByRef F05 As Double, ByRef F1 As Double, ByRef F2 As Double, ByRef F5 As Double, ByRef F10 As Double, ByRef DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a NBCC2015 response spectrum function.</p>
+<p class="ParameterName">PGA</p>
+<p class="Comment">The peak ground acceleration.</p>
+<p class="ParameterName">S02</p>
+<p class="Comment">The spectral acceleration at a 0.2 second period.</p>
+<p class="ParameterName">S05</p>
+<p class="Comment">The spectral acceleration at a 0.5 second period.</p>
+<p class="ParameterName">S1</p>
+<p class="Comment">The spectral acceleration at a 1 second period.</p>
+<p class="ParameterName">S2</p>
+<p class="Comment">The spectral acceleration at a 2 second period.</p>
+<p class="ParameterName">S5</p>
+<p class="Comment">The spectral acceleration at a 5 second period.</p>
+<p class="ParameterName">S10</p>
+<p class="Comment">The spectral acceleration at a 10 second period.</p>
+<p class="ParameterName">SiteClass</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the site class.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = E</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9pt; margin-left: 88px;">6 = F</p>
+<p class="ParameterName">F02</p>
+<p class="Comment">The site coefficient at a 0.2 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">F05</p>
+<p class="Comment">The site coefficient&#160;at a 0.5 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">F1</p>
+<p class="Comment">The site coefficient at a 1 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">F2</p>
+<p class="Comment">The site coefficient at a 2 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">F5</p>
+<p class="Comment">The site coefficient at a 5 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">F10</p>
+<p class="Comment">The site coefficient at a 10 second period. This item is read when the site class is F only.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a NBCC2015 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function definition is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetRSFuncNBCC2015()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PGA As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim S02 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim S05 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim S1 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim S2 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim S5 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim S10 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim SiteClass As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim F02 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F05 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F1 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F2 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F5 As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim F10 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampRatio As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add NBCC2015 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetNBCC2015("RS-1", 0.6, 1.1, 0.7, 0.35, 0.2, 0.035, 0.01, 6, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 0.04)<br>
+<br>
+&#160;&#160;&#160;'get NBCC2015 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetNBCC2015("RS-1", PGA, S02, S05, S1, S2, S5, S10, SiteClass, F02, F05, F1, F2, F5, F10, DampRatio)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 19.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetNBCC2015_{RS}.htm">SetNBCC2015</a></p>
+<p>&#160;</p>
+<p>&#160;</p>
+</body>
+</html>

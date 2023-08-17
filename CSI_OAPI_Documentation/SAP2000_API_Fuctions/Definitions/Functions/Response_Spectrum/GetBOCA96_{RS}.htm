@@ -1,0 +1,83 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Response Spectrum Functions\GetBOCA96.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetBOCA96 {RS}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetBOCA96</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.GetBOCA96</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetBOCA96(ByVal Name As String, ByRef BOCA96Aa As Double, ByRef BOCA96Av As Double, ByRef BOCA96S As Double, ByRef BOCA96R As Double, ByRef DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a BOCA96 response spectrum function.</p>
+<p class="ParameterName">BOCA96Aa</p>
+<p class="Comment">The effective peak acceleration, Aa.</p>
+<p class="ParameterName">BOCA96Av</p>
+<p class="Comment">The effective peak velocity, Av.</p>
+<p class="ParameterName">BOCA96S</p>
+<p class="Comment">The soil profile coefficient, S.</p>
+<p class="ParameterName">BOCA96R</p>
+<p class="Comment">The response modification factor, R.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a BOCA96 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function definition is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetRSFuncBOCA96()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BOCA96Aa As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BOCA96Av As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BOCA96S As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BOCA96R As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampRatio As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add BOCA96 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetBOCA96("RS-1", 0.3, 0.3, 1.2, 1, 0.04)<br>
+<br>
+&#160;&#160;&#160;'get BOCA96 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetBOCA96("RS-1", BOCA96Aa, BOCA96Av, BOCA96S, BOCA96R, DampRatio)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetBOCA96_{RS}.htm">SetBOCA96</a></p>
+</body>
+</html>

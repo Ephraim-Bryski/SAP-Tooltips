@@ -1,0 +1,72 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\Analysis Results Setup\SetOptionBucklingMode.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetOptionBucklingMode</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetOptionBucklingMode</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.Setup.SetOptionBucklingMode</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetOptionBucklingMode(ByVal BuckModeStart As Long, ByVal BuckModeEnd As Long, Optional ByVal BuckModeAll As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">BuckModeStart</p>
+<p class="Comment">The first buckling mode for which the buckling factor is reported when the BuckModeAll item is False.</p>
+<p class="ParameterName">BuckModeEnd</p>
+<p class="Comment">The last buckling mode for which the buckling factor is reported when the BuckModeAll item is False.</p>
+<p class="ParameterName">BuckModeAll</p>
+<p class="Comment">If this item is True, buckling factors are reported for all calculated buckling modes. If it is False, buckling factors are reported for the buckling modes indicated by the BuckModeStart and BuckModeEnd items.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the buckling modes for which buckling factors are reported.</p>
+<p class="Comment">The function returns 0 if the modes are successfully set, otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetBucklingModeData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BuckModeStart As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BuckModeEnd As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BuckModeAll As Boolean<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'set buckling mode data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.SetOptionBucklingMode(1, 1)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetOptionBucklingMode.htm">GetOptionBucklingMode</a></p>
+</body>
+</html>

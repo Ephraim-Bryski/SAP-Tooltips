@@ -1,0 +1,115 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Link Object Functions\SetLoadTargetForce.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoadTargetForce {Link Object}</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetLoadTargetForce</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LinkObj.SetLoadTargetForce</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoadTargetForce(ByVal Name As String, ByVal LoadPat As String, ByRef DOF() As Boolean, ByRef f() As Double, ByRef RD() As Double, Optional ByVal ItemType As eItemType = Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing link object or group, depending on the value of the ItemType item.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">The name of a defined load pattern.</p>
+<p class="ParameterName">DOF</p>
+<p class="Comment">This is a array of boolean values indicating if the considered degree of freedom has a target force.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(1) = P</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(2) = V2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(3) = V3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(4) = T</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(5) = M2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">DOF(6) = M3</p>
+<p class="ParameterName">f</p>
+<p class="Comment">This is a array of target force values. The target forces specified for a given degree of freedom are applied only if the corresponding DOF item for that degree of freedom is True.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">f(1) = P [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">f(2) = V2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">f(3) = V3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">f(4) = T [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">f(5) = M2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">f(6) = M3 [FL]</p>
+<p class="ParameterName">RD</p>
+<p class="Comment">This is a array of relative distances along the link objects where the target force values apply. The relative distances specified for a given degree of freedom are applicable only if the corresponding DOF item for that degree of freedom is True. The relative distance must be between 0 and 1, 0 &lt;= RD &lt;=1.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RD(1) = relative location for P target force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RD(2) = relative location for V2 target force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RD(3) = relative location for V3 target force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RD(4) = relative location for T target force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">RD(5) = relative location for M2 target force</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">RD(6) = relative location for M3 target force</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the link object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all link objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made to all selected link objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns target forces to frame objects.</p>
+<p class="Comment">The function returns zero if the target forces are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignLinkTargetForce()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DOF() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim f() As double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim RD() As double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add link object by points<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.AddByPoint("1", "5", Name)<br>
+<br>
+&#160;&#160;&#160;'assign link target force<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim DOF(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim f(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim RD(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;DOF(0) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;f(0) = 50<br>
+&#160;&#160;&#160;&#160;&#160;&#160;RD(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LinkObj.SetLoadTargetForce(Name, "DEAD", DOF, f, RD)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetLoadTargetForce_{Link_Object}.htm">GetLoadTargetForce</a></p>
+<p class="Block-Text"><a href="DeleteLoadTargetForce_{Link_Object}.htm">DeleteLoadTargetForce</a></p>
+</body>
+</html>

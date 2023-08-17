@@ -1,0 +1,108 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetSolverOption_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSolverOption_1</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #800080;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetSolverOption_1 <span style="font-size: 10pt;">(Note: &#160;Newer 
+ function available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Analyze.GetSolverOption</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSolverOption(ByRef SolverType As Long, ByRef 
+ SolverProcessType As Long , ByRef Force32BitSolver As Boolean, ByRef StiffCase 
+ As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">SolverType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the solver type.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Standard solver</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = Advanced solver</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">2 
+ = Multi-threaded solver</p>
+<p class="ParameterName">SolverProcessType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the process the analysis 
+ is run.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Auto (program determined)</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = GUI process</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">2 
+ = Separate process</p>
+<p class="ParameterName">Force32BitSolver</p>
+<p class="Comment">This is True if the analysis is always run using 32-bit, 
+ even on 64-bit computers.</p>
+<p class="ParameterName">StiffCase</p>
+<p class="Comment">The name of the load case used when outputting the mass 
+ and stiffness matrices to text files. If this item is blank, no matrices 
+ are output.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the model solver options.</p>
+<p class="Comment">The function returns zero if the options are successfully 
+ retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding"><span class="Code">Sub GetModelSolverOption()</span><span 
+	 class="Code2"><br>
+&#160;&#160;&#160;'dimension variables</span><span class="Code3"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SolverType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SolverProcessType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Force32BitSolver As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StiffCase As String</span><span 
+	 class="Code2"><br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<span 
+	 class="Code2"><br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<span class="Code2"><br>
+<br>
+&#160;&#160;&#160;'create SapModel object</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<span 
+	 class="Code2"><br>
+<br>
+&#160;&#160;&#160;'initialize model</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<span 
+	 class="Code2"><br>
+<br>
+&#160;&#160;&#160;'create model from template</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<span class="Code2"><br>
+<br>
+&#160;&#160;&#160;'set model solver options</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.GetSolverOption_1(SolverType, 
+ SolverProcessType , Force32BitSolver, StiffCase)<span class="Code2"><br>
+<br>
+&#160;&#160;&#160;'close Sap2000</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.2.2.</p>
+<p class="Comment">This function superseded <a href="GetSolverOption.htm">GetSolverOption.</a></p>
+<p class="Comment">This function is obsolete and has been superseded by 
+ <a href="NEW_-_Analyze.GetSolverOption_2.htm">GetSolverOption_2</a> 
+ as of version 21.1.0. This function is maintained for backwards compatibility.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetSolverOption_1.htm">SetSolverOption_1</a></p>
+<p>&#160;</p>
+</body>
+</html>

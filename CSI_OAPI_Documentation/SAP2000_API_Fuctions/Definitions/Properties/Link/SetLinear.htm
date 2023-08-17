@@ -1,0 +1,167 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Links\SetLinear.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLinear</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetLinear</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropLink.SetLinear</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLinear(ByVal Name As String, ByRef DOF() As Boolean, ByRef Fixed() As Boolean, ByRef Ke() As Double, ByRef Ce() As Double, ByVal dj2 As Double, ByVal dj3 As Double, Optional ByVal KeCoupled As Boolean = False, Optional ByVal CeCoupled As Boolean = False, Optional ByVal Notes As String = "", Optional ByVal GUID As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new link property. If this is an existing property, that property is modified; otherwise, a new property is added.</p>
+<p class="ParameterName">DOF</p>
+<p class="Comment">This is a boolean array, dimensioned to 5, indicating if properties exist for a specified degree of freedom.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(0) = U1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(1) = U2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(2) = U3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(3) = R1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">DOF(4) = R2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">DOF(5) = R3</p>
+<p class="ParameterName">Fixed</p>
+<p class="Comment">This is a boolean array, dimensioned to 5, indicating if the specified degree of freedom is fixed (restrained).</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Fixed(0) = U1 fixity if DOF(0) = True</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Fixed(1) = U2 fixity if DOF(1) = True</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Fixed(2) = U3 fixity if DOF(2) = True</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Fixed(3) = R1 fixity if DOF(3) = True</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Fixed(4) = R2 fixity if DOF(4) = True</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">Fixed(5) = R3 fixity if DOF(5) = True</p>
+<p class="ParameterName">Ke</p>
+<p class="Comment">This is an array of stiffness terms for the link property. There are 6 terms in the array if the stiffness is uncoupled and 21 if it is coupled. The KeCoupled item indicates if the stiffness is coupled.</p>
+<p class="Comment">If the stiffness is uncoupled:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(0) = U1 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(1) = U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(2) = U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(3) = R1 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(4) = R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(5) = R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If the stiffness is coupled:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(0) = U1U1 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(1) = U1U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(2) = U2U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(3) = U1U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(4) = U2U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(5) = U3U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(6) = U1R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(7) = U2R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(8) = U3R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(9) = R1R1 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(10) = U1R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(11) = U2R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(12) = U3R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(13) = R1R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(14) = R2R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(15) = U1R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(16) = U2R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(17) = U3R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(18) = R1R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ke(19) = R2R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">Ke(20) = R3R3 [FL]</p>
+<p class="ParameterName">Ce</p>
+<p class="Comment">This is an array of damping terms for the link property. There are 6 terms in the array if the damping is uncoupled and 21 if it is coupled. The CeCoupled item indicates if the damping is coupled.</p>
+<p class="Comment">If the damping is uncoupled:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(0) = U1 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(1) = U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(2) = U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(3) = R1 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(4) = R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(5) = R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If the damping is coupled:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(0) = U1U1 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(1) = U1U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(2) = U2U2 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(3) = U1U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(4) = U2U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(5) = U3U3 [F/L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(6) = U1R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(7) = U2R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(8) = U3R1 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(9) = R1R1 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(10) = U1R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(11) = U2R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(12) = U3R2 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(13) = R1R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(14) = R2R2 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(15) = U1R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(16) = U2R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(17) = U3R3 [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(18) = R1R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Ce(19) = R2R3 [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">Ce(20) = R3R3 [FL]</p>
+<p class="ParameterName">dj2</p>
+<p class="Comment">The distance from the J-End of the link to the U2 shear spring. This item applies only when DOF(1) = True. [L]</p>
+<p class="ParameterName">dj3</p>
+<p class="Comment">The distance from the J-End of the link to the U3 shear spring. This item applies only when DOF(2) = True. [L]</p>
+<p class="ParameterName">KeCoupled</p>
+<p class="Comment">This item is True if the link stiffness, Ke, is coupled. There are 21 terms in the Ke array if Ke is coupled; otherwise there are 6 terms.</p>
+<p class="ParameterName">CeCoupled</p>
+<p class="Comment">This item is True if the link damping, Ce, is coupled. There are 21 terms in the Ce array if Ce is coupled; otherwise there are 6 terms.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the property.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the property. If this item is input as Default, the program assigns a GUID to the property.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function initializes a linear-type link property. If this function is called for an existing link property, all items for the property are reset to their default value.</p>
+<p class="Comment">The function returns zero if the property is successfully initialized; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetLinkPropLinear()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DOF() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fixed() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ke() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ce() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add link property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim DOF(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Fixed(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Ke(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Ce(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;DOF(0) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Ke(0) = 12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropLink.SetLinear("L1", DOF, Fixed, Ke, Ce, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetLinear.htm">GetLinear</a></p>
+</body>
+</html>

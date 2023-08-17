@@ -1,0 +1,118 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Line Object Functions\GetSpring {Line Object}.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSpring {Frame Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>&#160;GetSpring</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.GetSpring</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSpring(ByVal Name As String, ByRef NumberSprings As Long, ByRef MyType() As Long, ByRef s() As Double, ByRef SimpleSpringType() As Long, ByRef LinkProp() As String, ByRef SpringLocalOneType() As Long, ByRef Dir() As Long, ByRef Plane23Angle() As Double, ByRef VecX() As Double, ByRef VecY() As Double, ByRef VecZ() As Double, ByRef CSys() As String, ByRef Ang() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">NumberSprings</p>
+<p class="Comment">The number of springs assignments made to the specified frame object.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">Each value in this array is either 1 or 2, indicating the spring property type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Simple spring</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Link property</p>
+<p class="ParameterName">s</p>
+<p class="Comment">Each value in this array is the simple spring stiffness per unit length of the frame object. This item applies only when the corresponding MyType = 1. [F/L<sup>2</sup>]</p>
+<p class="ParameterName">SimpleSpringType</p>
+<p class="Comment">Each value in this array is 1, 2 or 3, indicating the simple spring type. This item applies only when the corresponding MyType = 1.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Spring resists tension and compression</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Spring resists compression only</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Spring resists tension only</p>
+<p class="ParameterName">LinkProp</p>
+<p class="Comment">Each value in this array is the name of the link property assigned to the spring. This item applies only when the corresponding MyType = 2.</p>
+<p class="ParameterName">SpringLocalOneType</p>
+<p class="Comment">Each value in this array is 1, 2 or 3, indicating the method used to specify the spring positive local 1-axis orientation.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Parallel to frame object local axis</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = In the frame object 2-3 plane</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = User specified direction vector</p>
+<p class="ParameterName">Dir</p>
+<p class="Comment">Each value in this array is 1, 2, 3, -1, -2 or -3, indicating the frame object local axis that corresponds to the positive local 1-axis of the spring. This item applies only when the corresponding SpringLocalOneType = 1.</p>
+<p class="ParameterName">Plane23Angle</p>
+<p class="Comment">Each value in this array is the angle in the frame object 2-3 plane measured counter clockwise from the frame positive 2-axis to the spring positive 1-axis. This item applies only when the corresponding SpringLocalOneType = 2. [deg]</p>
+<p class="ParameterName">VecX</p>
+<p class="Comment">Each value in this array is the X-axis or frame local 1-axis component (depending on the CSys specified) of the user specified direction vector for the spring local 1-axis. The direction vector is in the coordinate system specified by the CSys item. This item applies only when the corresponding SpringLocalOneType = 3.</p>
+<p class="ParameterName">VecY</p>
+<p class="Comment">Each value in this array is the Y-axis or frame local 2-axis component (depending on the CSys specified) of the user specified direction vector for the spring local 1-axis. The direction vector is in the coordinate system specified by the CSys item. This item applies only when the corresponding SpringLocalOneType = 3.</p>
+<p class="ParameterName">VecZ</p>
+<p class="Comment">Each value in this array is the X-axis or frame local 3-axis component (depending on the CSys specified) of the user specified direction vector for the spring local 1-axis. The direction vector is in the coordinate system specified by the CSys item. This item applies only when the corresponding SpringLocalOneType = 3.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">Each value in this array is Local (meaning the frame object local coordinate system) or the name of a defined coordinate system. This item is the coordinate system in which the user specified direction vector, Vec, is specified. This item applies only when the corresponding SpringLocalOneType = 3.</p>
+<p class="ParameterName">Ang</p>
+<p class="Comment">Each value in this array is the angle that the link local 2-axis is rotated from its default orientation. This item applies only when the corresponding MyType = 2. [deg]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the spring assignments to a frame object.</p>
+<p class="Comment">The function returns zero if the assignments are successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFrameSprings()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Vec() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberSprings As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim s() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SimpleSpringType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LinkProp() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SpringLocalOneType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Dir() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Plane23Angle() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim VecX() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim VecY() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim VecZ() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CSys() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ang() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'assign springs to frame<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim Vec(2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.SetSpring("ALL", 1, 1, 1, "", 1, 2, 0, Vec, 0, False, "Local", Group)<br>
+<br>
+&#160;&#160;&#160;'get spring assignments to frames<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.GetSpring("1", numbersprings, MyType, s, SimpleSpringType, LinkProp, SpringLocalOneType, Dir, Plane23Angle, VecX, VecY, VecZ, CSys, Ang)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000}<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetSpring__{Frame_Object}.htm">SetSpring</a></p>
+<p class="Block-Text"><a href="DeleteSpring_{Frame_Object}.htm">DeleteSpring</a></p>
+</body>
+</html>

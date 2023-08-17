@@ -1,0 +1,81 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetAPI4F2013</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetAPI4F2013</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.SetAPI4F2013</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetAPI4F2013(ByVal Name As String, ByVal ExposureFrom As Long, ByVal DirAngle As Double, ByVal UserZ As Boolean, ByVal TopZ As Double, ByVal BottomZ As Double, ByVal WindSpeed As Double, ByVal SSLFactor As Double, ByVal ShieldingFactor As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load case.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 2, 3, or 4, indicating the source of the wind exposure.</p>
+<p class="Block-Text" style="margin-left: 85px;">2 = From area objects</p>
+<p class="Block-Text" style="margin-left: 85px;">3 = From frame objects (open structure)</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">4 = From area objects and frame objects (open structure)</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">WindSpeed</p>
+<p class="Comment">The design reference wind velocity, Vref, in knots.</p>
+<p class="ParameterName">SSLFactor</p>
+<p class="Comment">The structural safety level multiplier.</p>
+<p class="ParameterName">ShieldingFactor</p>
+<p class="Comment">The shielding factor.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns auto wind loading parameters for API 4F 2013.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignWindAPI4F2013()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'add new load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign API 4F 2013 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetAPI4F2013("WIND", 3, 0, False, 0, 0, 93, 1.1, 0.85)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetAPI4F2013.htm">GetAPI4F2013</a></p>
+</body>
+</html>

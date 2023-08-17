@@ -1,0 +1,899 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Examples\Example1.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Example 7 (Python Com)</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h1>Example 7 (Python COM)</h1>
+<h2>Remarks</h2>
+<p class="Comment">This example was created using Python 3.4.3. It is based 
+ on the Sap2000 verification problem Example 1-001.</p>
+<p class="Comment">This example creates the example verification problem 
+ from scratch, runs the analysis, extracts results, and compares the results 
+ with hand calculated values.</p>
+<h2>Example</h2>
+<p class="Comment">1. Download and install Python 3.4.3 or higher for Windows. 
+ Python is freely available at python.org.</p>
+<p class="Comment">2. Install the Python package &quot;comtypes&quot;. 
+ If you are using Python 3.4 or higher, the easiest way to do this is by 
+ opening a command prompt with administrative privileges and entering the 
+ command:</p>
+<p class="Coding">C:\&gt;python -m pip install comtypes</p>
+<p class="Coding">&#160;</p>
+<p class="Comment">Please note that your computer will need to be connected 
+ to the internet for the above command to work.</p>
+<p class="Comment">3. Create a Python .py file using IDLE or any text editor 
+ and paste in the following code. Please pay attention to the comments 
+ in this code block; they contain important information about running the 
+ script.</p>
+<p class="Coding">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">import os</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">import sys</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">import comtypes.client</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#set the following flag to True to attach to 
+ an existing instance of the program</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#otherwise a new instance of the program will 
+ be started</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">AttachToInstance = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#set the following flag to True to manually 
+ specify the path to SAP2000.exe</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#this allows for a connection to a version 
+ of SAP2000 other than the latest installation</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#otherwise the latest installed version of 
+ SAP2000 will be launched</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">SpecifyPath = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#if the above flag is set to True, specify 
+ the path to SAP2000 below</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#ProgramPath = 'C:\Program Files\Computers 
+ and Structures\SAP2000 22\SAP2000.exe'</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#full path to the model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#set it to the desired path of your model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">APIPath = 'C:\CSiAPIexample'</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">if not os.path.exists(APIPath):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;try:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;os.makedirs(APIPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;except 
+ OSError:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;pass</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px; 
+	 font-size: 10.0pt; font-family: 'Courier New'; mso-highlight: white; 
+	 background-color: #ffffff;"><span style="background: #ffffff;">ModelPath 
+ = APIPath + os.sep + 'API_1-001.sdb'</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;#create 
+ API helper object</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">&#160;&#160;&#160;&#160;helper = comtypes.client.CreateObject('SAP2000v1.Helper')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">&#160;&#160;&#160;&#160;helper = helper.QueryInterface(comtypes.gen.SAP2000v1.cHelper)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">if AttachToInstance:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;#attach 
+ to a running instance of SAP2000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;try:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;#get 
+ the active SapObject</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">&#160;&#160;&#160;&#160;&#160;mySapObject = 
+ </span><span style="font-size: 10.0pt; line-height: 107%; font-family: 'Courier New'; 
+				 mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; 
+				 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">helper.GetObject(&quot;CSI.SAP2000.API.SapObject&quot;)</span> 
+ </p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;except 
+ (OSError, comtypes.COMError):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;print(&quot;No 
+ running instance of the program found or failed to attach.&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">else:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;if 
+ SpecifyPath:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;try:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;#'create 
+ an instance of the SAPObject from the specified path</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;mySapObject 
+ = helper.CreateObject(ProgramPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;except 
+ (OSError, comtypes.COMError):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;print(&quot;Cannot 
+ start a new instance of the program from &quot; + ProgramPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;else:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;try:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;#create 
+ an instance of the SAPObject from the latest installed SAP2000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;mySapObject 
+ = helper.CreateObjectProgID(&quot;CSI.SAP2000.API.SapObject&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;except 
+ (OSError, comtypes.COMError):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;print(&quot;Cannot 
+ start a new instance of the program.&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;sys.exit(-1)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;#start 
+ SAP2000 application</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;mySapObject.ApplicationStart()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;</span><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#create SapModel object</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">SapModel = mySapObject.SapModel</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#initialize model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">SapModel.InitializeNewModel()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#create new blank model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.File.NewBlank()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#define material property</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">MATERIAL_CONCRETE = 2</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PropMaterial.SetMaterial('CONC', 
+ MATERIAL_CONCRETE)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign isotropic mechanical properties to 
+ material</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PropMaterial.SetMPIsotropic('CONC', 
+ 3600, 0.2, 0.0000055)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#define rectangular frame section property</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PropFrame.SetRectangle('R1', 
+ 'CONC', 12, 12)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#define frame section property modifiers</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ModValue = [1000, 0, 0, 1, 1, 1, 1, 1]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PropFrame.SetModifiers('R1', 
+ ModValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#switch to k-ft units</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">kip_ft_F = 4</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.SetPresentUnits(kip_ft_F)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#add frame object by coordinates</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">FrameName1 = ' '</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 lang="IT" xml:lang="IT" style="font-size: 10.0pt; font-family: 'Courier New'; 
+	 background: #ffffff; mso-highlight: white; mso-ansi-language: IT;">FrameName2 
+ = ' '</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 lang="IT" xml:lang="IT" style="font-size: 10.0pt; font-family: 'Courier New'; 
+	 background: #ffffff; mso-highlight: white; mso-ansi-language: IT;">FrameName3 
+ = ' '</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[FrameName1, ret] = SapModel.FrameObj.AddByCoord(0, 
+ 0, 0, 0, 0, 10, FrameName1, 'R1', '1', 'Global')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[FrameName2, ret] = SapModel.FrameObj.AddByCoord(0, 
+ 0, 10, 8, 0, 16, FrameName2, 'R1', '2', 'Global')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[FrameName3, ret] = SapModel.FrameObj.AddByCoord(-4, 
+ 0, 10, 0, 0, 10, FrameName3, 'R1', '3', 'Global')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign point object restraint at base</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">PointName1 = ' '</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">PointName2 = ' '</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">Restraint = [True, True, True, True, False, 
+ False]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName1, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PointObj.SetRestraint(PointName1, 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign point object restraint at top</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">Restraint = [True, True, False, False, False, 
+ False]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName2, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PointObj.SetRestraint(PointName2, 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#refresh view, update (initialize) zoom</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.View.RefreshView(0, False)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#add load patterns</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">LTYPE_OTHER = 8</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('1', LTYPE_OTHER, 
+ 1, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('2', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('3', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('4', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('5', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('6', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.LoadPatterns.Add('7', LTYPE_OTHER, 
+ 0, True)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 2</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName3, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">PointLoadValue = [0,0,-10,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PointObj.SetLoadForce(PointName1, 
+ '2', PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName3, 
+ '2', 1, 10, 0, 1, 1.8, 1.8)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 3</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName3, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">PointLoadValue = [0,0,-17.2,0,-54.4,0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.PointObj.SetLoadForce(PointName2, 
+ '3', PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 4</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName2, 
+ '4', 1, 11, 0, 1, 2, 2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 5</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName1, 
+ '5', 1, 2, 0, 1, 2, 2, 'Local')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName2, 
+ '5', 1, 2, 0, 1, -2, -2, 'Local')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName1, 
+ '6', 1, 2, 0, 1, 0.9984, 0.3744, 'Local')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadDistributed(FrameName2, 
+ '6', 1, 2, 0, 1, -0.3744, 0, 'Local')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#assign loading for load pattern 7</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.FrameObj.SetLoadPoint(FrameName2, 
+ '7', 1, 2, 0.5, -15, 'Local')</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#switch to k-in units</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">kip_in_F = 3</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.SetPresentUnits(kip_in_F)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#save model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.File.Save(ModelPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#run model (this will create the analysis model)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = SapModel.Analyze.RunAnalysis()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#initialize for Sap2000 results</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">SapResult= [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">[PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName2, 
+ PointName1, PointName2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#get Sap2000 results for load cases 1 through 
+ 7</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;NumberResults 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Obj 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Elm 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ACase 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;StepType 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;StepNum 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;U1 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;U2 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;U3 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;R1 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;R2 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;R3 
+ = []</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ObjectElm 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.Results.Setup.SetCaseSelectedForOutput(str(i+1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;if 
+ i &lt;= 3:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;[NumberResults, 
+ Obj, Elm, ACase, StepType, StepNum, U1, U2, U3, R1, R2, R3, ret] = SapModel.Results.JointDispl(PointName2, 
+ ObjectElm, NumberResults, Obj, Elm, ACase, StepType, StepNum, U1, U2, 
+ U3, R1, R2, R3)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResult[i] 
+ = U3[0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;else:</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;[NumberResults, 
+ Obj, Elm, ACase, StepType, StepNum, U1, U2, U3, R1, R2, R3, ret] = SapModel.Results.JointDispl(PointName1, 
+ ObjectElm, NumberResults, Obj, Elm, ACase, StepType, StepNum, U1, U2, 
+ U3, R1, R2, R3)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResult[i] 
+ = U1[0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#close Sap2000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">ret = mySapObject.ApplicationExit(False)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">SapModel = None</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">mySapObject = None</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#fill independent results</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult= [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[0] = -0.02639</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[1] = 0.06296</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[2] = 0.06296</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[3] = -0.2963</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[4] = 0.3125</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[5] = 0.11556</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">IndResult[6] = 0.00651</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#fill percent difference</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">PercentDiff = [0,0,0,0,0,0,0]</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;PercentDiff[i] 
+ = (SapResult[i] / IndResult[i]) - 1</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">#display results</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;">for i in range(0,7):</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;print()</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;print(SapResult[i])</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;print(IndResult[i])</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-layout-grid-align: none; text-autospace: none; margin-left: 48px;"><span 
+	 style="font-size: 10.0pt; font-family: 'Courier New'; background: #ffffff; 
+	 mso-highlight: white;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;print(PercentDiff[i])</span><br>
+&#160;</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.1</p>
+<p class="Comment">Updated for version 22.1.0.</p>
+</body>
+</html>

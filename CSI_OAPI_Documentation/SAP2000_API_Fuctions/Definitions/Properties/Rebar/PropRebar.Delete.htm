@@ -1,0 +1,71 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="PropRebar.Delete.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>PropRebar.Delete</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1><b>Delete</b></h1>
+<h2><b>Syntax</b></h2>
+<p class="Comment">SapObject.SapModel.PropRebar.Delete</p>
+<h2><b>VB6 Procedure</b></h2>
+<p class="Comment">Function Delete(ByVal Name As String) As Long</p>
+<h2><b>Parameters</b></h2>
+<p class="ParameterName"><b>Name</b></p>
+<p class="Comment">The name of an existing rebar property.</p>
+<h2><b>Remarks</b></h2>
+<p class="Comment">The function deletes a specified rebar property.</p>
+<p class="Comment">The function returns zero if the property is successfully 
+ deleted; otherwise it returns a nonzero value. It returns an error if 
+ the specified property can not be deleted, for example, if it is assigned 
+ to an existing object.</p>
+<h2><b>VBA Example</b></h2>
+<p class="Coding">Sub DeleteRebarProp()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set new rebar properties<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropRebar.SetProp(&quot;R1&quot;, 
+ 1, 1.128)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropRebar.SetProp(&quot;R2&quot;, 
+ 1, 1.128)<br>
+<br>
+&#160;&#160;&#160;'delete rebar property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropRebar.Delete(&quot;R1&quot;)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2><b>Release Notes</b></h2>
+<p class="Comment">Initial release in v21.2.0.</p>
+<h2><b>See Also</b></h2>
+<p>&#160;</p>
+</body>
+</html>

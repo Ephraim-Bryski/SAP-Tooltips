@@ -1,0 +1,104 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetSuperCutSectionPropsAtY.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSuperCutWebStressPoint</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">
+/*<![CDATA[*/
+A:visited {
+        color: #800080;
+}
+A:link {
+        color: #0000ff;
+}
+/*]]>*/
+</style>
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSuperCutWebStressPoint</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutWebStressPoint</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSuperCutWebStressPoint(ByVal Name As String, ByVal CutIndex As Long, ByVal WebIndex As Long, ByVal PointIndex As Long, ByRef X As Double, ByRef Y As Double, ByRef MatProp As String, ByRef Note as String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">CutIndex</p>
+<p class="Comment">The index number of section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by function CountSuperCut.</p>
+<p class="ParameterName">WebIndex</p>
+<p class="Comment">The index number of the web in this section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by function GetSuperCutSectionValues.</p>
+<p class="ParameterName">PointIndex</p>
+<p class="Comment">The index number of the stress point in this web of this section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by function CountSuperCutWebStressPoint.</p>
+<p class="ParameterName">X, Y</p>
+<p class="Comment">The transverse and vertical coordinates of the stress point in the section, measured from the bottom left corner of the section. &#160;X is positive to the right when looking upstation. Y is positive upward. [L]</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property at this stress point.</p>
+<p class="ParameterName">Note</p>
+<p class="Comment">A description of the stress point that may be used for identification. Points that are pre-defined by the program will have prescribed notes.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns location and material information about a single stress point in a web at a superstructure section cut in a bridge object. The function returns zero if the information is successfully retrieved; otherwise it returns a nonzero value.</p>
+<p class="Comment">If the bridge object is not currently linked to existing objects in the model, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a linked bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub GetBridgeSuperCutStressPointInfo()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CountWeb As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CountPoint As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim X As Double,<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Y As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MatProp As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Note As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get section cut count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.CountSuperCut("BOBJ1", Count)<br>
+<br>
+&#160;&#160;&#160;'get web count at first section cut (0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues ("BOBJ1", 0, 1, CountWeb)<br>
+<br>
+&#160;&#160;&#160;'get stress point count at first web (0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.CountSuperCutWebStressPoint("BOBJ1", 0, 0, CountPoint)<br>
+<br>
+&#160;&#160;&#160;'get web stress point location information<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.GetSuperCutWebStressPoint("BOBJ1", 0, 0, 0, X, Y, MatProp, Note)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.0.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="../CountSuperCut.htm">CountSuperCut</a></p>
+<p class="Block-Text"><a href="GetSuperCutSectionValues.htm">GetSuperCutSectionValues</a></p>
+<p class="Block-Text"><a href="CountSuperCutWebStressPoint.htm">CountSuperCutWebStressPoint</a></p>
+<p class="Block-Text">&#160;</p>
+</body>
+</html>

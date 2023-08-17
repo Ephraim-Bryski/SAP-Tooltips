@@ -1,0 +1,78 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Object Functions\IsSpringCoupled.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>IsSpringCoupled {Point Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>IsSpringCoupled</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.IsSpringCoupled</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function IsSpringCoupled(ByVal Name As String, ByVal IsCoupled As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object.</p>
+<p class="ParameterName">IsCoupled</p>
+<p class="Comment">This item is True if the spring assigned to the specified point object is coupled, otherwise it is False.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function indicates if the spring assignments to a point object are coupled, that is, if they have off-diagonal terms in the 6x6 spring matrix for the point object.</p>
+<p class="Comment">The function returns zero if the coupled status is successfully retrieved, otherwise it returns a nonzero value. If no springs exist at the point object,n the function returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub CheckIsSpringCoupled()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim k() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim IsCoupled As Boolean<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'assign spring to a point<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim k(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;k(2) = 10<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetSpring("3", k)<br>
+<br>
+&#160;&#160;&#160;'determine if spring is coupled<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.IsSpringCoupled("3", IsCoupled)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetSpring_{Point_Object}.htm">GetSpring</a></p>
+<p class="Block-Text"><a href="GetSpringCoupled_{Point_Object}.htm">GetSpringCoupled</a></p>
+<p class="Block-Text"><a href="SetSpring.htm">SetSpring</a></p>
+<p class="Block-Text"><a href="SetSpringCoupled.htm">SetSpringCoupled</a></p>
+<p class="Block-Text"><a href="DeleteSpring_{Point_Object}.htm">DeleteSpring</a></p>
+</body>
+</html>

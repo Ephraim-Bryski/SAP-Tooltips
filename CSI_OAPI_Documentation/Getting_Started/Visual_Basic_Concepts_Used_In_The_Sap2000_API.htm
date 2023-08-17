@@ -1,0 +1,98 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\API FrontStuff\Visual Basic Concepts Used In The Sap2000 API.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Visual Basic Concepts Used In The SAP2000 API</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+<style type="text/css">
+/*<![CDATA[*/
+A:visited {
+        color: #800080;
+}
+A:link {
+        color: #0000ff;
+}
+/*]]>*/
+</style>
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h1>Visual Basic Concepts Used in the CSi OAPI</h1>
+<p class="IntroText">Some of the Visual Basic concepts and definitions that apply to the CSi API are explained herein.</p>
+<p class="IntroTextHeading">Option Base</p>
+<p class="IntroText">Visual Basic 6 allows the default lower bound for arrays to be specified as 0 (the default), or 1. SAP2000 uses a lower bound of 0 for all arrays. Any program that accesses SAP2000 through the API should also use a lower bound of 0 for its arrays.</p>
+<p class="IntroTextHeading">Fixed-Size and Dynamic Arrays</p>
+<p class="IntroText">Arrays can be used to refer to a series of variables by the same name and to use a number (an index) to distinguish them. Visual Basic has two types of arrays: fixed-size and dynamic. A fixed-size array always remains the same size. A dynamic array can change its size while the program is running.</p>
+<p class="IntroText">A fixed-size array is declared with the size indicated. For example, the following line declares MyFixedArray dimensioned to 2.</p>
+<p class="Coding">Dim MyFixedArray(2)as Double<br>
+&#160;</p>
+<p class="IntroText">Dimensioning the array to 2 means that it holds three data items:</p>
+<p class="IntroText" style="margin-left: 46px; margin-bottom: 5pt;">MyFixedArray(0) = first data item</p>
+<p class="IntroText" style="margin-left: 46px; margin-bottom: 5pt;">MyFixedArray(1) = second data item</p>
+<p class="IntroText" style="margin-left: 46px;">MyFixedArray(2) = third data item</p>
+<p class="IntroText">Dynamic arrays are declared with no size indicated as shown here:</p>
+<p class="Coding">Dim MyDynamicArray()as Double<br>
+&#160;</p>
+<p class="IntroText">Dynamic arrays are dimensioned sometime after they are declared using a statement such as the following:</p>
+<p class="Coding">ReDim MyDynamicArray(2)<br>
+&#160;</p>
+<p class="IntroText">Any array that is dimensioned inside SAP2000 must be declared as a dynamic array so that SAP2000 can redimension it. It is probably a good idea to declare all arrays as dynamic arrays for simplicity. As an example, the analysis results obtained through the CSi API are stored in arrays that are defined as dynamic arrays by the user and then dimensioned and filled inside of SAP2000.</p>
+<p class="IntroTextHeading">Variable Types</p>
+<p class="IntroText">Most of the data in the CSi API is one of the following variable types.</p>
+<ul style="list-style: square;">
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">Boolean</span>: A variable stored as a 16-bit (2-byte) number, but it can only be True or False. When boolean values are converted to other data types, False becomes 0 and True becomes –1.</p>
+</li>
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">Long</span>: A variable stored as a 32-bit (4-byte) number ranging in value from -2,147,483,648 to 2,147,483,647. Note that other programming languages may refer to this data type differently; for example, they may refer to this as an Integer.</p>
+</li>
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">Double</span>: A double-precision floating-point variable stored as an IEEE 64-bit (8-byte) floating-point number ranging in value from -1.79769313486231E308 to -4.94065645841247E-324 for negative values and from 4.94065645841247E-324 to 1.79769313486232E308 for positive values.</p>
+</li>
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">String</span>: A variable length string.</p>
+</li>
+</ul>
+<p class="IntroTextHeading">Optional Arguments</p>
+<p class="IntroText">Some of the CSi API functions have optional arguments. For example, the CountLoadDispl function has two optional arguments: Name and LoadPat. It is not necessary to include the optional arguments when calling this function. All four of the following calls are valid.</p>
+<p class="Coding">ret = SapModel.PointObj.CountLoadDispl(Count)<br>
+<br>
+ret = SapModel.PointObj.CountLoadDispl(Count, Name)<br>
+<br>
+ret = SapModel.PointObj.CountLoadDispl(Count, , LoadPat)<br>
+<br>
+ret = SapModel.PointObj.CountLoadDispl(Count, Name, LoadPat)<br>
+&#160;</p>
+<p class="IntroText">Note in the third example, the first optional item is not included and the second optional item is included. In that case, commas must be included to denote the missing arguments.</p>
+<p class="IntroTextHeading">Comments</p>
+<p class="IntroText">In Visual Basic the Rem statement followed by a space indicates that all of the data on the line to the right of the Rem statement is a comment (or a remark). The Rem statement can be abbreviated using an apostrophe, '. The apostrophe is used in all of the VBA examples in the CSi OAPI documentation to denote a comment.</p>
+<p class="IntroTextHeading">ByVal and ByRef</p>
+<p class="IntroText">Variables are passed to the CSi API functions using the ByRef or the ByVal keyword.</p>
+<ul style="list-style: square;">
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">ByVal</span> means that the variable is passed by value. This allows the CSi API to access a copy of the variable but not the original variable. This means the value of the variable in another application can not be changed by the API.</p>
+</li>
+<li class="p-IntroText">
+<p class="IntroText"><span style="font-weight: bold;">ByRef</span>, which is the default in VB6 and VBA, means the argument is passed by reference. This passes the address of the variable to the CSi API instead of passing a copy of the value. It allows the CSi API to access the actual variable, and, as a result, allows SAP2000 to change the variable's actual value in an application.</p>
+</li>
+</ul>
+<p class="IntroText">Variables are passed ByRef when data needs to be returned in them from SAP2000 to your application. In addition, Visual Basic requires that all arrays be passed ByRef.</p>
+<p class="IntroTextHeading">Release Notes</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<p class="IntroText" style="font-weight: bold; margin-bottom: 0pt;">See Also</p>
+<p class="Block-Text" style="margin-left: 24px;"><a href="../Introduction.htm">Introduction</a></p>
+<p class="Block-Text" style="margin-left: 24px;"><a href="Accessing_Sap2000_From_An_External_Application.htm">Accessing SAP2000 From An External Application</a></p>
+<p class="Block-Text" style="margin-left: 24px;"><a href="Function_Documentation_Conventions.htm">Function Documentation Conventions</a></p>
+<p class="Block-Text" style="margin-left: 24px;"><a href="Function_Return_Values.htm">Function Return Values</a></p>
+<p class="Block-Text" style="margin-left: 24px;"><a href="Units_Abbreviations.htm">Units Abbreviations</a></p>
+</body>
+</html>

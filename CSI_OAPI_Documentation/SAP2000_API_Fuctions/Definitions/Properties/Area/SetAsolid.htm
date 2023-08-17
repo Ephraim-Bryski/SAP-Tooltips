@@ -1,0 +1,82 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Area\SetAsolid.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetAsolid</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetAsolid</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropArea.SetAsolid</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetAsolid(ByVal Name As String, ByVal MatProp As String, ByVal MatAng As Double, ByVal Arc As Double, ByVal Incompatible As Boolean, Optional ByVal CSys As String = "Global", Optional ByVal Color As Long = -1, Optional ByVal Notes As String = "", Optional ByVal GUID As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new area property. If this is an existing property, that property is modified; otherwise, a new property is added.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the area property.</p>
+<p class="ParameterName">MatAng</p>
+<p class="Comment">The material angle. [deg]</p>
+<p class="ParameterName">Arc</p>
+<p class="Comment">The arc angle through which the area object is passed to define the asolid element. [deg]</p>
+<p class="Comment">A value of zero means 1 radian (approximately 57.3 degrees).</p>
+<p class="ParameterName">Incompatible</p>
+<p class="Comment">If this item is True, incompatible bending modes are included in the stiffness formulation. In general, incompatible modes significantly improve the bending behavior of the object.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The area object is rotated about the Z-axis in this coordinate system to define the asolid element.</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the property. If Color is specified as -1, the program will automatically assign a color.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the property.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the property. If this item is input as Default, the program assigns a GUID to the property.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function initializes an asolid-type area property. If this function is called for an existing area property, all items for the property are reset to their default value.</p>
+<p class="Comment">The function returns zero if the property is successfully initialized; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetAreaPropAsolid()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(2, 48, 2, 48)<br>
+<br>
+&#160;&#160;&#160;'set new area property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropArea.SetAsolid("AS1", "4000Psi", 0, 45, True)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetAsolid.htm">GetAsolid</a></p>
+</body>
+</html>

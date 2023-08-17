@@ -1,0 +1,92 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Object Functions\AddSpherical.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>AddSpherical</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>AddSpherical</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.AddSpherical</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function AddSpherical(ByVal r As Double, ByVal a As Double, ByVal b As Double, ByRef Name As String, Optional ByVal userName As String = "", Optional ByVal csys As String = "Global", Optional ByVal MergeOff As Boolean = False, Optional ByVal MergeNumber As Long = 0) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">r</p>
+<p class="Comment">The radius for the added point object in the specified coordinate system. [L]</p>
+<p class="ParameterName">a</p>
+<p class="Comment">The plan angle for the added point object in the specified coordinate system. This angle is measured in the XY plane from the positive global X axis. When looking in the XY plane with the positive Z axis pointing toward you, a positive a angle is counterclockwise. [deg]</p>
+<p class="ParameterName">b</p>
+<p class="Comment">The elevation angle for the added point object in the specified coordinate system. This angle is measured in an X'Z plane that is perpendicular to the XY plane with the positive X' axis oriented at angle a from the positive global X axis. Angle b is measured from the positive global Z axis. When looking in the X’Z plane with the positive Y' axis pointing toward you, a positive b angle is counter clockwise. [deg]</p>
+<p class="ParameterName">Name</p>
+<p class="Comment">This is the name that the program ultimately assigns for the point object. If no UserName is specified, the program assigns a default name to the point object. If a UserName is specified and that name is not used for another point, the UserName is assigned to the point; otherwise a default name is assigned to the point.</p>
+<p class="Comment">If a point is merged with another point, this will be the name of the point object with which it was merged.</p>
+<p class="ParameterName">UserName</p>
+<p class="Comment">This is an optional user specified name for the point object. If a UserName is specified and that name is already used for another point object, the program ignores the UserName.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The name of the coordinate system in which the joint coordinates are defined.</p>
+<p class="ParameterName">MergeOff</p>
+<p class="Comment">If this item is False, a new point object that is added at the same location as an existing point object will be merged with the existing point object (assuming the two point objects have the same MergeNumber) and thus only one point object will exist at the location.</p>
+<p class="Comment">If this item is True, the points will not merge and two point objects will exist at the same location.</p>
+<p class="ParameterName">MergeNumber</p>
+<p class="Comment">Two points objects in the same location will merge only if their merge number assignments are the same. By default all pointobjects have a merge number of zero.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function adds a point object to a model. The added point object will be tagged as a Special Point except if it was merged with another point object. Special points are allowed to exist in the model with no objects connected to them</p>
+<p class="Comment">The function returns zero if the point object is successfully added or merged, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AddPointSpherical()<br>
+&#160;&#160;&#160;'dimension variables<span style="color: #ff0000;"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;</span>Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim r As Double, a As Double, b As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name as String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyName as String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model blank from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewBlank<br>
+<br>
+&#160;&#160;&#160;'add point object to model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;r = 12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;a = 37<br>
+&#160;&#160;&#160;&#160;&#160;&#160;b = 23<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyName = "A1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.AddSpherical(r, a, b, Name, MyName)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="AddCartesian.htm">AddCartesian</a></p>
+<p class="Block-Text"><a href="AddCylindrical.htm">AddCylindrical</a></p>
+<p class="Block-Text"><a href="GetCoordSpherical_{Point_Object}.htm">GetCoordSpherical</a></p>
+<p class="Block-Text"><a href="GetSpecialPoint.htm">GetSpecialPoint</a></p>
+<p class="Block-Text"><a href="SetSpecialPoint.htm">SetSpecialPoint</a></p>
+</body>
+</html>

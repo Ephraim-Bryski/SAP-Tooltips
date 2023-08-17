@@ -1,0 +1,126 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetNBCC2010_1 {Wind Load}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetNBCC2010_1 {Wind Load}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.GetNBCC2010_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetNBCC2010_1(ByVal Name As String, ByRef ExposureFrom As Long, ByRef DirAngle As Double, ByRef Cpw As Double, ByRef Cpl As Double, ByRef UserZ As Boolean, ByRef TopZ As Double, ByRef BottomZ As Double, ByRef q As Double, ByRef GustFactor As Double, ByRef ImportanceFactor As Double, ByRef TerrainType As Long, ByRef CeWindward As Double, ByRef CeLeeward As Double, ByRef UserExposure As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern with an NBCC 2010 auto wind assignment.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 1 or 2, indicating the source of the wind exposure.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = From extents of rigid diaphragms</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9pt; margin-left: 88px;">2 = From area objects</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpw</p>
+<p class="Comment">The windward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpl</p>
+<p class="Comment">The leeward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It &#160;is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">q</p>
+<p class="Comment">The velocity pressure in kPa.</p>
+<p class="ParameterName">GustFactor</p>
+<p class="Comment">The gust effect factor.</p>
+<p class="ParameterName">ImportanceFactor</p>
+<p class="Comment">The importance factor.</p>
+<p class="ParameterName">TerrainType</p>
+<p class="Comment">This is 1, 2, or 3, indicating the terrain type.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">1 = Open</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">2 = Rough</p>
+<p class="Comment" style="margin-left: 88px;">3 = User</p>
+<p class="ParameterName">CeWindward</p>
+<p class="Comment">The windward exposure factor, Ce. This item applies only when TerrainType = 3.</p>
+<p class="ParameterName">CeLeeward</p>
+<p class="Comment">The windward exposure factor, Ce. This item applies only when TerrainType = 3.</p>
+<p class="ParameterName">UserExposure</p>
+<p class="Comment">If this item is True, the wind exposure widths are provided by the user. If it is False, the wind exposure widths are calculated by the program from the extents of the diaphragms.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto wind loading parameters for NBCC 2010.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindNBCC2010()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ExposureFrom As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirAngle As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cpw As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cpl As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserZ As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TopZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BottomZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim q As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GustFactor As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ImportanceFactor As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim TerrainType As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim CeWindward As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim CeLeeward As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserExposure As Boolean<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'define diaphragm constraints<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'assign points to diaphragm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("2")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph1", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.PlaneXY("3")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetConstraint("", "Diaph2", SelectedObjects)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.ClearSelection<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign NBCC2010 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetNBCC2010_1("WIND", 1, 0, 0.8, 0.5, False, 0, 0, 0.75, 2.1, 1.1, 1, 0, 0)<br>
+<br>
+&#160;&#160;&#160;'get NBCC2010 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.GetNBCC2010_1("WIND", ExposureFrom, DirAngle, Cpw, Cpl, UserZ, TopZ, BottomZ, q, GustFactor, ImportanceFactor, TerrainType, CeWindward, CeLeeward, UserExposure)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 19.0.0.</p>
+<p class="Comment">This function supersedes GetNBCCC2010.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetNBCC2010_1.htm">SetNBCC2010_1</a></p>
+</body>
+</html>

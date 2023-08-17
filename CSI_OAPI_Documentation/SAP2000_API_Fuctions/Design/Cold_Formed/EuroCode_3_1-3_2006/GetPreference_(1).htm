@@ -1,0 +1,190 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="GetOverwrite (1).docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetPreference</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body style="word-wrap: break-word;">
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1><b>GetPreference</b></h1>
+<h2><b>Syntax</b></h2>
+<p class="Comment">SapObject.SapModel.DesignColdFormed.EuroCold06.GetPreference</p>
+<h2><b>VB6 Procedure</b></h2>
+<p class="Comment">Function GetPreference(ByVal Item As Long, ByRef Value 
+ As Double) As Long</p>
+<h2><b>Parameters</b></h2>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 11, inclusive, indicating 
+ the preference item considered.</p>
+<p class="Parameter_Description">1 = Country</p>
+<p class="Parameter_Description">2 = Multi-response case design</p>
+<p class="Parameter_Description">3 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description">4 = Combos equation</p>
+<p class="Parameter_Description">5 = Reliability class</p>
+<p class="Parameter_Description">6 = K factor method</p>
+<p class="Parameter_Description">7 = Consider P-Delta Done</p>
+<p class="Parameter_Description">8 = GammaM0</p>
+<p class="Parameter_Description">9 = GammaM1</p>
+<p class="Parameter_Description">10 = GammaM2</p>
+<p class="Parameter_Description">11 = Pattern live load factor&#160;</p>
+<p class="ParameterName">Value</p>
+<p class="Parameter_Description">The value of the considered preference 
+ item.</p>
+<p class="Parameter_Description">1 = Country</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;1 = CEN 
+ Default</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;2 = United 
+ Kingdom</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;3 = Slovenia</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;4 = Bulgaria</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;5 = Norway</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;7 = Sweden</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;8 = Finland</p>
+<p class="Parameter_Description">&#160;&#160;&#160;&#160;&#160;9 = Denmark</p>
+<p class="Parameter_Description">&#160;&#160;&#160;10 = Portugal</p>
+<p class="Parameter_Description">&#160;&#160;&#160;11 = Germany</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: 0in; margin-left: 66.0pt; line-height: normal;"><span 
+	 style="line-height: normal;">2 = Multi-response case design</span></p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">1 = Envelopes</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">2 = Step-by-step</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">3 = Last step</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">4 = Envelopes -- All</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 78.0pt; 
+	 text-indent: 6.0pt; line-height: normal;">5 = Step-by-step -- &#160;All</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">3 = Demand/capacity ratio limit</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">Value &gt; 0</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">4 = Combos equation</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;1 = Eq. 6.10</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;2 = Max of Eqs. 
+ 6.10a and 6.10b</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: 0in; margin-left: 66.0pt; line-height: normal;"><span 
+	 style="line-height: normal;">5 = Reliability class</span></p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;1 = Class 1</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;2 = Class 2</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;3 = Class 3</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">6 = K factor method</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;1 = Method 1 (Annex 
+ A)</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;2 = Method 2 (Annex 
+ B)</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;&#160;</span></p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">7 = Consider P-Delta Done</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">0 = No</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">Any other value = Yes</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">8 = GammaM0</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">Value &gt; 0</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">&#160;</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">9 = GammaM1</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">Value &gt; 0</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">&#160;</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">10 = GammaM2</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;Value 
+ &gt; 0</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 66.0pt; 
+	 line-height: normal;">11 = Pattern live load factor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 0in; margin-left: 84.0pt; 
+	 line-height: normal;">&#160;Value &gt;= 0</p>
+<h2><b>Remarks</b></h2>
+<p class="Comment">This function retrieves the value of a cold-formed steel 
+ design preference item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ retrieved; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetSteelDesignPreferenceItemEuroCold06()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set steel design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.SetCode(&quot;Eurocode 
+ 3 1-3 2006&quot;)<br>
+<br>
+&#160;&#160;&#160;'get preference item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.EuroCold06.GetPreference(4, 
+ Value)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2><b>Release Notes</b></h2>
+<p class="Comment">Initial release in version 23.0.0.</p>
+<h2><b>See Also</b></h2>
+<p class="Comment"><a href="SetPreference_(1).htm">SetPreference</a></p>
+<p>&#160;</p>
+</body>
+</html>

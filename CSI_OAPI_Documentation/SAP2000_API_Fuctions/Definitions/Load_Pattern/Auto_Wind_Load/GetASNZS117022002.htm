@@ -1,0 +1,126 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetASNZS117022002.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetASNZS117022002</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetASNZS117022002</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWind.GetASNZS117022002</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetASNZS117022002(ByVal Name As String, ByRef ExposureFrom As Long, ByRef DirAngle As Double, ByVal Cpw As Double, ByVal Cpl As Double, ByRef&#160;&#160;Ka As Double, ByRef&#160;&#160;Kc As Double, ByRef&#160;&#160;Kl As Double, ByRef&#160;&#160;Kp As Double, ByRef&#160;&#160;UserZ As Boolean, ByRef&#160;&#160;TopZ As Double, ByRef&#160;&#160;BottomZ As Double, ByRef &#160;WindSpeed As Double, ByRef &#160;Cat As Long, ByRef &#160;CycloneRegion As Boolean, ByRef &#160;Md As Double, ByRef &#160;Ms As Double, ByRef &#160;Mt As Double, ByRef &#160;Cdyn As Double, ByRef &#160;UserExposure As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load case with an AS/NZS 1170.2:2002 auto wind assignment.</p>
+<p class="ParameterName">ExposureFrom</p>
+<p class="Comment">This is 1, or 2, indicating the source of the wind exposure.</p>
+<p class="Comment" style="margin-bottom: 0pt; margin-left: 88px;">1 = From extents of rigid diaphragms</p>
+<p class="Comment" style="margin-left: 88px;">2 = From area objects</p>
+<p class="ParameterName">DirAngle</p>
+<p class="Comment">The direction angle for the wind load.</p>
+<p class="ParameterName">Cpw</p>
+<p class="Comment">The windward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Cpl</p>
+<p class="Comment">The leeward coefficient, Cp. This item applies only when ExposureFrom = 1.</p>
+<p class="ParameterName">Ka</p>
+<p class="Comment">The area reduction factor, Ka.</p>
+<p class="ParameterName">Kc</p>
+<p class="Comment">The combination factor, Kc.</p>
+<p class="ParameterName">Kl</p>
+<p class="Comment">The local pressure factor, Kl.</p>
+<p class="ParameterName">Kp</p>
+<p class="Comment">The porous cladding factor, Kp.</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the wind load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item is the global Z-coordinate at the highest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item is the global Z-coordinate at the lowest level where auto wind loads are applied. [L]</p>
+<p class="ParameterName">WindSpeed</p>
+<p class="Comment">The regional wind speed, Vr, in m/s.</p>
+<p class="ParameterName">Cat</p>
+<p class="Comment">This is 1, 2, 3 or 4, indicating the terrain category.</p>
+<p class="ParameterName">CycloneRegion</p>
+<p class="Comment">This is True or False, indicating if the structure is in a cyclone region.</p>
+<p class="ParameterName">Md</p>
+<p class="Comment">The directional multiplier, Md.</p>
+<p class="ParameterName">Ms</p>
+<p class="Comment">The shielding multiplier, Ms.</p>
+<p class="ParameterName">Mt</p>
+<p class="Comment">The topographic multiplier, Mt.</p>
+<p class="ParameterName">Cdyn</p>
+<p class="Comment">The dynamic response factor, Cdyn.</p>
+<p class="ParameterName">UserExposure</p>
+<p class="Comment">If this item is True, the wind exposure widths are provided by the user. If it is False, the wind exposure widths are calculated by the program from the extents of the diaphragms.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto wind loading parameters for AS/NZS 1170.2:2002.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindASNZS117022002()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ExposureFrom As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DirAngle As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cpw As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cpl As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ka As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Kc As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Kl As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Kp As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserZ As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TopZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BottomZ As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim WindSpeed As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cat As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim CycloneRegion As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Md As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ms As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Mt As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Cdyn As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim UserExposure As Boolean<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'add new load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("WIND", LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign AS/NZS 1170.2:2002 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.SetASNZS117022002("WIND", 1, 0, 0.8, 0.5, 1, 1, 1, 1, False, 0, 0, 50, 2, False, 1, 1, 1, 1)<br>
+<br>
+&#160;&#160;&#160;'get AS/NZS 1170.2:2002 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWind.GetASNZS117022002("WIND", ExposureFrom, DirAngle, Cpw, Cpl, Ka, Kc, Kl, Kp, UserZ, TopZ, BottomZ, WindSpeed, Cat, CycloneRegion, Md, Ms, Mt, Cdyn, UserExposure)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetASNZS117022002.htm">SetASNZS117022002</a></p>
+</body>
+</html>

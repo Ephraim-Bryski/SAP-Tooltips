@@ -1,0 +1,74 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetLinePlanPoints.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ConvertLineToBLL</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>ConvertLineToBLL</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GenRefLine.ConvertLineToBLL</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ConvertLineToBLL(ByVal Name As String, Optional ByVal FirstStation As Double = 0, Optional ByVal CSys As String = "Global", Optional ByVal OffsetX As Double = 0, Optional ByVal OffsetY As Double = 0, Optional ByVal OffsetZ As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">This is the name of an existing general reference line.</p>
+<p class="ParameterName">FirstStation</p>
+<p class="Comment">The first station value on the bridge layout line. [L]</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The name of the coordinate system in which the general reference line is offset to create the bridge layout line.</p>
+<p class="ParameterName">OffsetX</p>
+<p class="Comment">The distance to offset the general reference line in the x-direction of the specified CSys, to the location of the new bridge layout line.</p>
+<p class="Comment">OffsetY<span style="font-weight: normal;"><br>
+The distance to offset the general reference line in the y-direction of the specified CSys, to the location of the new bridge layout line.</span></p>
+<p class="ParameterName">OffsetZ<span style="font-weight: normal;"><br>
+The distance to offset the general reference line in the z-direction of the specified CSys, to the location of the new bridge layout line.</span></p>
+<h2>Remarks</h2>
+<p class="Comment">This function converts an existing general reference line to a new bridge layout line, with the ability to specify offset values.</p>
+<p class="Comment">The function returns zero if the bridge layout line is successfully created; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub ConvertGenRefLine()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'define new general reference line<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span lang="FR" xml:lang="FR">ret = SapModel.GenRefLine.SetLine("GRef1", 120, 5)</span><br>
+<br>
+&#160;&#160;&#160;'convert general reference line to bridge layout line<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.GenRefLine.ConvertLineToBLL("GRef1")<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetLine_{Gen_Ref_Line}.htm">SetLine</a></p>
+</body>
+</html>

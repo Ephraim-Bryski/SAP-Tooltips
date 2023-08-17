@@ -1,0 +1,122 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetEurocode82004_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetEurocode82004_1 {RS}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetEurocode82004_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.GetEurocode82004_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetEurocode82004_1(ByVal Name As String, ByRef EURO2004Country As Long, ByRef EURO2004Direction As Long, ByRef EURO2004SpectrumType As Long, ByRef EURO2004GroundType As Long, ByRef EURO2004ag As Double, ByRef EURO2004S As Double, ByRef EURO2004AvgoverAg As Double, ByRef EURO2004Tb As Double, ByRef EURO2004Tc As Double, ByRef EURO2004Td As Double, ByRef EURO2004Beta As Double, ByRef EURO2004q As Double, ByRef DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a Eurocode 8 2004 response spectrum function.</p>
+<p class="ParameterName">EURO2004Country</p>
+<p class="Comment">This is 0, 1, 5, 6, or 10 indicating the country for which the Nationally Determined Parameters (NDPs) are specified.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">&#160;&#160;0 = Other (NDPs are user specified)</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">&#160;&#160;1 = CEN Default</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">&#160;&#160;5 = Norway</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">&#160;&#160;6 = Singapore</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">&#160;&#160;10 = Portugal</p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">EURO2004Direction</p>
+<p class="Comment">This is 1 or 2, indicating the ground motion direction.</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">1 = Horizontal</p>
+<p class="Comment" style="margin-left: 1.0in;">2 = Vertical (Does not apply when EURO2004Country = 6)</p>
+<p class="ParameterName">EURO2004SpectrumType</p>
+<p class="Comment">This is 1 or 2, indicating the spectrum type.</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">1 = Type 1</p>
+<p class="Comment" style="margin-left: 1.0in;">2 = Type 2 (Does not apply when EURO2004Country = 5 or 6)</p>
+<p class="ParameterName">EURO2004GroundType</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the ground type.&#160;&#160;This item only applies when the EURO2004Direction item is 1 (horizontal).</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">1 = A (Does not apply when EURO2004Country = 6)</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">2 = B (Does not apply when EURO2004Country = 6)</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">3 = C</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">4 = D</p>
+<p class="Comment" style="margin-left: 1.0in; margin-bottom: 0pt;">5 = E (Does not apply when EURO2004Country = 6)</p>
+<p class="Comment" style="margin-left: 1.0in;">6 = S1 (Only applies when EURO2004Country = 6)</p>
+<p class="ParameterName">EURO2004ag</p>
+<p class="Comment">The design ground acceleration in g, ag.</p>
+<p class="ParameterName">EURO2004S</p>
+<p class="Comment">The soil factor, S. This item only applies when the EURO2004Direction item is 1 (horizontal).</p>
+<p class="ParameterName">EURO2004AvgoverAg</p>
+<p class="Comment">The vertical ground acceleration divided by the horizontal ground acceleration, Avg/Ag. This item only applies when the EURO2004Direction item is 2 (vertical).</p>
+<p class="ParameterName">EURO2004Tb</p>
+<p class="Comment">The lower limit of period of the constant spectral acceleration branch, Tb.</p>
+<p class="ParameterName">EURO2004Tc</p>
+<p class="Comment">The upper limit of period of the constant spectral acceleration branch, Tc.</p>
+<p class="ParameterName">EURO2004Td</p>
+<p class="Comment">The period defining the start of the constant displacement range, Td.</p>
+<p class="ParameterName">EURO2004Beta</p>
+<p class="Comment">The lower bound factor, Beta.</p>
+<p class="ParameterName">EURO2004q</p>
+<p class="Comment">The behavior factor, q.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of a Eurocode 8 2004 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function definition is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetRSFuncEurocode82004()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Country As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Direction As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004SpectrumType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004GroundType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004ag As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004S As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004AvgoverAg As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Tb As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Tc As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Td As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004Beta As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim EURO2004q As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampRatio As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add Eurocode 8 2004 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetEurocode82004_1("RS-1", 1, 1, 1, 2, 0.4, 1.2, 0.9, 0.15, 0.5, 2, 0.2, 2, 0.04)<br>
+<br>
+&#160;&#160;&#160;'get Eurocode 8 2004 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetEurocode82004_1("RS-1", EURO2004Country, EURO2004Direction, EURO2004SpectrumType, EURO2004GroundType, EURO2004ag, EURO2004S, EURO2004AvgoverAg, EURO2004Tb, EURO2004Tc, EURO2004Td, EURO2004Beta, EURO2004q, DampRatio)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.1.0.</p>
+<p class="Comment">This function supersedes <a href="../../../Obsolete_Functions/GetEurocode82004_(RS).htm">GetEurocode82004</a>.</p>
+<p class="Comment">Added Portugal as a Country parameter in SAP2000 Version 15.0.0 and CSiBridge Version 15.1.0.</p>
+<p class="Comment">Added Singapore as a Country parameter in v20.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetEurocode82004_1_{RS}.htm">SetEurocode82004_1</a></p>
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDAMModifiers</title>
+
+<style type="text/css">
+/*<![CDATA[*/
+h2 {
+        font-family: Arial, sans-serif;
+        color: #0000ff;
+        text-decoration: underline;
+}
+/*]]>*/
+</style>
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1 style="text-underline: none; font-family: Arial, sans-serif; font-size: 14pt; color: #0000ff;">GetDAMModifiers</h1>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 0pt; color: #0000ff; margin-left: 24px; text-decoration: underline;">Syntax</h2>
+<p style="margin-left: 60px;"><span style="font-family: Arial, sans-serif; font-size: 10pt;">SapObject.SapModel.FrameObj.GetDAMModifiers</span></p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 0pt; color: #0000ff; margin-left: 24px; text-decoration: underline;">VB6 Procedure</h2>
+<p class="MsoNormal" style="margin-top: 0pt; margin-left: 60px; font-family: Arial, sans-serif; font-size: 10pt;">Function GetDAMModifiers(ByVal Name As String, ByRef EAModifier As Double, ByRef EIModifier As Double) As Long</p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 0pt; color: #0000ff; margin-left: 24px; text-decoration: underline;">Parameters</h2>
+<p class="ParameterName" style="font-family: Arial, sans-serif; font-size: 10pt; font-weight: bold; margin-left: 60px; margin-bottom: 0pt;">Name</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px; margin-top: 0pt;">The name of an existing frame section whose design type is Steel Frame design.</p>
+<p class="ParameterName" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px; font-weight: bold; margin-bottom: 0pt;">EAModifier</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px; margin-top: 0pt;">The modification factor for axial stiffness if the Direct Analysis method is used.</p>
+<p class="ParameterName" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px; font-weight: bold; margin-bottom: 0pt;">EIModifier</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px; margin-top: 0pt;">The modification factor for flexural stiffness if the Direct Analysis method is used.</p>
+<h2 style="mso-bidi-font-weight: normal; font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 0pt; color: #0000ff; margin-left: 24px; text-decoration: underline;"><b>Remarks</b></h2>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-top: 0pt; margin-left: 60px;">This function gets the modification factors for axial and flexural stiffness for a frame object if the Direct Analysis method is used.</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 60px;">The function returns zero if the factors are successfully retrieved, otherwise it returns a nonzero value. The function will return nonzero the modification factors are not available for the frame object.</p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 0pt; color: #0000ff; margin-left: 24px; text-decoration: underline;">VBA Example</h2>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 60px; font-size: 10pt;">Sub GetDAMModifiers()</p>
+<p class="CommentFirstOne" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'dimension variables</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Dim SapModel As cSapModel</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Dim ret As Long</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Dim EAModifier As Double</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Dim EIModifier As Double</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'create Sap2000 object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Set SapObject = New Sap2000v16.SapObject</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'start Sap2000 application</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">SapObject.ApplicationStart</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'create SapModel object</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Set SapModel = SapObject.SapModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'initialize model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret = SapModel.InitializeNewModel</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'create model from template</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'set the steel frame design code</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret =SapModel.DesignSteel.SetCode("AISC360-05/IBC2006")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'save model</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret = SapModel.File.Save("C:\SapAPI\x.sdb")</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'run analysis</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret =SapModel.Analyze.RunAnalysis</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'run design</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret =SapModel.DesignSteel.StartDesign</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'get direct analysis method modification factors</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">ret = SapModel.FrameObj.GetDAMModifiers("1", EAModifier, EIModifier)</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt;">&#160;</p>
+<p class="Comment" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 96px; font-size: 10pt;">'close Sap2000</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">SapObject.ApplicationExit False</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Set SapModel = Nothing</p>
+<p class="Code" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; font-size: 10pt; margin-left: 120px;">Set SapObject = Nothing</p>
+<p class="CodeName" style="font-family: 'Courier New', monospace; margin-bottom: 0pt; margin-top: 0px; margin-left: 60px; font-size: 10pt;">End Sub</p>
+<h2 style="margin-bottom: 0pt; font-size: 11pt; margin-left: 24px;">Release Notes</h2>
+<p class="MsoNormal" style="tab-stops: .25in .5in; font-family: Arial, sans-serif; margin-top: 0pt; font-size: 10pt; margin-left: 60px;">Initial release in version 16.0.0.</p>
+<h2 style="font-size: 11pt; margin-left: 24px;">See Also</h2>
+</body>
+</html>

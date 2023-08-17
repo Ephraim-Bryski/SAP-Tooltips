@@ -1,0 +1,120 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetIRC62017 {Wind Load}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetIRC62017</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoWindBridge.SetIRC62017</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment" style="mso-fareast-font-family: 'Times New Roman'; font-family: Arial, sans-serif;">Function 
+ SetIRC62017(ByVal Name As String, ByVal Superstructure As Boolean, ByVal 
+ Substructure As Boolean, ByVal Vertical As Boolean, ByVal GroundElevation 
+ As Double, ByVal SuperZProgCalc As Boolean, ByVal SuperstructureZ As Double, 
+ ByVal SubZProgCalc As Boolean, ByVal SubstructureZ As Double, ByVal vb 
+ As Double, ByVal Terrain As Long, ByVal G As Double, ByVal CDSuper As 
+ Double, ByVal CDSub As Double, ByVal CL As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Wind-type load pattern.</p>
+<p class="ParameterName">Superstructure</p>
+<p class="Comment">This item is True if wind on the superstructure should 
+ be considered, otherwise it is false.</p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">Substructure</p>
+<p class="Comment">This item is True if wind on the substructure should 
+ be considered, otherwise it is false.</p>
+<p class="ParameterName">Vertical</p>
+<p class="Comment">This item is True if vertical wind should be considered, 
+ otherwise it is false</p>
+<p class="ParameterName">GroundElevation</p>
+<p class="Comment">The ground elevation used for determining heights used 
+ for wind pressure values. [L]</p>
+<p class="ParameterName">SuperZProgCalc</p>
+<p class="Comment">This item is True if the superstructure height, Z, should 
+ be program calculated, otherwise it is false.</p>
+<p class="ParameterName">SuperstructureZ</p>
+<p class="Comment">The superstructure height Z. This item applies only 
+ when SuperProgCalc = False. [L]</p>
+<p class="ParameterName">SubZProgCalc</p>
+<p class="Comment">This item is True if the substructure height, Z, should 
+ be program calculated, otherwise it is false.</p>
+<p class="ParameterName">SubstructureZ</p>
+<p class="Comment">The substructure height Z. This item applies only when 
+ SubProgCalc = False. [L]</p>
+<p class="ParameterName">vb</p>
+<p class="Comment">The basic wind speed. [m/s]</p>
+<p class="ParameterName">Terrain</p>
+<p class="Comment" style="margin-bottom: 0pt;">The terrain type.</p>
+<p class="ParameterNameDescription" style="margin-left: 88px; margin-bottom: 0pt;">0 
+ = Plain</p>
+<p class="ParameterNameDescription" style="margin-left: 88px; margin-bottom: 0pt;">1 
+ = Obstructions</p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">G</p>
+<p class="Comment">The gu<span style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; 
+								 line-height: normal;">st factor, G.</span></p>
+<p class="ParameterName">CDSuper</p>
+<p class="Comment">The drag coefficient for the superstructure, C<sub>D</sub>.</p>
+<p class="ParameterName">CDSub</p>
+<p class="Comment">The drag coefficient for the substructure, C<sub>D</sub>.</p>
+<p class="ParameterName">CL</p>
+<p class="Comment">The lift coefficient, C<sub>L</sub>, for vertical wind.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets bridge auto wind loading parameters 
+ for IRC:6-2017.</p>
+<p class="Comment">The function returns zero if the parameters are successfully 
+ assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetWindIRC62017()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open existing model containing a bridge object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(“C:\Temp\BridgeModel.bdb” 
+ )<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add(&quot;WIND&quot;, 
+ LTYPE_WIND)<br>
+<br>
+&#160;&#160;&#160;'assign CSA S6-14 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoWindBridge. 
+ SetIRC62017(&quot;WIND&quot;, True, True, True, -100, True, 10, True, 
+ 10, 33, 0, 2, 1.5, 1.5, 0.75)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+ End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in v23.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetIRC62017_{Wind_Load}.htm">GetIRC62017</a></p>
+<p class="Comment">&#160;</p>
+</body>
+</html>

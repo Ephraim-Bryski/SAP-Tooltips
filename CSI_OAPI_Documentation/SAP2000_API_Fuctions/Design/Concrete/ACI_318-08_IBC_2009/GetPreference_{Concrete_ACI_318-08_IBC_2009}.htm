@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Originator" content="ImportDoc" />
+<meta name="OriginalFile" content="GetOverwrite Concrete ACI 318-08.doc" />
+<meta name="generator" content="Adobe RoboHelp 2019" />
+<title>GetPreference {Concrete ACI 318-08 IBC 2009}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css" />
+<style type="text/css">
+/*<![CDATA[*/
+A:visited {
+        color: #800080;
+}
+A:link {
+        color: #0000ff;
+}
+/*]]>*/
+</style>
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetPreference</h1>
+<h2>Syntax</h2>
+<p class="comment">SapObject.SapModel.DesignConcrete.ACI318_08_IBC2009.GetPreference</p>
+<h2>VB6 Procedure</h2>
+<p class="comment">Function GetPreference(ByVal Item As Long, ByRef Value As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="parametername">Item</p>
+<p class="comment">This is an integer between 1 and 13, inclusive, indicating the preference item considered.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">1 = Number of interaction curves</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">2 = Number of interaction points</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">3 = Consider minimum eccentricity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">4 = Seismic design category</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">5 = Phi tension controlled</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">6 = Phi compression controlled tied</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">7 = Phi compression controlled spiral</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">8 = Phi shear and/or torsion</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">9 = Phi shear seismic</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">10 = Phi joint shear</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">11 = Pattern live load factor</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">12 = Utilization factor limit</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt;">13 = Multi-response case design</p>
+<p class="parametername">Value</p>
+<p class="comment">The value of the considered preference item.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">1 = Number of interaction curves</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt;= 4 and devisable by 4</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">2 = Number of interaction points</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt;= 5 and odd</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">3 = Consider minimum eccentricity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">0 = No</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Any other value = Yes</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">4 = Seismic design category</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">1 = A</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">2 = B</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">3 = C</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;"><span lang="IT" xml:lang="IT">4 = D</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;"><span lang="IT" xml:lang="IT">5 = E</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;"><span lang="IT" xml:lang="IT">6 = F</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;"><span lang="IT" xml:lang="IT">5 = Phi tension controlled</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">6 = Phi compression controlled tied</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">7 = Phi compression controlled spiral</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">8 = Phi shear and/or torsion</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">9 = Phi shear seismic</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">10 = Phi joint shear</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">11 = Pattern live load factor</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">Value &gt;= 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">12 = Utilization factor limit</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">Value &gt; 0</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84.0pt;">&#160;</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt;">13 = Multi-response case design</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">1 = Envelopes</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">2 = Step-by step</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">3= Last step</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">4 = Envelopes - All</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 1.25in;">5 = Step-by step - All</p>
+<h2>Remarks</h2>
+<p class="comment">This function retrieves the value of a concrete design preference item.</p>
+<p class="comment">The function returns zero if the item is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="coding">Sub GetConcreteDesignPreferenceItemACI318_08_IBC2009()<br />
+&#160;&#160;&#160;'dimension variables<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br />
+<br />
+&#160;&#160;&#160;'create Sap2000 object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br />
+<br />
+&#160;&#160;&#160;'start Sap2000 application<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br />
+<br />
+&#160;&#160;&#160;'create SapModel object<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br />
+<br />
+&#160;&#160;&#160;'initialize model<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br />
+<br />
+&#160;&#160;&#160;'create new concrete frame section property<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetRectangle("R1", "4000Psi", 20, 12)<br />
+<br />
+&#160;&#160;&#160;'create model from template<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288, True, "R1", "R1")<br />
+<br />
+&#160;&#160;&#160;'set concrete design code<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.SetCode("ACI318-08/IBC2009")<br />
+<br />
+&#160;&#160;&#160;'get preference item<br />
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignConcrete.ACI318_08_IBC2009.GetPreference(2, Value)<br />
+<br />
+&#160;&#160;&#160;'close Sap2000<br />
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br />
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br />
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="comment">Initial release in version 14.2.0.</p>
+<h2>See Also</h2>
+<p class="blocktext" style="margin-left: 40px;"><a href="mk:@MSITStore:W:/Released/SAP2000 V15/15.0.0 Server/CSi_OAPI_Documentation.chm::/SAP2000_API_Fuctions/Design/Concrete/ACI_318-05_IBC_2003/SetPreference_%7bConcrete_ACI_318-05_IBC_2003%7d.htm">SetPreference</a></p>
+<p>&#160;</p>
+</body>
+</html>

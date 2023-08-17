@@ -1,0 +1,176 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="GetOverwrite.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetPreference</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetPreference</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignColdFormed.AISI_16.GetPreference</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetPreference(ByVal Item As Long, ByRef Value 
+ As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 13, inclusive, indicating 
+ the preference item considered.</p>
+<p class="Parameter_Description">1 = Framing type</p>
+<p class="Parameter_Description">2 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description">3 = Second order method</p>
+<p class="Parameter_Description">4 = Design provision</p>
+<p class="Parameter_Description">5 = Lateral factor</p>
+<p class="Parameter_Description">6 = Use lateral factor</p>
+<p class="Parameter_Description">7 = PhiTy resistance or OmegaTy safety 
+ factor</p>
+<p class="Parameter_Description">8 = PhiTr resistance or OmegaTr safety 
+ factor</p>
+<p class="Parameter_Description">9 = PhiC resistance or OmegaC safety factor</p>
+<p class="Parameter_Description">10 = PhiB resistance or OmegaB safety 
+ factor</p>
+<p class="Parameter_Description">11 = PhiBPipe resistance or OmegaBPipe 
+ safety factor</p>
+<p class="Parameter_Description">12 = PhiV resistance or OmegaV safety 
+ factor</p>
+<p class="Parameter_Description">13 = Time history design</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered preference item.</p>
+<p class="Parameter_Description">1 = Framing type</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = Moment 
+ Frame</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = Braced 
+ Frame</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">2 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt; 
+ 0</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">3 = Second Order Method</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = General 
+ 2nd Order</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = Amplified 
+ 1st Order</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">4 = Design Provision</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = LRFD</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = ASD</p>
+<p class="Parameter_Description" style="margin-left: 128px;">3 = LSD</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">5 = Lateral Factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt; 
+ 0</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">6 = Use Lateral Factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = No</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = Yes</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p class="Parameter_Description">7 = PhiTy resistance or OmegaTy safety 
+ factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiTy:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaTy:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">8 = PhiTr resistance or OmegaTr safety 
+ factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiTr:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaTr:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">9 = PhiC resistance or OmegaC safety factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiC:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaC:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">10 = PhiB resistance or OmegaB safety 
+ factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiB:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaB:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">11 = PhiBPipe resistance or OmegaBPipe 
+ safety factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiBr:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaBr:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">12 = PhiV or OmegaV safety factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">PhiV:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="GetPreference_files/image001.png" alt="" width="101" height="20" border="0"></p>
+<p class="Parameter_Description" style="margin-left: 128px;">OmegaV:&#160;&#160;&#160;<img src="GetPreference_files/image003.png" alt="" width="71" height="20" border="0"></p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">13 = Time history design</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = Envelopes</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = Step-by 
+ step</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 48.0pt; 
+	 text-indent: .5in; line-height: normal;">&#160;</p>
+<p class="Comment">If Design Provision is 1 (LRFD) or 3 (LSD), the value 
+ of items 7 through 12 will be obtained from Phi factors. Otherwise, if 
+ Design Provision is 2 (ASD), the value of items 6 through 12 will come 
+ from Omega factors.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the value of a cold formed design 
+ preference item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetColdFormedDesignPreferenceItemAISI_16()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'add cold formed material<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.AddQuick(Name, 
+ MATERIAL_COLDFORMED, , , , MATERIAL_COLDFORMED_SUBTYPE_ASTM_A653SQGr50)<br>
+<br>
+&#160;&#160;&#160;'create new cold formed frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetColdC(&quot;CdC&quot;, 
+ Name , 9, 3, 0.06, 0.25, 0.5)<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 72, 2, 144, True, &quot;CdC&quot;, &quot;CdC&quot;)<br>
+<br>
+&#160;&#160;&#160;'set coldformed design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.SetCode(&quot;AISI-16&quot;)<br>
+<br>
+&#160;&#160;&#160;'get preference item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.AISI_16.GetPreference(1, 
+ Value)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 22.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetPreference.htm">SetPreference</a></p>
+<p>&#160;</p>
+</body>
+</html>

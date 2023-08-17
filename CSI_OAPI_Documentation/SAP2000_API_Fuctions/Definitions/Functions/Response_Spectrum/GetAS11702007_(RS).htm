@@ -1,0 +1,87 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetAASHTO2007.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetAS11702007 (RS)</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetAS11702007</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.GetAS11702007</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetAS11702007(ByVal Name As String, ByRef AS2007SiteClass As Long, ByRef AS2007kp As Double, ByRef AS2007Z As Double, ByRef AS2007Sp As Double, ByRef AS2007Mu As Double, ByRef DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a AS 1170 2007 response spectrum function.</p>
+<p class="ParameterName">AS2007SiteClass</p>
+<p class="Comment">This is 1, 2, 3, 4 or 5, indicating the site class.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">5 = E</p>
+<p class="ParameterName">AS2007kp</p>
+<p class="Comment">The probability factor, kp.</p>
+<p class="ParameterName">AS2007Z</p>
+<p class="Comment">The hazard factor, Z.</p>
+<p class="ParameterName">AS2007Sp</p>
+<p class="Comment">The structural performance factor, Sp.</p>
+<p class="ParameterName">AS2007Mu</p>
+<p class="Comment">The structural ductility factor, u.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the definition of an AS 1170 2007 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function definition is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetRSFuncAS11702007()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AS2007SiteClass As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AS2007kp As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AS2007Z As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AS2007Sp As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim AS2007Mu As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampRatio As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add AS 1170 2007 RS function</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetAS11702007("RS-1", 3, 1.3, 0.9, 0.77, 2, 0.04)<br>
+<br>
+&#160;&#160;&#160;'get AS 1170 2007 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.GetAS11702007("RS-1", AS2007SiteClass, AS2007kp, AS2007Z, AS2007Sp, AS2007Mu, DampRatio)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+&#160;&#160;&#160;End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetAS11702007.htm">SetAS11702007</a></p>
+</body>
+</html>

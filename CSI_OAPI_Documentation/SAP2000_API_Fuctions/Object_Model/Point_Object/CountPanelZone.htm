@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Point Object Functions\CountPanelZone.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>CountPanelZone</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>CountPanelZone</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.CountPanelZone</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function CountPanelZone() As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName" style="font-weight: normal;">None</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns the total number of panel zone assignments to point objects in the model.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub CountPanelZones()<br>
+&#160;&#160;&#160;'dimension variables<span style="color: #ff0000;"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;</span>Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count as Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PropType as Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Thickness As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Connectivity As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LocalAxisFrom As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'add panel zone assignment<br>
+&#160;&#160;&#160;&#160;&#160;&#160;PropType = 1 'elastic from column and doubler plate<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Thickness = 2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Connectivity&#160;&#160;= 0 'beams to other objects<br>
+&#160;&#160;&#160;&#160;&#160;&#160;LocalAxisFrom = 0 'column<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointObj.SetPanelZone("3", PropType, Thickness, 0, 0, "", Connectivity, LocalAxisFrom, 0)<br>
+<br>
+&#160;&#160;&#160;'get number of panel zone assignments<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Count = SapModel.PointObj.CountPanelZone<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetPanelZone.htm">GetPanelZone</a></p>
+<p class="Block-Text"><a href="SetPanelZone.htm">SetPanelZone</a></p>
+<p class="Block-Text"><a href="DeletePanelZone.htm">DeletePanelZone</a></p>
+</body>
+</html>

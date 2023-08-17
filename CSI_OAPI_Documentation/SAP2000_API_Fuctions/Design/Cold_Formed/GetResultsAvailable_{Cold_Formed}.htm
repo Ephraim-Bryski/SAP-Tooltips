@@ -1,0 +1,69 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetResultsAvailable {Cold Formed}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetResultsAvailable {Cold Formed}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignColdFormed.GetResultsAvailable</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetResultsAvailable() As Boolean</p>
+<h2>Parameters</h2>
+<p class="Comment">None</p>
+<h2 class="ParameterName">Remarks</h2>
+<p class="Comment">The function returns True if the cold formed frame design results are available, otherwise False.</p>
+<h2 class="Comment">VBA Example</h2>
+<p class="Coding">Sub GetResultsAvailable()</p>
+<p class="Coding">&#160;&#160;'dimension variables</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Dim SapObject as cOAPI</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Dim SapModel As cSapModel</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Dim ResultsAvailable As Boolean</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'create Sap2000 object</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'start Sap2000 application</p>
+<p class="Coding">&#160;&#160;&#160;&#160;SapObject.ApplicationStart</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'create SapModel object</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'initialize model</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'add cold formed material</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.AddQuick(Name, MATERIAL_COLDFORMED, , , , MATERIAL_COLDFORMED_SUBTYPE_ASTM_A653SQGr50)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'create new concrete frame section property</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetColdC("CdC", Name, 9, 3, 0.06, 0.25, 0.5)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'create model from template</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 72, 2, 144, True, "CdC", "CdC")</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'run analysis</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'start cold formed design</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.StartDesign</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'check if design results are available</p>
+<p class="Coding">&#160;&#160;&#160;&#160;ResultsAvailable = SapModel.DesignColdFormed.GetResultsAvailable</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;'close Sap2000</p>
+<p class="Coding">&#160;&#160;&#160;&#160;SapObject.ApplicationExit.False</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Set SapModel = Nothing</p>
+<p class="Coding">&#160;&#160;&#160;&#160;Set SapObject = Nothing</p>
+<p class="Coding">End Sub&#160;&#160;</p>
+<h2 class="Comment">Release Notes</h2>
+<p class="Comment">Initial release in version 18.2.0.</p>
+</body>
+</html>

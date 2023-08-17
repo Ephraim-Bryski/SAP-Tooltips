@@ -1,0 +1,345 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetShellLayer_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetShellLayer_2</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetShellLayer_2</h1>
+<h2>Syntax</h2>
+<p class="Block-Text">SapObject.SapModel.PropArea.GetShellLayer_2</p>
+<h2>VB6 Procedure</h2>
+<p class="Block-Text">Function GetShellLayer_2(ByVal Name As String, ByRef 
+ NumberLayers As Long, ByRef LayerName() As String, ByRef Dist() As Double, 
+ ByRef Thickness() As Double, ByRef MyType() As Long, ByRef NumIntegrationPts() 
+ As Long, ByRef MatProp() As String, ByRef Matang() As Double, ByRef MatBehavior() 
+ As Long, ByRef S11Type() As Long, ByRef S22Type() As Long, ByRef S12Type() 
+ As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing shell-type area property that 
+ is specified to be a layered shell property.</p>
+<p class="ParameterName">NumberLayers</p>
+<p class="Comment">The number of layers in the area property.</p>
+<p class="ParameterName">LayerName</p>
+<p class="Comment">This is an array that includes the name of each layer.</p>
+<p class="ParameterName">Dist</p>
+<p class="Comment">This is an array that includes the distance from the 
+ area reference surface (area object joint location plus offsets) to the 
+ mid-height of the layer. [L]</p>
+<p class="ParameterName">Thickness</p>
+<p class="Comment">This is an array that includes the thickness of each 
+ layer. [L]</p>
+<p class="ParameterName">Type</p>
+<p class="Comment">This is an array that includes 1, 2 or 3, indicating 
+ the layer type.</p>
+<p class="Block-Text" style="margin-left: 88px;">1 = Shell</p>
+<p class="Block-Text" style="margin-left: 88px;">2 = Membrane</p>
+<p class="Block-Text" style="margin-left: 88px;">3 = Plate</p>
+<p class="Block-Text" style="margin-left: 48px;">&#160;</p>
+<p class="ParameterName">NumIntegrationPts</p>
+<p class="Comment">The number of integration points in the thickness direction 
+ for the layer. The locations are determined by the program using standard 
+ Guass-quadrature rules.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">This is an array that includes the name of the material 
+ property for the layer.</p>
+<p class="ParameterName">MatAng</p>
+<p class="Comment">This is an array that includes the material angle for 
+ the layer. [deg]</p>
+<p class="ParameterName">MatBehavior</p>
+<p class="Comment">This is an array that includes 0 or 1,indicating the 
+ material behavior for the layer.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Directional</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = Coupled</p>
+<p class="Block-Text" style="margin-left: 85px;">&#160;</p>
+<p class="ParameterName">S11Type, S22Type, S12Type</p>
+<p class="Comment">These are arrays that include 0, 1 or 2, indicating 
+ the material component behavior.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Inactive</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = Linear</p>
+<p class="Block-Text" style="margin-left: 85px;">2 = Nonlinear</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves area property layer parameters 
+ for a shell-type area section.</p>
+<p class="Comment">The function returns zero if the parameters are successfully 
+ retrieved, otherwise it returns a nonzero value.</p>
+<p class="Comment">The function returns an error if the specified area 
+ property is not a shell-type property specified to be a layered shell.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAreaPropShellLayer2()</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'dimension 
+ variables</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ SapObject as cOAPI</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ SapModel As cSapModel</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ ret As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ Name As String</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyNumberLayers As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyLayerName() As String</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyDist() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyThickness() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyType() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;</span><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyNumIntegrationPts() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyMatProp() As String</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyMatAng() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyMatBehavior() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyS11Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyS22Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MyS12Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ NumberLayers As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ LayerName() As String</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ Dist() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ Thickness() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ SType() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MatProp() As String</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MatAng() As Double</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ MatBehavior() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ S11Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ S22Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ S12Type() As Long</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Dim 
+ NumIntegrationPts() As Long</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'create 
+ Sap2000 object</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'start 
+ Sap2000 application</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject.ApplicationStart</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'create 
+ SapModel object</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;Set 
+ SapModel = SapObject.SapModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'initialize 
+ model</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.InitializeNewModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'create 
+ model from template</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.File.NewWall(2, 48, 2, 48)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'set 
+ new area property</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.PropArea.SetShell(&quot;A1&quot;, 6, &quot;&quot;, 0, 0, 0)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'add 
+ A615Gr60 rebar material</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.PropMaterial.AddMaterial(Name, eMatType_Rebar, &quot;United 
+ States&quot;, &quot;ASTM A706&quot;, &quot;Grade 60&quot;)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'set 
+ area property layer parameters</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;<span 
+	 style="mso-spacerun: yes;">&#160;</span>MyNumberLayers = 5</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyLayerName(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyDist(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyThickness(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyType(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyNumIntegrationPts(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyMatProp(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyMatAng(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyMatBehavior(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyS11Type(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyS22Type(4)</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ReDim 
+ MyS12Type(4)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyLayerName(0) 
+ = &quot;Concrete&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyDist(0) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyThickness(0) 
+ = 16</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyType(0) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyNumIntegrationPts(0) 
+ = 2</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatProp(0) 
+ = &quot;4000Psi&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatAng(0) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatBehavior(0) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS11Type(0) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS22Type(0) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS12Type(0) 
+ = 1</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyLayerName(1) 
+ = &quot;Top Bar 1&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyDist(1) 
+ = 6</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyThickness(1) 
+ = 0.03</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyType(1) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyNumIntegrationPts(1) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatProp(1) 
+ = Name</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;<span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>MyMatAng(1) = 
+ 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatBehavior(1) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS11Type(1) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS22Type(1) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS12Type(1) 
+ = 1</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyLayerName(2) 
+ = &quot;Top Bar 2&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyDist(2) 
+ = 6</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyThickness(2) 
+ = 0.03</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyType(2) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyNumIntegrationPts(2) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatProp(2) 
+ = Name</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatAng(2) 
+ = 90</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatBehavior(2) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS11Type(2) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS22Type(2) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS12Type(2) 
+ = 1</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyLayerName(3) 
+ = &quot;Bot Bar 1&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyDist(3) 
+ = -6</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyThickness(3) 
+ = 0.03</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyType(3) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyNumIntegrationPts(3) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatProp(3) 
+ = Name</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatAng(3) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatBehavior(3) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS11Type(3) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS22Type(3) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS12Type(3) 
+ = 1</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyLayerName(4) 
+ = &quot;Bot Bar 2&quot;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyDist(4) 
+ = -6</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyThickness(4) 
+ = 0.03</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyType(4) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyNumIntegrationPts(4) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatProp(4) 
+ = Name</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatAng(4) 
+ = 90</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyMatBehavior(4) 
+ = 0</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS11Type(4) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS22Type(4) 
+ = 1</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;MyS12Type(4) 
+ = 1</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.PropArea.SetShellLayer_2(&quot;A1&quot;, MyNumberLayers, MyLayerName, 
+ MyDist, MyThickness, MyType, MyNumIntegrationPts, MyMatProp, MyMatAng, 
+ MyMatBehavior, MyS11Type, MyS22Type, MyS12Type)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'get 
+ area property layer parameters</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = SapModel.PropArea.GetShellLayer_2(&quot;A1&quot;, NumberLayers, LayerName, 
+ Dist, Thickness, SType, NumIntegrationPts, MatProp, MatAng, MatBehavior, 
+ S11Type, S22Type, S12Type)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;'close 
+ Sap2000</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;SapObject.ApplicationExit 
+ False</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ SapModel = Nothing</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<p>&#160;</p>
+<h2>Release Notes</h2>
+<p class="Block-Text">Initial release in version 22.1.0</p>
+<p class="Block-Text">&#160;</p>
+<p class="Block-Text">This function supersedes <a href="GetShellLayer_1.htm">GetShellLayer_1</a></p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetShellLayer_2.htm">SetShellLayer_2</a></p>
+</body>
+</html>

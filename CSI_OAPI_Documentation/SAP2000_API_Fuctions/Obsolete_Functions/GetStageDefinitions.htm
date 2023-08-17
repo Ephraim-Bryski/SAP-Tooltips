@@ -1,0 +1,90 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Statuc Nonlinear Staged\GetStageDefinitions.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetStageDefinitions</title>
+<link rel="stylesheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetStageDefinitions &#160;<span style="font-size: 10pt;">(Note: &#160;Newer Function Available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.StaticNonlinear.GetStageDefinitions</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetStageDefinitions(ByVal Name As String, ByRef NumberStages As Long, ByRef Duration() As Long, ByRef Comment() As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing static nonlinear staged analysis case.</p>
+<p class="ParameterName">NumberStages</p>
+<p class="Comment">The number of stages defined for the specified analysis case.</p>
+<p class="ParameterName">Duration</p>
+<p class="Comment">This is an array that includes the duration in days for each stage.</p>
+<p class="ParameterName">Comment</p>
+<p class="Comment">This is an array that includes a comment for each stage. The comment may be a blank string.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the stage definition data for the specified load case.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseStaticNonlinearStagedStageDefinitions()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject As Sap2000v15.SapObject<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDuration() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyComment() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberStages As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Duration() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Comment() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = New Sap2000v15.SapObject<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add static nonlinear staged load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'initialize stage definitions<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyDuration(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyComment(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(0) = "Build structure"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(1) = 60<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(1) = "Wait"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageDefinitions("LCASE1", 2, MyDuration, MyComment)<br>
+<br>
+&#160;&#160;&#160;'get stage definitions<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.GetStageDefinitions("LCASE1", NumberStages, Duration, Comment)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<p class="Comment">This function is obsolete and has been superseded by <a href="GetStageDefinitions_1.htm">GetStageDefinitions_1</a> as of version 12.00. This function is maintained for backwards compatibility.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetStageDefinitions.htm">SetStageDefinitions</a></p>
+</body>
+</html>

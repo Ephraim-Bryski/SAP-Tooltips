@@ -1,0 +1,78 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetFrameForceMultiple</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetFrameForceMultiple</h1>
+<h2>Syntax</h2>
+<p class="parameterdescription" style="margin-left: .5in;">SapObject.SapModel.ExternalAnalysisResults.SetFrameForceMultiple</p>
+<h2>VB6 Procedure</h2>
+<p class="ParameterNameDescription">Function SetFrameForceMultiple(ByVal NumberFrameNames As Long, ByVal FrameName() As String, ByVal NumberLoadCases As Long, ByVal LoadCase() As String, ByVal FirstStep() As Long, ByVal LastStep() As Long, ByRef P() As Double, ByRef M2() As Double, ByRef M3() As Double) As Long</p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Parameters</span></h2>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">NumberFrameNames</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The number of input frames</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">FrameName</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of existing frame objects</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">NumberLoadCases</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold;"><span lang="X-NONE" xml:lang="X-NONE" style="font-weight: normal;">The number of input load cases</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">LoadCase</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of existing external results load cases for which user-supplied external analysis results relevant to the frame objects are available.</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">FirstStep</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the first step values for each load case. This should be of length NumberLoadCases.</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold;"><span lang="X-NONE" xml:lang="X-NONE">LastStep</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the last step values for each load case. This should be of length NumberLoadCases.</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">P</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the axial forces for each frame station. [F]</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">V2</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the shear forces in the local 2 direction for each frame station. [F]</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">V3</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the shear forces in the local 3 direction for each frame station. [F]</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">T</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the torsion for each frame station. [F]</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">M2</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the moment about the local 2-axis for each frame station. [F]</span></p>
+<p class="ParameterNameDescription" style="font-weight: bold; margin-bottom: 0pt;"><span lang="X-NONE" xml:lang="X-NONE">M3</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">An array of the moment about the local 3-axis for each frame station. [F]</span></p>
+<h2><span lang="X-NONE" xml:lang="X-NONE">Remarks</span></h2>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">This function sets the external result forces for all input frames and load cases.</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P, V2, V3, T, M2, M3 arrays should be of length:</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">(Sum of all steps for all input Load Cases) * (Sum of all stations for all input Frames)</span></p>
+<p class="ParameterNameDescription">&#160;</p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">As an example, consider setting results for two Frames, each with two defined Stations, for two Load Cases, each Load Case containing three steps, eg First Step = 1, Last step = 3.</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The values of this array will be iterated over in the following order:</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[0] value will be the axial force for FrameName[0], LoadCase[0], FirstStep[0], 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[1] value will be the axial force for FrameName[0], LoadCase[0], FirstStep[0], 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[2] value will be the axial force for FrameName[0], LoadCase[0], FirstStep[0]+1, 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[3] value will be the axial force for FrameName[0], LoadCase[0], FirstStep[0]+1, 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[4] value will be the axial force for FrameName[0], LoadCase[0], LastStep[0], 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[5] value will be the axial force for FrameName[0], LoadCase[0], LastStep[0], 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[6] value will be the axial force for FrameName[0], LoadCase[1], FirstStep[1], 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[7] value will be the axial force for FrameName[0], LoadCase[1], FirstStep[1], 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[8] value will be the axial force for FrameName[0], LoadCase[1], FirstStep[1]+1, 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[9] value will be the axial force for FrameName[0], LoadCase[1], FirstStep[1]+1, 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[10] value will be the axial force for FrameName[0], LoadCase[1], LastStep[1], 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[11] value will be the axial force for FrameName[0], LoadCase[1], <span style="mso-spacerun: yes;">&#160;</span>LastStep[1], 2nd Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The P[12] value will be the axial force for FrameName[1], LoadCase[0], FirstStep[0], 1st Station</span></p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">And so on…</span></p>
+<p class="ParameterNameDescription">&#160;</p>
+<p class="ParameterNameDescription"><span lang="X-NONE" xml:lang="X-NONE">The number of stations must be previously declared using SetFrameStations</span></p>
+<p class="ParameterNameDescription">&#160;</p>
+<p class="ParameterNameDescription">Enter 0 for any unneeded values in these arrays</p>
+<p class="ParameterNameDescription">&#160;</p>
+<p class="ParameterNameDescription">The function returns zero if the forces are successfully set, otherwise it returns a nonzero value.</p>
+<p class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; margin-left: .5in; line-height: normal;">&#160;</p>
+<h2>VBA Example</h2>
+<p>&#160;</p>
+<h2>Release Notes</h2>
+<p class="ParameterNameDescription">Initial Release in version 16.0.0.</p>
+<p class="ParameterNameDescription">&#160;</p>
+<p class="ParameterNameDescription">&#160;</p>
+</body>
+</html>

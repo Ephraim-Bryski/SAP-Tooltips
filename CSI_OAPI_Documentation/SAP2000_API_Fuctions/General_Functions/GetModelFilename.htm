@@ -1,0 +1,63 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetModelFilename.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetModelFilename</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetModelFilename</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.GetModelFilename</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetModelFilename(Optional ByVal IncludePath As Boolean = True) As String</p>
+<h2>Parameters</h2>
+<p class="ParameterName">IncludePath</p>
+<p class="Comment"><span style="font-weight: normal;">A boolean (True or False) value. When this item is True, the returned filename includes the full path where the file is located.</span></p>
+<h2>Remarks</h2>
+<p class="Comment">The function returns a string that represents the filename of the current model, with or without the full path.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetModelFilename()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'start a new template model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'save the model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\API_1-001.sdb")<br>
+<br>
+&#160;&#160;&#160;'display the filename of the model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MsgBox “Model filename = “ &amp; SapModel.GetModelFilename<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.2.2</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetModelFilepath.htm">GetModelFilepath</a></p>
+</body>
+</html>

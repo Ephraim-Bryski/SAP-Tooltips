@@ -1,0 +1,91 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetConnectivity.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetConnectivity {Point Element}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+<style type="text/css">
+/*<![CDATA[*/
+A:visited {
+        color: #800080;
+}
+A:link {
+        color: #0000ff;
+}
+/*]]>*/
+</style>
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetConnectivity</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointElm.GetConnectivity</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetConnectivity(ByVal Name As String, ByRef NumberItems As Long, ByRef ObjectType() As Long, ByRef ObjectName() As String, ByRef PointNumber() As Long) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point element.</p>
+<p class="ParameterName">NumberItems</p>
+<p class="Comment">This is the total number of elements connected to the specified point element.</p>
+<p class="ParameterName">ObjectType</p>
+<p class="Comment">This is an array that includes the element type of each element connected to the specified point element.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Frame element</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Cable element</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Tendon element</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Area element</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Solid element</p>
+<p class="Comment" style="margin-left: 88px;">7 = Link element</p>
+<p class="ParameterName">ObjectName</p>
+<p class="Comment">This is an array that includes the element name of each element connected to the specified point element.</p>
+<p class="ParameterName">PointNumber</p>
+<p class="Comment">This is an array that includes the point number within the considered element that corresponds to the specified point element.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns a list of elements connected to a specified point element.</p>
+<p class="Comment">The function returns zero if the list is successfully filled; otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetPointElementConnectivity()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberItems as Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PointNumber() As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'create analysis model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.CreateAnalysisModel<br>
+<br>
+&#160;&#160;&#160;'get elements connected to point element 11<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PointElm.GetConnectivity("11", NumberItems, ObjectType, ObjectName, PointNumber)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

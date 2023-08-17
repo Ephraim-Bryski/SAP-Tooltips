@@ -1,0 +1,113 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Steady State\GetFreqData.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetFreqData {Steady State}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetFreqData</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.SteadyState.GetFreqData</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetFreqData(ByVal Name As String, ByRef FreqFirst As Double, ByRef FreqLast As Double, ByRef FreqNumIncs As Long, ByRef FreqAddModal As Boolean, ByRef FreqAddModalDev As Boolean, ByRef FreqAddSpecified As Boolean, ByRef FreqNumModalDev As Long, ByRef FreqModalDev() As Double, ByRef FreqNumSpecified As Long, ByRef FreqSpecified() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing steady state load case.</p>
+<p class="ParameterName">FreqFirst</p>
+<p class="Comment">The first frequency. [cyc/s]</p>
+<p class="ParameterName">FreqLast</p>
+<p class="Comment">The last frequency. [cyc/s]</p>
+<p class="ParameterName">FreqNumIncs</p>
+<p class="Comment">The number of frequency increments.</p>
+<p class="ParameterName">FreqAddModal</p>
+<p class="Comment">If this item is True then modal frequencies are added.</p>
+<p class="ParameterName">FreqAddModalDev</p>
+<p class="Comment">If this item is True then signed fractional deviations from modal frequencies are added.</p>
+<p class="ParameterName">FreqAddSpecified</p>
+<p class="Comment">If this item is True, specified frequencies are added.</p>
+<p class="ParameterName">ModalCase</p>
+<p class="Comment">This is the name of an existing modal load case. It specifies the modal load case on which modal frequencies and modal frequency deviations are based.</p>
+<p class="ParameterName">FreqNumModalDev</p>
+<p class="Comment">The number of signed fractional deviations from modal frequencies that are added. This item applies only when FreqAddModalDev = True.</p>
+<p class="ParameterName">FreqModalDev</p>
+<p class="Comment">This is an array that includes the added signed fractional deviations from modal frequencies. This item applies only when FreqAddModalDev = True.</p>
+<p class="ParameterName">FreqNumSpecified</p>
+<p class="Comment">The number of specified frequencies that are added. This item applies only when FreqAddSpecified = True.</p>
+<p class="ParameterName">FreqSpecified</p>
+<p class="Comment">This is an array that includes the added specified frequencies. This item applies only when FreqAddModalDev = True.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the frequency data for the specified load case.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseSteadyStateFreqData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyFreqModalDev() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyFreqSpecified() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqFirst As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqLast As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqNumIncs As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqAddModal As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqAddModalDev As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqAddSpecified As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ModalCase As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqNumModalDev As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqModalDev() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqNumSpecified As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FreqSpecified() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add steady state load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set frequency data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyFreqModalDev(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyFreqSpecified(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFreqModalDev(0) = -0.1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFreqModalDev(1) = 0.2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFreqSpecified(0) = 1.2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFreqSpecified(1) = 11.4<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.SetFreqData("LCASE1", .6, 20.6, 10, True, True, True, "MODAL", 2, MyFreqModalDev, 2, MyFreqSpecified)<br>
+<br>
+&#160;&#160;&#160;'get frequency data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.GetFreqData("LCASE1", FreqFirst, FreqLast, FreqNumIncs, FreqAddModal, FreqAddModalDev, FreqAddSpecified, ModalCase, FreqNumModalDev, FreqModalDev, FreqNumSpecified, FreqSpecified)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetFreqData_{Steady_State}.htm">SetFreqData</a></p>
+</body>
+</html>

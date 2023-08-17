@@ -1,0 +1,194 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDamper</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetDamper</h1>
+<h2>Syntax</h2>
+<p class="comment">SapObject.SapModel.PropLink.GetDamper</p>
+<h2>VB6 Procedure</h2>
+<p class="comment">Function GetDamper(ByVal Name As String, ByRef DOF() As Boolean, ByRef Fixed() As Boolean, ByRef NonLinear() As Boolean, ByRef Ke() As Double, ByRef Ce() As Double, ByRef k() As Double, ByRef c() As Double, ByRef cexp() As Double, ByRef dj2 As Double, ByRef dj3 As Double, ByRef Notes As String, ByRef GUID As String) As Long</p>
+<h2>Parameters</h2>
+<p class="parametername">Name</p>
+<p class="comment">The name of an existing exponential damper-type link property.</p>
+<p class="parametername">DOF</p>
+<p class="comment">This is a boolean array, dimensioned to 5, indicating if properties exist for a specified degree of freedom.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">DOF(0) = U1</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">DOF(1) = U2</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">DOF(2) = U3</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">DOF(3) = R1</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">DOF(4) = R2</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt;">DOF(5) = R3</p>
+<p class="parametername">Fixed</p>
+<p class="comment">This is a boolean array, dimensioned to 5, indicating if the specified degree of freedom is fixed (restrained).</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Fixed(0) = U1 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Fixed(1) = U2 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Fixed(2) = U3 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Fixed(3) = R1 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Fixed(4) = R2 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt;">Fixed(5) = R3 fixity</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term Fixed(n) applies only when DOF(n) = True.</p>
+<p class="parametername">NonLinear</p>
+<p class="comment">This is a boolean array, dimensioned to 5, indicating if nonlinear properties exist for a specified degree of freedom.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(0) = U1 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(1) = U2 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(2) = U3 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(3) = R1 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(4) = R2 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">NonLinear(5) = R3 has nonlinear properties</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term NonLinear(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="parametername">Ke</p>
+<p class="comment">This is an array of effective stiffness terms for the link property. The effective stiffness applies for linear analyses.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ke(0) = U1 [F/L]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">Ke(1) = U2 [F/L]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">Ke(2) = U3 [F/L]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">Ke(3) = R1 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">Ke(4) = R2 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ke(5) = R3 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term Ke(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="parametername">Ce</p>
+<p class="comment">This is an array of effective damping terms for the link property. The effective damping applies for linear analyses.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(0) = U1 [F/L]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(1) = U2 [F/L]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(2) = U3 [F/L]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(3) = R1 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(4) = R2 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">Ce(5) = R3 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term Ce(n) applies only when DOF(n) = True and Fixed(n) = False.</p>
+<p class="parametername">k</p>
+<p class="comment">This is an array of initial stiffness terms for the link property. The initial stiffness applies for nonlinear analyses.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">k(0) = U1 [F/L]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">k(1) = U2 [F/L]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">k(2) = U3 [F/L]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">k(3) = R1 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">k(4) = R2 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">k(5) = R3 [FL]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term k(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="parametername">c</p>
+<p class="comment">This is an array of nonlinear damping coefficient terms for the link property. The nonlinear damping coefficient applies for nonlinear analyses.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">c(0) = U1 [F/(L^cexp)]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">c(1) = U2 [F/(L^cexp)]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">c(2) = U3 [F/(L^cexp)]</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">c(3) = R1 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">c(4) = R2 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;"><span lang="NO-BOK" xml:lang="NO-BOK" style="mso-ansi-language: NO-BOK;">c(5) = R3 [FL]</span></p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term c(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="parametername">cexp</p>
+<p class="comment">This is an array of the nonlinear damping exponent terms. The nonlinear damping exponent applies for nonlinear analyses. It is applied to the velocity across the damper in the equation of motion.</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(0) = U1</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(1) = U2</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(2) = U3</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(3) = R1</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(4) = R2</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; margin-bottom: .0001pt;">cexp(5) = R3</p>
+<p class="parameterdescription" style="margin-top: 0in; margin-right: 0in; margin-left: .5in; margin-bottom: .0001pt;">&#160;</p>
+<p class="comment">The term cexp(n) applies only when DOF(n) = True, Fixed(n) = False and NonLinear(n) = True.</p>
+<p class="parametername">dj2</p>
+<p class="comment">The distance from the J-End of the link to the U2 shear spring. This item applies only when DOF(1) = True. [L]</p>
+<p class="parametername">dj3</p>
+<p class="comment">The distance from the J-End of the link to the U3 shear spring. This item applies only when DOF(2) = True. [L]</p>
+<p class="parametername">Notes</p>
+<p class="comment">The notes, if any, assigned to the property.</p>
+<p class="parametername">GUID</p>
+<p class="comment">The GUID (global unique identifier), if any, assigned to the property.</p>
+<h2>Remarks</h2>
+<p class="comment">This function retrieves link property data for an exponential damper-type link property.</p>
+<p class="comment">The function returns zero if the property data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding"><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; font-family: 'Courier New'; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Sub GetLinkPropDamper()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDOF() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyFixed() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyNonLinear() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyKe() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCe() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyK() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyC() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCexp() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DOF() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Fixed() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Nonlinear() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ke() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Ce() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim k() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim c() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim cexp() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim dj2 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim dj3 As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Notes As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GUID As String</span></p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 96px;"><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; font-family: 'Courier New'; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add link property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyDOF(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyFixed(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyNonLinear(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyKe(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyCe(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyK(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyC(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyCexp(5)<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDOF(0) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyKe(0) = 12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCe(0) = 0.01<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDOF(1) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyNonLinear(1) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyKe(1) = 12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCe(1) = 0.01<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyK(1) = 20<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyC(1)=0.08<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCexp(1) = 1.2<br>
+<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDOF(2) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFixed(2) = True<br style="mso-special-character: line-break;">
+<br style="mso-special-character: line-break;">
+ret = SapModel.PropLink.SetDamper("D1", MyDOF, MyFixed, MyNonLinear,</span> <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; font-family: 'Courier New'; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">MyKe, MyCe, MyK, MyC, MyCexp, 1, 0)</span></p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'get link property data</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.PropLink.GetDamper ("D1", DOF, Fixed, NonLinear, Ke, Ce, k, c, cexp, dj2, dj3, Notes, GUID)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="comment">Initial release in version 11.02.</p>
+<p class="comment">Clarification that damper type is exponential added in version 16.0.2.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetDamper.htm">SetDamper</a></p>
+</body>
+</html>

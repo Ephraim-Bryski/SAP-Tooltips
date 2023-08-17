@@ -1,0 +1,96 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Breaking Changes in v23.0.0, v22.2.0, and v22.1.0</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Breaking Changes in v23.0.0, v22.2.0, and v22.1.0</h1>
+<p class="Comment">The following inadvertent changes broke compatibility 
+ with earlier API versions: </p>
+<ul style="list-style: disc;">
+	<li><p class="Comment" style="margin-bottom: 4pt;">In SAP2000 v22.2.0 
+	 (SAP2000v1.dll version 1.9 and CSiAPIv1.dll version 1.9), eMatTypeSteel_Chinese_Q345&#160;enumeration 
+	 got renamed to eMatTypeSteel_Chinese_Q355.&#160; </p></li>
+	<ul style="list-style: disc;">
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Affected 
+		 Programs: </p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">SAP2000 
+			 v22.2.0, v22.2.1, v23.0.0</p></li>
+			<li><p class="Comment" style="margin-bottom: 4pt;">CSiBridge 
+			 v22.2.0, v22.2.1, v23.0.0</p></li>
+		</ul>
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Affected 
+		 API clients: </p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">Compiled 
+			 COM clients (e.g. VB6, Delphi) failed to start. </p></li>
+			<li><p class="Comment" style="margin-bottom: 4pt;">Interpreted 
+			 COM clients (e.g. VBA) failed to compile/run if the affected 
+			 enumeration was used.</p></li>
+		</ul>
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Fix</p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">eMatTypeSteel_Chinese_Q345 
+			 enumeration got reinstated.</p></li>
+		</ul>
+	</ul>
+</ul>
+<ul style="list-style: disc;">
+	<li><p class="Comment" style="margin-bottom: 4pt;">In SAP2000 v23.0.0 
+	 (SAP2000v1.dll version 1.13 and CSiAPIv1.dll version 1.13), cDAlAA_ASD_2000 
+	 &amp; cDAlAA_LRFD_2000 interfaces got removed. </p></li>
+	<ul style="list-style: disc;">
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Affected 
+		 Programs: </p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">SAP2000 
+			 v23.0.0</p></li>
+		</ul>
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Affected 
+		 API clients: </p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">Compiled 
+			 COM clients (e.g. VB6, Delphi)&#160;started but gave an automation 
+			 error if affected interfaces were used. </p></li>
+			<li><p class="Comment" style="margin-bottom: 4pt;">Interpreted 
+			 COM clients (e.g. VBA) failed to compile/run if the affected 
+			 interfaces were used.</p></li>
+			<li><p class="Comment" style="margin-bottom: 4pt;">Compiled 
+			 .NET clients started but gave an error if affected interfaces 
+			 were used. &#160;</p></li>
+		</ul>
+		<li style="list-style: circle;"><p class="Comment" style="margin-bottom: 4pt;">Fix</p></li>
+		<ul style="list-style: square;">
+			<li><p class="Comment" style="margin-bottom: 4pt;">cDAlAA_ASD_2000 
+			 &amp; cDAlAA_LRFD_2000 interfaces got reinstated.</p></li>
+		</ul>
+	</ul>
+</ul>
+<p class="Comment" style="margin-bottom: 4pt;">&#160;</p>
+<p class="Comment" style="margin-bottom: 4pt;">SAP2000 versions 22.2.0, 
+ 22.2.1, and 23.0.0 and corresponding SAP2000v1.dll versions 1.9 and 1.13 
+ &amp; CSiAPIv1.dll versions between 1.9 and 1.13 should not to be used 
+ for developing plug-ins and/or API scripts to ensure full compatibility 
+ with past and future API versions. </p>
+<p class="Comment" style="margin-bottom: 4pt;">cOAPI.GetOAPIVersionNumber() 
+ method can be used to check for incompatible API versions before using 
+ affected interfaces to prevent run time errors.</p>
+<p class="Comment" style="margin-bottom: 4pt;">&#160;</p>
+<p class="MsoNormal" style="margin-left: .5in; background-color: #ffffff; 
+	 font-size: 12pt;">CSiBridge versions 22.2.0, 22.2.1, and 23.0.0 and 
+ corresponding CSiBridge1.dll versions 1.9 and 1.13 &amp; CSiAPIv1.dll 
+ versions between 1.9 and 1.13 should not to be used for developing plug-ins 
+ and/or API scripts to ensure full compatibility with past and future API 
+ versions.</p>
+<p class="MsoNormal" style="margin-left: .25in; background-color: #ffffff;">&#160;</p>
+<p class="Comment" style="margin-bottom: 4pt;">&#160;</p>
+</body>
+</html>

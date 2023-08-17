@@ -1,0 +1,66 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Set Default</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Set Default</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SourceMass.SetDefault</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetDefault(ByVal Name As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of the mass source to be flagged as the default mass source.</p>
+<h2><b style="mso-bidi-font-weight: normal;">Remarks</b></h2>
+<p class="Comment">This function sets the default mass source.</p>
+<p class="Comment">The function returns zero if the mass source is successfully flagged as default, otherwise it returns nonzero.<span style="mso-spacerun: yes;">&#160;</span>&#160;Only one mass source can be the default mass source so when this assignment is set all other mass sources are automatically set to have their IsDefault flag False.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetDefaultMassSource()</p>
+<p class="Coding" style="margin-left: 72px;">'dimension variables</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapObject as cOAPI</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapModel As cSapModel</p>
+<p class="Coding" style="margin-left: 96px;">Dim ret As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim LoadPat(0) As String</p>
+<p class="Coding" style="margin-left: 96px;">Dim SF(0) As Double</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'start Sap2000 application</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationStart</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create SapModel object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = SapObject.SapModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'initialize model</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.InitializeNewModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create model from template</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'add a new mass source and do NOT make it the default mass source</p>
+<p class="Coding" style="margin-left: 96px;">LoadPat(0) = "DEAD"</p>
+<p class="Coding" style="margin-left: 96px;">SF(0) = 1.25</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.SourceMass.SetMassSource("MyMassSource", True, True, True, False, 1, LoadPat, SF)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'set MyMassSource as the default mass source</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.SourceMass.SetDefault("MyMassSource")</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

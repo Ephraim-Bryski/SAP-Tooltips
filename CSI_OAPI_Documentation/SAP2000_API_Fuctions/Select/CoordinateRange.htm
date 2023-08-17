@@ -1,0 +1,85 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Selection Functions\CoordinateRange.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>CoordinateRange</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>CoordinateRange</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SelectObj.CoordinateRange</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function CoordinateRange(ByVal XMin As Double, ByVal XMax As Double, ByVal YMin As Double, ByVal YMax As Double, ByVal ZMin As Double, ByVal ZMax As Double, Optional ByVal DeSelect As Boolean = False, Optional ByVal CSys As String = "Global", Optional ByVal IncludeIntersections As Boolean = False, Optional ByVal Point As Boolean = True, Optional ByVal Line As Boolean = True, Optional ByVal Area As Boolean = True, Optional ByVal Solid As Boolean = True, Optional ByVal Link As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">XMin, XMax</p>
+<p class="Comment">The maximum and minimum X coordinates of the selection box in the specified coordinate system.</p>
+<p class="ParameterName">YMin, YMax</p>
+<p class="Comment">The maximum and minimum Y coordinates of the selection box in the specified coordinate system.</p>
+<p class="ParameterName">ZMin, ZMax</p>
+<p class="Comment">The maximum and minimum Z coordinates of the selection box in the specified coordinate system.</p>
+<p class="ParameterName">DeSelect</p>
+<p class="Comment">The item is False if objects are to be selected and True if they are to be deselected.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The name of the coordinate system in which XMin, XMax, YMin, YMax, ZMin and ZMax are specified.</p>
+<p class="ParameterName">IncludeIntersections</p>
+<p class="Comment">When this item is True, objects that are inside the box or intersecting the sides and edges of the box are selected or deselected.</p>
+<p class="Comment">When this item is False, only objects that are fully inside the box are selected or deselected.</p>
+<p class="ParameterName">Point</p>
+<p class="Comment">Point objects that fall inside the box are only selected or deselected when this item is True.</p>
+<p class="ParameterName">Line</p>
+<p class="Comment">Line objects that fall inside the box are only selected or deselected when this item is True.</p>
+<p class="ParameterName">Area</p>
+<p class="Comment">Area objects that fall inside the box are only selected or deselected when this item is True.</p>
+<p class="ParameterName">Solid</p>
+<p class="Comment">Solid objects that fall inside the box are only selected or deselected when this item is True.</p>
+<p class="ParameterName">Link</p>
+<p class="Comment">Link objects that fall inside the box are only selected or deselected when this item is True.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function selects or deselects objects inside the box defined by the XMin, XMax, YMin, YMax, ZMin and ZMax coordinates.</p>
+<p class="Comment">The function returns zero if the selection is successfully completed, otherwise it returns nonzero.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SelectCoordinateRange()<br>
+&#160;&#160;&#160;'dimension variables<span style="color: #ff0000;"><br>
+&#160;&#160;&#160;&#160;&#160;&#160;</span>Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'select coordinate range<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.CoordinateRange(-100, 100, 0, 0, 100, 200, , , True)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+</body>
+</html>

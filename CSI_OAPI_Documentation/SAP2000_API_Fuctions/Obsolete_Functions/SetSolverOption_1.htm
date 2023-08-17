@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="SetSolverOption_1.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetSolverOption_1</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #800080;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>SetSolverOption_1 <span style="font-size: 10pt;">(Note: &#160;Newer 
+ function available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Analyze.SetSolverOption_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetSolverOption(ByVal SolverType As Long, ByVal 
+ SolverProcessType As Long, ByVal Force32BitSolver As Boolean, Optional 
+ ByVal StiffCase As String = &quot;&quot;) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">SolverType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the solver type.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Standard solver</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = Advanced solver</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">2 
+ = Multi-threaded solver</p>
+<p class="ParameterName">SolverProcessType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the process the analysis 
+ is run.</p>
+<p class="Block-Text" style="margin-left: 85px;">0 = Auto (program determined)</p>
+<p class="Block-Text" style="margin-left: 85px;">1 = GUI process</p>
+<p class="Block-Text" style="margin-left: 85px; margin-bottom: 9pt;">2 
+ = Separate process</p>
+<p class="ParameterName">Force32BitSolver</p>
+<p class="Comment">This is True if the analysis is always run using 32-bit, 
+ even on 64-bit computers.</p>
+<p class="ParameterName">StiffCase</p>
+<p class="Comment">The name of the load case used when outputting the mass 
+ and stiffness matrices to text files If this item is blank, no matrices 
+ are output.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the model solver options.</p>
+<p class="Comment">The function returns zero if the options are successfully 
+ set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding"><span class="Code">Sub SetModelSolverOption()</span><br>
+&#160;&#160;&#160;<span class="Code2">'dimension variables</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">Dim SapObject as 
+ cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</span><br>
+<br>
+&#160;&#160;<span class="Code2">&#160;'create Sap2000 object</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">Set SapObject = 
+ New</span> <span class="Code3">SAP</span><span class="Code3">2000.SapObject</span><br>
+<br>
+&#160;&#160;<span class="Code2">&#160;'start Sap2000 application</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">SapObject.ApplicationStart</span><br>
+<br>
+&#160;&#160;&#160;<span class="Code2">'create SapModel object</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">Set SapModel = 
+ SapObject.SapModel</span><br>
+<br>
+&#160;&#160;&#160;<span class="Code2">'initialize model</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">ret = SapModel.InitializeNewModel</span><br>
+<br>
+&#160;&#160;<span class="Code2">&#160;'create model from template</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)</span><br>
+<br>
+&#160;&#160;&#160;<span class="Code2">'set model solver options</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">ret = SapModel.Analyze.SetSolverOption_1(1, 
+ 1, True, &quot;DEAD&quot;)</span><br>
+<br>
+&#160;&#160;<span class="Code2">&#160;'close Sap2000</span><br>
+&#160;&#160;&#160;&#160;&#160;&#160;<span class="Code3">SapObject.ApplicationExit 
+ False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing</span><br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.2.2</p>
+<p class="Comment">This function is obsolete and has been superseded by 
+ <a href="NEW_-_Analyze.SetSolverOption_2.htm">SetSolverOption_2</a> as 
+ of version 21.1.0. This function is maintained for backwards compatibility.</p>
+<p class="Comment">This function supersedes <a href="SetSolverOption.htm">SetSolverOption</a>.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetSolverOption_1.htm">GetSolverOption_1</a></p>
+<p>&#160;</p>
+</body>
+</html>

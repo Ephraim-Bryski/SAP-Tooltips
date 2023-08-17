@@ -1,0 +1,58 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\ApplicationExit.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetAsActiveObject</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=2"></a><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1 style="text-decoration: none;"><span>SetAsActiveObject</span></h1>
+<h2>Syntax</h2>
+<p class="Block-Text">SapObject.SetAsActiveObject</p>
+<h2>VB6 Procedure</h2>
+<p class="Block-Text">Function SetAsActiveObject () As Long</p>
+<h2>Parameters</h2>
+<p style="margin-left: 48px; margin-bottom: 0pt;">None</p>
+<h2>Remarks</h2>
+<p class="Block-Text">This function sets the active instance of a SapObject in the system Running Object Table (ROT), replacing the previous instance(s).</p>
+<p class="Block-Text">&#160;</p>
+<p class="Block-Text">When a new SapObject is created using the OAPI, it is automatically added to the system ROT if none is already present. Subsequent instances of the SapObject do not alter the ROT as long as at least one active instance of a SapObject is present in the ROT.</p>
+<p class="Block-Text">&#160;</p>
+<p class="Block-Text">The Windows API call GetObject() can be used to attach to the active SapObject instance registered in the ROT.<br>
+&#160;</p>
+<p class="Block-Text">This function returns zero if the current instance is successfully added to the system ROT and nonzero if it fails.</p>
+<h2>VBA Example</h2>
+<p class="Coding" style="margin-left: 48px;">Sub StartExample()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'set as active SapObject instance<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapObject.SetAsActiveObject<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Block-Text">Initial release in version 15.01.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="UnsetAsActiveObject.htm">UnsetAsActiveObject</a></p>
+</body>
+</html>

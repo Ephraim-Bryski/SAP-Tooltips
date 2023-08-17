@@ -1,0 +1,91 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\General Edit Functions\ReplicateLinear.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ReplicateLinear</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>ReplicateLinear</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.EditSolid.ReplicateLinear</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ReplicateLinear(ByVal dx As Double, ByVal dy As Double, ByVal dz As Double, ByVal Number As Long, ByRef NumberObjects As Long, ByRef ObjectName() As String, ByRef ObjectType() As Long, Optional ByVal Remove As Boolean = False) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">dx, dy, dz</p>
+<p class="Comment">These are the x, y and z offsets used, in the present coordinate system, to replicate the selected objects.</p>
+<p class="ParameterName">Number</p>
+<p class="Comment">The number of times the selected objects are to be replicated.</p>
+<p class="ParameterName">NumberObjects</p>
+<p class="Comment">The number of new objects created by the replication process.</p>
+<p class="ParameterName">ObjectName</p>
+<p class="Comment">This is an array of the name of each object created by the replication process.</p>
+<p class="ParameterName">ObjectType</p>
+<p class="Comment">This is an array of the type of each object created by the replication process.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Point object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Frame object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Cable object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Tendon object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Area object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Solid object</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">7 = Link object</p>
+<p class="ParameterName">Remove</p>
+<p class="Comment">If this item is True, the originally selected objects are deleted after the replication is complete.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function linearly replicates selected objects.</p>
+<p class="Comment">The function returns zero if the replication is successful; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub LinearReplication()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberObjects As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectType() As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'linearly replicate<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SelectObj.All<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.EditGeneral.ReplicateLinear(0, 288, 0, 1, NumberObjects, ObjectName, ObjectType)<br>
+<br>
+&#160;&#160;&#160;'refresh view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, False)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Modified optional argument Remove to be ByVal in version 12.0.1.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="ReplicateRadial.htm">ReplicateRadial</a></p>
+<p class="Block-Text"><a href="ReplicateMirror.htm">ReplicateMirror</a></p>
+</body>
+</html>

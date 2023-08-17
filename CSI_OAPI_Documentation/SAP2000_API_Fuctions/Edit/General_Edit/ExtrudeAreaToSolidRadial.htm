@@ -1,0 +1,94 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\General Edit Functions\ExtrudeAreaToSolidRadial.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ExtrudeAreaToSolidRadial</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>ExtrudeAreaToSolidRadial</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.EditSolid.ExtrudeAreaToSolidRadial</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ExtrudeAreaToSolidRadial(ByVal Name As String, ByVal PropName As String, ByVal RotateAxis As Long, ByVal x As Double, ByVal y As Double, ByVal z As Double, ByVal IncrementAng As Double, ByVal TotalRise As Double, ByVal Number As Long, ByRef NumberSolids As Long, ByRef SolidName() As String, Optional ByVal Remove As Boolean = True) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing area object to be extruded.</p>
+<p class="ParameterName">PropName</p>
+<p class="Comment">This is either Default or the name of a defined solid property to be used for the new extruded solid objects.</p>
+<p class="ParameterName">RotateAxis</p>
+<p class="Comment">This is 0, 1 or 2, indicating the axis that the radial extrusion is around.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = X axis</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Y axis</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Z axis</p>
+<p class="ParameterName">x, y, z</p>
+<p class="Comment">These are the x, y and z coordinates, in the present coordinate system, of the point that the radial extrusion is around. For rotation about the X axis the value of the x coordinate is irrelevant. Similarly, for rotation about the Y and Z axes the y and z coordinates, respectively, are irrelevant. [L]</p>
+<p class="ParameterName">IncrementAng</p>
+<p class="Comment">The angle is rotated by this amount for each added solid object. [deg]</p>
+<p class="ParameterName">TotalRise</p>
+<p class="Comment">The total rise over the full length of the extrusion. [L]</p>
+<p class="ParameterName">Number</p>
+<p class="Comment">The number of angle increments for the extrusion.</p>
+<p class="ParameterName">NumberSolids</p>
+<p class="Comment">The number of solid objects created when the specified area object is extruded. Usually this item is returned the same as the Number item. However, in some cases, such as when an area object with more than four sides is extruded, this item will be larger than the Number item.</p>
+<p class="ParameterName">SolidName</p>
+<p class="Comment">This is an array of the name of each solid object created when the specified area object is extruded.</p>
+<p class="ParameterName">Remove</p>
+<p class="Comment">If this item is True, the area object indicated by the Name item is deleted after the extrusion is complete.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function creates new solid objects by radially extruding a specified area object into solid objects.</p>
+<p class="Comment">The function returns zero if the extrusion is successful; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub RadialAreaExtrusionToSolids()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberSolids As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SolidName() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(5, 48, 2, 48)<br>
+<br>
+&#160;&#160;&#160;'radially extrude area to solid<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.EditGeneral.ExtrudeAreaToSolidRadial("2", "Default", 2, 0, 0, 96, 30, 0, 6, NumberSolids, SolidName)<br>
+<br>
+&#160;&#160;&#160;'refresh view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, False)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Modified optional argument Remove to be ByVal in version 12.0.1.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="ExtrudeAreaToSolidLinearNormal.htm">ExtrudeAreaToSolidLinearNormal</a></p>
+<p class="Block-Text"><a href="ExtrudeAreaToSolidLinearUser.htm">ExtrudeAreaToSolidLinearUser</a></p>
+<p class="block-text">&#160;</p>
+</body>
+</html>

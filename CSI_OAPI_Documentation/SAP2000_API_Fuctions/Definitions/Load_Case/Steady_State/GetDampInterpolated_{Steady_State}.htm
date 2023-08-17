@@ -1,0 +1,108 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Steady State\GetDampInterpolated.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDampInterpolated {Steady State}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetDampInterpolated</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.SteadyState.GetDampInterpolated</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetDampInterpolated(ByVal Name As String, ByRef HysIntFreqUnits As Long, ByRef HysIntNumFreqs As Long, ByRef HysIntFreq() As Double, ByRef HysIntMassCoeff() As Double, ByRef HysIntStiffCoeff() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing steady state load case that has interpolated damping.</p>
+<p class="ParameterName">HysIntFreqUnits</p>
+<p class="Comment">This is 1 or 2, indicating the units for the frequency.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Hz [cyc/s]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = RPM</p>
+<p class="ParameterName">HysIntNumFreqs</p>
+<p class="Comment">The number of sets of frequency, mass coefficient and stiffness coefficient data.</p>
+<p class="ParameterName">HysIntFreq</p>
+<p class="Comment">This is an array of frequencies. The frequency is in Hz or RPM, depending on the value of HysIntFreqUnits.</p>
+<p class="ParameterName">HysIntMassCoeff</p>
+<p class="Comment">This is an array that includes the mass proportional damping coefficient.</p>
+<p class="ParameterName">HysIntStiffCoeff</p>
+<p class="Comment">This is an array that includes the stiffness proportional damping coefficient.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the interpolated hysteretic damping by frequency assigned to the specified load case.</p>
+<p class="Comment">The function returns zero if the damping is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseSteadyStateDampInterpolated()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyHysIntFreq() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyHysIntMassCoeff() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyHysIntStiffCoeff() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim DampType As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysIntFreqUnits As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysIntNumFreqs As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysIntFreq() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysIntMassCoeff() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim HysIntStiffCoeff() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add steady state load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set interpolated damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyHysIntFreq(2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyHysIntMassCoeff(2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyHysIntStiffCoeff(2)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntFreq(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntMassCoeff(0) = 0.6<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntStiffCoeff(0) = 0.04<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntFreq(1) = 10<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntMassCoeff(1) = 0.7<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntStiffCoeff(1) = 0.05<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntFreq(2) = 100<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntMassCoeff(2) = 0.8<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyHysIntStiffCoeff(2) = 0.08<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.SetDampInterpolated("LCASE1", 2, 3, MyHysIntFreq, MyHysIntMassCoeff, MyHysIntStiffCoeff)<br>
+<br>
+&#160;&#160;&#160;'get interpolated damping<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.GetDampType("LCASE1", DampType)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;If DampType = 2 Then<br>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.SteadyState.GetDampInterpolated("LCASE1", HysIntFreqUnits, HysIntNumFreqs, HysIntFreq, HysIntMassCoeff, HysIntStiffCoeff)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;End If<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetDampInterpolated_{Steady_State}.htm">SetDampInterpolated</a></p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetStringsExtendedEntityData</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetStringsExtendedEntityData</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.SetStringsExtendedEntityData</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetStringsExtendedEntityData (ByVal AppName As String, ByVal Key As String, ByRef NumberValues As Long, ByRef Values As String()) As Long &#160;</p>
+<h2 class="Comment">Parameters</h2>
+<p class="ParameterName">AppName</p>
+<p class="Comment">This is an application name of your choice under which your application previously stored some data. It is recommended you choose a unique name to guarantee no other third-party application resets the data that was set by your application. Application names are stored in their original capitalization and character set, but are compared in a case insensitive and culturally invariant manner for retrieval purposes.</p>
+<p class="ParameterName">Key</p>
+<p class="Comment">This is an entry name under which the data provided in the remaining arguments was stored. This data can later be retrieved, reset, or deleted by providing a valid application name and entry name. Entry names are stored in their original capitalization and character set, but are compared in a case insensitive and culturally invariant manner for retrieval purposes.</p>
+<p class="ParameterName">NumberValues</p>
+<p class="Comment">The number of strings to store for the given application name and entry name.</p>
+<p class="ParameterName">Values</p>
+<p class="Comment">A one-dimensional array of strings containing NumberValues strings. These strings replace any strings previously stored for the given application name and entry name. Calling this function with NumberValues equal to zero is equivalent to erasing any previously stored data.</p>
+<h2 class="Comment">Remarks</h2>
+<p class="Comment">This function can be used to store metadata for a model, or any other data specific to your application.</p>
+<h2 class="Comment">Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment">GetKeysWithStringsExtendedEntityData</p>
+<p class="Comment">GetKeyStringsExtendedEntityData</p>
+</body>
+</html>

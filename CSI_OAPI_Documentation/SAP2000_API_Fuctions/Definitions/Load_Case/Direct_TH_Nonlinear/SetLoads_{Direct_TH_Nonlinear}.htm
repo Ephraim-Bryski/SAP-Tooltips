@@ -1,0 +1,126 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Direct TH Nonlinear\SetLoads.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoads {Direct TH Nonlinear}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetLoads</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.DirHistNonlinear.SetLoads</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoads(ByVal Name As String, ByVal NumberLoads As Long, ByRef LoadType() As String, ByRef LoadName() As String, ByRef Func() As String, ByRef SF() As Double, ByRef TF() As Double, ByRef AT() As Double, ByRef CSys() As String, ByRef Ang() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing nonlinear direct integration time history load case.</p>
+<p class="ParameterName">NumberLoads</p>
+<p class="Comment">The number of loads assigned to the specified analysis case.</p>
+<p class="ParameterName">LoadType</p>
+<p class="Comment">This is an array that includes Load or Accel, indicating the type of each load assigned to the load case.</p>
+<p class="ParameterName">LoadName</p>
+<p class="Comment">This is an array that includes the name of each load assigned to the load case.</p>
+<p class="Comment">If the LoadType item is Load, this item is the name of a defined load pattern.</p>
+<p class="Comment">If the LoadType item is Accel, this item is U1, U2, U3, R1, R2 or R3, indicating the direction of the load.</p>
+<p class="ParameterName">Func</p>
+<p class="Comment">This is an array that includes the name of the time history function associated with each load.</p>
+<p class="ParameterName">SF</p>
+<p class="Comment">This is an array that includes the scale factor of each load assigned to the load case. [L/s<sup style="font-size: 8pt;">2</sup>] for U1 U2 and U3; otherwise unitless</p>
+<p class="ParameterName">TF</p>
+<p class="Comment">This is an array that includes the time scale factor of each load assigned to the load case.</p>
+<p class="ParameterName">AT</p>
+<p class="Comment">This is an array that includes the arrival time of each load assigned to the load case.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is an array that includes the name of the coordinate system associated with each load. If this item is a blank string, the Global coordinate system is assumed.</p>
+<p class="Comment">This item applies only when the LoadType item is Accel.</p>
+<p class="ParameterName">Ang</p>
+<p class="Comment">This is an array that includes the angle between the acceleration local 1 axis and the +X-axis of the coordinate system specified by the CSys item. The rotation is about the Z-axis of the specified coordinate system. [deg]</p>
+<p class="Comment">This item applies only when the LoadType item is Accel.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the load data for the specified analysis case.</p>
+<p class="Comment">The function returns zero if the data is successfully set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetCaseDirHistNonlinearLoads()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyLoadType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyLoadName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyFunc() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MySF() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyTF() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAT() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCSys() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAng() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add sine TH function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncTH.SetSine("TH-1", 1, 16, 4, 1.25)<br>
+<br>
+&#160;&#160;&#160;'add nonlinear direct history load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.DirHistNonlinear.SetCase("LCASE1")<br>
+<br>
+&#160;&#160;&#160;'set load data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyLoadType(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyLoadName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyFunc(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MySF(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyTF(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAT(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyCSys(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAng(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadType(0) = "Load"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadName(0) = "DEAD"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFunc(0) = "RAMPTH"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MySF(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyTF(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAT(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCSys(0) = "Global"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAng(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadType(1) = "Accel"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyLoadName(1) = "U2"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyFunc(1) = "TH-1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MySF(1) = 2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyTF(1) = 1.5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAT(1) = 10<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyCSys(1) = "Global"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAng(1) = 10<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.DirHistNonlinear.SetLoads("LCASE1", 2, MyLoadType, MyLoadName, MyFunc, MySF, MyTF, MyAT, MyCSys, MyAng)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetLoads_{Direct_TH_Nonlinear}.htm">GetLoads</a></p>
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetFireproofing_1</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetFireproofing_1</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.GetFireProofing_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetFireProofing_1(ByVal Name As String, ByRef MyType As Long, ByRef Thickness As Double, ByRef Perimeter As Double, ByRef Density As Double, ByRef tf As Boolean, ByRef IncludeInSelfWeight As Boolean, ByRef IncludeInGravityLoads As Boolean, ByRef IncludeInThisLoadPattern As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1, 2 or 3, indicating the type of fireproofing assigned.</p>
+<p class="Comment" style="font-size: 12pt; margin-bottom: 0pt;">1 = Sprayed on - program calculate section perimeter</p>
+<p class="Comment" style="font-size: 12pt; margin-bottom: 0pt;">2 = Sprayed on - user provides section perimeter</p>
+<p class="Comment" style="font-size: 12pt;">3 = Concrete encased</p>
+<p class="ParameterName">Thickness</p>
+<p class="Comment">When MyType = 1 or MyType = 2 this is the thickness of the sprayed on fireproofing. When MyType = 3 this is the concrete cover dimension. [L]</p>
+<p class="ParameterName">Perimeter</p>
+<p class="Comment">This item applies only when MyType = 2. It is the length of fireproofing applied measured around the perimeter of the frame object cross-section. [L]</p>
+<p class="ParameterName">Density</p>
+<p class="Comment">This is the weight per unit volume of the fireproofing material. [F/L3]</p>
+<p class="ParameterName">tf</p>
+<p class="Comment">This item &#160;applies only when MyType = 1 or MyType = 3. If this item is True, the fireproofing is assumed to be applied to the top flange of the section. If it is False, the program assumes no fireproofing is applied to the section top flange. This flag applies for I, channel and double channel sections.</p>
+<p class="ParameterName">IncludeInSelfWeight</p>
+<p class="Comment">If this item is True the fireproofing is included in the structure self weight.</p>
+<p class="ParameterName">IncludeInGravityLoads</p>
+<p class="Comment">If this item is True the fireproofing is included gravity loads applied in the X, Y and Z directions.</p>
+<p class="ParameterName">IncludeInThisLoadPattern</p>
+<p class="Comment">This item is either None or the name of an existing load pattern. If it is the name of a load pattern then the weight of the fireproofing is applied as a distributed load in the global Z direction in the load pattern.</p>
+<h2><b style="mso-bidi-font-weight: normal;">Remarks</b></h2>
+<p class="Comment">This function gets the fireproofing assignment to an existing frame object.</p>
+<p class="Comment">The function returns zero if the fireproofing assignment is successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding" style="margin-left: 60px;">Sub GetFireproofing()</p>
+<p class="Coding" style="margin-left: 72px;">'dimension variables</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapObject as cOAPI</p>
+<p class="Coding" style="margin-left: 96px;">Dim SapModel As cSapModel</p>
+<p class="Coding" style="margin-left: 96px;">Dim ret As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim MyType As Long</p>
+<p class="Coding" style="margin-left: 96px;">Dim Thickness As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim Perimeter As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim Density As Double</p>
+<p class="Coding" style="margin-left: 96px;">Dim tf As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim IncludeInSelfWeight As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim IncludeInGravityLoads As Boolean</p>
+<p class="Coding" style="margin-left: 96px;">Dim IncludeInThisLoadPattern As String</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'start Sap2000 application</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationStart</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create SapModel object</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = SapObject.SapModel</p>
+<p class="Coding">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'initialize model</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.InitializeNewModel</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create model from template</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'add new load pattern</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.LoadPatterns.Add("Fireproofing", LTYPE_SUPERDEAD)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'assign fireproofing, use in self weight and in load pattern</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel.FrameObj.SetFireproofing_1("ALL", 1, 2, 0, 8.68E-06, False, True, False, "Fireproofing", Group)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'get fireproofing data for frame object 3</p>
+<p class="Coding" style="margin-left: 96px;">ret = SapModel. FrameObj.GetFireproofing_1("3", MyType, Thickness, Perimeter, Density, tf, IncludeInSelfWeight, IncludeInGravityLoads, IncludeInThisLoadPattern)</p>
+<p class="Coding" style="margin-left: 96px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 96px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 96px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 96px;">Set SapObject = Nothing</p>
+<p class="Coding" style="margin-left: 60px;">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.<span style="mso-spacerun: yes;">&#160;</span>&#160;This function supersedes obsolete function GetFireProofing</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetFireproofing_1.htm">SetFireProofing_1</a></p>
+<p class="Comment"><a href="DeleteFireproofing.htm">DeleteFireProofing</a></p>
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>MergeAnalysisResults</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>MergeAnalysisResults</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Analyze.MergeAnalysisResults</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function MergeAnalysisResults(ByVal FileName As String) 
+ As Long </p>
+<h2>Parameters</h2>
+<p class="ParameterName">FileName</p>
+<p class="Comment">The full path of a model file from which the analysis 
+ results are to be merged.</p>
+<h2>Remarks</h2>
+<p class="Comment">See “Merging Analysis Results” section in program help 
+ file for requirements and limitations.</p>
+<p class="Comment">The analysis model is automatically created as part 
+ of this function.</p>
+<p class="Comment">The function returns zero if analysis results are successfully 
+ merged, otherwise it returns a nonzero value.</p>
+<p class="Comment">IMPORTANT NOTE: Your model must have a file path defined 
+ before merging analysis results. If the model is opened from an existing 
+ file, a file path is defined. If the model is created from scratch, the 
+ File.Save function must be called with a file name before merging analysis 
+ results. Saving the file creates the file path.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub MergeSapAnalysisResults()<br>
+'dimension variables<br>
+Dim SapObject as cOAPI<br>
+Dim SapModel As cSapModel<br>
+Dim ret As Long<br>
+<br>
+'create Sap2000 object<br>
+Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+'start Sap2000 application<br>
+SapObject.ApplicationStart<br>
+<br>
+'create SapModel object<br>
+Set SapModel = SapObject.SapModel<br>
+<br>
+'initialize model<br>
+ret = SapModel.InitializeNewModel<br>
+<br>
+'create model from template<br>
+ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+'save model<br>
+ret = SapModel.File.Save(&quot;C:\SapAPI\source\model.sdb&quot;)<br>
+<br>
+'run model (this will create the analysis model)<br>
+ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+'initialize a new model<br>
+ret = SapModel.InitializeNewModel<br>
+<br>
+'create the same model from template<br>
+ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+'merge analysis results<br>
+ret = SapModel.Analyze.SetSolverOption_2(1, 2, 0)</p>
+<p class="Coding">ret = SapModel.File.Save(&quot;C:\SapAPI\target\model.sdb&quot;)<br>
+ret = SapModel.Analyze.MergeAnalysisResults(&quot;C:\SapAPI\source\model.sdb&quot;)<br>
+<br>
+'close Sap2000<br>
+SapObject.ApplicationExit False<br>
+Set SapModel = Nothing<br>
+Set SapObject = Nothing </p>
+<p class="Coding">End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 22.1.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="../File/Save.htm">File.Save</a></p>
+<p class="Comment"><a href="RunAnalysis.htm">Analyze.RunAnalysis</a></p>
+<p class="Comment"><a href="../Obsolete_Functions/NEW_-_Analyze.SetSolverOption_2.htm">Analyze.SetSolverOption_2</a></p>
+</body>
+</html>

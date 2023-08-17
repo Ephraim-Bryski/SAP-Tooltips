@@ -1,0 +1,105 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Load Case Functions\Auto Seismic Load Functions\SetChinese2002.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetChinese2010 {Auto Seismic}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetChinese2010</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoSeismic.SetChinese2010</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetChinese2010(ByVal Name As String, ByVal DirFlag As Long, ByVal Eccen As Double, ByVal PeriodFlag As Long, ByVal UserT As Double, ByVal UserZ As Boolean, ByVal TopZ As Double, ByVal BottomZ As Double, ByVal JGJ32010AlphaMax As Double, ByVal JGJ32010SI As Long, ByVal JGJ32010DampRatio As Double, ByVal JGJ32010Tg As Double, ByVal JGJ32010PTDF As Double, ByVal EnhancementFactor As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing Quake-type load pattern.</p>
+<p class="ParameterName">DirFlag</p>
+<p class="Comment">This is 1, 2 or 3, indicating the seismic load direction.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Global X</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Global Y</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = Global Z</p>
+<p class="ParameterName">Eccen</p>
+<p class="Comment">The eccentricity ratio that applies to all diaphragms.</p>
+<p class="ParameterName">PeriodFlag</p>
+<p class="Comment">This is either 2 or 3, indicating the time period option.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Program calculated</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">3 = User defined</p>
+<p class="ParameterName">UserT</p>
+<p class="Comment">The user specified time period. This item applies when the PeriodFlag item is 3. [s]</p>
+<p class="ParameterName">UserZ</p>
+<p class="Comment">This item is True if the top and bottom elevations of the seismic load are user specified. It is False if the elevations are determined by the program.</p>
+<p class="ParameterName">TopZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the highest level where auto seismic loads are applied. [L]</p>
+<p class="ParameterName">BottomZ</p>
+<p class="Comment">This item applies only when the UserZ item is True. It is the global Z-coordinate at the lowest level where auto seismic loads are applied. [L]</p>
+<p class="ParameterName">JGJ32010AlphaMax</p>
+<p class="Comment">The maximum influence factor.</p>
+<p class="ParameterName">JGJ32010SI</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the seismic intensity.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = 6&#160;&#160;(0.05g)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = 7&#160;&#160;(0.10g)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = 7&#160;&#160;(0.15g)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = 8&#160;&#160;(0.20g)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = 8&#160;&#160;(0.30g)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">6 = 9&#160;&#160;(0.40g)</p>
+<p class="ParameterName">JGJ32010DampRatio</p>
+<p class="Comment">The damping ratio.</p>
+<p class="ParameterName">JGJ32010Tg</p>
+<p class="Comment">The characteristic ground period. [s]</p>
+<p class="ParameterName">JGJ32010PTDF</p>
+<p class="Comment">The period time discount factor.</p>
+<p class="ParameterName">EnhancementFactor</p>
+<p class="Comment">The enhancement factor.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns auto seismic loading parameters for the Chinese 2010 code.</p>
+<p class="Comment">The function returns zero if the parameters are successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignSeismicChinese2010()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("EQX", LTYPE_QUAKE)<br>
+<br>
+&#160;&#160;&#160;'assign Chinese 2010 parameters<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeismic.SetChinese2010("EQX", 1, 0.05, 2, 0, False, 0, 0, 0.16, 4, 0.06, 0.4, 1, 1)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.2.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetChinese2010_{Auto_Seismic}.htm">GetChinese2010</a></p>
+</body>
+</html>

@@ -1,0 +1,115 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame\SetPrecastU.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetPrecastU</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetPrecastU</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.SetPrecastU</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetPrecastU(ByVal Name As String, ByVal MatProp As String, ByRef b() As Double, ByRef d() As Double, Optional ByVal Color As Long = -1, Optional ByVal Notes As String = "", Optional ByVal GUID As String = "") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new frame section property. If this is an existing property, that property is modified; otherwise, a new property is added.</p>
+<p class="ParameterName">MatProp</p>
+<p class="Comment">The name of the material property for the section.</p>
+<p class="ParameterName">b</p>
+<p class="Comment">This is an array, dimensioned to 5, containing the horizontal section dimensions. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">b(0) = B1 (&gt; 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">b(1) = B2 (&gt; 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">b(2) = B3 (&gt; 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">b(3) = B4 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">b(4) = B5 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">b(5) = B6 (&gt;= 0)</p>
+<p class="Comment">Section dimensions B1 through B6 are defined on the precast concrete U girder definition form.</p>
+<p class="ParameterName">d</p>
+<p class="Comment">This is an array, dimensioned to 6, containing the vertical section dimensions. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(0) = D1 (&gt; 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(1) = D2 (&gt; 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(2) = D3 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(3) = D4 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(4) = D5 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">d(5) = D6 (&gt;= 0)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">d(6) = D7 (&gt;= 0)</p>
+<p class="Comment">Section dimensions D1 through D7 are defined on the precast concrete U girder definition form.</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the section. If Color is specified as -1, the program will automatically assign a color.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the section.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the section. If this item is input as Default, the program assigns a GUID to the section.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function initializes a precast concrete U girder frame section property. If this function is called for an existing frame section property, all items for the section are reset to their default value.</p>
+<p class="Comment">The function returns zero if the section property is successfully initialized; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetFramePropPrecastU()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim bb() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim dd() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set present units to kN-mm<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SetPresentUnits(kN_mm_C)<br>
+<br>
+&#160;&#160;&#160;'set new frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim bb(5)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim dd(6)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(0) = 2350<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(1) = 1500<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(2) = 200<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(3) = 75<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(4) = 143.8447<br>
+&#160;&#160;&#160;&#160;&#160;&#160;bb(5) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(0) = 1700<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(1) = 175<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(2) = 75<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(3) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(4) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(5) = 125<br>
+&#160;&#160;&#160;&#160;&#160;&#160;dd(6) = 175<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetPrecastU("PC1", "4000Psi", bb, dd)<br>
+<br>
+&#160;&#160;&#160;'set present units to kip-in<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.SetPresentUnits(kip_in_F)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetPrecastU.htm">GetPrecastU</a></p>
+</body>
+</html>

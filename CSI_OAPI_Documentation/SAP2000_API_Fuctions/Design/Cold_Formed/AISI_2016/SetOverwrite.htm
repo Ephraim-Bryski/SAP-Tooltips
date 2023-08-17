@@ -1,0 +1,323 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="GetPreference.docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetOverwrite</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetOverwrite</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignColdFormed.AISI_ASD96.SetOverwrite</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetOverwrite(ByVal Name As String, ByVal Item 
+ As Long, ByVal Value As Double, Optional ByVal ItemType As eItemType = 
+ Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object or group depending 
+ on the value of the ItemType item.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 33, inclusive, indicating 
+ the overwrite item considered.</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">1 = Framing type</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">2 = Demand/capacity ratio limit</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">3 = Live load reduction factor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">4 = Unbraced length ratio, Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">5 = Unbraced length ratio, Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">6 = Unbraced length ratio, Lateral Torsional 
+ Buckling</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">7 = Unbraced length ratio, Distortional Buckling</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">8 = Effective length factor, K Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">9 = Effective length factor, K Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">10 = Effective length factor, K Lateral Torsional 
+ Buckling</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">11 = Effective length factor, K Distortional 
+ Buckling</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">12 = Rotational stiffness, kPhi (Distortional 
+ Buckling)</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">13 = Moment coefficient, Cm Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">14 = Moment coefficient, Cm Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">15 = Moment coefficient, Ctf Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">16 = Moment coefficient, Ctf Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">17 = Bending coefficient, Cb Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">18 = Bending coefficient, Cb Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">19 = Moment factor, Alpha Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">20 = Moment factor, Alpha Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">21 = Nonsway moment factor, B1 Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">22 = Nonsway moment factor, B1 Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">23 = Sway moment factor, B2 Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">24 = Sway moment factor, B2 Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">25 = Through fastened to deck</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">26 = Fastener eccentricity, a/b</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">27 = Hole diameter on web</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">28 = Hole length on web</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">29 = Hole spacing on web</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">30 = Asymmetric integral ratio, Major</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">31 = Asymmetric integral ratio, Minor</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 66.0pt; 
+	 line-height: normal;">32 = Nominal bending capacity for lateral torsional 
+ buckling, Mn33</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: 9.0pt; margin-left: 66.0pt; 
+	 line-height: normal;">33 = Nominal bending capacity for lateral torsional 
+ buckling, Mn22</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered overwrite item.</p>
+<p class="Parameter_Description">1 = Framing type</p>
+<p class="Parameter_Description" style="margin-left: 128px;">0 = Program 
+ Default</p>
+<p class="Parameter_Description" style="margin-left: 128px;">1 = Moment 
+ Frame</p>
+<p class="Parameter_Description" style="margin-left: 128px;">2 = Braced 
+ Frame</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">2 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">3 = Live load reduction factor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use a program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">4 = Unbraced length ratio, Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">5 = Unbraced length ratio, Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">6 = Unbraced length ratio, Lateral Torsional 
+ Buckling</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">7 = Unbraced length ratio, Distortional 
+ Buckling</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">8 = Effective length factor, K Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">9 = Effective length factor, K Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">10 = Effective length factor, K Lateral 
+ Torsional Buckling</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">11 = Effective length factor, K Distortional 
+ Buckling</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">12 = Rotational stiffness, kPhi (Distortional 
+ Buckling)</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">13 = Moment coefficient, Cm Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">14 = Moment coefficient, Cm Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">15 = Moment coefficient, Ctf Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">16 = Moment coefficient, Ctf Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">17 = Bending coefficient, Cb Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">18 = Bending coefficient, Cb Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">19 = Moment factor, Alpha Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">20 = Moment factor, Alpha Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">21 = Nonsway moment factor, B1 Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">22 = Nonsway moment factor, B1 Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">23 = Sway moment factor, B2 Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">24 = Sway moment factor, B2 Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">25 = Through fastened to deck</p>
+<p class="Parameter_Description" style="margin-left: 128px;">0 = No.</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Any other 
+ value = Yes.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">26 = Fastener eccentricity, a/b</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value. [L]</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p class="Parameter_Description">27 = Hole diameter on web</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value. [L]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">28 = Hole length on web</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ hole diameter on web; 0 means use program determined value. [L]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">29 = Hole spacing on web</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ hole length on web; 0 means use program determined value. [L]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">30 = Asymmetric integral ratio, Major</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">31 = Asymmetric integral ratio, Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">32 = Nominal bending capacity for lateral 
+ torsional buckling, Mn33</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">33 = Nominal bending capacity for lateral 
+ torsional buckling, Mn22</p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value. [FL]</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType 
+ enumeration:</p>
+<p class="Parameter_Description">Object = 0</p>
+<p class="Parameter_Description">Group = 1</p>
+<p class="Parameter_Description">SelectedObjects = 2</p>
+<p style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in; 
+	 line-height: normal;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the 
+ frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all 
+ frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made 
+ to all selected frame objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the value of a cold formed design 
+ overwrite item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetColdFormedDesignOverwriteItemAISI_16()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'add cold formed material<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.AddQuick(Name, 
+ MATERIAL_COLDFORMED, , , , MATERIAL_COLDFORMED_SUBTYPE_ASTM_A653SQGr50)<br>
+<br>
+&#160;&#160;&#160;'create new cold formed frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetColdC(&quot;CdC&quot;, 
+ Name , 9, 3, 0.06, 0.25, 0.5)<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 72, 2, 144, True, &quot;CdC&quot;, &quot;CdC&quot;)<br>
+<br>
+&#160;&#160;&#160;'set cold formed design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.SetCode(&quot;AISI-16&quot;)<br>
+<br>
+&#160;&#160;&#160;'set overwrite item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.AISI_16.SetOverwrite(&quot;8&quot;, 
+ 1, 2)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 22.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetOverwrite.htm">GetOverwrite</a></p>
+<p>&#160;</p>
+</body>
+</html>

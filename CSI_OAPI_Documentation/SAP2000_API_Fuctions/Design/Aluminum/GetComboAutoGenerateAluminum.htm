@@ -1,0 +1,59 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetComboAutoGenerate {Aluminum}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetComboAutoGenerate</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignAluminum.GetComboAutoGenerate</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetComboAutoGenerate(ByRef AutoGenerate As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">AutoGenerate</p>
+<p class="Comment">If this item is True, the option to automatically generate code-based design load combinations for aluminum frame design is turned on. If it is False, the option is turned off.</p>
+<h2 class="Comment">Remarks</h2>
+<p class="Comment">This function retrieves the value of the automatically generated code-based design load combinations option for aluminum frame design.</p>
+<p class="Comment">The function returns zero if the options are successfully set; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAluminumDesignComboAutoGenerate()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim AutoGenerate As Boolean<br></p>
+<p class="Coding">&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p class="Coding"><br>
+&#160;&#160;&#160;'set option to not auto generate code-based design load combinations<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignAluminum.GetComboAutoGenerate(AutoGenerate)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 18.1.0.</p>
+<h2>See Also</h2>
+<p style="margin-left: 48px;"><a href="SetComboAutoGenerate_{Aluminum}.htm">SetComboAutoGenerate</a></p>
+</body>
+</html>

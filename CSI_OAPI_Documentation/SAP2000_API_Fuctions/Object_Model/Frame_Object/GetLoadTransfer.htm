@@ -1,0 +1,62 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetLoadTransfer</title>
+</head>
+<body><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1 style="font-family: Arial, sans-serif; font-size: 14pt; color: #0000ff;">GetLoadTransfer</h1>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-left: 24px; margin-bottom: 0pt; color: #0000ff; text-decoration: underline;">Syntax</h2>
+<p style="margin-top: 0px; margin-bottom: 0px; margin-left: 48px;"><span style="font-family: Arial, sans-serif; font-size: 10pt;">SapObject.SapModel.FrameObj.GetLoadTransfer</span></p>
+<h2 style="color: #0000ff; font-family: Arial, sans-serif; font-size: 11pt; margin-left: 24px; margin-bottom: 0pt; text-decoration: underline;">VB6 Procedure</h2>
+<p class="MsoNormal" style="margin-top: 0pt; font-family: Arial, sans-serif; font-size: 10pt; margin-left: 48px;">Function GetLoadTransfer(ByVal Name As String, ByRef Val As Boolean) As Long</p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; margin-left: 24px; color: #0000ff; text-decoration: underline;">Parameters</h2>
+<p class="ParameterName" style="margin-bottom: 0pt; font-weight: bold; margin-left: 48px; font-family: Arial, sans-serif; font-size: 10pt;">Name</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-top: 0pt; margin-left: 48px;">The name of an existing frame.</p>
+<p class="ParameterName" style="font-family: Arial, sans-serif; font-size: 10pt; font-weight: bold; margin-left: 48px; margin-bottom: 0pt;">Val</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 48px; margin-top: 0pt;">This boolean value indicates if load is allowed to be transferred from area objects to this frame object.</p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; color: #0000ff; margin-left: 24px; margin-bottom: 0pt; text-decoration: underline;">Remarks</h2>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 48px; margin-top: 0pt;">This function returns the load transfer option for a frame object.<span style="mso-spacerun: yes;">&#160;</span>&#160;It indicates whether the frame receives load from an area object when the area object is loaded with a load of type uniform to frame.</p>
+<p class="ParameterDescription" style="font-family: Arial, sans-serif; font-size: 10pt; margin-left: 48px;">The function returns zero if the load transfer option is successfully returned, otherwise it returns a nonzero value.</p>
+<h2 style="font-family: Arial, sans-serif; color: #0000ff; font-size: 11pt; margin-left: 24px; text-decoration: underline;">VBA Example</h2>
+<p style="margin-left: 48px; margin-top: 0pt; margin-bottom: 0pt; font-family: 'Courier New', monospace; font-size: 10pt;">Sub GetLoadTransferOption()</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'dimension variables</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Dim SapObject as cOAPI</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Dim SapModel As cSapModel</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Dim ret As Long</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Dim val As Boolean</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'create Sap2000 object</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'start Sap2000 application</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">SapObject.ApplicationStart</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;"><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">'create SapModel object</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Set SapModel = SapObject.SapModel</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'initialize model</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">ret = SapModel.InitializeNewModel</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'create model from template</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'get the load transfer option to False for frame object 1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">ret = SapModel.FrameObj.GetLoadTransfer("1", val)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 72px; font-family: 'Courier New', monospace; font-size: 10pt;">'close Sap2000</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;"><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">SapObject.ApplicationExit False</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Set SapModel = Nothing</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 96px; font-family: 'Courier New', monospace; font-size: 10pt;">Set SapObject = Nothing</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 48px; font-family: 'Courier New', monospace; font-size: 10pt;">End Sub</p>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; color: #0000ff; margin-bottom: 0pt; text-decoration: underline;">Release Notes</h2>
+<h2 style="font-family: Arial, sans-serif; margin-top: 0pt; margin-bottom: 0pt; font-weight: normal; font-size: 10pt;">Initial release in version 16.0.0.</h2>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt; color: #0000ff; margin-bottom: 0pt; text-decoration: underline;">See Also</h2>
+<h2 style="font-family: Arial, sans-serif; font-weight: normal; margin-top: 0pt; font-size: 10pt;"><a href="SetLoadTransfer.htm">SetLoadTransfer</a></h2>
+<h2 style="font-family: Arial, sans-serif; font-size: 11pt;">&#160;</h2>
+</body>
+</html>

@@ -1,0 +1,74 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetDirectionalFactors</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetDirectionalFactors</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.Moving.GetDirectionalFactors</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetDirectionalFactors(ByVal Name As String, ByRef Vertical As Double, ByRef Braking As Double, ByRef Centrifugal As Double) As Integer</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing moving load case.</p>
+<p class="ParameterName">Vertical</p>
+<p class="Comment">The moving load directional factor for vertical load.</p>
+<p class="ParameterName">Braking</p>
+<p class="Comment">The moving load directional factor.</p>
+<p class="ParameterName">Centrifugal</p>
+<p class="Comment">The moving directional factor for centrifugal load.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the directional factors for the specified load case.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetDirectionalFactors()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Vertical As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Braking As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Centrifugal As Double</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open existing model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapModel.File.OpenFile("C:\SapAPI\Example 1-030.SDB")<br>
+<br>
+&#160;&#160;&#160;'add moving load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.Moving.SetCase("LCASE1")</p>
+<p class="Coding"><br>
+&#160;&#160;&#160;'set directional factors<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.Moving.SetDirectionalFactors("LCASE1", 1, 0.7, 0.4)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'get directional factors<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.Moving.GetDirectionalFactors("LCASE1", 1, Vertical, Braking, Centrifugal)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text">SetDirectionalFactors</p>
+</body>
+</html>

@@ -1,0 +1,499 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Examples\Example4.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Example 4 (Intel Visual Fortran)</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h1>Example 4 (Intel Visual Fortran)</h1>
+<h2>Remarks</h2>
+<p class="Comment">This example is written for Intel Visual Fortran with Microsoft Visual Studio Integration. It is based on the SAP2000 verification problem Example 1-001.</p>
+<p class="Comment">This example creates the example verification problem from scratch, runs the analysis, extracts results, and compares the results with hand-calculated values.</p>
+<h2>Example</h2>
+<ol>
+<li class="p-Comment">
+<p class="Comment" style="margin-left: 12px;">Create an empty Intel Fortran project.</p>
+</li>
+<li class="p-Comment">
+<p class="Comment" style="margin-left: 12px;">Using the Intel Fortran Module Wizard (under Tools menu), browse for "C:\Program Files\Computers and Structures\SAP2000 22\SAP2000v1.TLB". Modify the path as appropriate for CSiBridge or if you have installed the program in a different location. If the TLB is missing from the installed program directory, an error occurred during installation. Please uninstall the program, restart your computer, and re-install with full administrative rights.</p>
+</li>
+<li class="p-Comment">
+<p class="Comment" style="margin-left: 12px;">Once you have selected SAP2000v1.TLB, click "Next", then select all the members to generate SAP2000v1.f90. The generated module contains explicit interfaces to all objects and member functions of the SAP2000 API.</p>
+</li>
+<li class="p-Comment">
+<p class="Comment" style="margin-left: 12px;">&#160;Add an empty source file by right clicking on the “Source Files” folder in Solution Explorer and by selecting "Add&gt;New Item&gt;Fortran Free-form File (.f90)".Source.</p>
+</li>
+<li class="p-Comment">
+<p class="Comment" style="margin-left: 12px;">Open the empty source file and paste in the following code. Please pay attention to the comments in this code block; they contain important information about running the script.</p>
+</li>
+</ol>
+<p class="Coding">&#160;&#160;&#160;program APIExample<br>
+<br>
+&#160;&#160;&#160;use Sap2000 ! gives access to SAP2000 API calls<br>
+<br>
+&#160;&#160;&#160;implicit none<br>
+<br>
+&#160;&#160;!parameters<br>
+&#160;&#160;&#160;integer(kind=4), parameter :: nDimCON = 1 ! array dimension<br>
+<br>
+&#160;&#160;!local variables<br>
+&#160;&#160;&#160;<span style="font-family: 'Courier New';">integer(kind=INT_PTR_KIND()) :: pHelper ! pointer to OAPI helper object</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pSapObject ! pointer to a Sap object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pSapModel ! pointer to a model object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pFile ! pointer to a file object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pPropMaterial ! pointer to a material property object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pPropFrame ! pointer to a model object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pFrameObj ! pointer to a frame object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pView ! pointer to a view object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pPointObj ! pointer to a point object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pLoadPatterns ! pointer to a load patterns object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pAnalyze ! pointer to an analyze object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pAnalysisResults ! pointer to a analysis results object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pAnalysisResultsSetup ! pointer to a setup object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iStatus ! error code returned from COM subsystem</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iRet ! error code returned from SAP2000 API calls</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iCol</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iUnits</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iColor</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iWindow</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iItemType</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iTypleLoadPat</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iMyType</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iDir</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=4) :: iNumberResults</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dE</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dU</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dA</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dTemp</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dT3</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dT2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dModValue</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dXi</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dYi</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dZi</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dXj</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dYj</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dZj</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dSelfWTMultiplier</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dDist1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dDist2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dVal1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dVal2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dSapResultsRA1(7)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;real(kind=8) :: dIndResultsRA1(7)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bAttachToInstance</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bVisible</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bFileSave</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bZoom</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bRestrained</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bAddLoadCase</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bReplace</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bRelDist</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;logical(kind=2) :: bSelected</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cProgramPath</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cModelPath</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cNotes</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cGUID</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cCsys</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cLoadPat</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cFrameName(3)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;character(len=256) :: cPointName(2)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;! pointers to SafeArrays</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;type(SA_BOUNDS) :: saBounds ! bounds object defining for SafeArray</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pModValueSA ! property modifiers</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pRestraintSA ! restraints</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pPointLoadValueSA ! load values</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pObjSA ! object names</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pElmSA ! element names</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pLCaseSA ! load case names</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pStepTypeSA ! step type names</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pStepNumSA ! step numbers</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pU1SA ! displacements along u1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pU2SA ! displacements along u2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pU3SA ! displacements along u3</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pR1SA ! displacements along r1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pR2SA ! displacements along r2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;integer(kind=INT_PTR_KIND()) :: pR3SA ! displacements along r3</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!set the following flag to true to attach to an existing instance of the program</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!otherwise a new instance of the program will be started</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bAttachToInstance = .false. ! .true. !</p>
+<p class="Coding" style="font-family: 'Courier New'; mso-spacerun: yes; color: #000000;">&#160;&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!full path to the program executable</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!set it to the installation folder</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cProgramPath = 'C:\Program Files (x86)\Computers and Structures\SAP2000 21\sap2000.exe'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!full path to the model</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!set it to an already existing folder</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cModelPath = 'C:\API\API_1-001.sdb'</p>
+<p class="Coding" style="font-family: 'Courier New'; mso-spacerun: yes; color: #000000;">&#160;&#160;&#160;&#160;&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!initialize COM</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;call COMInitialize(iStatus)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;if (bAttachToInstance) then</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;!attach to a running instance of Sap2000<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;call COMGetActiveObjectByProgID("CSI.SAP2000.API.SapObject", pSapObject, iStatus)</p>
+<p class="Coding" style="font-family: 'Courier New'; mso-spacerun: yes; color: #000000;">&#160;&#160;&#160;&#160;&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;call COMQueryInterface(pSapObject, IID_cOAPI, pSapObject, iStatus)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;else</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-tab-count: 1;">&#160;&#160;&#160;</span>&#160;<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!create a new instance of Sap2000<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;!create helper object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;call COMCreateObjectByGUID(CLSID_Helper, CLSCTX_ALL, IID_cHelper, pHelper, iStatus)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;!create Sap2000 object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cHelper_CreateObject(pHelper, cProgramPath, pSapObject)</p>
+<p class="Coding" style="font-family: 'Courier New'; mso-spacerun: yes; color: #000000;">&#160;&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;!start Sap2000 application</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iUnits = eUnits_kip_in_F</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;bVisible = .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cOAPI_ApplicationStart(pSapObject, iUnits, bVisible, '', iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end if</p>
+<p class="Coding" style="font-family: 'Courier New'; mso-spacerun: yes; color: #000000;">&#160;&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!create SapModel object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cOAPI_GetSapModel(pSapObject, pSapModel)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!initialize model</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iUnits = eUnits_kip_in_F</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_InitializeNewModel(pSapModel, iUnits, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!create new blank model</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetFile(pSapModel, pFile)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFile_NewBlank(pFile, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!define material property</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetPropMaterial(pSapModel, pPropMaterial)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iColor<span style="mso-spacerun: yes;">&#160;</span>&#160;= -1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cNotes<span style="mso-spacerun: yes;">&#160;</span>&#160;= ''</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cGUID<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= ''</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPropMaterial_SetMaterial(pPropMaterial, 'CONC', eMatType_Concrete, iColor, cNotes, cGUID, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign isotropic mechanical properties to material</p>
+<p class="Coding"><span style="font-family: 'Courier New'; mso-spacerun: yes;">&#160;&#160;</span>&#160;<span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT;">dE</span><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT; mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT;">&#160;= 3600.</span></p>
+<p class="Coding" style="font-family: 'Courier New'; mso-ansi-language: IT; color: #000000;"><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;dU</span><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;= 0.2</span></p>
+<p class="Coding" style="font-family: 'Courier New'; mso-ansi-language: IT; color: #000000;"><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;dA</span><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;= 0.0000055</span></p>
+<p class="Coding" style="font-family: 'Courier New'; mso-ansi-language: IT; color: #000000;"><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;dTemp</span><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;= 0.</span></p>
+<p class="Coding" style="font-family: 'Courier New'; mso-ansi-language: IT; color: #000000;"><span lang="IT" xml:lang="IT" style="mso-spacerun: yes;">&#160;&#160;</span><span lang="IT" xml:lang="IT">&#160;iStatus = $cPropMaterial_SetMPIsotropic(pPropMaterial, 'CONC', dE, dU, dA, dTemp, iRet)</span></p>
+<p class="Coding" style="font-family: 'Courier New'; mso-ansi-language: IT; color: #000000;">&#160;</p>
+<p class="Coding"><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT; mso-spacerun: yes;">&#160;&#160;</span>&#160;<span style="font-family: 'Courier New';">!define rectangular frame section property</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetPropFrame(pSapModel, pPropFrame)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dT3<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 12.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dT2<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 12.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iColor<span style="mso-spacerun: yes;">&#160;</span>&#160;= -1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cNotes<span style="mso-spacerun: yes;">&#160;</span>&#160;= ''</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cGUID<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= ''</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPropFrame_SetRectangle(pPropFrame, 'R1', 'CONC', dT3, dT2, iColor, cNotes, cGUID, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!define frame section property modifiers</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%lbound = 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%extent = 8</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pModValueSA<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;= 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 0, 7</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pModValueSA, iCol, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier Ne w'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = 1000.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pModValueSA, 0, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pModValueSA, 1, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pModValueSA, 2, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPropFrame_SetModifiers(pPropFrame, 'R1', pModValueSA, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pModValueSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!switch to k-ft units</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_SetPresentUnits(pSapModel, eUnits_kip_ft_F, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!add frame object by coordinates</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys = 'Global'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dXi = 0.; dYi = 0.; dZi = 0.; dXj = 0.; dYj = 0.; dZj = 10.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetFrameObj(pSapModel, pFrameObj)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_AddByCoord(pFrameObj, dXi, dYi, dZi, dXj, dYj, dZj, cFrameName(1), 'R1', '1', cCsys, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dXi = 0.; dYi = 0.; dZi = 10.; dXj = 8.; dYj = 0.; dZj = 16.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_AddByCoord(pFrameObj, dXi, dYi, dZi, dXj, dYj, dZj, cFrameName(2), 'R1', '2', cCsys, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dXi = -4.; dYi = 0.; dZi = 10.; dXj = 0.; dYj = 0.; dZj = 10.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_AddByCoord(pFrameObj, dXi, dYi, dZi, dXj, dYj, dZj, cFrameName(3), 'R1', '3', cCsys, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign point object restraint at base</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%lbound = 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%extent = 6</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pRestraintSA = SafeArrayCreate(VT_BOOL, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRestrained = .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 0, 3</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pRestraintSA, iCol, loc(bRestrained))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRestrained = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 4, 5</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pRestraintSA, iCol, loc(bRestrained))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_GetPoints(pFrameObj, cFrameName(1), cPointName(1), cPointName(2), iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetPointObj(pSapModel, pPointObj)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPointObj_SetRestraint(pPointObj, cPointName(1), pRestraintSA, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign point object restraint at top</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRestrained = .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 0, 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pRestraintSA, iCol, loc(bRestrained))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRestrained = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 2, 5</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pRestraintSA, iCol, loc(bRestrained))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_GetPoints(pFrameObj, cFrameName(2), cPointName(1), cPointName(2), iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPointObj_SetRestraint(pPointObj, cPointName(2), pRestraintSA, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pRestraintSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!refresh view, update (initialize) zoom</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetView(pSapModel, pView)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bZoom = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iWindow = 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cView_RefreshView(pView, iWindow, bZoom, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!add load patterns</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetLoadPatterns(pSapModel, pLoadPatterns)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iTypleLoadPat = eLoadPatternType_Other</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dSelfWTMultiplier = 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bAddLoadCase = .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '1', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dSelfWTMultiplier = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '2', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '3', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '4', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '5', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '6', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cLoadPatterns_Add(pLoadPatterns, '7', iTypleLoadPat, dSelfWTMultiplier, bAddLoadCase, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetFrameObj(pSapModel, pFrameObj)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_GetPoints(pFrameObj, cFrameName(3), cPointName(1), cPointName(2), iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%lbound<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%extent<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 6</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pPointLoadValueSA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = saBounds%lbound, saBounds%extent</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pPointLoadValueSA, iCol, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = -10.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pPointLoadValueSA, 2, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys = 'Global'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPointObj_SetLoadForce(pPointObj, cPointName(1), '2', pPointLoadValueSA, bReplace, cCsys, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iMyType<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iDir<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;= 10</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist1<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist2<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 1.8</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 1.8</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 'Global'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRelDist<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(3), '2', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 3</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_GetPoints(pFrameObj, cFrameName(3), cPointName(1), cPointName(2), iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = saBounds%lbound, saBounds%extent</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pPointLoadValueSA, iCol, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = -17.2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pPointLoadValueSA, 2, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dModValue = -54.4</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayPutElement(pPointLoadValueSA, 4, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys = 'Global'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cPointObj_SetLoadForce(pPointObj, cPointName(2), '3', pPointLoadValueSA, bReplace, cCsys, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pPointLoadValueSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 4</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iMyType<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iDir<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;= 11</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist1<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist2<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 'Global'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRelDist<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(2), '4', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 5</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iMyType<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iDir<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;= 2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist1<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist2<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 'Local'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRelDist<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(1), '5', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1 = -2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2 = -2.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(2), '5', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 6</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iMyType<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iDir<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;= 2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist1<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist2<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 1.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 0.9984</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 0.3744</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 'Local'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRelDist<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(1), '6', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1 = -0.3744</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal2 = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadDistributed(pFrameObj, cFrameName(2), '6', iMyType, iDir, dDist1, dDist2, dVal1, dVal2, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!assign loading for load pattern 7</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iMyType<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;= 1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iDir<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;= 2</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dDist1<span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;= 0.5</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dVal1<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= -15.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;cCsys<span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;</span>&#160;= 'Local'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bRelDist <span style="mso-spacerun: yes;">&#160;</span>= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bReplace<span style="mso-spacerun: yes;">&#160;</span>&#160;= .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemType_Objects</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_SetLoadPoint(pFrameObj, cFrameName(2), '7', iMyType, iDir, dDist1, dVal1, cCsys, bRelDist, bReplace, iItemType, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!switch to k-in units</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_SetPresentUnits(pSapModel, eUnits_kip_in_F, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!save model</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFile_Save(pFile, cModelPath, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!run model (this will create the analysis model)</p>
+<p class="Coding"><span style="font-family: 'Courier New'; mso-spacerun: yes;">&#160;&#160;</span>&#160;<span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT;">iStatus = $cSapModel_GetAnalyze(pSapModel, pAnalyze)</span></p>
+<p class="Coding"><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT; mso-spacerun: yes;">&#160;&#160;</span>&#160;<span style="font-family: 'Courier New';">iStatus = $cAnalyze_RunAnalysis(pAnalyze, iRet)</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!initialize for Sap2000 results</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cFrameObj_GetPoints(pFrameObj, cFrameName(2), cPointName(1), cPointName(2), iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!get Sap2000 results for load patterns 1 through 7</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%lbound = 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;saBounds%extent = 0</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pObjSA = SafeArrayCreate(VT_BSTR, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pElmSA = SafeArrayCreate(VT_BSTR, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pLCaseSA = SafeArrayCreate(VT_BSTR, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pStepTypeSA = SafeArrayCreate(VT_BSTR, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pStepNumSA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pU1SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pU2SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pU3SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pR1SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pR2SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pR3SA = SafeArrayCreate(VT_R8, nDimCON, saBounds)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dSapResultsRA1(:) = 0.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iItemType = eItemTypeElm_ObjectElm</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bSelected = .TRUE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cSapModel_GetResults(pSapModel, pAnalysisResults)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 0, 6</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cAnalysisResults_GetSetup(pAnalysisResults, pAnalysisResultsSetup)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;write (cLoadPat, '(I1)') iCol+1</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cAnalysisResultsSetup_DeselectAllCasesAndCombosForOutput(pAnalysisResultsSetup, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cAnalysisResultsSetup_SetCaseSelectedForOutput(pAnalysisResultsSetup, cLoadPat, bSelected, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;if (iCol &lt;= 3) then</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cAnalysisResults_JointDispl(pAnalysisResults, cPointName(2), iItemType, iNumberResults, pObjSA, pElmSA, pLCaseSA, pStepTypeSA, pStepNumSA, pU1SA, pU2SA, pU3SA, pR1SA, pR2SA, pR3SA, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayGetElement(pU3SA, 0, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;else</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;iStatus = $cAnalysisResults_JointDispl(pAnalysisResults, cPointName(1), iItemType, iNumberResults, pObjSA, pElmSA, pLCaseSA, pStepTypeSA, pStepNumSA, pU1SA, pU2SA, pU3SA, pR1SA, pR2SA, pR3SA, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;iRet = SafeArrayGetElement(pU1SA, 0, loc(dModValue))</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;end if</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;dSapResultsRA1(iCol+1) = dModValue</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end do</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!close Sap2000 application</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;bFileSave = .FALSE.</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = $cOAPI_ApplicationExit(pSapObject, bFileSave, iRet)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!release Sap2000 object</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iStatus = cOMReleaseObject(pSapObject)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!uninitialize COM</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;call COMUninitialize()</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!deallocate SafeArrays</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pObjSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pElmSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pLCaseSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pStepTypeSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pStepNumSA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pU1SA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pU3SA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pR1SA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pR2SA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;iRet = SafeArrayDestroy(pR3SA)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!fill independent results</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(1) = -0.02639</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(2) =<span style="mso-spacerun: yes;">&#160;</span>&#160;0.06296</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(3) =<span style="mso-spacerun: yes;">&#160;</span>&#160;0.06296</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(4) = -0.29630</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(5) =<span style="mso-spacerun: yes;">&#160;</span>&#160;0.31250</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(6) =<span style="mso-spacerun: yes;">&#160;</span>&#160;0.11556</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;dIndResultsRA1(7) =<span style="mso-spacerun: yes;">&#160;</span>&#160;0.00651</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;!display results</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;print *, 'LC<span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;Sap2000<span style="mso-spacerun: yes;">&#160;</span>&#160;Independent<span style="mso-spacerun: yes;">&#160;</span>&#160;%Diff'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;print *, '--<span style="mso-spacerun: yes;">&#160;</span>&#160;--------<span style="mso-spacerun: yes;">&#160;</span>&#160;-----------<span style="mso-spacerun: yes;">&#160;</span>&#160;-----'</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;do iCol = 1, 7</p>
+<p class="Coding"><span style="font-family: 'Courier New'; mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;<span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT;">print 1, iCol, dSapResultsRA1(iCol), dIndResultsRA1(iCol), (dSapResultsRA1(iCol) /</span><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT; mso-spacerun: yes;">&#160;</span><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT;">&#160;dIndResultsRA1(iCol)) - 1.</span></p>
+<p class="Coding"><span lang="IT" xml:lang="IT" style="font-family: 'Courier New'; mso-ansi-language: IT; mso-spacerun: yes;">&#160;&#160;</span>&#160;<span style="font-family: 'Courier New';">end do</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">1<span style="mso-spacerun: yes;">&#160;</span>&#160;format ( i3, f10.5, f13.5, f7.2)</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;pause</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;"><span style="mso-spacerun: yes;">&#160;&#160;</span>&#160;end program APIExample</p>
+&#160;
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.1.</p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Tendon Object Functions\GetTendonGeometry.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetTendonGeometry</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>GetTendonGeometry</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.TendonObj.GetTendonGeometry</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetTendonGeometry(ByVal Name As String, ByRef NumberPoints As Long, ByRef x() As Double, ByRef y() As Double, ByRef z() As Double, Optional ByVal CSys As String = "Global") As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a defined tendon object.</p>
+<p class="ParameterName">NumberPoints</p>
+<p class="Comment">The number of items used to define the discretized tendon geometry.</p>
+<p class="ParameterName">x</p>
+<p class="Comment">This is an array of the X (or local 1) coordinate of each point in the coordinate system specified by CSys. [L]</p>
+<p class="ParameterName">y</p>
+<p class="Comment">This is an array of the Y (or local 2) coordinate of each point in the coordinate system specified by CSys. [L]</p>
+<p class="ParameterName">z</p>
+<p class="Comment">This is an array of the Z (or local 3) coordinate of each point in the coordinate system specified by CSys. [L]</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is the coordinate system in which the x, y and z coordinate parameters are defined. It is Local or the name of a defined coordinate system.</p>
+<p class="Comment">Local means that the point coordinates are in the local system of the specified tendon object with the origin assumed to be at the I-End of the tendon.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves tendon object discretized geometry, that is, it retrieves the coordinates of the points along the discretized tendon.</p>
+<p class="Comment">The function returns zero if the tendon object discretized geometry is successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetTendonDiscretizedGeometry()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Name As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberPoints As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyType() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim x() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim y() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim z() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add tendon object by coordinates<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.AddByCoord(-288, 0, 288, 288, 0, 288, Name)<br>
+<br>
+&#160;&#160;&#160;'set tendon geometry<br>
+&#160;&#160;&#160;&#160;&#160;&#160;NumberPoints = 3<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyType(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim x(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim y(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim z(NumberPoints – 1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyType(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyType(1) = 7<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyType(2) = 6<br>
+&#160;&#160;&#160;&#160;&#160;&#160;x(0) = 0:&#160;&#160;y(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;x(1) = 288:&#160;&#160;y(1) = -12<br>
+&#160;&#160;&#160;&#160;&#160;&#160;x(2) = 576:&#160;&#160;y(2) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.SetTendonData(Name, NumberPoints, MyType, x, y, z, "Local")<br>
+<br>
+&#160;&#160;&#160;'update view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, False)<br>
+<br>
+&#160;&#160;&#160;'get tendon discretized geometry<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim x(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim y(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim z(0)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.TendonObj.GetTendonGeometry(Name, NumberPoints, x, y, z, "Global")<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetTendonData.htm">GetTendonData</a></p>
+<p class="Block-Text"><a href="SetTendonData.htm">SetTendonData</a></p>
+</body>
+</html>

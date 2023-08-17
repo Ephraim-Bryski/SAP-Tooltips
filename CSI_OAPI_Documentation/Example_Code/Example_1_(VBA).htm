@@ -1,0 +1,1477 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Examples\Example1.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Example 1 (VBA)</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h1>Example 1 (VBA)</h1>
+<h2>Remarks</h2>
+<p class="Comment">This example is written for Visual Basic for Applications 
+ (VBA). It can be run from a program such as Microsoft Excel. It is based 
+ on the SAP2000 verification problem Example 1-001.</p>
+<p class="Comment">This example creates the example verification problem 
+ from scratch, runs the analysis, extracts results, and compares the results 
+ with hand-calculated values.</p>
+<h2>Example</h2>
+<ol style="list-style: decimal;">
+	<li style="font-family: Arial, sans-serif; font-size: 10pt;"><p class="Comment" 
+		 style="margin-left: 12px;">Create a new VBA project.</p></li>
+	<li style="font-family: Arial, sans-serif; font-size: 10pt;"><p class="Comment" 
+		 style="margin-left: 12px;">Add a reference to &quot;C:\Program 
+	 Files\Computers and Structures\SAP2000 22\SAP2000v1.TLB&quot; 
+	 to the VBA project. Modify the path as appropriate for CSiBridge or 
+	 if you have installed the program in a different location. If the 
+	 TLB is missing <span style="mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri;">from 
+	 the installed program directory, an error occurred during installation. 
+	 Please uninstall the program, restart your computer, and re-install 
+	 with full administrative rights.</span></p></li>
+	<li style="font-family: Arial, sans-serif; font-size: 10pt;"><p class="Comment" 
+		 style="margin-left: 12px;">Add a new module to the VBA project 
+	 and paste in the following code. Please pay attention to the comments 
+	 in this code block; they contain important information about running 
+	 the script:</p></li>
+</ol>
+<p class="Coding" style="mso-layout-grid-align: none; text-autospace: none; 
+	 font-family: 'Courier New'; color: #000000;">Sub VerificationExample1001()</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New';"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;<span 
+	 style="font-size: 10.0pt;">Dim ret As Long</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'set the 
+ following flag to True to attach to an existing instance of the program</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'otherwise 
+ a new instance of the program will be started</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim AttachToInstance 
+ As Boolean</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;AttachToInstance 
+ = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'set the 
+ following flag to True to manually specify the path to SAP2000.exe</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'this allows 
+ for a connection to a version of SAP2000 other than the latest installation</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'otherwise 
+ the latest installed version of SAP2000 will be launched</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim SpecifyPath 
+ As Boolean</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;SpecifyPath 
+ = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'if the 
+ above flag is set to True, specify the path to SAP2000 below</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim ProgramPath 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'ProgramPath 
+ = &quot;C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe&quot;</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'full path 
+ to the model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'set it 
+ to the desired path of your model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim ModelDirectory 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModelDirectory 
+ = &quot;C:\CSiAPIexample&quot;</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;If Len(Dir(ModelDirectory, 
+ vbDirectory)) = 0 Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;MkDir 
+ ModelDirectory</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;End If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim ModelName 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModelName 
+ = &quot;API_1-001.sdb&quot;</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim ModelPath 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModelPath 
+ = ModelDirectory &amp; Application.PathSeparator &amp; ModelName</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'create 
+ API helper object</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim myHelper 
+ As cHelper</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Set myHelper 
+ = New Helper</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'dimension 
+ the SapObject as cOAPI type</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim mySapObject 
+ As cOAPI</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Set mySapObject 
+ = Nothing</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;If AttachToInstance 
+ Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;'attach 
+ to a running instance of SAP2000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;'get 
+ the active SapObject</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ mySapObject = myHelper.GetObject(&quot;CSI.SAP2000.API.SapObject&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Else</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;If 
+ SpecifyPath Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create 
+ an instance of the SapObject from the specified path</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ mySapObject = myHelper.CreateObject(ProgramPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;Else</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;'create 
+ an instance of the SapObject from the latest installed SAP2000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Set 
+ mySapObject = myHelper.CreateObjectProgID(&quot;CSI.SAP2000.API.SapObject&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;End 
+ If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;'start 
+ SAP2000 application</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;</span>&#160;mySapObject.ApplicationStart</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;End If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'Get a reference 
+ to cSapModel to access all OAPI classes and functions</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim mySapModel 
+ As cSapModel</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Set mySapModel 
+ = mySapObject.SapModel</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'initialize 
+ model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.InitializeNewModel</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'create 
+ new blank model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.File.NewBlank</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'define 
+ material property</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PropMaterial.SetMaterial(&quot;CONC&quot;, 
+ eMatType_Concrete)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ isotropic mechanical properties to material</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PropMaterial.SetMPIsotropic(&quot;CONC&quot;, 
+ 3600, 0.2, 0.0000055)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'define 
+ rectangular frame section property</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PropFrame.SetRectangle(&quot;R1&quot;, 
+ &quot;CONC&quot;, 12, 12)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'define 
+ frame section property modifiers</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim i As 
+ Long</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim ModValue() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ReDim ModValue(7)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 7</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ModValue(i) 
+ = 1</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModValue(0) 
+ = 1000</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModValue(1) 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ModValue(2) 
+ = 0</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PropFrame.SetModifiers(&quot;R1&quot;, 
+ ModValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'switch 
+ to k-ft units</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.SetPresentUnits(eUnits_kip_ft_F)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'add frame 
+ object by coordinates</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim FrameName(2) 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.AddByCoord(0, 
+ 0, 0, 0, 0, 10, FrameName(0), &quot;R1&quot;, &quot;1&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.AddByCoord(0, 
+ 0, 10, 8, 0, 16, FrameName(1), &quot;R1&quot;, &quot;2&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.AddByCoord(-4, 
+ 0, 10, 0, 0, 10, FrameName(2), &quot;R1&quot;, &quot;3&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ point object restraint at base</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim PointName() 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ReDim PointName(1)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim Restraint() 
+ As Boolean</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ReDim Restraint(5)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 3</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Restraint(i) 
+ = True</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 4 To 5</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Restraint(i) 
+ = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.GetPoints(FrameName(0), 
+ PointName(0), PointName(1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PointObj.SetRestraint(PointName(0), 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ point object restraint at top</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 1</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Restraint(i) 
+ = True</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 2 To 5</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Restraint(i) 
+ = False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.GetPoints(FrameName(1), 
+ PointName(0), PointName(1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PointObj.SetRestraint(PointName(1), 
+ Restraint)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'refresh 
+ view, update (initialize) zoom</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.View.RefreshView(0, 
+ False)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'add load 
+ patterns</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;1&quot;, 
+ eLoadPatternType_Other, 1)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;2&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;3&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;4&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;5&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;6&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.LoadPatterns.Add(&quot;7&quot;, 
+ eLoadPatternType_Other)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 2</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.GetPoints(FrameName(2), 
+ PointName(0), PointName(1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim PointLoadValue() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ReDim PointLoadValue(5)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;PointLoadValue(2) 
+ = -10</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PointObj.SetLoadForce(PointName(0), 
+ &quot;2&quot;, PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(2), 
+ &quot;2&quot;, 1, 10, 0, 1, 1.8, 1.8)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 3</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.GetPoints(FrameName(2), 
+ PointName(0), PointName(1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ReDim PointLoadValue(5)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;PointLoadValue(2) 
+ = -17.2</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;PointLoadValue(4) 
+ = -54.4</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.PointObj.SetLoadForce(PointName(1), 
+ &quot;3&quot;, PointLoadValue)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 4</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(1), 
+ &quot;4&quot;, 1, 11, 0, 1, 2, 2)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 5</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(0), 
+ &quot;5&quot;, 1, 2, 0, 1, 2, 2, &quot;Local&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(1), 
+ &quot;5&quot;, 1, 2, 0, 1, -2, -2, &quot;Local&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(0), 
+ &quot;6&quot;, 1, 2, 0, 1, 0.9984, 0.3744, &quot;Local&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadDistributed(FrameName(1), 
+ &quot;6&quot;, 1, 2, 0, 1, -0.3744, 0, &quot;Local&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'assign 
+ loading for load pattern 7</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.SetLoadPoint(FrameName(1), 
+ &quot;7&quot;, 1, 2, 0.5, -15, &quot;Local&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'switch 
+ to k-in units</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.SetPresentUnits(eUnits_kip_in_F)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'save model</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.File.Save(ModelPath)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'run model 
+ (this will create the analysis model)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.Analyze.RunAnalysis</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'initialize 
+ for results</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim SapResult(6) 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;ret = mySapModel.FrameObj.GetPoints(FrameName(1), 
+ PointName(0), PointName(1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'get results 
+ for load patterns 1 through 7</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim NumberResults 
+ As Long</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim Obj() 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim Elm() 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim LoadCase() 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim StepType() 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim StepNum() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim U1() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim U2() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim U3() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim R1() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim R2() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim R3() 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;">&#160;</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = mySapModel.Results.Setup.DeselectAllCasesAndCombosForOutput</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = mySapModel.Results.Setup.SetCaseSelectedForOutput(Format(i + 1))</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;If 
+ i &lt;= 3 Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = mySapModel.Results.JointDispl(PointName(1), eItemTypeElm_ObjectElm, 
+ NumberResults, Obj, Elm, LoadCase, StepType, StepNum, U1, U2, U3, R1, 
+ R2, R3)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResult(i) 
+ = U3(0)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;Else</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;ret 
+ = mySapModel.Results.JointDispl(PointName(0), eItemTypeElm_ObjectElm, 
+ NumberResults, Obj, Elm, LoadCase, StepType, StepNum, U1, U2, U3, R1, 
+ R2, R3)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResult(i) 
+ = U1(0)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;End 
+ If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'close application</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;mySapObject.ApplicationExit 
+ False</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Set mySapModel 
+ = Nothing</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Set mySapObject 
+ = Nothing</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'fill result 
+ strings</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim SapResultString(6) 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResultString(i) 
+ = Format(SapResult(i), &quot;0.00000&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;If 
+ Left(SapResultString(i), 1) &lt;&gt; &quot;-&quot; Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;SapResultString(i) 
+ = &quot; &quot; &amp; SapResultString(i)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;End 
+ If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'fill independent 
+ results (hand calculated)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim IndResult(6) 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim IndResultString(6) 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(0) 
+ = -0.02639</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(1) 
+ = 0.06296</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(2) 
+ = 0.06296</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(3) 
+ = -0.2963</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(4) 
+ = 0.3125</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(5) 
+ = 0.11556</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;IndResult(6) 
+ = 0.00651</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;IndResultString(i) 
+ = Format(IndResult(i), &quot;0.00000&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;If 
+ Left(IndResultString(i), 1) &lt;&gt; &quot;-&quot; Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;IndResultString(i) 
+ = &quot; &quot; &amp; IndResultString(i)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;End 
+ If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'fill percent 
+ difference</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim PercentDiff(6) 
+ As Double</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim PercentDiffString(6) 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 6</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;PercentDiff(i) 
+ = (SapResult(i) / IndResult(i)) - 1</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;PercentDiffString(i) 
+ = Format(PercentDiff(i), &quot;0%&quot;)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;If 
+ Left(PercentDiffString(i), 1) &lt;&gt; &quot;-&quot; Then</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;PercentDiffString(i) 
+ = &quot; &quot; &amp; PercentDiffString(i)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;End 
+ If</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;</span></span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'display 
+ message box comparing results</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Dim msg 
+ As String</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;msg = &quot;&quot;</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;msg = msg 
+ &amp; &quot;LC<span style="mso-spacerun: yes;">&#160;</span>&#160;Sap2000<span 
+	 style="mso-spacerun: yes;">&#160;</span>&#160;Independent<span style="mso-spacerun: yes;">&#160;</span>&#160;%Diff&quot; 
+ &amp; vbCr &amp; vbLf</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;For i = 
+ 0 To 5</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>&#160;msg 
+ = msg &amp; Format(i + 1) &amp; &quot; &quot; &amp; SapResultString(i) 
+ &amp; &quot; &quot; &amp; IndResultString(i) &amp; &quot; &quot; &amp; 
+ PercentDiffString(i) &amp; vbCr &amp; vbLf</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Next i</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;msg = msg 
+ &amp; Format(i + 1) &amp; &quot; &quot; &amp; SapResultString(i) &amp; 
+ &quot; &quot; &amp; IndResultString(i) &amp; &quot; &quot; &amp; PercentDiffString(i)</span></p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal; 
+	 mso-outline-level: 2; margin-left: 48px;"><span style="font-size: 10.0pt; 
+													 font-family: 'Courier New'; 
+													 color: #000000;"><span 
+	 style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;MsgBox msg</span></p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">&#160;</p>
+<p class="Coding" style="font-family: 'Courier New'; color: #000000;">End 
+ Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 15.0.1.</p>
+<p class="Comment">Updated for version 22.1.0</p>
+</body>
+</html>

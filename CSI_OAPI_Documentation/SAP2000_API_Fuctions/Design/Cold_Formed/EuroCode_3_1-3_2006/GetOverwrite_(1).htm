@@ -1,0 +1,301 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="OriginalFile" content="SetPreference (1).docx">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetOverwrite</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+<style type="text/css">/*<![CDATA[*/
+A:visited {
+	color: #954F72;
+}
+A:link {
+	color: #0000ff;
+}
+/*]]>*/</style>
+</head>
+
+<body style="word-wrap: break-word;">
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetOverwrite</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignColdFormed.EuroCold06.GetOverwrite</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetOverwrite(ByVal Name As String, ByVal Item 
+ As Long, ByRef Value As Double, ByRef ProgDet As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of a frame object with a cold-formed steel 
+ frame design procedure.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 33, inclusive, indicating 
+ the overwrite item considered.</p>
+<p class="Parameter_Description">1 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description">2 = Live load reduction factor</p>
+<p class="Parameter_Description">3 = Yield stress, Fy</p>
+<p class="Parameter_Description">4 = Net area to total area ratio</p>
+<p class="Parameter_Description">5 = Unbraced length ratio, Major</p>
+<p class="Parameter_Description">6 = Unbraced length ratio, Minor</p>
+<p class="Parameter_Description">7 = Unbraced length ratio, LTB</p>
+<p class="Parameter_Description">8 = Effective length factor sway, K2 Major</p>
+<p class="Parameter_Description">9 = Effective length factor sway, K2 Minor</p>
+<p class="Parameter_Description">10 = Effective length factor, K LTB</p>
+<p class="Parameter_Description">11 = Effective length factor braced, K1 
+ Major</p>
+<p class="Parameter_Description">12 = Effective length factor braced, K1 
+ Minor</p>
+<p class="Parameter_Description">13 = Bending coefficient, C1</p>
+<p class="Parameter_Description">14 = Bending coefficient, C<sub>2</sub></p>
+<p class="Parameter_Description">15 = Bending coefficient, C<sub>3</sub></p>
+<p class="Parameter_Description">16 = Moment coefficient, kyy</p>
+<p class="Parameter_Description">17 = Moment coefficient, kzz</p>
+<p class="Parameter_Description">18 = Moment coefficient, kzy</p>
+<p class="Parameter_Description">19 = Moment coefficient, kyz</p>
+<p class="Parameter_Description">20 = Column buckling curve, y-y</p>
+<p class="Parameter_Description">21 = Column buckling curve, z-z</p>
+<p class="Parameter_Description">22 = Buckling curve for LTB</p>
+<p class="Parameter_Description">23 = Elastic torsional buckling force, 
+ Ncr T</p>
+<p class="Parameter_Description">24 = Elastic torsional-flexural buckling 
+ force, Ncr TF</p>
+<p class="Parameter_Description">25 = Compressive capacity, NRk</p>
+<p class="Parameter_Description">26 = Tensile capacity, Nt.Rd</p>
+<p class="Parameter_Description">27 = Major bending capacity, MyRk</p>
+<p class="Parameter_Description">28 = Minor bending capacity, MzRk</p>
+<p class="Parameter_Description">29 = Major shear capacity, Vby.Rd</p>
+<p class="Parameter_Description">30 = Minor shear capacity, Vbz.Rd</p>
+<p class="Parameter_Description">31 = Warping coefficient, k<sub>w</sub></p>
+<p class="Parameter_Description">32 = Coordinate of load application, z<sub>a</sub></p>
+<p class="Parameter_Description">33 = Lateral-torsional buckling moment 
+ capacity, M<sub>cr</sub></p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered overwrite item.</p>
+<p class="Parameter_Description">1 = Demand/capacity ratio limit</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.&#160;&#160;</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">2 = Live load reduction factor</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">3 = Yield stress, Fy</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F/L<sup>2</sup>]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">4 = Net area to total area ratio</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program default value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">5 = Unbraced length ratio, Major</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">6 = Unbraced length ratio, Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">7 = Unbraced length ratio, LTB</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">8 = Effective length factor sway, K2 Major</p>
+<p class="Parameter_Description" style="margin-left: 120px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">9 = Effective length factor sway, K2 Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">10 = Effective length factor, K LTB</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">11 = Effective length factor braced, K1 
+ Major</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">12 = Effective length factor braced, K1 
+ Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p class="Parameter_Description">13 = Bending coefficient, C1</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">14 = Bending coefficient, C<sub>2</sub></p>
+<p class="Parameter_Description" style="margin-left: 128px;">Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">15 = Bending coefficient, C<sub>3</sub></p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">16 = Moment coefficient, kyy Major</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">17 = Moment coefficient, kzz Minor</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">18 = Moment coefficient, kzy</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">19 = Moment coefficient, kyz</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value.</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p class="Parameter_Description">20 = Column buckling curve, y-y</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">0 
+ = Program default</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">1 
+ = a0</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">2 
+ = a</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">3 
+ = b</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">4 
+ = c</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">5 
+ = d</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">21 = Column buckling curve, z-z</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">0 
+ = Program default</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">1 
+ = a0</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">2 
+ = a</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">3 
+ = b</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">4 
+ = c</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">5 
+ = d</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">22 = Buckling curve for LTB</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">0 
+ = Program default</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">1 
+ = a0</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">2 
+ = a</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">3 
+ = b</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">4 
+ = c</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">5 
+ = d</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">23 = Elastic torsional buckling force, 
+ Ncr T</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">24 = Elastic torsional-flexural buckling 
+ force, Ncr TF</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">25 = Compressive capacity, NRk</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">26 = Tensile capacity, Nt.Rd</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">27 = Major bending capacity, MyRk</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">28 = Minor bending capacity, MzRk</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;</span></p>
+<p class="Parameter_Description">29 = Major shear capacity, Vby.Rd</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description">&#160;</p>
+<p class="Parameter_Description">30 = Minor shear capacity, Vbz.Rd</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [F]</p>
+<p class="Parameter_Description"><span style="font-size: 12.0pt; font-family: 'Times New Roman', serif;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span></p>
+<p class="Parameter_Description">31 = Warping coefficient, k<sub>w</sub> 
+ (used in M<sub>cr</sub> calculation)</p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">0.5 
+ =&lt;Value =&lt; 1; 0 means use program determined value which is defaulted 
+ to 1.0.</p>
+<p class="Parameter_Description" style="margin-left: 128px;">&#160;</p>
+<p class="Parameter_Description">32 = Coordinate of load application, z<sub>a</sub> 
+ (used in M<sub>cr</sub> calculation)</p>
+<p class="Parameter_Description">33 = Lateral-torsional buckling moment 
+ capacity, M<sub>cr</sub></p>
+<p class="Parameter_Description" style="margin-left: 128px; text-indent: -8px;">Value 
+ &gt;= 0; 0 means use program determined value. [FL]</p>
+<p class="ParameterName">ProgDet</p>
+<p class="Comment">If this item is True, the specified value is program 
+ determined.</p>
+<h2><b>Remarks</b></h2>
+<p class="Comment">This function retrieves the value of a steel design 
+ overwrite item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ retrieved; otherwise, it returns a nonzero value.</p>
+<h2><b>VBA Example</b></h2>
+<p class="Coding">Sub GetSteelDesignOverwriteItemEuroCold06()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ProgDet As Boolean<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set steel design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.SetCode(&quot;Eurocode 
+ 3 1-3 2006&quot;)<br>
+<br>
+&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save(&quot;C:\SapAPI\x.sdb&quot;)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'start steel design<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.StartDesign<br>
+<br>
+&#160;&#160;&#160;'get overwrite item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignColdFormed.EuroCold06.GetOverwrite(&quot;8&quot;, 
+ 1, Value, ProgDet)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetOverwrite_(1).htm">SetOverwrite</a></p>
+<p>&#160;</p>
+</body>
+</html>

@@ -1,0 +1,143 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetAuto</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetAuto</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadPatterns.AutoSeastate.SetAuto</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetAuto(ByVal Name As String, ByVal LoadMethod As Long, ByVal CSys As String, ByVal AdjustGravityLat As Boolean, ByVal AdjustGravityLatFactor As Double, ByVal AdjustGravityVert As Boolean, ByVal AdjustGravityVertFactor As Double, ByVal CenterRotation() As Double, ByVal Parameters() As Double, ByVal IgnorePhase As Boolean) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing seastate-type load pattern.</p>
+<p class="ParameterName">LoadMethod</p>
+<p class="Comment">This is one of the following three options defining what parameters are being specified.</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">1 = Rotation / Translations Vertical Input</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">2 = Rotations / Translations Full Input</p>
+<p class="Comment" style="margin-left: 88px;">3 = Accelerations / Velocities</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">The coordinate system used as a reference for specifying the center of rotation location and the inertia load parameters.</p>
+<p class="ParameterName">AdjustGravityLat</p>
+<p class="Comment">This item only applies when using LoadMethod 1 or 2. It is True if generated lateral loads should include the effects of the rotated structure, otherwise it is False.</p>
+<p class="ParameterName">AdjustGravityLatFactor</p>
+<p class="Comment">This item only applies when using LoadMethod 1 or 2. This is a scale factor on the lateral effects generated as a result of the rotated structure.</p>
+<p class="ParameterName">AdjustGravityVert</p>
+<p class="Comment">This item only applies when using LoadMethod 1 or 2. It is True if generated vertical loads should include the effects of the rotated structure, otherwise it is False.</p>
+<p class="ParameterName">AdjustGravityVertFactor</p>
+<p class="Comment">This item only applies when using LoadMethod 1 or 2. This is a scale factor on the vertical effects generated as a result of the rotated structure.</p>
+<p class="ParameterName">CenterRotation</p>
+<p class="Comment">This is an array dimensioned to 2 (3 doubles) that defines the coordinates of the center of rotation, with respect to the selected coordinate system.</p>
+<p class="ParameterName">Parameters</p>
+<p class="Comment">This is an array of the inertia load parameters, based on the specified LoadMethod, as described below.</p>
+<p class="Comment">If LoadMethod = 1, the following 9 parameters should be input:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(0) - UZ amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(1) - UZ period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(2) - UZ phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(3) - RX amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(4) &#160;- RX period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(5) - RX phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(6) - RY amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(7) - RY period</p>
+<p class="Comment" style="margin-left: 88px;">Parameters(8) - RY phase</p>
+<p class="Comment">If the LoadMethod = 2, the following 18 parameters should be input:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(0) - UX amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(1) - UX period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(2) - UX phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(3) - UY amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(4) &#160;- UY period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(5) - UY phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(6) - UZ amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(7) - UZ period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(8) - UZ phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(9) - RX amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(10) - RX period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(11) - RX phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(12) - RY amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(13) &#160;- RY period</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(14) - RY phase</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(15) - RZ amplitude</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(16) - RZ period</p>
+<p class="Comment" style="margin-left: 88px;">Parameters(17) - RZ phase</p>
+<p class="Comment">If the LoadMethod = 3, the following 9 parameters should be input:</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(0) - Acceleration UX</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(1) - Acceleration UY</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(2) - Acceleration UZ</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(3) - Acceleration RX</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(4) &#160;- Acceleration RY</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(5) - Acceleration RZ</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(6) - Velocity RX</p>
+<p class="Comment" style="margin-left: 88px; margin-bottom: 0pt;">Parameters(7) - Velocity RY</p>
+<p class="Comment" style="margin-left: 88px;">Parameters(8) - Velocity RZ</p>
+<p class="ParameterName">IgnorePhase</p>
+<p class="Comment">This item only applies when using LoadMethod 1 or 2. It is True if the input phases should be ignored, otherwise it is False.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves auto seastate loading parameters.</p>
+<p class="Comment">The function returns zero if the parameters are successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetAutoSeastate()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyCenter(2) As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim MyParams(8) As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New3DFrame(BeamSlab, 2, 144, 3, 336, 2, 432)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'define diaphragm constraints</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph1", Z)</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.ConstraintDef.SetDiaphragm("Diaph2", Z)<br>
+<br>
+&#160;&#160;&#160;'add new load pattern<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.Add("SEASTATE", LTYPE_SEASTATE)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'assign seastate parameters</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(0) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(1) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyCenter(2) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(0) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(1) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(2) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(3) = 0.5</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(4) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(5) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(6) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(7) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;MyParams(8) = 0</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeastate.SetAuto("SEASTATE", 3, "Global", True, 1, True, 1, MyCenter, MyParms, False)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">&#160;&#160;&#160;'get seastate parameters</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadPatterns.AutoSeastate.GetAuto("SEASTATE", LoadMethod, CSys, AdjustGravity, Center, Params)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetAuto.htm">GetAuto</a></p>
+</body>
+</html>

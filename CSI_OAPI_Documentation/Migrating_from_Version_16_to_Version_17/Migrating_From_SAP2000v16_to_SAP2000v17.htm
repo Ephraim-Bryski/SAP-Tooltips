@@ -1,0 +1,26 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Migrating From SAP2000v16 to SAP2000v17</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Migrating From SAP2000v16 to SAP2000v17</h1>
+<p class="Comment">In version 17 of SAP2000, the API has been separated from the main SAP2000 executable into a dynamic link library (DLL). This will change how API client applications connect to CSI software. You will no longer directly reference the SAP2000 executable assembly. Instead, you will reference the API DLL. In addition, you will no longer be able to declare a variable of type SapObject. Instead, create a variable of type SAP2000v17 cOAPI, which is an interface type. Then instantiate an object that implements the cOAPI interface. This process is detailed in the included examples.</p>
+<h1>Migrating from CSiBridge16 to CSiBridge17</h1>
+<p class="Comment">The same considerations and examples apply to CSiBridge 2015 (v17) as well as to SAP2000v17. In the discussion throughout this document, replace all references to SAP2000 with CSiBridge, all references to Sap2000v16 with CSiBridge16, and all references to Sap2000v17 with CSiBridge17.</p>
+<p class="IntroText" style="font-weight: bold;">&#160;</p>
+<p class="IntroText" style="font-weight: bold;">See Also</p>
+<p class="Block-Text">Changes in API Behavior</p>
+<p class="Block-Text">Instructions for Updating COM clients (VBA example)</p>
+<p class="Block-Text">Instructions for Updating .NET clients (C# example)</p>
+<p class="Block-Text"><a href="../SAP2000_API_Fuctions/Breaking_Changes_Between_v16_and_v17/Breaking_Changes.htm">Breaking Changes</a></p>
+<p class="Block-Text"><a href="../SAP2000_API_Fuctions/Breaking_Changes_Between_v16_and_v17/Breaking_Changes_to_COM_Enumerations.htm">Breaking Changes to COM Enumerations</a></p>
+<p class="Block-Text">Breaking Changes to NET Enumerations</p>
+</body>
+</html>

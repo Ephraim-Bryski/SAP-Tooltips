@@ -1,0 +1,96 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Material Properties\SetORebar.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetORebar</title>
+<link rel="stylesheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>SetORebar <span style="font-size: 10pt;">(Note: &#160;Newer function available)</span></h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropMaterial.SetORebar</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetORebar(ByVal Name As String, ByVal Fy As Double, ByVal Fu As Double, ByVal eFy As Double, ByVal eFu As Double, ByVal SSType As Long, ByVal SSHysType As Long, ByVal StrainAtHardening As Double, ByVal StrainUltimate As Double, ByVal UseCaltransSSDefaults As Boolean, Optional ByVal Temp As Double = 0) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing rebar material property.</p>
+<p class="ParameterName">Fy</p>
+<p class="Comment">The minimum yield stress. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">Fu</p>
+<p class="Comment">The minimum tensile stress. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">eFy</p>
+<p class="Comment">The expected yield stress. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">eFu</p>
+<p class="Comment">The expected tensile stress. [F/L<sup style="font-size: 8pt;">2</sup>]</p>
+<p class="ParameterName">SSType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the stress-strain curve type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = User defined</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Parametric - Simple</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Parametric - Park</p>
+<p class="ParameterName">SSHysType</p>
+<p class="Comment">This is 0, 1 or 2, indicating the stress-strain hysteresis type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Elastic</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Kinematic</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Takeda</p>
+<p class="ParameterName">StrainAtHardening</p>
+<p class="Comment">This item applies only when parametric stress-strain curves are used and when UseCaltransSSDefaults is False. It is the strain at the onset of strain hardening.</p>
+<p class="ParameterName">StrainUltimate</p>
+<p class="Comment">This item applies only when parametric stress-strain curves are used and when UseCaltransSSDefaults is False. It is the ultimate strain capacity. This item must be larger than the StrainAtHardening item.</p>
+<p class="ParameterName">UseCaltransSSDefaults</p>
+<p class="Comment">If this item is True, the program uses Caltrans default controlling strain values, which are bar size dependent.</p>
+<p class="ParameterName">Temp</p>
+<p class="Comment">This item applies only if the specified material has properties that are temperature dependent. That is, it applies only if properties are specified for the material at more than one temperature.</p>
+<p class="Comment">This item is the temperature at which the specified data applies. The temperature must have been defined previously for the material.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the other material property data for rebar materials.</p>
+<p class="Comment">The function returns zero if the data is successfully assigned; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignMatPropRebarData()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject As Sap2000v15.SapObject<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = New Sap2000v15.SapObject<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'initialize new material property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.SetMaterial("Rebar", MATERIAL_REBAR)<br>
+<br>
+&#160;&#160;&#160;'assign other properties<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.SetORebar("Rebar", 62, 93, 70, 102, 2, 2, 0.02, 0.1, False)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<p class="Comment">This function is obsolete and has been superseded by <a href="SetORebar.htm">SetORebar</a>. This function is maintained for backwards compatibility.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetORebar.htm">GetORebar</a></p>
+</body>
+</html>

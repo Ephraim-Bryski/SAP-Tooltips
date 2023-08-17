@@ -1,0 +1,77 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\General Edit Functions\ExtrudePointToFrameLinear.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ExtrudePointToFrameLinear</title>
+<link rel="stylesheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>ExtrudePointToFrameLinear</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.EditSolid.ExtrudePointToFrameLinear</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ExtrudePointToFrameLinear(ByVal Name As String, ByVal PropName As String, ByVal dx As Double, ByVal dy As Double, ByVal dz As Double, ByVal NumberFrames As Long, ByRef FrameName() As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object to be extruded.</p>
+<p class="ParameterName">PropName</p>
+<p class="Comment">This is Default, None or the name of a defined frame section property to be used for the new extruded frame objects.</p>
+<p class="ParameterName">dx, dy, dz</p>
+<p class="Comment">These are the x, y and z offsets used, in the present coordinate system, to create each new frame object.</p>
+<p class="ParameterName">NumberFrames</p>
+<p class="Comment">The number of frame objects created when the specified point object is extruded.</p>
+<p class="ParameterName">FrameName</p>
+<p class="Comment">This is an array of the name of each frame object created when the specified point object is extruded.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function creates new frame objects by linearly extruding a specified point object into frame objects.</p>
+<p class="Comment">The function returns zero if the extrusion is successful; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub LinearPointExtrusionToFrames()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FrameName() As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'linearly extrude point to frames<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.EditGeneral.ExtrudePointToFrameLinear("3", "FSec1", 0, 144, 0, 3, FrameName)<br>
+<br>
+&#160;&#160;&#160;'refresh view<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.View.RefreshView(0, False)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="ExtrudePointToFrameRadial.htm">ExtrudePointToFrameRadial</a></p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetHybridISection.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetHybridUSection</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetHybridUSection</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropFrame.GetHybridUSection</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetHybridUSection(ByVal name As String, ByRef WebMaterial As String, ByRef TopFlangeMaterial As String, ByRef BotFlangeMaterial As String, ByRef T() As Double, ByRef color As Long, ByRef notes As String, ByRef GUID As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame section property.</p>
+<p class="ParameterName">WebMaterial</p>
+<p class="Comment">The name of the material property for the webs.</p>
+<p class="ParameterName">TopFlangeMaterial</p>
+<p class="Comment">The name of the material property for the top flanges.</p>
+<p class="ParameterName">BotFlangeMaterial</p>
+<p class="Comment">The name of the material property for the bottom flange.</p>
+<p class="ParameterName">T()</p>
+<p class="Comment">The dimension array of the section:</p>
+<p class="ParameterName">(0) <span style="font-weight: normal;">D1 = Web Depth (vertical, inside to inside of flanges). [L]</span></p>
+<p class="ParameterName">(1) <span style="font-weight: normal;">B1 = Web Distance at Top (CL to CL). [L]</span></p>
+<p class="ParameterName">(2) <span style="font-weight: normal;">B2 = Bottom Flange Width. [L]</span></p>
+<p class="ParameterName">(3) <span style="font-weight: normal;">B3 = Top Flange Width (per each). [L]</span></p>
+<p class="ParameterName">(4) <span style="font-weight: normal;">B4 = Bottom Flange Lip (Web CL to flange edge, may be zero). [L]</span></p>
+<p class="ParameterName">(5) <span style="font-weight: normal;">tw = Web Thickness. [L]</span></p>
+<p class="ParameterName">(6) <span style="font-weight: normal;">tf = Top Flange Thickness. [L]</span></p>
+<p class="ParameterName">(7) <span style="font-weight: normal;">tfb = Bottom Flange Thickness. [L]</span></p>
+<p class="ParameterName">&#160;</p>
+<p class="ParameterName">Color</p>
+<p class="Comment">The display color assigned to the section.</p>
+<p class="ParameterName">Notes</p>
+<p class="Comment">The notes, if any, assigned to the section.</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">The GUID (global unique identifier), if any, assigned to the section.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves frame section property data for a steel hybrid U frame section.</p>
+<p class="Comment">The function returns zero if the section property data is successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetFramePropHybridUSection()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim WebMaterial As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim TopFlangeMaterial As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim BotFlangeMaterial As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim T() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyT() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Color As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Notes As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim GUID As String<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set new Hybrid U-type frame section property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Redim T(7)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(0) = 48<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(1) = 64<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(2) = 48<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(3) = 15<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(4) = 1.5<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(5) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(6) = 2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;T(7) = 2<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.SetHybridUSection("HybridU", &#160;"A992Fy50", "A992Fy50", "A992Fy50", T())<br>
+<br>
+&#160;&#160;&#160;'get frame section property data for cover plated I<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropFrame.GetHybridUSection("HybridI", WebMaterial, TopFlangeMaterial, BotFlangeMaterial, MyT(), Color, Notes, GUID)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.0.</p>
+<h2>See Also</h2>
+</body>
+</html>

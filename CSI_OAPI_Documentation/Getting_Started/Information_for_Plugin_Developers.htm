@@ -1,0 +1,175 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Information for Plugin Developers</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Information for Plugin Developers</h1>
+<p class="IntroText">This topic contains the following sections: </p>
+<ul style="list-style: disc;">
+	<li><p class="IntroText" style="margin-bottom: 4pt;">Plugin Considerations</p></li>
+	<li><p class="IntroText" style="margin-bottom: 4pt;">The cPlugin Class</p></li>
+	<li><p class="IntroText" style="margin-bottom: 4pt;">Adding Plugins</p></li>
+</ul>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-family: Arial, sans-serif; font-size: 10pt;">Plugins can be developed 
+ to make use of the SAP2000 API from inside the program.</p>
+<p class="IntroText">No license is required to use the API beyond having 
+ a valid license for SAP2000 or CSiBridge. However, technical support for 
+ developing with the API is not included. For qualified users and third-party 
+ developers who would like technical support to help them build solutions 
+ and integrations with SAP2000 using the SAP2000 API, Computers and Structures, 
+ Inc., has created a subscription-based service, CSI Developer Network 
+ (CSIDN) &#160;(see <a href="http://www.csiamerica.com/support">http://www.csiamerica.com/support</a>). 
+ You would need to subscribe to CSIDN to be eligible for technical support 
+ for SAP2000 API.</p>
+<p class="IntroText">Plugins can be developed in a .NET compatible language 
+ (e.g. VB.NET, C#, etc.), as a .NET DLL, or by using any language capable 
+ of creating a COM server compiled as a DLL. An example plugin project 
+ can be found at: <a href="https://wiki.csiamerica.com/display/kb/Sample+Plugin+1">https://wiki.csiamerica.com/display/kb/Sample+Plugin+1</a></p>
+<h3>Plugin Considerations: </h3>
+<p class="IntroText" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; 
+	 line-height: normal; mso-fareast-font-family: 'Times New Roman'; font-size: 10pt;">The 
+ plugin must reference the SAP2000v1 API library (for SAP2000, <i>SAP2000v1.dll</i> 
+ or <i>SAP2000v1.tlb</i> and for CSiBridge, <i>CSiBridge1.dll</i> or <i>CSiBridge1.tlb</i>) 
+ which must be registered on the developer’s and the user’s systems. This 
+ registration takes place during the installation of SAP2000. The SAP2000v1.dll 
+ is compiled as AnyCPU, hence it can be referenced by both 64-bit and AnyCPU 
+ compiled plugin projects.</p>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-size: 10pt;">Please note that COM plugins must be registered 
+ for COM on the user’s system, before they can be used in SAP2000. This 
+ will require that the SAP2000v1.dll be present in the directory where 
+ the COM plugin is being registered. It is the plugin developer’s responsibility 
+ to instruct users how to install the plugin. Plugins should be installed 
+ only after SAP2000 has been installed. COM plugin developers should consider 
+ that registering assemblies usually requires administrative permissions, 
+ which many users may not have.</p>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-size: 10pt;">Plugins compiled as 32-bit will not work with 64-bit 
+ SAP2000.</p>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-size: 10pt;">We recommend that developers create .NET plugins 
+ that are compiled as 64-bit or AnyCPU. This will allow your plugin to 
+ be called from 64-bit SAP2000 and will not require registration.</p>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-size: 10pt;">Please make sure your plugin is stable, handles 
+ errors well, and does not cause any unintended changes to the user’s model.</p>
+<p class="IntroText">We will attempt to maintain a stable interface in 
+ SAP2000, however, that cannot be guaranteed, and updates to your plugin 
+ may be required for future versions of SAP2000.</p>
+<h3 style="font-size: 12.0pt; font-family: 'Times New Roman', serif; mso-fareast-font-family: 'Times New Roman';">The 
+ cPlugin Class:</h3>
+<p class="IntroText" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; 
+	 line-height: normal;"><span style="mso-fareast-font-family: 'Times New Roman';">In 
+ your plugin, all functionality must be implemented in a class called</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Courier New';">cPlugin</span><span 
+	 style="mso-fareast-font-family: 'Times New Roman';">.</span></p>
+<p class="IntroText"><span style="mso-fareast-font-family: 'Times New Roman';">Class</span> 
+ <span class="Coding_Characters">cPlugin</span><span style="mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Courier New';"> 
+ </span><span style="mso-fareast-font-family: 'Times New Roman';">must 
+ contain a subroutine</span> <span class="Coding_Characters">cPlugin.Main</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">that has two 
+ reference arguments of types</span> <span class="Coding_Characters">SAP2000v1.cSapModel</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">and</span> <span 
+	 class="Coding_Characters">SAP2000v1.cPluginCallback.</span></p>
+<p class="Coding">Public Sub Main(ByRef SapModel As SAP2000v1.cSapModel, 
+ ByRef ISapPlugin as SAP2000v1.cPluginCallback)</p>
+<p class="Coding">&#160;</p>
+<p class="IntroText"><span style="mso-fareast-font-family: 'Times New Roman';">Class</span> 
+ <span class="Coding_Characters">cPlugin</span><span style="mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Courier New';"> 
+ </span><span style="mso-fareast-font-family: 'Times New Roman';">must 
+ also contain a function</span> <span class="Coding_Characters">cPlugin.Info</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">that has one 
+ reference argument of type</span> <span class="Coding_Characters">String</span><span 
+	 style="mso-fareast-font-family: 'Times New Roman';">, and returns 
+ a Long (32-bit signed integer). The return value should be zero if successful. 
+ The string argument should be filled in by the function and may be plain 
+ text or rich text. If this function is found and returns zero, the string 
+ will be displayed when the user first adds the plugin to SAP2000. You 
+ can use this string to tell the user the purpose and author of the plugin. 
+ This is in addition to any information you may provide when the user executes 
+ the plugin.</span></p>
+<p class="Coding">Public Function Info(ByRef Text As String) As Integer</p>
+<p class="Coding">&#160;</p>
+<p class="IntroText"><span class="Coding_Characters">SAP2000v1.cPluginCallback</span><span 
+	 style="mso-fareast-font-family: 'Times New Roman';"> contains a</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Courier New';">Finish</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">subroutine that 
+ is to be called immediately before the plugin closes (e.g., if the plugin 
+ has a single main window, at the end of the close event of that form). 
+ It expects an error flag (0 meaning no errors) to let SAP2000 know if 
+ the operation was successful or not. SAP2000 will wait indefinitely for</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Courier New';">SAP2000v1.cPluginCallback.Finish</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">to be called, 
+ so the plugin programmer must make sure that it is called when the plugin 
+ completes.</span></p>
+<p class="Coding"><span style="mso-fareast-font-family: 'Times New Roman'; 
+						 mso-bidi-font-family: 'Courier New';">SAP2000v1.cPluginCallback.Finish(</span><span 
+	 style="mso-fareast-font-family: 'Times New Roman';">ByVal</span> <span 
+	 style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Courier New';">iVal</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">As</span> <span 
+	 style="mso-fareast-font-family: 'Times New Roman';">Integer</span><span 
+	 style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Courier New';">)</span></p>
+<p class="Coding">&#160;</p>
+<p class="IntroText"><span style="mso-fareast-font-family: 'Times New Roman';">It 
+ is OK for</span> <span class="Coding_Characters">cPlugin.Main </span><span 
+	 style="mso-fareast-font-family: 'Times New Roman';">to return before 
+ the actual work is completed (e.g., return after displaying a form where 
+ the functionality implemented in the plugin can be accessed through different 
+ command buttons). However, it is imperative to remember to call</span> 
+ <span class="Coding_Characters">SAP2000v1.cPluginCallback.Finish</span> 
+ <span style="mso-fareast-font-family: 'Times New Roman';">to return the 
+ control back to SAP2000 when the plugin is ready to close.</span></p>
+<p class="IntroText" style="mso-fareast-font-family: 'Times New Roman'; 
+	 font-size: 10pt;">If you want to provide multiple functionality in 
+ your plugin, you can provide options for the user when subroutine Main 
+ is called. Options for the user to obtain information about the product, 
+ developer, technical support, and help should be provided. Support for 
+ your plugin will not be provided by Computers and Structures, Inc.</p>
+<p class="IntroText">As currently implemented, the <span class="Coding_Characters">cPlugin</span> 
+ object will be destroyed between invocations from the SAP2000 Tools menu 
+ command that calls it, so data cannot be saved.</p>
+<h3>Adding Plugins</h3>
+<p><img src="../External_Plugin_Data_form.png" alt="" style="border: none;" width="849" height="300" border="0"></p>
+<p class="IntroTextHeading"><span style="mso-fareast-font-family: 'Times New Roman';">Adding 
+ a COM Plugin</span></p>
+<p class="IntroText">To add a COM plugin to the Tools menu in SAP2000, 
+ users will select &quot;Add/Show Plugins&quot; from the Tools menu. In 
+ the External Plugin Data form, they will type the name of the COM server 
+ DLL in the &quot;Plugin Name&quot; field.</p>
+<p class="IntroText">Please note that SAP2000 will look for the plugin 
+ by Type Library name (usually the name of the plugin project), which you 
+ define when developing your COM server DLL. We suggest using a unique 
+ name such as <span class="Coding_Characters">SAP2000PlugIn_xxx_yyy</span>, 
+ where <span class="Coding_Characters">xxx</span> is your (company) name, 
+ and <span class="Coding_Characters">yyy</span> is the name to distinguish 
+ the plugin from other plugins that you develop, e.g. <span class="Coding_Characters">SAP2000PlugIn_OmniCorp_Robo1</span>.</p>
+<p class="IntroText">The &quot;Plugin Name&quot; must exactly match the 
+ COM server DLL name. However, the plugin will appear under the Tools menu 
+ under the &quot;Menu Text&quot; name. That can be whatever the user likes, 
+ but it should be different for each plugin added.</p>
+<p class="IntroText">The &quot;Plugin Path&quot; field should be left blank 
+ for COM plugins.</p>
+<p class="IntroText">After clicking the &quot;Add&quot; button, the &quot;Status&quot; 
+ field will indicate whether the plugin was successfully located in the 
+ registry and loaded.</p>
+<p class="IntroTextHeading"><span style="mso-fareast-font-family: 'Times New Roman';">Adding 
+ a .NET Plugin</span></p>
+<p class="IntroText">The process for adding a .NET plugin is much simpler. 
+ In the External Plugin Data form, the user should simply browse for and 
+ select the plugin .NET DLL and click the &quot;Add&quot; button. The rest 
+ of the fields will be automatically populated. It is still recommended 
+ that .NET plugins be given unique names.</p>
+<p class="IntroText">&#160;</p>
+</body>
+</html>

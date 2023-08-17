@@ -1,0 +1,63 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetLoadForceWithGUID {Point Object}</title>
+<link rel="StyleSheet" href="SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetLoadForceWithGUID {Point Object}</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PointObj.GetLoadForceWithGUID</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetLoadForceWithGUID(ByVal Name As String, ByRef NumberItems As Integer, ByRef PointName() As String, ByRef LoadPat() As String, ByRef LcStep() As Integer, ByRef CSys() As String, ByRef F1() As Double, ByRef F2() As Double, ByRef F3() As Double, ByRef M1() As Double, ByRef M2() As Double, ByRef M3() As Double, ByRef GUID() As String, Optional ByVal ItemType As eItemType = eItemType.Objects) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing point object or group, depending on the value of the ItemType item.</p>
+<p class="ParameterName">NumberItems</p>
+<p class="Comment">This is the total number of joint force load assignments returned.</p>
+<p class="ParameterName">PointName</p>
+<p class="Comment">This is an array that includes the name of the point object to which the specified load assignment applies.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">This is an array that includes the name of the load pattern for the load.</p>
+<p class="ParameterName">LCStep</p>
+<p class="Comment">This is an array that includes the load pattern step for the load. In most cases, this item does not apply and will be returned as 0.</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is an array that includes the name of the coordinate system for the load. This is Local or the name of a defined coordinate system.</p>
+<p class="ParameterName">F1</p>
+<p class="Comment">This is an array that includes the assigned translational force in the local 1-axis or coordinate system X-axis direction, depending on the specified CSys. [F]</p>
+<p class="ParameterName">F2</p>
+<p class="Comment">This is an array that includes the assigned translational force in the local 2-axis or coordinate system Y-axis direction, depending on the specified CSys. [F]</p>
+<p class="ParameterName">F3</p>
+<p class="Comment">This is an array that includes the assigned translational force in the local 3-axis or coordinate system Z-axis direction, depending on the specified CSys. [F]</p>
+<p class="ParameterName">M1</p>
+<p class="Comment">This is an array that includes the assigned moment about the local 1-axis or coordinate system X-axis, depending on the specified CSys. [FL]</p>
+<p class="ParameterName">M2</p>
+<p class="Comment">This is an array that includes the assigned moment about the local 2-axis or coordinate system Y-axis, depending on the specified CSys. [FL]</p>
+<p class="ParameterName">M3</p>
+<p class="Comment">This is an array that includes the assigned moment about the local 3-axis or coordinate system Z-axis, depending on the specified CSys. [FL]</p>
+<p class="ParameterName">GUID</p>
+<p class="Comment">This is an array that includes the global unique ID of the distributed load.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="Comment">If this item is Object, the load assignments are retrieved for the point object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignments are retrieved for all point objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, the load assignments are retrieved for all selected point objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the joint force load assignments to point objects.</p>
+<p class="Comment">The function returns zero if the load assignments are successfully retrieved, otherwise it returns a nonzero value.</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 17.2.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetLoadForceWithGUID_{Point_Object}.htm">SetLoadForceWithGUID</a></p>
+<p class="Block-Text"><a href="DeleteLoadForceWithGUID_{Point_Object}.htm">DeleteLoadForceWithGUID</a></p>
+</body>
+</html>

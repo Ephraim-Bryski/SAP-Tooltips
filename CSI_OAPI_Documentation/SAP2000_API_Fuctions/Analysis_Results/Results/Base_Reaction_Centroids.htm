@@ -1,0 +1,61 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\Base Reaction Centroid Hyperlink.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Base Reaction Centroids</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US">
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>Base Reaction Centroids</h1>
+<p class="Comment">All base reaction data is considered in and reported in the global coordinate system. For clarity and to reduce wordiness, where the following description refers to a coordinate direction as X, Y or Z, it actually means global X, global Y or global Z.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: .25in; margin-bottom: 6.0pt; margin-left: .5in; background-color: #ffff00;"><b style="font-weight: bold;">Important Note:</b> The base reaction centroids are calculated from translational reaction forces only. Reaction moments are not considered when calculating these centroids. Thus the reported base reaction centroids are not the same as the centroid of the applied loads.</p>
+<p class="Comment">Three centroid locations are reported: one for the X direction translational reactions, one for the Y direction translational reactions, and one for the Z direction translational reactions.</p>
+<p class="Comment">The centroid for the X direction translational reactions is (XCentroidForFx, YCentroidForFx, ZCentroidForFx).</p>
+<p class="Comment">The centroid for the Y direction translational reactions is (XCentroidForFy, YCentroidForFy, ZCentroidForFy).</p>
+<p class="Comment">The centroid for the Z direction translational reactions is (XCentroidForFz, YCentroidForFz, ZCentroidForFz).</p>
+<p class="Comment">Following are descriptions of each coordinate item.</p>
+<p class="ParameterName">XCentroidForFx</p>
+<p class="Comment">This is an array of the X coordinates of the centroid of all X-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the X- direction is zero.</p>
+<p class="ParameterName">YCentroidForFx</p>
+<p class="Comment">This is an array of the Y coordinates of the centroid of all X-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the Y coordinate about which the Mz moment caused by the X-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the X-direction is zero.</p>
+<p class="ParameterName">ZCentroidForFx</p>
+<p class="Comment">This is an array of the Z coordinates of the centroid of all X-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the Z coordinate about which the My moment caused by the X-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the X-direction is zero.</p>
+<p class="ParameterName">XCentroidForFy</p>
+<p class="Comment">This is an array of the X coordinates of the centroid of all Y-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the X coordinate about which the Mz moment caused by the Y-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Y-direction is zero.</p>
+<p class="ParameterName">YCentroidForFy</p>
+<p class="Comment">This is an array of the Y coordinates of the centroid of all Y-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Y-direction is zero.</p>
+<p class="ParameterName">ZCentroidForFy</p>
+<p class="Comment">This is an array of the Z coordinates of the centroid of all Y-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the Z coordinate about which the Mx moment caused by the Y-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Y-direction is zero.</p>
+<p class="ParameterName">XCentroidForFz</p>
+<p class="Comment">This is an array of the X coordinates of the centroid of all Z-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the X coordinate about which the My moment caused by the Z-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Z-direction is zero.</p>
+<p class="ParameterName">YCentroidForFz</p>
+<p class="Comment">This is an array of the Y coordinates of the centroid of all Z-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">Said another way, the coordinate in this array is the Y coordinate about which the Mx moment caused by the Z-direction translational reaction forces is zero.</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Z-direction is zero.</p>
+<p class="ParameterName">ZCentroidForFz</p>
+<p class="Comment">This is an array of the Z coordinates of the centroid of all Z-direction translational reaction forces for each result. [L]</p>
+<p class="Comment">This item is reported as zero if the sum of all translational reaction forces in the Z-direction is zero.</p>
+</body>
+</html>

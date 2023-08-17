@@ -1,0 +1,111 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Frame Object Functions\SetLoadDistributed.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetLoadDistributed {Frame Object}</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>SetLoadDistributed</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.FrameObj.SetLoadDistributed</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetLoadDistributed(ByVal Name As String, ByVal LoadPat As String, ByVal MyType As Long, ByVal Dir As Long, ByVal Dist1 As Double, ByVal Dist2 As Double, ByVal Val1 As Double, ByVal Val2 As Double, Optional ByVal CSys As String = "Global", Optional ByVal RelDist As Boolean = True, Optional ByVal Replace As Boolean = True, Optional ByVal ItemType As eItemType = Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object or group, depending on the value of the ItemType item.</p>
+<p class="ParameterName">LoadPat</p>
+<p class="Comment">The name of a defined load pattern.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is 1 or 2, indicating the type of distributed load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Force per unit length</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Moment per unit length</p>
+<p class="ParameterName">Dir</p>
+<p class="Comment">This is an integer between 1 and 11, indicating the direction of the load.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Local 1 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Local 2 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Local 3 axis (only applies when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">7 = Projected X direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">8 = Projected Y direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">9 = Projected Z direction (does not apply when CSys is Local)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">10 = Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">11 = Projected Gravity direction (only applies when CSys is Global)</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">The positive gravity direction (see Dir = 10 and 11) is in the negative Global Z direction.</p>
+<p class="ParameterName">Dist1</p>
+<p class="Comment">This is the distance from the I-End of the frame object to the start of the distributed load. This may be a relative distance (0 &lt;= Dist1 &lt;= 1) or an actual distance, depending on the value of the RelDist item. [L] when RelDist is False</p>
+<p class="ParameterName">Dist2</p>
+<p class="Comment">This is the distance from the I-End of the frame object to the end of the distributed load. This may be a relative distance (0 &lt;= Dist2 &lt;= 1) or an actual distance, depending on the value of the RelDist item. [L] when RelDist is False</p>
+<p class="ParameterName">Val1</p>
+<p class="Comment">This is the load value at the start of the distributed load. [F/L] when MyType is 1 and [FL/L] when MyType is 2</p>
+<p class="ParameterName">Val2</p>
+<p class="Comment">This is the load value at the end of the distributed load. [F/L] when MyType is 1 and [FL/L] when MyType is 2</p>
+<p class="ParameterName">CSys</p>
+<p class="Comment">This is Local or the name of a defined coordinate system. It is the coordinate system in which the loads are specified.</p>
+<p class="ParameterName">RelDist</p>
+<p class="Comment">If this item is True, the specified Dist item is a relative distance, otherwise it is an actual distance.</p>
+<p class="ParameterName">Replace</p>
+<p class="Comment">If this item is True, all previous distributed loads, if any, assigned to the specified frame object(s), in the specified load pattern, are deleted before making the new assignment.</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made to all selected frame objects, and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function assigns distributed loads to frame objects.</p>
+<p class="Comment">The function returns zero if the loads are successfully assigned, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub AssignFrameDistributedLoad()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'assign frame distributed loads<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.SetLoadDistributed("15", "DEAD", 1, 10, 0, 1, 0.08, 0.08)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetLoadDistributed_{Frame_Object}.htm">GetLoadDistributed</a></p>
+<p class="Block-Text"><a href="DeleteLoadDistributed_{Frame_Object}.htm">DeleteLoadDistributed</a></p>
+</body>
+</html>

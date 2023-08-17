@@ -1,0 +1,162 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Results Functions\AreaForceShell.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>AreaForceShell</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../ehlpdhtm.js"></script>
+
+<h1>AreaForceShell</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.Sap2000.Results.AreaForceShell</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function AreaForceShell(ByVal name As String, ByVal ItemTypeElm As eItemTypeElm, ByRef NumberResults As Long, ByRef Obj() As String, ByRef Elm() As String, ByRef PointElm() As String, ByRef LoadCase() As String, ByRef StepType() As String, ByRef StepNum() As Double, ByRef F11() As Double, ByRef F22() As Double, ByRef F12() As Double, ByRef FMax() As Double, ByRef FMin() As Double, ByRef FAngle() As Double, ByRef FVM() As Double, ByRef M11() As Double, ByRef M22() As Double, ByRef M12() As Double, ByRef MMax() As Double, ByRef MMin() As Double, ByRef MAngle() As Double, ByRef V13() As Double, ByRef V23() As Double, ByRef VMax() As Double, ByRef VAngle() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing area object, area element or group of objects, depending on the value of the ItemTypeElm item.</p>
+<p class="ParameterName">ItemTypeElm</p>
+<p class="Comment">This is one of the following items in the eItemTypeElm enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">ObjectElm = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">Element = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">GroupElm = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 84px;">SelectionElm = 3</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is ObjectElm, the result request is for the area elements corresponding to the area object specified by the Name item.</p>
+<p class="Comment">If this item is Element, the result request is for the area element specified by the Name item.</p>
+<p class="Comment">If this item is GroupElm, the result request is for the area elements corresponding to all area objects included in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectionElm, the result request is for area elements corresponding to all selected area objects, and the Name item is ignored.</p>
+<p class="ParameterName">NumberResults</p>
+<p class="Comment">The total number of results returned by the program.</p>
+<p class="ParameterName">Obj</p>
+<p class="Comment">This is an array that includes the area object name associated with each result, if any.</p>
+<p class="ParameterName">Elm</p>
+<p class="Comment">This is an array that includes the area element name associated with each result.</p>
+<p class="ParameterName">PointElm</p>
+<p class="Comment">This is an array that includes the name of the point element where the results are reported.</p>
+<p class="ParameterName">LoadCase</p>
+<p class="Comment">This is an array that includes the name of the analysis case or load combination associated with each result.</p>
+<p class="ParameterName">StepType</p>
+<p class="Comment">This is an array that includes the step type, if any, for each result.</p>
+<p class="ParameterName">StepNum</p>
+<p class="Comment">This is an array that includes the step number, if any, for each result.</p>
+<p class="ParameterName">F11</p>
+<p class="Comment">The area element internal F11 membrane direct force per length reported in the area element local coordinate system. [F/L]</p>
+<p class="ParameterName">F22</p>
+<p class="Comment">The area element internal F22 membrane direct force per length reported in the area element local coordinate system. [F/L]</p>
+<p class="ParameterName">F12</p>
+<p class="Comment">The area element internal F12 membrane shear force per length reported in the area element local coordinate system. [F/L]</p>
+<p class="ParameterName">FMax</p>
+<p class="Comment">The maximum principal membrane force per length. [F/L]</p>
+<p class="ParameterName">FMin</p>
+<p class="Comment">The minimum principal membrane force per length. [F/L]</p>
+<p class="ParameterName">FAngle</p>
+<p class="Comment">The angle measured counter clockwise (when the local 3 axis is pointing toward you) from the area local 1 axis to the direction of the maximum principal membrane force. [deg]</p>
+<p class="ParameterName">FVM</p>
+<p class="Comment">The area element internal Von Mises membrane force per length. [F/L]</p>
+<p class="ParameterName">M11</p>
+<p class="Comment">The area element internal M11 plate bending moment per length reported in the area element local coordinate system. This item is only reported for area elements with properties that allow plate bending behavior. [FL/L]</p>
+<p class="ParameterName">M22</p>
+<p class="Comment">The area element internal M22 plate bending moment per length reported in the area element local coordinate system. This item is only reported for area elements with properties that allow plate bending behavior. [FL/L]</p>
+<p class="ParameterName">M12</p>
+<p class="Comment">The area element internal M12 plate twisting moment per length reported in the area element local coordinate system. This item is only reported for area elements with properties that allow plate bending behavior. [FL/L]</p>
+<p class="ParameterName">MMax</p>
+<p class="Comment">The maximum principal plate moment per length. This item is only reported for area elements with properties that allow plate bending behavior. [FL/L]</p>
+<p class="ParameterName">MMin</p>
+<p class="Comment">The minimum principal plate moment per length. This item is only reported for area elements with properties that allow plate bending behavior. [FL/L]</p>
+<p class="ParameterName">MAngle</p>
+<p class="Comment">The angle measured counter clockwise (when the local 3 axis is pointing toward you) from the area local 1 axis to the direction of the maximum principal plate moment. This item is only reported for area elements with properties that allow plate bending behavior. [deg]</p>
+<p class="ParameterName">V13</p>
+<p class="Comment">The area element internal V13 plate transverse shear force per length reported in the area element local coordinate system. This item is only reported for area elements with properties that allow plate bending behavior. [F/L]</p>
+<p class="ParameterName">V23</p>
+<p class="Comment">The area element internal V23 plate transverse shear force per length reported in the area element local coordinate system. This item is only reported for area elements with properties that allow plate bending behavior. [F/L]</p>
+<p class="ParameterName">VMax</p>
+<p class="Comment">The maximum plate transverse shear force. It is equal to the square root of the sum of the squares of V13 and V23. This item is only reported for area elements with properties that allow plate bending behavior. [F/L]</p>
+<p class="ParameterName">VAngle</p>
+<p class="Comment">The angle measured counter clockwise (when the local 3 axis is pointing toward you) from the area local 1 axis to the direction of Vmax. This item is only reported for area elements with properties that allow plate bending behavior. [deg]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function reports the area forces for the specified area elements that are assigned shell section properties (not plane or asolid properties). Note that the forces reported are per unit of in-plane length.</p>
+<p class="Comment">The function returns zero if the forces are successfully recovered, otherwise it returns a nonzero value.</p>
+<p class="Comment">See <a href="Analysis_Results_Remarks.htm">Analysis Results Remarks</a> for more information.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetAreaForces()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberResults As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Obj() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Elm() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim PointElm() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim LoadCase() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StepType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim StepNum() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim F11() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim F22() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim F12() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FMax() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FMin() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FAngle() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FVM() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim M11() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim M22() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim M12() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MMax() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MMin() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MAngle() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim V13() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim V23() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim VMax() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim VAngle() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.NewWall(6, 48, 6, 48)<br>
+<br>
+&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'clear all case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput<br>
+<br>
+&#160;&#160;&#160;'set case and combo output selections<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.Setup.SetCaseSelectedForOutput("DEAD")<br>
+<br>
+&#160;&#160;&#160;'get area forces for area object "1"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Results.AreaForceShell("1", Object, NumberResults, Obj, Elm, PointElm, LoadCase, StepType, StepNum, F11, F22, F12, FMax, FMin, FAngle, FVM, M11, M22, M12, MMax, MMin, MAngle, V13, V23, VMax, VAngle)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.00.</p>
+<p class="Comment">Changed nomenclature from Load Cases, Analysis Cases and Response Combinations to Load Patterns, Load Cases and Load Combinations, respectively, in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="AreaStressShell.htm">AreaStressShell</a></p>
+<p class="Block-Text"><a href="AreaStressShellLayered.htm">AreaStressShellLayered</a></p>
+<p class="Block-Text"><a href="AreaJointForcePlane.htm">AreaJointForcePlane</a></p>
+</body>
+</html>

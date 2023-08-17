@@ -1,0 +1,722 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetOverwrite {NTC_2018}</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SetOverwrite</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignSteel.Italian_NTC_2018.SetOverwrite</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetOverwrite(ByVal Name As String, ByVal Item 
+ As Long, ByVal textValue As String, ByVal numericValue As Double, Optional 
+ ByVal ItemType As eItemType = Object) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing frame object or group depending 
+ on the value of the ItemType item.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer between 1 and 55, inclusive, indicating 
+ the overwrite item considered.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">1 = Current Design Section</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">2 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">3 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">4 = Deflection check type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">5 = DL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">6 = SDL + LL deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">7 = LL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">8 = Total load deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">9 = Total camber limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">10 = DL deflection limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">11 = SDL + LL deflection 
+ limit, absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">12 = LL deflection limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">13 = Total load deflection 
+ limit, absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">14 = Total camber limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">15 = Specified camber</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">16 = Net area to total 
+ area ratio</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">17 = Live load reduction 
+ factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">18 = Unbraced length ratio, 
+ Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">19 = Unbraced length ratio, 
+ Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">20 = Effective length 
+ factor, K2 Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">21 = Effective length 
+ factor, K2 Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">22 = Moment coefficient, 
+ kyy Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">23 = Moment coefficient, 
+ kzz Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">24 = Bending coefficient, 
+ C1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;"><span lang="FR" xml:lang="FR">25 
+ = Moment coefficient, kzy</span></p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;"><span lang="FR" xml:lang="FR">26 
+ = Moment coefficient, kyz</span></p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">27 = Yield stress, Fy</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">28 = Compressive capacity, 
+ Nc.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">29 = Tensile capacity, 
+ Nt.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">30 = Major bending capacity, 
+ Mc3.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">31 = Minor bending capacity, 
+ Mc2.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">32 = Buckling resistance 
+ moment, Mb.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">33 = Major shear capacity, 
+ V2.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">34 = Minor shear capacity, 
+ V3.RD</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0px;">35 = Demand/capacity ratio 
+ limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0px;">36 = Section class</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0px;">37 = Column buckling curve, 
+ y-y</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">38 = Column buckling curve, 
+ z-z</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">39 = Buckling curve for LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">40 = System overstrength factor, 
+ Omega</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">41 = Is rolled section</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">42 = Unbraced length ratio, 
+ LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">43 = Effective length factor 
+ braced, K1 Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">44 = Effective length factor 
+ braced, K1 Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">45 = Effective length factor, 
+ K LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">46 = Material overstrength 
+ factor, GammaRd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">47 = Warping constant, Iw</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">48 = Elastic torsional buckling 
+ force, Ncr T</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">49 = Elastic torsional-flexural 
+ buckling force, Ncr TF</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;"><span><span style="line-height: normal;">50 
+ = Bending coefficient, C<sub>2</sub></span></span></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">51 = Bending coefficient, 
+ C<sub>3</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">52 = Warping coefficient, 
+ k<sub>w</sub> </p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">53 = Coordinate of load 
+ application, z<sub>a</sub> </p>
+<p class="ParameterNameDescription" style="margin-left: 88px; margin-bottom: 0pt;">54 
+ = Shear center coordinate, z<sub>s</sub></p>
+<p class="ParameterNameDescription" style="margin-left: 88px; margin-bottom: 0pt;">55 
+ = Lateral-torsional buckling moment capacity, M<sub>cr</sub></p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the considered overwrite item.</p>
+<p class="Code">1 = Current design section</p>
+<p class="Code">&#160;&#160;&#160;&#160;&#160;&#160;0 or &quot;Program 
+ Determined&quot;</p>
+<p class="Code">&#160;&#160;&#160;&#160;&#160;&#160;String corresponding 
+ to desired shape overwrite, e.g. &quot;W14x26&quot; or &quot;W14X26&quot;.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">2 = Framing type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">0 or &quot;Program Default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 or &quot;DCH-MRF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 or &quot;DCL-MRF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">3 or &quot;DCH-CBF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">4 or &quot;DCL-CBF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">5 or &quot;DCH-EBF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">6 or &quot;DCL-EBF&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">7 or &quot;InvPendulum&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">8 or &quot;NonDissipative&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">3 = Consider deflection</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">0 or &quot;Program Default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 or &quot;No&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 or &quot;Yes&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">4 = Deflection check type</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">0 or &quot;Program Default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 or &quot;Ratio&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 or &quot;Absolute&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">3 or &quot;Both&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">5 = DL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">6 = SDL + LL deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">7 = LL deflection limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">8 = Total load deflection 
+ limit, L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">9 = Total camber limit, 
+ L/Value</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">10 = DL deflection limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ no check for this item. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">11 = SDL + LL deflection 
+ limit, absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means no check for this item. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">12 = LL deflection limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means no check for this item. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">13 = Total load deflection 
+ limit, absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means no check for this item. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">14 = Total camber limit, 
+ absolute</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means no check for this item. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">15 = Specified camber</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0. [L]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">16 = Net area to total 
+ area ratio</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program default value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">17 = Live load reduction 
+ factor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">18 = Unbraced length ratio, 
+ Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">19 = Unbraced length ratio, 
+ Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">20 = Effective length 
+ factor sway, K2 Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">21 = Effective length 
+ factor sway, K2 Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">22 = Moment coefficient, 
+ kyy Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">23 = Moment coefficient, 
+ kzz Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">24 = Bending coefficient, 
+ C1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">25 = Moment coefficient, 
+ kzy</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">26 = Moment coefficient, 
+ kyz</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">27 = Yield stress, Fy</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [F/L<sup>2</sup>]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">28 = Compressive capacity, 
+ Nc.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">29 = Tensile capacity, 
+ Nt.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">30 = Major bending capacity, 
+ Mc3.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">31 = Minor bending capacity, 
+ Mc2.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">32 = Buckling resistance 
+ moment, Mb.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [FL]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">33 = Major shear capacity, 
+ V2.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">34 = Minor shear capacity, 
+ V3.Rd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;&#160;Value &gt;= 
+ 0; 0 means use program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">35 = Demand/capacity ratio 
+ limit</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 9pt;">&#160;&#160;Value &gt;= 0; 
+ 0 means use program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">36 = Section class</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">0 or &quot;Program default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">1 or &quot;Class 1&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">2 or &quot;Class 2&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">3 or &quot;Class 3&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">4 or &quot;Class 4&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">37 = Column buckling curve, 
+ y-y</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">0 or &quot;Program default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">1 or &quot;a0&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">2 or &quot;a&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">3 or &quot;b&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">4 or &quot;c&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">5 or &quot;d&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; 
+	 line-height: normal; margin-left: 88px;">38 = Column buckling curve, 
+ z-z</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">0 or &quot;Program default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">1 or &quot;a0&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">2 or &quot;a&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">3 or &quot;b&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">4 or &quot;c&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">5 or &quot;d&quot;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; 
+	 line-height: normal; margin-left: 88px;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; 
+	 line-height: normal; margin-left: 88px;">39 = Buckling curve for LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">0 or &quot;Program default&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">1 or &quot;a0&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">2 or &quot;a&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">3 or &quot;b&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">4 or &quot;c&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">5 or &quot;d&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">40 = System overstrength factor, 
+ Omega</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">41 = Is rolled section</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">0 or &quot;Program Determined&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">1 or &quot;No&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">2 or &quot;Yes&quot;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">42 = Unbraced length ratio, 
+ LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">43 = Effective length factor 
+ braced, K1 Major</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">44 = Effective length factor 
+ braced, K1 Minor</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">45 = Effective length factor, 
+ K LTB</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">46 = Material overstrength 
+ factor, GammaRd</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">47 = Warping constant, Iw</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value. [L<span style="vertical-align: Super;">6</span>]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">48 = Elastic torsional buckling 
+ force, Ncr T</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">Value &gt;= 0; 0 means use 
+ program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 88px; margin-bottom: 0pt;">49 = Elastic torsional-flexural 
+ buckling force, Ncr TF</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">Value &gt;= 0; 0 means 
+ use program determined value. [F]</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 112px;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;"><span><span><span style="line-height: normal;">50 
+ = Bending coefficient, C<sub>2</sub></span></span></span></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 84.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">Value &gt;= 0; 0 means 
+ use program determined value.</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 84.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">51 = Bending coefficient, 
+ C<sub>3</sub></p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 84.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">Value &gt;= 0; 0 means 
+ use program determined value.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">52 = Warping coefficient, 
+ k<sub>w</sub> (used in M<sub>cr</sub> calculation)</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 84.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">0.5 =&lt;Value =&lt; 
+ 1; 0 means use program determined value which is defaulted to 1.0.</p>
+<p class="MsoNormal" style="margin-bottom: .0001pt; line-height: normal;">&#160;</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">53 = Coordinate of load 
+ application, z<sub>a</sub> (used in M<sub>cr</sub> calculation)</p>
+<p class="MsoNormal" style="margin-top: 0in; margin-right: 0in; margin-left: 66.0pt; 
+	 margin-bottom: .0001pt; line-height: normal;">54 = Shear center coordinate, 
+ z<sub>s</sub> (used in M<sub>cr</sub> calculation)</p>
+<p class="ParameterNameDescription" style="margin-left: 88px; margin-bottom: 0pt;">55 
+ = Lateral-torsional buckling moment capacity, M<sub>cr</sub></p>
+<p class="ParameterNameDescription" style="margin-left: 84pt;">Value &gt;= 
+ 0; 0 means use program determined value. [FL] </p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-left: 112px; margin-bottom: 0pt;">&#160;</p>
+<p class="ParameterName">ItemType</p>
+<p class="Comment">This is one of the following items in the eItemType 
+ enumeration:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">Object = 0</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">Group = 1</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">SelectedObjects = 2</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: .5in;">&#160;</p>
+<p class="Comment">If this item is Object, the assignment is made to the 
+ frame object specified by the Name item.</p>
+<p class="Comment">If this item is Group, the assignment is made to all 
+ frame objects in the group specified by the Name item.</p>
+<p class="Comment">If this item is SelectedObjects, assignment is made 
+ to all selected frame objects and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function sets the value of a steel design overwrite 
+ item.</p>
+<p class="Comment">The function returns zero if the item is successfully 
+ set; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetSteelDesignOverwriteItemItalian_NTC_2018()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject(&quot;CSI.SAP2000.API.SapObject&quot;)<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 
+ 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'set steel design code<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.SetCode(&quot;Italian 
+ NTC 2018&quot;)<br>
+<br>
+&#160;&#160;&#160;'set overwrite item<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.Italian_NTC_2018.SetOverwrite(&quot;8&quot;, 
+ 2, &quot;DCH-CBF&quot;, 2)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in v20.1.0.</p>
+<p class="Comment">Added items 50 - 53 in v22.0.0</p>
+<p class="Comment">Added items 54 - 55 in v22.0.0</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetOverwrite_{NTC_2018}.htm">GetOverwrite</a></p>
+</body>
+</html>

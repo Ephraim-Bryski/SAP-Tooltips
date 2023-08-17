@@ -1,0 +1,178 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Analysis Case Functions\GetStageData_1.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetStageData_1</title>
+<link rel="stylesheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1>GetStageData_1 (Note: Newer Function Available)</h1>
+<h2 class="Comment">Syntax</h2>
+<p class="Comment">SapObject.SapModel.LoadCases.StaticNonlinear.GetStageData_1</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetStageData_1(ByVal Name As String, ByVal Stage As Long, ByRef NumberOperations As Long, ByRef Operation() As Long, ByRef ObjectType() As String, ByRef ObjectName() As String, ByRef Age() As Long, ByRef MyType() As String, ByRef MyName() As String, ByRef SF() As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing static nonlinear staged load case.</p>
+<p class="ParameterName">Stage</p>
+<p class="Comment">The stage in the specified load case for which data is requested. Stages are numbered sequentially starting from 1.</p>
+<p class="ParameterName">NumberOperations</p>
+<p class="Comment">The number of operations in the specified stage.</p>
+<p class="ParameterName">Operation</p>
+<p class="Comment">This is an array that includes 1, 2, 3, 4, 5, 6, 7, or 11, indicating an operation type.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Add structure</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = Remove structure</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = Load objects if new</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = Load objects</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = Change section properties</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">6 = Change section property modifiers</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">7 = Change releases</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">11 = Change section properties and age</p>
+<p class="ParameterName">ObjectType</p>
+<p class="Comment">This is an array that includes the object type associated with the specified operation. The object type may be one of the following:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Group</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Frame</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Cable</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Tendon</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Area</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Solid</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Link</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Point</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">&#160;</p>
+<p class="Comment">The following list shows which object types are applicable to each operation type:</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 1 (Add structure):&#160;&#160;All object types</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 2 (Remove structure):&#160;&#160;All object types</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 3 (Load objects if new):&#160;&#160;All object types</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 4 (Load objects):&#160;&#160;All object types</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 5 (Change section properties):&#160;&#160;All object types except Point</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">Operation = 6 (Change section property modifiers):&#160;&#160;Group, Frame, Cable, Area</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 0pt;">Operation = 7 (Change releases):&#160;&#160;Group, Frame</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">Operation = 11 (Change section properties and age): All object types except Point</p>
+<p class="ParameterName">ObjectName</p>
+<p class="Comment">This is an array that includes the name of the object associated with the specified operation. This is the name of a Group, Frame object, Cable object, Tendon object, Area object, Solid object, Link object or Point object, depending on the ObjectType item.</p>
+<p class="ParameterName">Age</p>
+<p class="Comment">This is an array that includes the age of the added structure, at the time it is added, in days. This item applies only to operations with Operation = 1.</p>
+<p class="ParameterName">MyType</p>
+<p class="Comment">This is an array that includes a load type or an object type, depending on what is specified for the Operation item. This item applies only to operations with Operation = 3, 4, 5, 6, 7, or 11.</p>
+<p class="Comment">When Operation = 3 or 4, this is an array that includes Load or Accel, indicating the load type of an added load.</p>
+<p class="Comment">When Operation = 5 or 11, and the ObjectType item is Group, this is an array that includes Frame, Cable, Tendon, Area, Solid or Link, indicating the object type for which the section property is changed.</p>
+<p class="Comment">When Operation = 6 and the ObjectType item is Group, this is an array that includes Frame, Cable or Area, indicating the object type for which the section property modifiers are changed.</p>
+<p class="Comment">When Operation = 7 and the ObjectType item is Group, this is an array that includes Frame, indicating the object type for which the releases are changed.</p>
+<p class="Comment">When Operation = 5, 6, 7, or 11, and the ObjectType item is not Group and not Point, this item is ignored and the type is picked up from the ObjectType item.</p>
+<p class="ParameterName">MyName</p>
+<p class="Comment">This is an array that includes a load assignment or an object name, depending on what is specified for the Operation item. This item applies only to operations with Operation = 3, 4, 5, 6, 7, or 11.</p>
+<p class="Comment">When Operation = 3 or 4, this is an array that includes the name of the load assigned to the operation. If the associated LoadType item is Load, this item is the name of a defined load pattern. If the associated LoadType item is Accel , this item is UX, UY, UZ, RX, RY or RZ, indicating the direction of the load.</p>
+<p class="Comment">When Operation = 5 or 11, this is the name of a Frame, Cable, Tendon, Area, Solid or Link object, depending on the object type specified.</p>
+<p class="Comment">When Operation = 6, this is the name of a Frame, Cable or Area object, depending on the object type specified.</p>
+<p class="Comment">When Operation = 7, this is the name of a Frame object.</p>
+<p class="ParameterName">SF</p>
+<p class="Comment">This is an array that includes the scale factor for the load assigned to the operation, if any. [L/s<sup style="font-size: 8pt;">2</sup>] for Accel UX UY and UZ; otherwise unitless</p>
+<p class="Comment">This item applies only to operations with Operation = 3 or 4.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves stage data for the specified stage in the specified load case.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise, it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetCaseStaticNonlinearStagedStageData_1()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyDuration() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutput() As Boolean<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOutputName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyComment() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyOperation() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyObjectType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyObjectName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyAge() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyMyType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyMyName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MySF() As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberOperations As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Operation() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ObjectName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Age() As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyType() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim MyName() As String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SF() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add static nonlinear staged load case<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetCase("ACASE1")<br>
+<br>
+&#160;&#160;&#160;'initialize stage definitions<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyDuration(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutput(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOutputName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyComment(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(0) = 0<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(0) = False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(0) = "Build structure"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyDuration(1) = 60<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutput(1) = True<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOutputName(1) = "HBC2"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyComment(1) = "Wait"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageDefinitions_1("ACASE1", 2, MyDuration, MyOutput, MyOutputName, MyComment)<br>
+<br>
+&#160;&#160;&#160;'set stage data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyOperation(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyObjectType(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyObjectName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyAge(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyMyType(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MyMyName(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ReDim MySF(1)<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOperation(0) = 1<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectType(0) = "Group"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectName(0) = "ALL"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyAge(0) = 3<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyOperation(1) = 4<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectType(1) = "Frame"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyObjectName(1) = "8"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyMyType(1) = "Load"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MyMyName(1) = "DEAD"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;MySF(1) = 0.85<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.SetStageData_1("ACASE1", 1, 2, MyOperation, MyObjectType, MyObjectName, MyAge, MyMyType, MyMyName, MySF)<br>
+<br>
+&#160;&#160;&#160;'get stage data<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.LoadCases.StaticNonlinearStaged.GetStageData_1("ACASE1", 1, NumberOperations, Operation, ObjectType, ObjectName, Age, MyType, MyName, SF)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<p class="Comment">Added Operation 11 (Change section properties and age) in version 16.10.</p>
+<p class="Comment">This function supersedes <a href="GetStageData.htm">GetStageData</a>.</p>
+<p class="Comment">This function is obsolete and has been replaced by <a href="../Definitions/Load_Case/Staged/GetStageData_2.htm">GetStageData_2</a> as of v19.0.0. This function is maintained for backward compatibility</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetStageData_1.htm">SetStageData_1</a></p>
+</body>
+</html>

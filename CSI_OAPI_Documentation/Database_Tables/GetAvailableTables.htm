@@ -1,0 +1,65 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Language" content="en-us">
+<meta name="System.Keywords" content="GetAvailableTables method">
+<meta name="System.Keywords" content="cDatabaseTables.GetAvailableTables method">
+<meta name="Microsoft.Help.F1" content="ETABSv1.cDatabaseTables.GetAvailableTables">
+<meta name="Microsoft.Help.Id" content="M:ETABSv1.cDatabaseTables.GetAvailableTables(System.Int32@,System.String[]@,System.String[]@,System.Int32[]@)">
+<meta name="Description" content="Returns the tables that are currently available for display.">
+<meta name="Microsoft.Help.ContentType" content="Reference">
+<meta name="BrandingAware" content="true">
+<meta name="container" content="ETABSv1">
+<meta name="file" content="06be9356-26a5-d81b-7ddc-d758bbc000cc">
+<meta name="guid" content="06be9356-26a5-d81b-7ddc-d758bbc000cc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetAvailableTables</title>
+<link rel="shortcut icon" href="../icons/favicon.ico">
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetAvailableTables</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.GetAvailableTables</span></p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetAvailableTables(ByRef NumberTables As Integer, 
+ ByRef TableKey As As String(), ByRef TableName As As String(), ByRef ImportType 
+ As Integer () ) As Integer </p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">NumberTables</span> </p>
+<p class="Comment">Returned Item: The number of tables that are currently 
+ available for display. </p>
+<p class="ParameterName"><span class="parameter">TableKey</span> </p>
+<p class="Comment"><span class="parameter">Returned Item: zero-based array 
+ of the table keys for the available tables. &#160;</span></p>
+<p class="ParameterName"><span class="parameter">TableName</span> </p>
+<p class="Comment">Returned Item: A zero-based array of the table names 
+ for the available tables. &#160;</p>
+<dl>
+	<p class="ParameterName"><span class="parameter">ImportType</span> 
+	 </p>
+	<p class="Comment">Returned Item: This is either 0, 1, 2 or 3 indicating 
+	 the import type for the table. </p>
+	<p class="Parameter_Description">0= not importable</p>
+	<p class="Parameter_Description">1= importable, but not interactively 
+	 importable</p>
+	<p class="Parameter_Description">2= importable and interactive importable 
+	 when he model is unlocked</p>
+	<p class="Parameter_Description">3= importable and interactive importable 
+	 when he model is unlocked and locked</p>
+	<p class="Comment">&#160;</p>
+</dl>
+<h2>Remarks</h2>
+<p class="Comment">Returns a list of load cases that are selected for table 
+ display. </p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="GetAllTables.htm">GetAllTables</a></p>
+</body>
+</html>

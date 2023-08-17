@@ -1,0 +1,75 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>Interactive Database</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>Interactive Database</h1>
+<p><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">Beginning 
+ with Version 23.0.0, SAP2000 and CSIBridge allow database tables to be 
+ accessed through the API using the</span> <span class="API_Call">DatabaseTables</span> 
+ <span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">class. 
+ It is recommended that API users first familiarize themselves with the 
+ database tables using the SAP2000 (or CSiBridge) GUI, to understand how 
+ data can be requested, viewed, modified, and applied to the model.</span></p>
+<p><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">Generally, 
+ the API user will start with a </span>call<span style="font-size: 11.5pt; 
+												 font-family: 'Segoe UI', sans-serif;"> 
+ to</span> <span class="API_Call"><a href="../Database_Tables/GetAvailableTables.htm">GetAvailableTables</a></span><span 
+	 style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">. 
+ They can decide which tables they want to retrieve data from, or edit 
+ and apply to the model. A call to</span> <span class="API_Call"><a href="../Database_Tables/GetAllFieldsInTable.htm">GetAllFieldsInTable</a></span> 
+ <span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">will 
+ show the user which columns the table has, and which columns can be edited 
+ and imported.</span></p>
+<p><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">If 
+ the user simply wants to retrieve data, they can use one of the</span> 
+ <span class="API_Call"><a href="../Database_Tables/GetTableforDisplayArray.htm">GetTableForDisplay</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';">...</span><span 
+	 style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">functions. 
+ Functions are provided to set the Load Cases, Load Combinations, Load 
+ Patterns, Generalized Displacements, Section Cuts, Pushover Named Sets, 
+ Plot Function Traces Named Sets, Joint Response Spectra Named Sets, and 
+ Element Virtual Work Named Sets for which data is desired. The</span> 
+ <span class="API_Call"><a href="../Database_Tables/GetTableOutputOptionsForDisplay.htm">SetTableOutputOptionsForDisplay</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';"> 
+ </span><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">function 
+ can be used to set other options for display.</span></p>
+<p><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">If 
+ the user would like to edit a table and import it into the model, they 
+ should start by calling one of the</span> <span class="API_Call"><a href="../Database_Tables/GetTableForEditingArray.htm">GetTableForEditing</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';">...</span><span 
+	 style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">functions. 
+ This will retrieve the table data in one of several formats. The user 
+ can then edit that data, but they must ensure that the format of the data 
+ is not altered. Then they can import the edited table data with the respective</span> 
+ <span class="API_Call"><a href="../Database_Tables/SetTableforEditingArray.htm">SetTableForEditing</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';">...</span><span 
+	 style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">function. 
+ These functions only operate on one table at a time, but any number of 
+ edited tables can be imported by calling them successively. Finally, to 
+ apply the edited tables to the model, the user will call</span> <span 
+	 class="API_Call"><a href="../Database_Tables/ApplyEditedTables.htm">ApplyEditedTables</a></span><span 
+	 style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">. 
+ If for any reason the user would like to clear the internal list of edited 
+ tables set using the</span> <span class="API_Call"><a href="../Database_Tables/SetTableforEditingArray.htm">SetTableForEditing</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';">...</span> 
+ <span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">functions, 
+ they can call the</span> <span class="API_Call"><a href="../Database_Tables/CancelTableEditing.htm">CancelTableEditing</a></span><span 
+	 class="code" style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';"> 
+ </span><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">function.</span></p>
+<p><span style="font-size: 11.5pt; font-family: 'Segoe UI', sans-serif;">For 
+ thorough descriptions of database table operations, please refer to the 
+ function documentation in</span> <span style="font-size: 11.5pt; mso-bidi-font-family: 'Segoe UI';">DatabaseTables</span> 
+ </p>
+<p>&#160;</p>
+<p>&#160;</p>
+</body>
+</html>

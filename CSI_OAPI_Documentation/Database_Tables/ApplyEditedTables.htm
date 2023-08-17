@@ -1,0 +1,63 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>ApplyEditedTables</title>
+<link rel="StyleSheet" href="../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>ApplyEditedTables</h1>
+<h2 class="introtext">Syntax</h2>
+<p class="Comment">cDatabaseTables<span id="LST9389C294_01">.</span>ApplyEditedTables</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function ApplyEditedTables (FillImportLog As Boolean, 
+ ByRef NumFatalErrors As Integer, ByRef NumErrorMsgs As Integer, ByRef 
+ NumWarnMsgs As Integer, ByRef NumInfoMsgs As Integer, ByRef ImportLog 
+ As String ) As Integer</p>
+<h2>Parameters</h2>
+<p class="ParameterName"><span class="parameter">FillImportLog</span></p>
+<p class="Comment"><span class="parameter">W</span>hether the <span class="parameter">ImportLog</span> 
+ string should be filled. Please note that the import log may be very large. 
+ </p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">0 = Import log not requested</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; 
+	 margin-bottom: .0001pt; margin-left: 88px;">1 = Import log requested</p>
+<p class="ParameterName"><span class="parameter">NumFatalErrors</span></p>
+<p class="Comment"><span class="parameter">Returned Item: The number of 
+ fatal errors that occurred during the import </span></p>
+<p class="ParameterName"><span class="parameter">NumErrorMsgs</span></p>
+<p class="Comment">Returned Item: The number of error messages logged during 
+ the import </p>
+<dl>
+	<p class="ParameterName"><span class="parameter">NumWarnMsgs</span></p>
+	<p class="Comment"><span class="parameter">R</span>eturned Item: The 
+	 number of warning messages logged during the import </p>
+	<p class="ParameterName"><span class="parameter">NumInfoMsgs</span></p>
+	<p class="Comment"><span class="parameter">R</span>eturned Item: The 
+	 number of informational messages logged during the import </p>
+	<p class="ParameterName"><span class="parameter">ImportLog</span></p>
+</dl>
+<p class="Comment">Returned Item: A string containing all messages logged 
+ during the import </p>
+<h2>Remarks</h2>
+<p class="Comment">Instructs the program to interactively import all of 
+ the tables stored in the table list using the <span class="API_Call">SetTableForEditing</span><span 
+	 class="code">...</span> functions.</p>
+<p class="Comment">If the model is locked at the time this command is called 
+ then only tables that can be interactively imported when the model is 
+ locked will be imported. </p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 23.0.0</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="SetTableforEditingArray.htm">SetTableForEditingArray</a></p>
+<p class="Comment"><a href="SetTableForEditingCSVFile.htm">SetTableForEditingCSVFile</a></p>
+<p class="Comment"><a href="SetTableForEditingCSVString.htm">SetTableForEditngCSVString</a></p>
+<p>&#160;</p>
+</body>
+</html>

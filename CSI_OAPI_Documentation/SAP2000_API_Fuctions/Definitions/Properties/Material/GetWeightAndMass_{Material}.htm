@@ -1,0 +1,80 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\API\Material Properties\GetWeightAndMass.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetWeightAndMass {Material}</title>
+<link rel="stylesheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetWeightAndMass</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.PropMaterial.GetWeightAndMass</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetWeightAndMass(ByVal Name As String, ByRef w As Double, ByRef m As Double, Optional ByVal Temp As Double = 0) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing material property.</p>
+<p class="ParameterName">w</p>
+<p class="Comment">The weight per unit volume for the material. [F/L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">m</p>
+<p class="Comment">The mass per unit volume for the material. [M/L<sup style="font-size: 8pt;">3</sup>]</p>
+<p class="ParameterName">Temp</p>
+<p class="Comment">This item applies only if the specified material has properties that are temperature dependent. That is, it applies only if properties are specified for the material at more than one temperature.</p>
+<p class="Comment">This item is the temperature at which the specified data is to be retrieved. The temperature must have been defined previously for the material.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves the weight per unit volume and mass per unit volume of the material.</p>
+<p class="Comment">The function returns zero if the data is successfully retrieved; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub GetMatPropWeightAndMass()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim w As Double<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim m As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'initialize new material property<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.SetMaterial("Steel", MATERIAL_STEEL)<br>
+<br>
+&#160;&#160;&#160;'assign material property weight per unit volume<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.SetWeightAndMass("Steel", 1, 0.00029)<br>
+<br>
+&#160;&#160;&#160;'get material weight and mass per unit volume<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.PropMaterial.GetWeightAndMass("Steel", w, m)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 11.02.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="SetWeightAndMass_{Material}.htm">SetWeightAndMass</a></p>
+</body>
+</html>

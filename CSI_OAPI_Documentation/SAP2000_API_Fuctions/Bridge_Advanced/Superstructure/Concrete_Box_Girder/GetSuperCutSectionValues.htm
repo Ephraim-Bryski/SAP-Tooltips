@@ -1,0 +1,123 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetSuperCutWebValues.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetSuperCutSectionValues</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>GetSuperCutSectionValues</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetSuperCutSectionValues (ByVal Name As String, ByVal CutIndex As Long, ByVal Item as Long, ByRef Value as Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing bridge object.</p>
+<p class="ParameterName">CutIndex</p>
+<p class="Comment">The index number of the section cut in this bridge object. This must be from 0 to Count-1, where Count is the value returned by the function CountSuperCut. Section cuts will be in order of increasing Station and increasing SuperCutType.</p>
+<p class="ParameterName">Item</p>
+<p class="Comment">This is an integer from 1 to 12, inclusive, indicating the type of property value to be gotten:</p>
+<p class="Block-Text" style="margin-left: 72px;">1 = Number of girders or webs</p>
+<p class="Block-Text" style="margin-left: 72px;">2 = Design area of top slab, ASlabTop</p>
+<p class="Block-Text" style="margin-left: 72px;">3 = Design area of bottom slab, ASlabBot</p>
+<p class="Block-Text" style="margin-left: 72px;">4 = Width of top slab, BSlabTop</p>
+<p class="Block-Text" style="margin-left: 72px;">5 = Width of bottom slab, BSlabBot</p>
+<p class="Block-Text" style="margin-left: 72px;">6 = X coordinate of top slab centroid, XSlabTop</p>
+<p class="Block-Text" style="margin-left: 72px;">7 = X coordinate of bottom slab centroid, XSlabBot</p>
+<p class="Block-Text" style="margin-left: 72px;">8 = Y coordinate of top slab centroid, YSlabTop</p>
+<p class="Block-Text" style="margin-left: 72px;">9 = Y coordinate of bottom slab centroid, YSlabBot</p>
+<p class="Block-Text" style="margin-left: 72px;">10 = Area inside torsion circuit, ATorsion</p>
+<p class="Block-Text" style="margin-left: 72px;">11 = Length of torsion circuit, LTorsion</p>
+<p class="Block-Text" style="margin-left: 72px;">12 = Number of tendons</p>
+<p class="Block-Text" style="margin-left: 72px;">13 = Top outside width of torsion circuit, BTorsionTop</p>
+<p class="Block-Text" style="margin-left: 72px;">14 = Bottom outside width of torsion circuit, BTorsionBot</p>
+<p class="Block-Text" style="margin-left: 72px;">15 = Left outside length of torsion circuit (along slope), HTorsionLeft</p>
+<p class="Comment" style="margin-left: 72px;">16 = Right outside length of torsion circuit (along slope), HTorsionRight</p>
+<p class="ParameterName">Value</p>
+<p class="Comment">The value of the requested item:</p>
+<p class="Block-Text" style="margin-left: 72px;">1 = Number of girders or webs</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0, integral.</p>
+<p class="Block-Text" style="margin-left: 72px;">2 = Design area of top slab, ASlabTop</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L<span style="vertical-align: Super; font-size: 8pt;">2</span>]</p>
+<p class="Block-Text" style="margin-left: 72px;">3 = Design area of bottom slab, ASlabBot</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0. [L<span style="vertical-align: Super; font-size: 8pt;">2</span>]</p>
+<p class="Block-Text" style="margin-left: 72px;">4 = Width of top slab, BSlabTop</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">5 = Width of bottom slab, BSlabBot</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">6 = X coordinate of top slab centroid, XSlabTop</p>
+<p class="Comment" style="margin-left: 96px;">Any value is valid. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">7 = X coordinate of bottom slab centroid, XSlabBot</p>
+<p class="Comment" style="margin-left: 96px;">Any value is valid. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">8 = Y coordinate of top slab centroid, YSlabTop</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">9 = Y coordinate of bottom slab centroid, YSlabBot</p>
+<p class="Comment" style="margin-left: 96px;">Value &lt;= 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">10 = Area inside torsion circuit, ATorsion</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0. [L<span style="vertical-align: Super; font-size: 8pt;">2</span>]</p>
+<p class="Block-Text" style="margin-left: 72px;">11 = Length of torsion circuit, LTorsion</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">12 = Number of tendons</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt;= 0.</p>
+<p class="Block-Text" style="margin-left: 72px;">13 = Top outside width of torsion circuit, BTorsionTop</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">14 = Bottom outside width of torsion circuit, BTorsionBot</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">15 = Left outside length of torsion circuit (along slope), HTorsionLeft</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L]</p>
+<p class="Block-Text" style="margin-left: 72px;">16 = Right outside length of torsion circuit (along slope), HTorsionRight</p>
+<p class="Comment" style="margin-left: 96px;">Value &gt; 0. [L]</p>
+<h2>Remarks</h2>
+<p class="Comment">This function returns an individual section property at a single superstructure section cut in a bridge object. These properties are calculated for the section before skew, grade, and superelevation are applied. Coordinate values are measured from the lower-left corner of the section bounding-box. X is positive to the right when looking upstation, and Y is positive upward.</p>
+<p class="Comment">The function returns zero if the information is successfully retrieved; otherwise it returns a nonzero value.</p>
+<p class="Comment">If the bridge object is not currently linked to existing objects in the model, an error is returned.</p>
+<h2>VBA Example</h2>
+<p class="Comment">This example assumes that a file MyBridge.sdb exists and has a linked bridge object named BOBJ1 in it.</p>
+<p class="Coding">Sub GetBridgeSuperCutSectionValues()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Count As Long<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim Value As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\MyBridge.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'get section cut count<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.CountSuperCut("BOBJ1", Count)<br>
+<br>
+&#160;&#160;&#160;'get section cut section top-slab area in Value<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.BridgeAdvancedSuper.BASConcBox.GetSuperCutSectionValues ("BOBJ1", 1, 2, Value)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 12.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="../CountSuperCut.htm">CountSuperCut</a></p>
+</body>
+</html>

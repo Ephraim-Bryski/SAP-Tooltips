@@ -1,0 +1,84 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="GetNZS11702004.doc">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SetAASHTO2007</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../../../ehlpdhtm.js"></script>
+
+<h1>SetAASHTO2007</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Func.FuncRS.SetAASHTO2007</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SetAASHTO2007(ByVal Name As String, ByVal AASHTO2007Option As Long, ByVal AASHTO2007Latitude As Double, ByVal AASHTO2007Longitude As Double, ByVal AASHTO2007ZipCode As String, ByVal AASHTO2007SS As Double, ByVal AASHTO2007S1 As Double, ByVal AASHTO2007PGA As Double, ByVal AASHTO2007SiteClass As Long, ByVal AASHTO2007Fa As Double, ByRef AASHTO2007Fv As Double, ByVal AASHTO2007Fpga As Double, ByVal DampRatio As Double) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="Comment">The name of an existing or new function. If this is an existing function, that function is modified; otherwise, a new function is added.</p>
+<p class="ParameterName">AASHTO2007Option</p>
+<p class="Comment">This is 0, 1 or 2, indicating the seismic coefficient option.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">0 = Ss and S1 from USGS by latitude and longitude</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = Ss and S1 from USGS by zip code</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">2 = Ss and S1 are user defined</p>
+<p class="ParameterName">AASHTO2007Latitude, AASHTO2007Longitude</p>
+<p class="Comment">The latitude and longitude for which the seismic coefficients are obtained. These items are used only when AASHTO2007Option = 0.</p>
+<p class="ParameterName">AASHTO2007ZipCode</p>
+<p class="Comment">The zip code for which the seismic coefficients are obtained. This item is used only when AASHTO2007Option = 1.</p>
+<p class="ParameterName">AASHTO2007SS, AASHTO2007S1, AASHTO2007PGA</p>
+<p class="Comment">The seismic coefficients Ss, S1 and PGA. These items are used only when AASHTO2007Option = 2.</p>
+<p class="ParameterName">AASHTO2007SiteClass</p>
+<p class="Comment">This is 1, 2, 3, 4, 5 or 6, indicating the site class.</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">1 = A</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">2 = B</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">3 = C</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">4 = D</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-bottom: .0001pt; margin-left: 88px;">5 = E</p>
+<p class="ParameterDescription" style="margin-top: 0in; margin-right: 0in; margin-left: 88px; margin-bottom: 9pt;">6 = F</p>
+<p class="ParameterName">AASHTO2007Fa, AASHTO2007Fv, AASHTO2007Fpga</p>
+<p class="Comment">The site coefficients Fa, Fv and Fpga. These items are used only when AASHTO2007SiteClass= 6.</p>
+<p class="ParameterName">DampRatio</p>
+<p class="Comment">The damping ratio for the function, 0 &lt;= DampRatio &lt; 1.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function defines a AASHTO 2007 response spectrum function.</p>
+<p class="Comment">The function returns zero if the function is successfully defined; otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SetRSFuncAASHTO2007()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 2, 288)<br>
+<br>
+&#160;&#160;&#160;'add AASHTO2007 RS function<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Func.FuncRS.SetAASHTO2007("RS-1", 1, 0, 0, "94704", 0, 0, 0, 4, 0, 0, 0, 0.04)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 14.00.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="GetAASHTO2007.htm">GetAASHTO2007</a></p>
+</body>
+</html>

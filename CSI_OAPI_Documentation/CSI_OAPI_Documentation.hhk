@@ -1,0 +1,168 @@
+<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="SiteType" value="index">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Tendon">
+    <param name="Name" value="GetGroupAssign {Tendon Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Tendon_Object/GetGroupAssign_{Tendon_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign">
+    <param name="Name" value="GetGroupAssign {Tendon Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Tendon_Object/GetGroupAssign_{Tendon_Object}.htm">
+    <param name="Name" value="GetGroupAssign {Solid Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Solid_Object/GetGroupAssign_{Solid_Object}.htm">
+    <param name="Name" value="GetGroupAssign {Link Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Link_Object/GetGroupAssign_{Link_Object}.htm">
+    <param name="Name" value="GetGroupAssign {Frame Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Frame_Object/GetGroupAssign_{Frame_Object}.htm">
+    <param name="Name" value="GetGroupAssign {Cable Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Cable_Object/GetGroupAssign_{Cable_Object}.htm">
+    <param name="Name" value="GetGroupAssign {Area Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Area_Object/GetGroupAssign_{Area_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Get Group Assign Tendon">
+    <param name="Name" value="GetGroupAssign {Tendon Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Tendon_Object/GetGroupAssign_{Tendon_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Solid Object">
+    <param name="Name" value="GetGroupAssign {Solid Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Solid_Object/GetGroupAssign_{Solid_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Solid Object">
+    <param name="Name" value="GetGroupAssign {Solid Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Solid_Object/GetGroupAssign_{Solid_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GroupAssign">
+    <param name="Name" value="GetGroupAssign {Point Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Point_Object/GetGroupAssign_{Point_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Point Object">
+    <param name="Name" value="GetGroupAssign {Point Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Point_Object/GetGroupAssign_{Point_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Point Object">
+    <param name="Name" value="GetGroupAssign {Point Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Point_Object/GetGroupAssign_{Point_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Link Object">
+    <param name="Name" value="GetGroupAssign {Link Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Link_Object/GetGroupAssign_{Link_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Link Object">
+    <param name="Name" value="GetGroupAssign {Link Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Link_Object/GetGroupAssign_{Link_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Frame Object">
+    <param name="Name" value="GetGroupAssign {Frame Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Frame_Object/GetGroupAssign_{Frame_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Frame Object">
+    <param name="Name" value="GetGroupAssign {Frame Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Frame_Object/GetGroupAssign_{Frame_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Cable Object">
+    <param name="Name" value="GetGroupAssign {Cable Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Cable_Object/GetGroupAssign_{Cable_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Cable Object">
+    <param name="Name" value="GetGroupAssign {Cable Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Cable_Object/GetGroupAssign_{Cable_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Area Object">
+    <param name="Name" value="GetGroupAssign {Area Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Area_Object/GetGroupAssign_{Area_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="GetGroupAssign Area Object">
+    <param name="Name" value="GetGroupAssign {Area Object}">
+    <param name="Local" value="SAP2000_API_Fuctions/Object_Model/Area_Object/GetGroupAssign_{Area_Object}.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="area strain shell">
+    <param name="Name" value="AreaStrainShell">
+    <param name="Local" value="SAP2000_API_Fuctions/Analysis_Results/Results/AreaStrainShell.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="area strain shell layered">
+    <param name="Name" value="AreaStrainShellLayered">
+    <param name="Local" value="SAP2000_API_Fuctions/Analysis_Results/Results/AreaStrainShellLayered.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="solid strain">
+    <param name="Name" value="SolidStrain">
+    <param name="Local" value="SAP2000_API_Fuctions/Analysis_Results/Results/SolidStrain.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="beam design forces">
+    <param name="Name" value="BeamDesignForces">
+    <param name="Local" value="SAP2000_API_Fuctions/Design/Steel/Design_Forces/BeamDesignForces.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Column Design Forces">
+    <param name="Name" value="ColumnDesignForces">
+    <param name="Local" value="SAP2000_API_Fuctions/Design/Steel/Design_Forces/ColumnDesignForces.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Database Tables">
+    <param name="Name" value="ApplyEditedTables">
+    <param name="Local" value="Database_Tables/ApplyEditedTables.htm">
+    <param name="Name" value="CancelTableEditing">
+    <param name="Local" value="Database_Tables/CancelTableEditing.htm">
+    <param name="Name" value="GetAllTables">
+    <param name="Local" value="Database_Tables/GetAllTables.htm">
+    <param name="Name" value="GetAllFieldsInTable">
+    <param name="Local" value="Database_Tables/GetAllFieldsInTable.htm">
+    <param name="Name" value="GetDatabaseUnits">
+    <param name="Local" value="SAP2000_API_Fuctions/General_Functions/GetDatabaseUnits.htm">
+    <param name="Name" value="Interactive Database">
+    <param name="Local" value="Getting_Started/Interactive_Database.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Tables for Display">
+      <param name="Name" value="GetTableForDisplayArray">
+      <param name="Local" value="Database_Tables/GetTableforDisplayArray.htm">
+      <param name="Name" value="GetTableForDisplayCSVFile">
+      <param name="Local" value="Database_Tables/GetTableforDisplayCSVfile.htm">
+      <param name="Name" value="GetTableForDisplayCSVString">
+      <param name="Local" value="Database_Tables/GetTableforDisplayCSVString.htm">
+      <param name="Name" value="GetTableForDisplayXMLString">
+      <param name="Local" value="Database_Tables/GetTableForDisplayXMLString.htm">
+      <param name="Name" value="SetTableOutputOptionsForDisplay">
+      <param name="Local" value="Database_Tables/SetTableOutputOptionsForDisplay.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Tables for Editing">
+      <param name="Name" value="CancelTableEditing">
+      <param name="Local" value="Database_Tables/CancelTableEditing.htm">
+      <param name="Name" value="GetTableForEditingArray">
+      <param name="Local" value="Database_Tables/GetTableForEditingArray.htm">
+      <param name="Name" value="GetTableForEditingCSVFile">
+      <param name="Local" value="Database_Tables/GetTableforEditingCSVFile.htm">
+      <param name="Name" value="GetTableForEditingCSVString">
+      <param name="Local" value="Database_Tables/GetTableForEditingCSVString.htm">
+      <param name="Name" value="SetTableForEditingCSVFile">
+      <param name="Local" value="Database_Tables/SetTableForEditingCSVFile.htm">
+      <param name="Name" value="SetTableForEditingCSVString">
+      <param name="Local" value="Database_Tables/SetTableForEditingCSVString.htm">
+    </object>
+    </ul>
+</ul>
+</html>

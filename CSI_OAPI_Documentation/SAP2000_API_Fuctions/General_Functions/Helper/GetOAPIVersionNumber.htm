@@ -1,0 +1,68 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>GetOAPIVersionNumber</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>GetOAPIVersionNumber</h1>
+<h2>Syntax</h2>
+<p class="Comment">Helper.GetOAPIVersionNumber</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function GetOAPIVersionNumber() As Double</p>
+<h2>Parameters</h2>
+<p class="Comment">None</p>
+<h2>Remarks</h2>
+<p class="Comment">Retrieves the API version. The returned API version 
+ can be compared to SapObject.GetOAPIVersionNumber to determine API compatibility 
+ with the started/attached instance of SAP2000.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Public Sub Example()</p>
+<p class="Coding">Dim myHelper As cHelper</p>
+<p class="Coding">Dim SapObject As cOAPI</p>
+<p class="Coding">Dim clientAPIVersion As Double</p>
+<p class="Coding">Dim programAPIVersion As Double</p>
+<p class="Coding">Dim ret As Integer</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">‘create SapObject</p>
+<p class="Coding">Set myHelper = New Helper</p>
+<p class="Coding">Set SapObject = myHelper.CreateObjectProgID(&quot;CSI.SAP2000.API.SapObject&quot;)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'start SAP2000 application</p>
+<p class="Coding">ret = SapObject.ApplicationStart()</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'get client API version</p>
+<p class="Coding">clientAPIVersion = myHelper.GetOAPIVersionNumber()</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'get program API version</p>
+<p class="Coding">programAPIVersion = SapObject.GetOAPIVersionNumber()</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">‘API compatibility check</p>
+<p class="Coding">If clientAPIVersion &gt; programAPIVersion Then</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'API 
+ client uses a newer version of the API than SAP2000.</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;'All 
+ API functionality may be not be available.</p>
+<p class="Coding"><span style="mso-spacerun: yes;">&#160;&#160;&#160;</span>&#160;Exit 
+ Sub</p>
+<p class="Coding">End If</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'close SAP2000</p>
+<p class="Coding">ret = SapObject.ApplicationExit(False)</p>
+<p class="Coding">&#160;</p>
+<p class="Coding">'clean up variables</p>
+<p class="Coding">Set SapObject = Nothingx</p>
+<p class="Coding">Set myHelper = Nothing</p>
+<p class="Coding">End Sub</p>
+<h2 class="Coding">Release Notes</h2>
+<p class="Comment">Initial release in version 21.00</p>
+<h2>See Also</h2>
+<p class="Comment"><a href="../GetOAPIVersionNumber.htm">SapObject.GetOAPIVersionNumber</a></p>
+</body>
+</html>

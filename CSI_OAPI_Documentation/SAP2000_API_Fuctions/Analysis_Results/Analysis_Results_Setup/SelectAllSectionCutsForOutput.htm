@@ -1,0 +1,81 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-US">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>SelectAllSectionCutsForOutput</title>
+<link rel="StyleSheet" href="../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>SelectAllSectionCutsForOutput</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.Results.Setup.SelectAllSectionCutsForOutput</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment">Function SelectAllSectionCutsForOutput (Selected as Boolean) AsLong</p>
+<h2>Parameters</h2>
+<p class="Comment">Selected</p>
+<p class="Comment">This item is True if all section cuts are to be selected for output, or False if no section cuts are to be selected for output.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function selects or deselects all section cuts for output.</p>
+<p class="Comment">The function returns 0 if the selected flag is successfully set, otherwise it returns nonzero.</p>
+<p class="Comment">Please note that all section cuts are, by default, selected for output when they are created.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub SelectAllSectionCuts()</p>
+<p class="Coding" style="margin-left: 88px; text-indent: -16px;">'dimension variables</p>
+<p class="Coding" style="margin-left: 128px; text-indent: -20px;">Dim SapObject As Sap2000v16.SapObject</p>
+<p class="Coding" style="margin-left: 128px; text-indent: -20px;">Dim SapModel As cSapModel</p>
+<p class="Coding" style="margin-left: 128px; text-indent: -20px;">Dim ret As Long</p>
+<p class="Coding" style="margin-left: 128px; text-indent: -20px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create Sap2000 object</p>
+<p class="Coding" style="margin-left: 112px;">Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'start Sap2000 application</p>
+<p class="Coding" style="margin-left: 112px;">SapObject.ApplicationStart</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create SapModel object</p>
+<p class="Coding" style="margin-left: 112px;">Set SapModel = SapObject.SapModel</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'initialize model</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.InitializeNewModel</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'create model from template</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.File.New2DFrame(PortalFrame, 2, 144, 288)</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'define new group</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.GroupDef.SetGroup("Group1")</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'add objects to group</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.PointObj.SetGroupAssign("1", "Group1")</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.FrameObj.SetGroupAssign("1", "Group1")</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'define section cut</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.SectCut.SetByGroup("SCut1", "Group1", 1)</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'Deselect all section cuts for output</p>
+<p class="Coding" style="margin-left: 112px;">ret = SapModel.Results.Setup.SelectAllSectionCutsForOutput(False)</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'Select all section cuts for output</p>
+<p class="Coding" style="margin-left: 112px;">ret = <span style="font-family: 'Courier New'; font-size: 15px; line-height: 21px; orphans: auto; widows: auto; -webkit-text-stroke-width: 0px; background-color: #ffffff; display: inline ! important ; float: none;">SapModel.Results.Setup.SelectAllSectionCutsForOutput(True)</span></p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">'close Sap2000</p>
+<p class="Coding" style="margin-left: 112px;">SapObject.ApplicationExit False</p>
+<p class="Coding" style="margin-left: 112px;">Set SapModel = Nothing</p>
+<p class="Coding" style="margin-left: 112px;">Set SapObject = Nothing</p>
+<p class="Coding" style="margin-left: 112px;">&#160;</p>
+<p class="Coding">End Sub</p>
+<p class="code" style="line-height: 21px; margin: 0px 0px 1.35em; color: rgb(68, 68, 68); font-family: Calibri, sans-serif; font-size: 15px; orphans: auto; widows: auto; -webkit-text-stroke-width: 0px; background-color: #ffffff; margin-bottom: 0em;">&#160;</p>
+<h2 class="Coding">Release Notes</h2>
+<p class="Comment">Initial release in version 16.0.2.</p>
+<h2>See Also</h2>
+<p style="margin-left: 48px; margin-bottom: 0pt;"><a href="GetSectionCutSelectedForOutput.htm">GetSectionCutSelectedForOutput</a></p>
+<p style="margin-left: 48px; margin-bottom: 0pt;"><a href="SetSectionCutSelectedForOutput.htm">SetSectionCutSelectedForOutput</a></p>
+<p class="Coding" style="margin-left: 72px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">&#160;</p>
+<p class="Coding" style="margin-left: 72px;">&#160;</p>
+<p class="Coding">&#160;</p>
+</body>
+</html>

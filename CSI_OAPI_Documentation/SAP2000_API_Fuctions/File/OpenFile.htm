@@ -1,0 +1,68 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Originator" content="ImportDoc">
+<meta name="OriginalFile" content="F:\Documents and Settings\Nancy\My Documents\SharedFiles\FileOpen.doc">
+<meta name="topic-status" content="In Progress">
+<meta name="topic-priority" content="0">
+<meta name="topic-time-estimate" content="0">
+<meta name="topic-id" content="">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>OpenFile</title>
+<link rel="StyleSheet" href="../../SAP2000.CSS" type="text/css">
+</head>
+<body lang="EN-US" xml:lang="EN-US"><a name="642b3b9347ca42c9b00b820c00c373fa=1"></a>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h1><u><span style="text-decoration: none;">OpenFile</span></u></h1>
+<h2>Syntax</h2>
+<p class="Block-Text">SapObject.SapModel.File.OpenFile</p>
+<h2>VB6 Procedure</h2>
+<p class="Block-Text">Function OpenFile(ByVal FileName As String) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">FileName</p>
+<p style="margin-left: 48px; margin-bottom: 0pt;">The full path of a model file to be opened in the Sap2000 application.</p>
+<h2>Remarks</h2>
+<p class="Block-Text" style="margin-bottom: 9pt;">This function opens an existing Sap2000 file. The file name must have an sdb, $2k, s2k, xlsx, xls, or mdb extension. Files with sdb extensions are opened as standard Sap2000 files. Files with $2k and s2k extensions are imported as text files. Files with xlsx and xls extensions are imported as Microsoft Excel files. Files with mdb extensions are imported as Microsoft Access files.</p>
+<p class="Block-Text" style="margin-bottom: 9pt;">This function returns zero if the file is successfully opened and nonzero if it is not opened.</p>
+<p class="Block-Text" style="margin-bottom: 9pt;">The function is only applicable when you are accessing the Sap2000 API from an external application. It will return an error if you call it from VBA inside Sap2000.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub OpenSDB()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim FileName as String<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret as Long<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'open an existing file<br>
+&#160;&#160;&#160;&#160;&#160;&#160;FileName = "C:\SapAPI\Example 1-019a.sdb"<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.OpenFile(FileName)<br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Block-Text">Initial release in version 11.00.</p>
+<p class="Block-Text">&#160;</p>
+<p class="Block-Text">Added reference to xlsx file extension in SAP2000 v15.0.0 and CSiBridge v15.1.0.</p>
+<h2>See Also</h2>
+<p class="Block-Text"><a href="../General_Functions/ApplicationStart.htm">ApplicationStart</a></p>
+<p class="Block-Text"><a href="Save.htm">Save</a></p>
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <meta name="generator" content="Adobe RoboHelp 2019">
+<title>BraceDesignForces</title>
+<link rel="StyleSheet" href="../../../../SAP2000.CSS" type="text/css">
+</head>
+<body>
+<script type="text/javascript" src="../../../../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<h1>BraceDesignForces</h1>
+<h2>Syntax</h2>
+<p class="Comment">SapObject.SapModel.DesignResults.DesignForces.BraceDesignForces</p>
+<h2>VB6 Procedure</h2>
+<p class="Comment" style="margin-bottom: 0pt;">Function BraceDesignForces (</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByVal <span style="font-style: italic;">Name</span> As String,</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">NumberResults</span> As Long,</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">FrameNam</span>e As String(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">ComboName</span> As String (),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">Station</span> As Double (),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">P</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">V2</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">V3</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">T</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">M2</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">ByRef <span style="font-style: italic;">M3</span> As Double(),</p>
+<p class="Comment" style="margin-left: 115px; margin-bottom: 0pt;">Optional ItemType As eItemType = eItemType.Objects) As Long</p>
+<h2>Parameters</h2>
+<p class="ParameterName">Name</p>
+<p class="ParameterNameDescription">The name of an existing frame object or group, depending on the value of the <i>ItemType</i> item.</p>
+<p class="ParameterName">NumberResults</p>
+<p class="ParameterNameDescription">The number of results, this is the length of all output arrays</p>
+<p class="ParameterName">FrameName</p>
+<p class="ParameterNameDescription">The frame unique name associated with each result</p>
+<p class="ParameterName">ComboName</p>
+<p class="ParameterNameDescription">The load combination for which the results are reported</p>
+<p class="ParameterName">Station</p>
+<p class="ParameterNameDescription">The location, measured from the I-end of the frame object, where the results are reported [L]</p>
+<p class="ParameterName">P</p>
+<p class="ParameterNameDescription">The design axial force in the frame object local 1-axis direction [F]</p>
+<p class="ParameterName">V2</p>
+<p class="ParameterNameDescription">The design shear force in the frame object local 2-axis direction [F]</p>
+<p class="ParameterName">V3</p>
+<p class="ParameterNameDescription">The design shear force in the frame object local 3-axis direction [F]</p>
+<p class="ParameterName">T</p>
+<p class="ParameterNameDescription">The design torsional moment about the frame object local 1-axis [FL]</p>
+<p class="ParameterName">M2</p>
+<p class="ParameterNameDescription">The design bending moment about the frame object local 2-axis [FL]</p>
+<p class="ParameterName">M3</p>
+<p class="ParameterNameDescription">The design bending moment about the frame object local 3-axis [FL]</p>
+<p class="ParameterName">ItemType [Optional]</p>
+<p class="ParameterNameDescription">This is one of the following items in the eItemType enumeration:</p>
+<ul style="list-style: disc;">
+<li>
+<p class="ParameterNameDescription">Object = 0</p>
+</li>
+<li>
+<p class="ParameterNameDescription">Group = 1</p>
+</li>
+<li>
+<p class="ParameterNameDescription">SelectedObjects = 2</p>
+</li>
+</ul>
+<p class="ParameterNameDescription">If this item is Objects, results are retrieved for the frame object specified by the Name item. This is the default.</p>
+<p class="ParameterNameDescription">If this item is Group, results are retrieved for all frame objects specified by the Name item.</p>
+<p class="ParameterNameDescription">If this item is SelectedObjects, results are retrieved for all selected frame objects and the Name item is ignored.</p>
+<h2>Remarks</h2>
+<p class="Comment">This function retrieves design forces for an existing designed brace.</p>
+<p class="Comment">The function returns zero if the forces are successfully recovered, otherwise it returns a nonzero value.</p>
+<h2>VBA Example</h2>
+<p class="Coding">Sub &#160;GetBraceDesignForces()<br>
+&#160;&#160;&#160;'dimension variables<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapObject as cOAPI<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim SapModel As cSapModel<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Dim ret As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim NumberResults As Long</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim FrameName() As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim ComboName() As String</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim Station() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim P() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim V2() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;Dim V3() As Double</p>
+<p class="Coding">&#160;&#160;&#160;&#160;&#160;&#160;<span style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">Dim T() As Double</span></p>
+<p class="Coding" style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;&#160;&#160;&#160;&#160;&#160;Dim M2() As Double</p>
+<p class="Coding" style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;&#160;&#160;&#160;&#160;&#160;Dim M3() As Double<br>
+<br>
+&#160;&#160;&#160;'create Sap2000 object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = CreateObject("CSI.SAP2000.API.SapObject")<br>
+<br>
+&#160;&#160;&#160;'start Sap2000 application<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationStart<br>
+<br>
+&#160;&#160;&#160;'create SapModel object<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = SapObject.SapModel<br>
+<br>
+&#160;&#160;&#160;'initialize model<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.InitializeNewModel<br>
+<br>
+&#160;&#160;&#160;'create model from template<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.New2DFrame(e2DFrameType_PortalFrame, 3, 124, 3, 200)<br>
+<br>
+&#160;&#160;&#160;'add brace</p>
+<p class="Coding" style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;&#160;&#160;&#160;&#160;&#160;Dim BraceName As String</p>
+<p class="Coding" style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.FrameObj.AddByPoint.("3","6", BraceName)</p>
+<p class="Coding" style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;</p>
+<p class="Coding"><span style="line-height: normal; mso-layout-grid-align: none; text-autospace: none;">&#160;&#160;&#160;'run analysis<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.File.Save("C:\SapAPI\x.sdb")<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.Analyze.RunAnalysis<br>
+<br>
+&#160;&#160;&#160;'run design<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignSteel.StartDesign<br>
+<br>
+&#160;&#160;&#160;'get brace design forces<br>
+&#160;&#160;&#160;&#160;&#160;&#160;ret = SapModel.DesignResults.DesignForces.BraceDesignForces(BraceName, NumberResults, FrameName, ComboName, Station, P, V2, V3, T, M2, M3, eItemType_Objects)</span><br>
+<br>
+&#160;&#160;&#160;'close Sap2000<br>
+&#160;&#160;&#160;&#160;&#160;&#160;SapObject.ApplicationExit False<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapModel = Nothing<br>
+&#160;&#160;&#160;&#160;&#160;&#160;Set SapObject = Nothing<br>
+End Sub</p>
+<h2>Release Notes</h2>
+<p class="Comment">Initial release in version 20.2</p>
+</body>
+</html>
