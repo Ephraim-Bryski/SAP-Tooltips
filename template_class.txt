@@ -1,5 +1,6 @@
 class CLASS:
-    def __init__(self, api):
+    def __init__(self, strict, api):
+        self.strict = strict
         self.api = api
 COMPONENTS
 METHODS

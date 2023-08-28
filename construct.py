@@ -14,14 +14,35 @@ template_method = f.read()
 classes = {}    
 
 
+def parse_method(method_info):
+
+    method_full_name = method_info["full_name"]
+
+    all_layers = method_full_name.split(".")
+
+    
+    if all_layers[0] == "SapObject" and all_layers[1] == "SapModel":
+        model_layers = all_layers[1:]
+    else:
+        print(f"unknown method base: {method_full_name}")
+        return [None, None, None]
+
+
+    method_short_name = model_layers[-1]
+    class_short_name = model_layers[-2]
+    
+    return [model_layers, class_short_name, method_short_name]
+
+
+
 
 for method_info in docs:
 
-    method_full_name = method_info["full_name"]
-    method_layers = method_full_name.split(".")
 
+    [method_layers, _, method_short_name] = parse_method(method_info)
 
-    method_short_name = method_layers[-1]
+    if method_layers == None:
+        continue
 
     for i in range(len(method_layers)-1):
         
@@ -58,17 +79,18 @@ def get_method_info(class_name, method_name):
     found = False
     for method_info in docs:
 
-        # TODO copied code
-        method_full_name = method_info["full_name"]
-        method_layers = method_full_name.split(".")
-        method_short_name = method_layers[-1]
-        class_short_name = method_layers[-2]
+        [method_layers, class_short_name, method_short_name] = parse_method(method_info)
+
+        if class_short_name == None:
+            continue
+
         if class_short_name == class_name and method_short_name == method_name:
             if found:
                 print(f"{class_name}.{method_name} appears multiple times")
                 return None
             else:
                 found = True
+                method_info["truncated_name"] = ".".join(method_layers)
                 method_info["short_name"] = method_short_name
                 method_info_found = method_info
 
@@ -96,7 +118,7 @@ def construct_method(method_info):
 
     method_txt = method_txt.replace("SHORT_METHOD",short_name)
     method_txt = method_txt.replace("ABOUT",method_info["about"])
-    method_txt = method_txt.replace("FULL_METHOD",method_info["full_name"])
+    method_txt = method_txt.replace("FULL_METHOD",method_info["truncated_name"]) # doesn't have SapObject
     # TODO need to include argument info in the about
 
     arguments = method_info["arguments"]
@@ -132,7 +154,7 @@ def construct_class(class_name, components, methods_names):
 
     component_txt = ""
     for component in components:
-        component_txt += f"{sp*8}self.{component} = {component}(api)\n"
+        component_txt += f"{sp*8}self.{component} = {component}(strict, api)\n"
 
     methods_txt = ""
     for method_name in methods_names:
@@ -175,5 +197,5 @@ def fix_typos(method_layers):
     
 
 
-f = open("constructed.py","w",encoding="utf8")
+f = open("sap/constructed.py","w",encoding="utf8")
 f.write(wrapper_txt)

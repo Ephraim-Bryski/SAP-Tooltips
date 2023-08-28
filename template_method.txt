@@ -3,5 +3,11 @@
 ABOUT
 ARGUMENT_INFO
         """
-        self.api.FULL_METHOD(SHORT_ARGUMENTS)
+        ret = self.api.FULL_METHOD(SHORT_ARGUMENTS)
+
+        if not isinstance(ret,list):
+            ret = [ret]
+
+        if self.strict and ret[-1] != 0:
+            raise Exception(f'"SHORT_METHOD" failed')
 
