@@ -1,4 +1,4 @@
-Puts SAP2000 API documentation directly in to your IDE as tooltips. This way you don't have to copy and paste methods and keep track of parameters.
+Puts SAP2000 API documentation directly in to your editor as tooltips. This way you don't have to copy and paste methods and keep track of parameters.
 
 This is done by taking the documentation to construct classes that call API methods.
 
