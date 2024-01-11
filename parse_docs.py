@@ -33,6 +33,27 @@ def get_parameter_info(div_group):
     inserted_names = []
     inserted_info = []
     
+    
+    flat_parameter_names = []
+    flat_parameter_info = []
+
+    for parameter in zip(parameter_names, parameter_info):
+        [name, info] = parameter
+
+        name = name.replace(" ","")
+
+        subnames = name.split(",")
+        
+
+        for subname in subnames:
+            flat_parameter_names.append(subname)
+            flat_parameter_info.append(info)
+        
+
+            
+    parameter_names = flat_parameter_names
+    parameter_info = flat_parameter_info
+
     for i in range(len(parameter_names)):
         name = parameter_names[i].replace(" ","")
         if not name.isidentifier():
@@ -70,6 +91,10 @@ def get_parameter_info(div_group):
 
 def get_method_info(file_name):
 
+    if file_name != desired_path:
+        pass
+        # return
+
     if ".htm" not in file_name:
         return None
     f = open(file_name)
@@ -103,8 +128,20 @@ def get_method_info(file_name):
             group = []
             prev_div = div
 
-    if method == None or description == None or arguments == None:
+    if method == None:
         return None
+    
+    success = True
+
+    if description == None:
+        description = ""
+        success = False
+    
+    if arguments == None:
+        arguments = {}
+        description += "\n Failed to parse arguments, start with '.api.' to call method"
+        success = False
+
 
 
     method_parts = method.split(".")
@@ -116,9 +153,12 @@ def get_method_info(file_name):
         "full_name": method,
         "file":file_name, # just used for reference
         "about": description,
-        "arguments":arguments
+        "arguments":arguments,
+        "fully_parsed": success
     }
     return method_data
+
+desired_path = "CSI_OAPI_Documentation\\SAP2000_API_Fuctions\\Edit\\Edit_Point\\ChangeCoordinates_1_{Point}.htm"
 
 def get_docs():
 
@@ -128,18 +168,29 @@ def get_docs():
     docs = []
     base_path = "CSI_OAPI_Documentation\SAP2000_API_Fuctions"
     def search_down_dir(path):    
+
         contents = os.listdir(path)
         files = []
         folders = []
         for content in contents:
-            if "." in content:
-                method_info = get_method_info(path+"\\"+content)
-                if method_info == None:
-                    cant_parse_files.append(path+"\\"+content)
-                else:
-                    files.append(method_info)
-            else:
+            
+            if "." not in content:
                 folders.append(content)
+                continue
+
+            full_name = f"{path}\\{content}"
+            method_info = get_method_info(full_name)
+
+
+            if method_info == None:
+                cant_parse_files.append(full_name)
+                continue
+            else:
+                files.append(method_info)
+
+            if not method_info["fully_parsed"]: 
+                cant_parse_arguments_files.append(full_name)
+
         for folder in folders:
             search_down_dir(path+"\\"+folder)
 
@@ -157,6 +208,7 @@ def get_docs():
 
 
 cant_parse_files = []
+cant_parse_arguments_files = []
 
 docs = get_docs()
 
@@ -167,6 +219,9 @@ with open("documentation.json", "w") as outfile:
 
 with open("cant_parse.txt","w") as outfile:
     outfile.write("\n".join(cant_parse_files))
+
+with open("cant_parse_arguments.txt","w") as outfile:
+    outfile.write("\n".join(cant_parse_arguments_files))
 
 
 

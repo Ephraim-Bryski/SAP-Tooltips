@@ -1,0 +1,26 @@
+def start_sap(strict = True):
+    import os
+    import sys
+    import comtypes.client
+    import numpy as np
+
+    helper = comtypes.client.CreateObject('SAP2000v1.Helper')
+    helper = helper.QueryInterface(comtypes.gen.SAP2000v1.cHelper)
+
+    try:
+        mySapObject = helper.GetObject("CSI.SAP2000.API.SapObject") 
+    except (OSError, comtypes.COMError):
+        print("No running instance of the program found or failed to attach.")
+        sys.exit(-1)
+
+    if mySapObject == None:
+        try:
+            mySapObject = helper.CreateObjectProgID("CSI.SAP2000.API.SapObject")
+        except (OSError, comtypes.COMError):
+            print("Cannot start a new instance of the program.")
+            sys.exit(-1)
+        mySapObject.ApplicationStart()
+
+    api = mySapObject
+
+    return SapModel(strict, api)
