@@ -1,4 +1,6 @@
 import json
+from dataclasses import dataclass
+
 
 f = open("documentation.json")
 docs = json.load(f)
@@ -9,22 +11,42 @@ template_class = f.read()
 f = open("template_method.txt","r")
 template_method = f.read()
 
+@dataclass
+class DefaultArgs:
+    full_name: str
+    args: dict
 
 
-classes = {}    
+# NOTE: default strings need to have nested quotes '"like this"'
+
+all_default_arguments = [
+    DefaultArgs("SapObject.SapModel.PointObj.AddCartesian", {"CSys": '"GLOBAL"', "MergeOff": False, "MergeNumber": False}),
+    DefaultArgs("SapObject.SapModel.PointObj.SetRestraint", {"ItemType": 0}),
+    DefaultArgs("SapObject.SapModel.PointObj.SetLoadForce", {"Replace": True, "CSys": '"GLOBAL"',"ItemType": 0})
+]
 
 
 def parse_method(method_info):
 
+
     method_full_name = method_info["full_name"]
+
+
 
     all_layers = method_full_name.split(".")
 
+
+    base_layer = f"{all_layers[0]}.{all_layers[1]}"
     
-    if all_layers[0] == "SapObject" and all_layers[1] == "SapModel":
+    
+    if base_layer == "SapObject.SapModel":
         model_layers = all_layers[1:]
     else:
-        print(f"unknown method base: {method_full_name}")
+
+        if base_layer not in unknown_bases:
+            print(f"unknown method base: {base_layer}")
+            unknown_bases.append(base_layer)
+
         return [None, None, None]
 
 
@@ -34,7 +56,9 @@ def parse_method(method_info):
     return [model_layers, class_short_name, method_short_name]
 
 
+classes = {}
 
+unknown_bases = []
 
 for method_info in docs:
 
@@ -119,20 +143,51 @@ def construct_method(method_info):
     method_txt = method_txt.replace("SHORT_METHOD",short_name)
     method_txt = method_txt.replace("ABOUT",method_info["about"])
     method_txt = method_txt.replace("FULL_METHOD",method_info["truncated_name"]) # doesn't have SapObject
-    # TODO need to include argument info in the about
 
     arguments = method_info["arguments"]
+
+    def replace_invalid_keys(key):
+        if key == "lambda":
+            return "Lambda"
+        return key
+
+    new_keys = map(replace_invalid_keys,arguments.keys())
+    new_values = arguments.values()
+
+    arguments = dict(zip(new_keys, new_values))
+
+
+    boop = list(filter(lambda x:(x.full_name == method_info["full_name"]), all_default_arguments))
+
+    assert len(boop)<=1
+
+    if len(boop) == 1:
+
+        default_arguments = boop[0].args
+
+    else:
+        default_arguments = {}
+
 
 
     argument_names = arguments.keys()
 
     full_argument_names = ["self"]
+
+
+
     for argument in argument_names:
         if not argument.isidentifier():
             raise Exception("should have been checked")
             print(f"invalid argument name: {argument}")
             return None
-        full_argument_names.append(argument)
+        
+
+        if argument in default_arguments:
+            full_argument_names.append(f"{argument} = {default_arguments[argument]}")
+        else:
+            full_argument_names.append(f"{argument} = None")
+
 
     method_txt = method_txt.replace("SHORT_ARGUMENTS",", ".join(argument_names))
     method_txt = method_txt.replace("FULL_ARGUMENTS",", ".join(full_argument_names)) # just has self too
@@ -197,5 +252,10 @@ def fix_typos(method_layers):
     
 
 
-f = open("sap/constructed.py","w",encoding="utf8")
-f.write(wrapper_txt)
+with open("base_class.txt") as f:
+    base_txt = f.read()
+
+full_text = f"{base_txt}\n\n{wrapper_txt}"
+
+with open("new_tooltips.py","w",encoding="utf8") as f:
+    f.write(full_text)

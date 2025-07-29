@@ -3,11 +3,22 @@
 ABOUT
 ARGUMENT_INFO
         """
-        ret = self.api.FULL_METHOD(SHORT_ARGUMENTS)
+
+        all_args = [SHORT_ARGUMENTS]
+
+        if None in all_args:
+            none_idx = all_args.index(None)
+            filled_args = all_args[:none_idx]
+        else:
+            filled_args = all_args
+
+        ret = self.api.FULL_METHOD(*filled_args)
 
         if not isinstance(ret,list):
             ret = [ret]
 
         if self.strict and ret[-1] != 0:
             raise Exception(f'"SHORT_METHOD" failed')
+        
+        return ret
 
